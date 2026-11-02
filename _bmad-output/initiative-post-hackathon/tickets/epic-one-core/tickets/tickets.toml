@@ -1,0 +1,124 @@
+# Stories of epic-one-core, in build order. Every story's check includes: golden master unchanged.
+
+[[entry]]
+id = 1
+type = "story"
+title = "One negotiate() for CLI, UI and cache script"
+description = "Adds service.negotiate(flight_key, seed, live) -> RunResult (outcome, plan, rounds used, log path, decision record) and cli.py; middleman.py, mediator/run.py and make_cache.py call it, then middleman.py and mediator/run.py are deleted."
+verify = "python -m autonomousprime run reproduces the old mediator.run output; console smoke test passes; golden master unchanged."
+covers = ["R1"]
+after = ["1.4"]
+hitl = false
+risk = "medium"
+
+[[entry]]
+id = 2
+type = "story"
+title = "One cached data loader with hindsight removed"
+description = "infra/data.py reads flights.csv once, caches parsed rows on disk keyed by file hash, indexes by date/airport and tail, and returns rows without outcome columns; data.outcomes() is the only path to them; world_stub.load_day, pilot_inputs.load_schedule, ground_agent _read_rows and the UI readers use it."
+verify = "Timed dry run < 2 s (warm cache); test fails if any module outside evaluation/ imports data.outcomes; golden master unchanged."
+covers = ["R2", "R3"]
+after = [1]
+hitl = false
+risk = "low"
+
+[[entry]]
+id = 3
+type = "story"
+title = "One world with per-role views"
+description = "core/world.py builds one frozen WorldState per run from the loader rows (background arrivals, filler, gates, crew, connections, alternate, fuel, provenance) and exposes atc/pilot/ground/fallback views; the four builders are deleted. Lane-specific derived values that disagree today are kept as separate fields, named and labelled."
+verify = "Golden master unchanged; a test shows each role view excludes other roles' private fields; build_world is called once per negotiate()."
+covers = ["R4"]
+after = [2]
+hitl = false
+risk = "high"
+
+[[entry]]
+id = 4
+type = "story"
+title = "One contracts module"
+description = "core/contracts.py replaces agents/schema.py, atc_agent/schema.py and mediator.core ScoredPlan/Vote/CheckResult; Vote gains flags; the JSONL log line gets a schema with a version; time helpers consolidate into core/timeutil.py."
+verify = "Schema round-trip tests for each model; golden master unchanged; docs/architecture.md §5 matches the module."
+covers = ["R5"]
+after = [3]
+hitl = false
+risk = "medium"
+
+[[entry]]
+id = 5
+type = "story"
+title = "Rule registry"
+description = "Moves C-CAP-1 (check_slot), C-FUEL-1/C-CREW-2 (assess_plan), C-GATE-1/2, C-TURN-1, C-CREW-1 (check_ground) into core/rules/ with one registration per id; check_plan becomes registry.check; ATC's fuel stub and the adapter's filter of it are deleted."
+verify = "Test: every rule id registered exactly once and emitted only from core/rules; golden master unchanged (same violations, same order)."
+covers = ["R6"]
+after = [4]
+hitl = false
+risk = "medium"
+
+[[entry]]
+id = 6
+type = "story"
+title = "One cost module and cost config"
+description = "core/cost.py and config/cost.toml (weights with source labels) replace atc_agent/config cost stub, ground_agent/cost_config.py, fallback/config cost block and the evaluation's literal 5.0."
+verify = "Golden master unchanged; a test fails if a cost weight literal appears outside config/ and tests/."
+covers = ["R7"]
+after = [5]
+hitl = false
+risk = "low"
+
+[[entry]]
+id = 7
+type = "story"
+title = "One LLM client and agent template"
+description = "infra/llm.py (async messages.parse, cached system prompt, retry once, typed failure, response cache, JSONL call log with usage and latency) and agents/base.py; ATC (sync client, find('{') parsing, own .env reader, own cache) and Pilot/Ground move onto it; prompts load at call time."
+verify = "Fake-client unit tests per role for success, malformed-then-valid, refusal and max_tokens; only infra/llm.py imports anthropic; one live demo row (tests/live, needs key) writes one call log for all three agents."
+covers = ["R8"]
+after = [4]
+hitl = true
+risk = "high"
+notes = ["hitl: a person runs the live test with an API key."]
+
+[[entry]]
+id = 8
+type = "story"
+title = "Mediator, fallback and agents on the core"
+description = "mediator/adapters.py dissolves: proposers and scoring keys move to agents/<role>/policy.py, LaneAgent to agents/base.py, fallback/scenario.py to core/fallback.py, mediator/core.py to core/mediator.py."
+verify = "Golden master unchanged; the dependency-direction rule holds (test: core imports nothing from agents, infra or app)."
+covers = ["R4", "R6"]
+after = [5, 6, 7]
+hitl = false
+risk = "medium"
+
+[[entry]]
+id = 9
+type = "story"
+title = "One evaluation harness and summary"
+description = "Merges mediator/eval_batch.py into evaluation/ (live and dry modes, one summary file, one RESULTS.md writer); the console reads that summary; generated results stop being committed except dated snapshots."
+verify = "python -m autonomousprime eval --dry reproduces docs/RESULTS.md tables; console shows the same consensus rate as RESULTS.md."
+covers = ["R9"]
+after = [8]
+hitl = false
+risk = "low"
+notes = ["Changes the numbers the console displays (today it shows the live 26/30 batch); plans and costs unchanged."]
+
+[[entry]]
+id = 10
+type = "story"
+title = "The console inside the package"
+description = "app_prime.py becomes autonomousprime/ui/app.py, split into render helpers; it imports only service and the evaluation summary; streamlit run path updated in README and docs/usage.md."
+verify = "Console smoke test passes against the new path; manual run of all five demo rows matches the snapshot."
+covers = ["R10"]
+after = [9]
+hitl = false
+risk = "low"
+
+[[entry]]
+id = 11
+type = "story"
+title = "Refactor sweep"
+description = "Cleanup only, scoped at its start from deferred review findings in this epic's plans: dead helpers, naming per the spine's conventions, docstrings, docs/architecture.md component diagram and layout table updated to the new tree."
+verify = "Golden master, unit, smoke and CI green; docs/architecture.md component table lists only modules that exist."
+covers = ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10"]
+after = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hitl = false
+risk = "low"
