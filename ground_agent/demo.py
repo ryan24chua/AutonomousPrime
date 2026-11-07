@@ -5,7 +5,6 @@ Usage: .venv/bin/python -m ground_agent.demo
 """
 import asyncio
 import json
-from pathlib import Path
 
 import anthropic
 from dotenv import load_dotenv

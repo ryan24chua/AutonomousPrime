@@ -48,7 +48,7 @@ def write_results(summary: dict, recs: list[dict]) -> Path:
 
     # ------------------------------------------------------------ headline
     w("## Headline\n")
-    w(f"| | Status quo (B0) | **Negotiated system** | Fallback solver (B1) |\n|---|---|---|---|")
+    w("| | Status quo (B0) | **Negotiated system** | Fallback solver (B1) |\n|---|---|---|---|")
     w(f"| Total cost, {S['n']} scenarios (shipped cost model) | {_usd(b0['total_cost_usd'])} | "
       f"**{_usd(neg['total_cost_usd'])}** | {_usd(b1['total_cost_usd'])} |")
     w(f"| Total cost incl. missed connections from late arrival | {_usd(b0['total_full_cost_usd'])} | "
@@ -81,34 +81,34 @@ def write_results(summary: dict, recs: list[dict]) -> Path:
     # ------------------------------------------------------------ requirements
     w("## 1. Does it do what the brief and CLAUDE.md require?\n")
     w("| Requirement (source) | Status | Evidence |\n|---|---|---|")
-    w(f"| 3 separate agents, one call each, never one prompt (brief: avoid) | Met | `mediator/adapters.py` "
-      f"LaneAgent per lane; live mode = 3 separate Claude calls in round 3 |")
-    w(f"| Structured messages (brief) | Met | `mediator/core.py` ScoredPlan / Vote; lane schemas in `agents/schema.py` |")
+    w("| 3 separate agents, one call each, never one prompt (brief: avoid) | Met | `mediator/adapters.py` "
+      "LaneAgent per lane; live mode = 3 separate Claude calls in round 3 |")
+    w("| Structured messages (brief) | Met | `mediator/core.py` ScoredPlan / Vote; lane schemas in `agents/schema.py` |")
     w(f"| Explicit constraint checking in code (brief, rubric 25%) | Met | `check_plan`: C-CAP-1, C-FUEL-1, C-CREW-2, "
       f"C-GATE-1/2, C-TURN-1; {A['unsafe_candidates_caught']} unsafe plans caught |")
-    w(f"| Traceable consensus log (brief) | Met | JSONL per run + plain-English decision record (`mediator/report.py`) |")
+    w("| Traceable consensus log (brief) | Met | JSONL per run + plain-English decision record (`mediator/report.py`) |")
     w(f"| Deterministic non-AI fallback (brief) | Met | `fallback/scenario.py`; ran in {N['outcomes']['no_consensus'] + N['outcomes']['no_valid_plan']} "
       f"of {S['n_run']} scenarios |")
     w(f"| Resolve in under 3 turns, no unbounded loop (brief) | Met | fixed 3 rounds, max {N['rounds_max']}; "
       f"mean {N['mean_latency_s']} s per scenario (dry) |")
     w(f"| Never accept unsafe plans (brief) | Met | {N['leaked_violations']} leaked; final check before output |")
-    w(f"| Human decides (rubric: trust) | Mostly | Approve / Reject buttons in `app_prime.py` and `app.py`; the choice "
-      f"is kept in the UI session, not yet written to the consensus log |")
-    w(f"| Baseline + metrics + visible failure (CLAUDE.md §13) | **Was missing, now added** | this file, `evaluation/` |")
+    w("| Human decides (rubric: trust) | Mostly | Approve / Reject buttons in `app_prime.py` and `app.py`; the choice "
+      "is kept in the UI session, not yet written to the consensus log |")
+    w("| Baseline + metrics + visible failure (CLAUDE.md §13) | **Was missing, now added** | this file, `evaluation/` |")
     w(f"| Weather = fewer arrival slots (CLAUDE.md §4) | **Weak** | {zero_wx.get('zero_delay_all_methods', 0)} of "
       f"{zero_wx.get('n', 0)} medium-hub weather rows produce zero delay under every method (actual 2015 mean "
       f"{zero_wx.get('mean_hist_delay')} min), see §5 |")
     w(f"| Depart on time + hold with extra fuel (CLAUDE.md §4) | **Broken** | {X['fuel_fail_as_shipped']} of "
       f"{X['hold_options']} hold options fail the Pilot's fuel check as shipped; 0 would fail with extra fuel sized "
       f"to the Pilot's holdable fuel, see §5 |")
-    w(f"| Document crafter (LLM narrative from log, CLAUDE.md §12) | Not built | `mediator/report.py` is a code "
-      f"template; good enough for traceability |\n")
+    w("| Document crafter (LLM narrative from log, CLAUDE.md §12) | Not built | `mediator/report.py` is a code "
+      "template; good enough for traceability |\n")
 
     # ------------------------------------------------------------ cost by method
     w("## 2. Cost improvement: every method on the same scenarios\n")
     w("All methods use the same scenario, the same checker (`mediator.adapters.check_plan`) and the same cost model "
       "(`plan_cost`: ATC delay/holding/knock-on + Ground gate/crew/connection). *Connection-aware* adds "
-      f"$200 for each passenger the Pilot lane counts as missing a connection because of the arrival time, which "
+      "$200 for each passenger the Pilot lane counts as missing a connection because of the arrival time, which "
       "`plan_cost` leaves out (§5).\n")
     w("| Method | What it does | Rule breaks | Mean cost | Mean conn.-aware cost | Mean focal delay | "
       "Mean system delay | Gate wait (min) | Gate changes |\n|---|---|---|---|---|---|---|---|---|")
@@ -208,7 +208,7 @@ def write_results(summary: dict, recs: list[dict]) -> Path:
           "recommends cancellation. The behaviour is safe (the human is told, nothing is auto-applied), but the cause "
           "is a bug, not an operational fact. *Fix:* one shared `disrupted_arrival` for all lanes. The ATC menu horizon "
           "(90 min) is also too short for a 185-min weather event.")
-    w(f"5. **No-consensus by rule mismatch** (§4, `atc-agent/atc_agent/agent.py` dry-run policy). All 8 medium-hub "
+    w("5. **No-consensus by rule mismatch** (§4, `atc-agent/atc_agent/agent.py` dry-run policy). All 8 medium-hub "
       "late-aircraft rows fail to reach consensus.")
     w("6. **Implausible connection counts** (`agents/pilot_inputs.py: derive_connections`). Every same-airline "
       f"departure 35-180 min later gets 3-25 connecting pax, so the demo's ~50-seat MQ regional jet reports "

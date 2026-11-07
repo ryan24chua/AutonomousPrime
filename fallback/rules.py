@@ -4,7 +4,6 @@ C-CAP-1 hourly arrival cap, C-WAKE-1 / C-SEP-1 spacing (seconds), C-FUEL-1 holdi
 C-GATE-2 gate-change notice, C-TURN-1 minimum turnaround, C-CREW-1 ground-crew overtime (hard beyond a cap).
 Soft quantities (overtime, next-leg delay, missed connections, fuel margin) are returned for the cost model.
 """
-import math
 from collections import Counter
 from functools import lru_cache
 

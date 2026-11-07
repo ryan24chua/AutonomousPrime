@@ -18,7 +18,7 @@ import re
 from collections import Counter
 from pathlib import Path
 
-from agents.pilot import PilotAgent, pilot_facts
+from agents.pilot import PilotAgent
 from agents.pilot_inputs import FLIGHTS, Alternate, Connection, PilotInputs, build_pilot_inputs
 from agents.schema import Plan
 

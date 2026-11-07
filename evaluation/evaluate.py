@@ -31,7 +31,6 @@ import re
 import statistics
 import time
 from collections import Counter, defaultdict
-from pathlib import Path
 
 from mediator.adapters import (REPO, PROPOSERS, LaneAgent, Scenario, _atc_option, build_scenario, check_plan,
                                plan_cost, score_plans)
