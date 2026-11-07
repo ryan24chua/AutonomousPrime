@@ -3,7 +3,7 @@ title: 'Console smoke test'
 type: 'chore'
 ticket: '3'
 created: '2026-11-07'
-status: 'in-progress'
+status: 'done'
 baseline_revision: 'acfa4c6'
 route: 'full'
 route_source: 'pinned'
@@ -72,7 +72,15 @@ context: []
 
 ## Implementation Notes
 
+- Built by a delegated subagent in one commit, rebased onto the integration branch as fb8143c. `app_prime.py` is unchanged: the existing labels and keys were enough for AppTest.
+- Each row gets a fresh AppTest. The expected button pair comes from `results/<row_id>.json` (`final_plan` present or not), and the test also asserts that the other pair is absent. `pytest tests/unit/ui` takes about 27 s for 5 rows.
+
 ## Review Triage Log
+
+- 2026-11-07, orchestrator review round 1: no findings. Diff limited to `tests/unit/ui/`; replay mode only; no files written. Fresh venv: ruff clean, `pytest` 80 passed, 1 deselected (37 s); snapshot unchanged.
+
+deferred:
+- Share one AppTest across rows, or cache the flights CSV reads, if UI test time grows (epic-one-core, story 2 cached data loader).
 
 ## Verification
 
