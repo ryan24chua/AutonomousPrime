@@ -3,7 +3,7 @@ title: 'One test tree, pytest config and CI'
 type: 'chore'
 ticket: '2'
 created: '2026-11-07'
-status: 'in-progress'
+status: 'done'
 baseline_revision: 'a4d354b'
 route: 'full'
 route_source: 'pinned'
@@ -94,7 +94,23 @@ context: []
 
 ## Implementation Notes
 
+- Built by a delegated subagent in three commits (moves + config + CI; `ruff check --fix`; `ruff format`), then rebased onto the integration branch: 0ff0eb0, 60578b3, 9f69335.
+- ruff 0.17.4. `ruff check --fix` removed six unused imports, none with side effects, and turned F-strings with no placeholders into plain strings in `evaluation/report.py`. `ruff format` changed 51 Python files.
+- Pre-existing E741, F841 and E731 findings are parked in `per-file-ignores`, with reasons, for the epic-one-core sweep (2.11).
+- `tests/live/pilot_eval.py`: `OUT` now uses `parents[2]`, so the moved script still writes to `results/`.
+- ruff 0.17 formats Python blocks inside Markdown, so `[tool.ruff.format]` excludes `*.md`.
+
 ## Review Triage Log
+
+- 2026-11-07 orchestrator review, round 1: the commits match the brief, with three findings (1 low, 1 nit, 1 note).
+  - Low, patched by the orchestrator: `tests/live/test_pilot_live.py` imported `pilot_eval` at module level, so every default run read flights.csv during collection. The import now happens inside the test.
+  - Nit, patched by the orchestrator: the format exclude widened from `CLAUDE.md` to `*.md`, so docs with Python blocks never fail CI.
+  - Note, verified: commit 3 is format-only. The AST of all 51 changed files is identical (docstring whitespace ignored).
+- Fresh venv from `requirements-dev.txt`: `ruff check` and `ruff format --check` are clean; `pytest`: 75 passed, 1 deselected (17 s); `pytest -m live`: 1 skipped; snapshot unchanged since a4d354b.
+
+deferred:
+- Fix E741/F841/E731 and drop their per-file-ignores (2.11).
+- Add the isort rule (`I`) once the `sys.path` hacks are gone (after story 4).
 
 ## Verification
 

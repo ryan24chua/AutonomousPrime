@@ -5,12 +5,12 @@ import os
 
 import pytest
 
-from tests.live import pilot_eval
-
 
 @pytest.mark.live
 @pytest.mark.skipif(not os.environ.get("ANTHROPIC_API_KEY"), reason="ANTHROPIC_API_KEY not set")
 def test_pilot_live_eval_writes_output(tmp_path, monkeypatch):
+    from tests.live import pilot_eval  # imported here: it reads flights.csv at import, so collection stays fast
+
     out = tmp_path / "pilot_live_eval.json"
     monkeypatch.setattr(pilot_eval, "OUT", out)
     asyncio.run(pilot_eval.main())
