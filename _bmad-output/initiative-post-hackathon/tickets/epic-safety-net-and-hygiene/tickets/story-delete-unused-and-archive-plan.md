@@ -3,7 +3,7 @@ title: 'Delete unused code and archive hackathon material'
 type: 'chore'
 ticket: '5'
 created: '2026-11-07'
-status: 'in-progress'
+status: 'done'
 baseline_revision: 'd332462'
 route: 'full'
 route_source: 'pinned'
@@ -93,7 +93,26 @@ User decisions (2026-11-03): archive, don't delete, the pitch, the PDFs, `atc-ag
 
 ## Implementation Notes
 
+- Built by a delegated subagent in one commit, ab47385, which fast-forwarded onto the integration branch. It has 38 files changed: 1,339 lines deleted and 58 added.
+- Deleted:
+  - `app.py`
+  - the standalone fallback (`world.py`, `rules.py`, `solver.py`, `__main__.py`) and its 5 tests
+  - `ui/ui_implementation_plan_mock_data.md`
+  - `atc-agent/requirements.txt` and `atc-agent/.gitignore`
+- `TIE_BREAK` now lives in `fallback/scenario.py`, with the same list. `fallback/__init__.py` is docstring-only.
+- Archived with `git mv` to `docs/hackathon/`: the pitch, both PDFs, `atc-agent-spec/` and `atc-agent-docs/`. A short README was added there.
+- Doc and docstring path references updated in `README.md`, `docs/usage.md`, `docs/architecture.md` (including the rule-registry link at :240, which was not in the code map but would otherwise be broken), ADR-0002/0003, `docs/challenge-2-brief.md`, the ATC config docstring and four root-script docstrings.
+
 ## Review Triage Log
+
+- 2026-11-07 orchestrator review, round 1: no blocking findings. The brief's acceptance grep was too broad in two places; both deviations are correct.
+  - `src/autonomousprime/evaluation/report.py:141` still names `app.py`, inside generated `RESULTS.md` text. Changing it without regenerating `docs/RESULTS.md` would desync the two, so it is deferred.
+  - `git ls-files '*.pdf'` matches the archived PDFs at any depth. Only the root is meant.
+- Merged result: ruff clean, `pytest` 75 passed and 1 deselected (34 s), snapshot unchanged, and no imports of deleted modules. The leftover empty `atc-agent/`, `ui/` and `tests/unit/fallback/` folders (ignored files only) were removed from the main checkout.
+
+deferred:
+- `evaluation/report.py` prose (:141, :287–322) and comments in `agents/ground/{acdm,checker,assumptions}.py` still name old paths. Fix them when `RESULTS.md` is next regenerated (epic-one-core story 9) or in the sweep (2.11).
+- `requirements.txt` and `requirements-dev.txt` are one-line pointers to the pyproject extras (`-e .`, `-e .[dev]`). Decide in 2.11 whether to keep them.
 
 ## Verification
 
