@@ -8,7 +8,7 @@ The brief asks for agents that negotiate "until a consensus is reached", resolve
 
 ## Decision
 
-- The **mediator is plain code** (`mediator/core.py`). It owns turns, termination, checking, the pick rule and the fallback hand-off. It never calls an LLM.
+- The **mediator is plain code** (`src/autonomousprime/mediator/core.py`). It owns turns, termination, checking, the pick rule and the fallback hand-off. It never calls an LLM.
 - **Exactly three rounds:** round 1 propose (up to 10 plans per agent), round 2 score the shortlist, round 3 accept or reject the picked plan. No consensus after round 3 → the deterministic fallback decides.
 - **Three separate agents, three separate calls per round,** run in parallel. Each sees only its own facts plus the other agents' stated reasons.
 - **Code computes every number.** Agents choose and explain; they never compute times, fuel or costs.

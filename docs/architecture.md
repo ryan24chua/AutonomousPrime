@@ -39,20 +39,20 @@ The duty manager is the only human in the loop and makes the final call. The sys
 ```mermaid
 flowchart TB
     subgraph UI["UI (Streamlit)"]
-        APP["app_prime.py / app.py"]
+        APP["app_prime.py"]
         MM["middleman.py<br/>negotiate()"]
     end
     subgraph MED["Mediator: pure code"]
-        CORE["mediator/core.py<br/>rounds, shortlist, Nash pick, log"]
-        ADP["mediator/adapters.py<br/>check_plan, plan_cost, LaneAgent"]
-        REP["mediator/report.py<br/>decision record"]
+        CORE["src/autonomousprime/mediator/core.py<br/>rounds, shortlist, Nash pick, log"]
+        ADP["src/autonomousprime/mediator/adapters.py<br/>check_plan, plan_cost, LaneAgent"]
+        REP["src/autonomousprime/mediator/report.py<br/>decision record"]
     end
     subgraph LANES["Agents: one lane each"]
-        ATC["atc-agent/<br/>ATC: slots, wake, capacity"]
-        PIL["agents/<br/>Pilot: fuel, duty, connections"]
-        GND["ground_agent/<br/>Ground: gates, turnaround, crew"]
+        ATC["agents/atc/<br/>ATC: slots, wake, capacity"]
+        PIL["agents/pilot/<br/>Pilot: fuel, duty, connections"]
+        GND["agents/ground/<br/>Ground: gates, turnaround, crew"]
     end
-    FB["fallback/<br/>deterministic least-cost solver"]
+    FB["fallback/<br/>deterministic least-cost fallback"]
     DATA[("data/raw/<br/>flights.csv + workbook")]
     LOG[("logs/<br/>JSONL + decision record")]
 
@@ -79,13 +79,13 @@ flowchart TB
 
 | Component | Folder | Responsibility |
 |---|---|---|
-| ATC lane | `atc-agent/` | Builds the arrival menu: every reachable landing slot, spaced by hourly capacity and wake separation, with focal delay, knock-on delay to other arrivals and cost. Votes on the picked plan. |
-| Pilot lane | `agents/` | Fuel budget to the must-divert point, flight-crew duty, onward connections, alternate airport. Ranks plans in strict priority order: no diversion, no minimum fuel, fewest stranded passengers. |
-| Ground lane | `ground_agent/` | Gate timelines, minimum turnaround, gate-change notice, ground-crew overtime. |
-| Mediator | `mediator/` | Runs the 3 rounds, merges duplicate plans, runs the checker, shortlists, picks, records every step. Never calls an LLM. |
-| Fallback | `fallback/` | Enumerates every slot × gate plan, drops unsafe ones, returns the cheapest, or recommends cancellation. Also the evaluation baseline. |
-| UI | `app_prime.py`, `app.py`, `middleman.py` | Pick a flight, replay or run a negotiation, read the recommendation, approve or reject. |
-| Evaluation | `evaluation/` | Batch run on 32 stratified real rows against status-quo and single-agent baselines. Writes [RESULTS.md](RESULTS.md). |
+| ATC lane | `src/autonomousprime/agents/atc/` | Builds the arrival menu: every reachable landing slot, spaced by hourly capacity and wake separation, with focal delay, knock-on delay to other arrivals and cost. Votes on the picked plan. |
+| Pilot lane | `src/autonomousprime/agents/pilot/` | Fuel budget to the must-divert point, flight-crew duty, onward connections, alternate airport. Ranks plans in strict priority order: no diversion, no minimum fuel, fewest stranded passengers. |
+| Ground lane | `src/autonomousprime/agents/ground/` | Gate timelines, minimum turnaround, gate-change notice, ground-crew overtime. |
+| Mediator | `src/autonomousprime/mediator/` | Runs the 3 rounds, merges duplicate plans, runs the checker, shortlists, picks, records every step. Never calls an LLM. |
+| Fallback | `src/autonomousprime/fallback/` | Enumerates every slot × gate plan, drops unsafe ones, returns the cheapest, or recommends cancellation. Also the evaluation baseline. |
+| UI | `app_prime.py`, `middleman.py` | Pick a flight, replay or run a negotiation, read the recommendation, approve or reject. |
+| Evaluation | `src/autonomousprime/evaluation/` | Batch run on 32 stratified real rows against status-quo and single-agent baselines. Writes [RESULTS.md](RESULTS.md). |
 
 ## 3. One negotiation, step by step
 
@@ -222,7 +222,7 @@ classDiagram
     Candidate --> "0..1" CheckResult : check
 ```
 
-*`LaneAgent` (`mediator/adapters.py`) wraps each lane's own code and Claude agent. Score dictionaries on `Candidate` are left out.*
+*`LaneAgent` (`src/autonomousprime/mediator/adapters.py`) wraps each lane's own code and Claude agent. Score dictionaries on `Candidate` are left out.*
 
 A plan has the same six fields everywhere:
 
@@ -237,7 +237,7 @@ A plan has the same six fields everywhere:
 
 ## 6. Safety rules
 
-Every rule is code. A plan that breaks a hard rule is removed before it is priced ([ADR-002](adr/0002-safety-as-filter-not-cost.md)). Limits come from `data/raw/challenge2/challenge-2-operational-constraints.xlsx`; full registry in [rule-registry.md](../atc-agent/agent-spec/agent-contract/rule-registry.md).
+Every rule is code. A plan that breaks a hard rule is removed before it is priced ([ADR-002](adr/0002-safety-as-filter-not-cost.md)). Limits come from `data/raw/challenge2/challenge-2-operational-constraints.xlsx`; full registry in [rule-registry.md](hackathon/atc-agent-spec/agent-contract/rule-registry.md).
 
 | Rule | Limit | Type | Checked by |
 |---|---|---|---|
@@ -253,7 +253,7 @@ Every rule is code. A plan that breaks a hard rule is removed before it is price
 
 ## 7. Cost model
 
-`plan_cost` in `mediator/adapters.py` = ATC part + Ground part. Weights are fixed in code and labelled with their source.
+`plan_cost` in `src/autonomousprime/mediator/adapters.py` = ATC part + Ground part. Weights are fixed in code and labelled with their source.
 
 | Item | Rate | Source |
 |---|---|---|

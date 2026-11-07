@@ -1,4 +1,4 @@
-"""AutonomousPrime polished demo UI (alternative to app.py; same data, same backend).
+"""AutonomousPrime polished demo UI (the console; same data, same backend).
 
 Run: .venv/bin/streamlit run app_prime.py
 Reads results/<row_id>.json (written by make_cache.py or a live negotiate() call).

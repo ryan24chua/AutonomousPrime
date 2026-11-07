@@ -1,4 +1,4 @@
-"""Pre-picked demo disruptions shared by app.py and make_cache.py (DOT 2015; 24 Apr unless a row says otherwise)."""
+"""Pre-picked demo disruptions shared by app_prime.py and make_cache.py (DOT 2015; 24 Apr unless a row says otherwise)."""
 
 # row_id -> identifies one flights.csv row (optional "month"/"day"; default 2015-04-24)
 # Order = selectbox order: consensus cases first, then no consensus -> fallback plan, then the no-valid-plan

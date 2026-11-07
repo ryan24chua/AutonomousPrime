@@ -1,4 +1,4 @@
-"""Bridge between the UI (app.py / make_cache.py) and the mediator.
+"""Bridge between the UI (app_prime.py / make_cache.py) and the mediator.
 
 `negotiate(row, seed)` runs one full negotiation and returns the dict the UI reads:
 outcome ("consensus" | "halt_least_cost" | "recommend_cancel"), rounds, final_plan, log[], document, world.

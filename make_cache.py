@@ -1,7 +1,7 @@
 """Run negotiate() on every demo row and save results/<row_id>.json so the demo works offline.
 
 Usage: .venv/bin/python make_cache.py [row_id ...]
-Expects middleman.negotiate(row, seed) -> dict (see app.py for the keys it reads).
+Expects middleman.negotiate(row, seed) -> dict (see app_prime.py for the keys it reads).
 """
 
 import json

@@ -1,7 +1,7 @@
 """ATC agent parameters. Every value is labelled: organiser, real, derived or synthetic.
 
 Organiser limits are read from the Challenge #2 workbook and override CLAUDE.md.
-Spec: atc-agent/agent-spec/ (private-state.md, research.md).
+Spec: docs/hackathon/atc-agent-spec/ (private-state.md, research.md).
 """
 
 from functools import lru_cache

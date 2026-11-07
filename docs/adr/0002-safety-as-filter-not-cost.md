@@ -10,7 +10,7 @@ The brief says agents "must not accept solutions that ignore operational constra
 
 Treat every safety rule as a **filter, applied before cost**:
 
-1. Every plan from any agent or from the fallback goes through `check_plan` (`mediator/adapters.py`): capacity, wake separation (built into ATC's menu), fuel to the must-divert point, flight-crew duty, gate availability, gate-change notice, turnaround.
+1. Every plan from any agent or from the fallback goes through `check_plan` (`src/autonomousprime/mediator/adapters.py`): capacity, wake separation (built into ATC's menu), fuel to the must-divert point, flight-crew duty, gate availability, gate-change notice, turnaround.
 2. A plan that fails any hard rule is removed, with the rule ID logged. It is never priced, never shown to other agents for scoring and never returned by the fallback.
 3. The picked plan is checked again after the vote, before it leaves the mediator.
 4. If no plan passes, the system recommends cancellation to the duty manager and applies nothing.
@@ -51,4 +51,4 @@ Make the fallback rank in strict priority order, with cost last:
 6. Then cheapest.
 7. Escalate to the duty manager when the best plan has a thin margin or the only options are divert or cancel.
 
-This needs flags added to `Vote` and about 30 lines in `fallback/scenario.py` and `mediator/core.py`.
+This needs flags added to `Vote` and about 30 lines in `src/autonomousprime/fallback/scenario.py` and `src/autonomousprime/mediator/core.py`.
