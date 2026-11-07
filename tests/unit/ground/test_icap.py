@@ -7,7 +7,7 @@ from ground_agent.checker import check_ground
 from ground_agent.cost import cost_ground
 from ground_agent.icap import build_icap
 from ground_agent.inputs import BusyWindow
-from ground_agent.tests.helpers import make_state, plan
+from tests.unit.ground.helpers import make_state, plan
 
 
 def test_icap_is_deterministic_and_has_no_outcome_fields():

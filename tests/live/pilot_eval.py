@@ -1,7 +1,7 @@
 """Live behavioural eval of the Pilot agent (real Claude calls, ~10 calls, ~$0.30).
 
 Run with your key loaded only in a subshell:
-  ( set -a; source .env.local; set +a; .venv/bin/python -m tests.live_pilot_eval )
+  ( set -a; source .env.local; set +a; .venv/bin/python -m tests.live.pilot_eval )
 
 Tests:
   1. Five scenario types (unsafe holding, safe holding, airborne divert-only, crew duty, connection judgement)
@@ -22,7 +22,7 @@ from agents.pilot import PilotAgent, pilot_facts
 from agents.pilot_inputs import FLIGHTS, Alternate, Connection, PilotInputs, build_pilot_inputs
 from agents.schema import Plan
 
-OUT = Path(__file__).resolve().parents[1] / "results" / "pilot_live_eval.json"
+OUT = Path(__file__).resolve().parents[2] / "results" / "pilot_live_eval.json"
 CONCURRENCY = asyncio.Semaphore(5)
 
 

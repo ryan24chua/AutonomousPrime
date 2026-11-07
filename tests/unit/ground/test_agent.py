@@ -9,7 +9,7 @@ from pydantic import ValidationError
 from agents.schema import validate_ranges
 from ground_agent.agent import GroundAgent, GroundDecision, assert_no_hindsight, baseline_plan, build_ground_facts
 from ground_agent.checker import check_ground
-from ground_agent.tests.helpers import make_state
+from tests.unit.ground.helpers import make_state
 
 
 # Builds a GroundDecision with sensible defaults.

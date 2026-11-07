@@ -1,4 +1,4 @@
-"""Pilot agent tests. No API calls (dry-run policy). Run: .venv/bin/python -m tests.test_pilot"""
+"""Pilot agent tests. No API calls (dry-run policy). Run: .venv/bin/python -m tests.unit.pilot.test_pilot"""
 import asyncio
 import csv
 import time

@@ -1,6 +1,6 @@
 from ground_agent.inputs import BusyWindow
 from ground_agent.options import cheapest_valid, enumerate_options, free_gate_ids, ranked_alternatives
-from ground_agent.tests.helpers import make_state
+from tests.unit.ground.helpers import make_state
 
 
 def test_options_start_with_scheduled_gate_then_free_gates():

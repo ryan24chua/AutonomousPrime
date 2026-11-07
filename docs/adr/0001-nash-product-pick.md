@@ -37,7 +37,7 @@ Pick the plan with the highest **ATC score × Pilot score × Ground score × cos
 
 ## Evidence
 
-- Unit tests: `test_nash_balanced_plan_beats_lopsided_one`, `test_nash_cost_factor_and_floor` in `mediator/test_core.py`.
+- Unit tests: `test_nash_balanced_plan_beats_lopsided_one`, `test_nash_cost_factor_and_floor` in `tests/unit/mediator/test_core.py`.
 - Demo row (DFW, MQ3086, 24 Apr 2015): the Nash pick costs $1,110 more than the least-cost plan on the shipped cost model, but $18,090 less once missed connections are priced ([RESULTS.md §3](../RESULTS.md)).
 - Over 31 evaluated rows, the negotiated plan equals the least-cost solver's in 29 ([RESULTS.md §4](../RESULTS.md)): balance rarely costs money.
 

@@ -1,4 +1,4 @@
-"""Mediator core tests (pure code, no API). Run: .venv/bin/python -m mediator.test_core"""
+"""Mediator core tests (pure code, no API). Run: .venv/bin/python -m tests.unit.mediator.test_core"""
 import asyncio
 import tempfile
 from pathlib import Path
