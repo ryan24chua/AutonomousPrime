@@ -3,7 +3,7 @@ title: 'One installable package'
 type: 'refactor'
 ticket: '4'
 created: '2026-11-07'
-status: 'in-progress'
+status: 'done'
 baseline_revision: 'acfa4c6'
 route: 'full'
 route_source: 'pinned'
@@ -120,7 +120,24 @@ Other edits:
 
 ## Implementation Notes
 
+- Built by a delegated subagent in one commit. After rebasing onto story 3 it is 9278760, with 66 files changed: renames plus import, path and packaging lines.
+- Baseline vs after: `pytest` 75 = 75. The normalised `mediator.run` stdout and decision record are identical, and the golden master is byte-identical.
+- One non-import edit: `agents/atc/agent.py` now creates `LOG_DIR` and `CACHE_DIR` with `mkdir(parents=True, exist_ok=True)`, because their new homes (`logs/atc`, `.cache/atc`) do not exist on a fresh checkout. It changes where the ATC agent writes, not what it computes.
+- `REPO` aliases are kept in `agents/constraints.py`, `mediator/adapters.py`, `fallback/world.py` and `agents/atc/config.py`, so their importers did not change.
+- `agents/pilot/agent.py` and `inputs.py` imports became absolute. The relative imports inside atc, fallback and mediator are unchanged.
+
 ## Review Triage Log
+
+- 2026-11-07 orchestrator review, round 1: no blocking findings.
+  - Read every non-rename hunk (`git diff -M`): imports, path constants, usage docstrings, packaging and CI only.
+  - In a fresh venv from `-e ".[dev]"`, after rebasing onto story 3: ruff clean, `pytest` 80 passed and 1 deselected (38 s), snapshot unchanged. `grep sys.path` finds nothing; `grep 'parents\['` finds only `paths.py`.
+  - In the main checkout, removed the leftover empty folders (`agents/`, `ground_agent/`, `mediator/`, `fallback/`, `evaluation/` and `atc-agent/atc_agent/`, which held only `__pycache__`), so none can shadow an import as a namespace package.
+
+deferred:
+- README, `docs/architecture.md` and `docs/usage.md` still name the old folders and `python -m mediator.run`. Story 5 updates doc references, story 6 the instructions.
+- Comments and docstrings that name old paths (`agents/ground/{assumptions,checker,inputs}.py`, `agents/atc/config.py`, `fallback/config.py`, `fallback/rules.py`), plus the prose strings in `evaluation/report.py` that end up in `docs/RESULTS.md`. Change those when RESULTS.md is regenerated (epic-one-core story 9).
+- Import blocks still carry the blank-line grouping left by the `sys.path` era. Add the ruff `I` rule in the epic-one-core sweep (2.11).
+- `mediator/eval_batch.py` builds `paths.REPO / "logs" / "eval"`, not `paths.LOGS / "eval"`. A nit for 2.11.
 
 ## Verification
 
