@@ -38,7 +38,7 @@ The team and coding agents work from a repo where `pytest` in CI fails on any un
 - CI is green on `main` with the golden-master test included.
 - `pip install -e . && pytest` works from a fresh clone with no other setup.
 - `grep -rn "sys.path.insert" src/` returns nothing.
-- `python -m autonomousprime run` and the Streamlit console both work on the five demo rows.
+- `python -m autonomousprime.mediator.run` and the Streamlit console both work on the five demo rows (the `python -m autonomousprime run` CLI arrives in epic-one-core story 2.1).
 
 ## Boundaries
 
@@ -55,5 +55,8 @@ The team and coding agents work from a repo where `pytest` in CI fails on any un
 
 - Decision: 2026-11-02 — tracer bullet is story 1 (golden master): it runs the whole pipeline (data → three agents → mediator → fallback → log) for 38 rows and is the check every later story runs.
 - Decision: 2026-11-02 — no closing "Refactor sweep" story: the epic is itself cleanup; epic-one-core closes with the sweep instead.
-- Unknown: whether dev dependencies (ruff) may be added — blocks story 2.
-- Unknown: keep or archive `pitch.pptx`, the hackathon PDF and the 19 generic skills — blocks story 5.
+- Decision: 2026-11-03 — user: dev-only ruff (format + lint, autofix) and a GitHub Actions workflow running ruff and pytest on push and pull request (unblocks story 2).
+- Decision: 2026-11-03 — user: archive `pitch.pptx`, the hackathon PDF, `atc-agent/agent-spec/` and `atc-agent/docs/` under `docs/hackathon/`; keep `.claude/skills/` as is; BMad skills stay local (unblocks story 5).
+- Decision: 2026-11-03 — user: stories 2–5 are built by delegated subagents from one brief per story, each reviewed and merged by the orchestrator onto `refactor/safety-net-and-hygiene`; stories 1 and 6 by the orchestrator (`delegation-plan.md`).
+- Decision: 2026-11-07 — user: run mode auto — stories 1 → 6 run without check-ins, stopping only on a stop condition in `delegation-plan.md`; the AGENTS.md block is reviewed at the end-of-epic pause.
+- Decision: 2026-11-07 — Done-when and story 4 verify use `python -m autonomousprime.mediator.run`: the `autonomousprime run` CLI belongs to epic-one-core story 1.
