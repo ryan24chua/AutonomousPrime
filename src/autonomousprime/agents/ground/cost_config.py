@@ -1,4 +1,4 @@
-"""Ground cost weights (CLAUDE.md section 9). USD. Every value is an ASSUMPTION unless a source is given.
+"""Ground cost weights (docs/hackathon/mvp-spec.md section 9). USD. Every value is an ASSUMPTION unless a source is given.
 
 Primary metric is total system cost, so knock-on delay is priced like ground delay.
 """

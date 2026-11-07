@@ -37,7 +37,7 @@ SHOWN_COLS = [
 ]  # no outcome columns, ever
 
 
-# Workflow from CLAUDE.md §5: (title, who, what happens)
+# Workflow from docs/hackathon/mvp-spec.md §5: (title, who, what happens)
 STAGES = [
     ("1. Disruption", "real 2015 flight", "A delayed flight comes in"),
     ("2. Each team weighs in", "ATC · Pilot · Ground", "Each team suggests its best plan"),

@@ -10,7 +10,7 @@ HORIZON_MIN = 180  # latest slot considered: earliest arrival + 3 h
 EXTRA_FUEL_OPTIONS = (0, 15, 30)  # extra holding fuel loaded for a hold plan, minutes
 TRIGGERS = ("no_consensus_r3", "no_valid_r1", "agent_error", "malformed_twice", "refusal", "max_tokens", "baseline")
 
-# --- Safety flag (CLAUDE.md pilot red line) ---
+# --- Safety flag (docs/hackathon/mvp-spec.md pilot red line) ---
 MIN_FUEL_FLAG_MIN = 10  # fuel margin below this -> MINIMUM_FUEL flag (soft)
 
 # --- Synthetic world ---
@@ -24,7 +24,7 @@ DEFAULT_NEXT_LEG_GAP_MIN = 75  # when the tail has no later departure in the dat
 CREW_MAX_OVERTIME_MIN = 120  # synthetic hard cap on ground-crew overtime (C-CREW-1)
 
 # --- Cost weights, USD ---
-HOLDING_PER_MIN = 98.0  # ~$98/block-min (Airlines for America 2025, CLAUDE.md section 9)
+HOLDING_PER_MIN = 98.0  # ~$98/block-min (Airlines for America 2025, docs/hackathon/mvp-spec.md section 9)
 GROUND_DELAY_PER_MIN = 49.0  # holding ~2x gate delay (Eurocontrol); ground_agent/cost_config.py
 EXTRA_FUEL_PER_MIN = 5.0  # synthetic; atc_agent/config.py
 KNOCK_ON_BG_PER_MIN = 98.0  # background arrivals absorb delay airborne; atc_agent/config.py
@@ -36,7 +36,7 @@ MISSED_CONNECTION_PER_PAX = 200.0  # synthetic; ground_agent/cost_config.py
 DIVERT_FIXED = 25000.0  # synthetic, large fixed cost
 CANCEL_COST = 100000.0  # synthetic, largest; recommendation to the human only
 
-# --- Outcome columns the world may never read (CLAUDE.md "No hindsight") ---
+# --- Outcome columns the world may never read (docs/hackathon/mvp-spec.md "No hindsight") ---
 HINDSIGHT_COLUMNS = frozenset(
     {
         "DEPARTURE_TIME",

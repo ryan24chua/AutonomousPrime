@@ -1,4 +1,4 @@
-"""Batch evaluation (CLAUDE.md section 13, docs/challenge-2-framing.md section 7). Pure code.
+"""Batch evaluation (docs/hackathon/mvp-spec.md section 13, docs/challenge-2-framing.md section 7). Pure code.
 
 Runs the full pipeline (3 lanes -> mediator -> fallback on no consensus) on a fixed, stratified sample of
 real DOT 2015 rows and compares the chosen plan with baselines on the SAME scenario, checker and cost:

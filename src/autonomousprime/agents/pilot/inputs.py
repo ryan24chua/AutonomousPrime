@@ -19,7 +19,7 @@ from autonomousprime.agents.constraints import ASSUMPTIONS, airport_limits
 FLIGHTS = paths.FLIGHTS
 AIRPORTS = paths.AIRPORTS
 
-# Columns the Pilot may see. Outcome columns are deliberately absent (CLAUDE.md "No hindsight").
+# Columns the Pilot may see. Outcome columns are deliberately absent (docs/hackathon/mvp-spec.md "No hindsight").
 SCHEDULE_COLS = (
     "YEAR",
     "MONTH",

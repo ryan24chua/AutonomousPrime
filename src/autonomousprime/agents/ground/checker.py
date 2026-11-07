@@ -1,4 +1,4 @@
-"""Ground-side constraint checker (CLAUDE.md section 8). Pure code, no LLM.
+"""Ground-side constraint checker (docs/hackathon/mvp-spec.md section 8). Pure code, no LLM.
 
 Rules: C-GATE-1 gate free (waiting allowed up to MAX_GATE_WAIT_MIN), C-GATE-2 gate-change
 notice, C-TURN-1 minimum turnaround (hard), C-CREW-1 crew overtime (soft: cost + flag).

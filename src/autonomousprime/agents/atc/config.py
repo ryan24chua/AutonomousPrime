@@ -1,6 +1,6 @@
 """ATC agent parameters. Every value is labelled: organiser, real, derived or synthetic.
 
-Organiser limits are read from the Challenge #2 workbook and override CLAUDE.md.
+Organiser limits are read from the Challenge #2 workbook and override docs/hackathon/mvp-spec.md.
 Spec: docs/hackathon/atc-agent-spec/ (private-state.md, research.md).
 """
 
@@ -44,7 +44,7 @@ HORIZON_HOURS = 1  # focal hour +/- 1 h
 HOLDABLE_MIN = 45
 
 # --- Cost stub (until team B's cost model lands) ---
-HOLDING_COST_PER_MIN = 98.0  # ~$98/block-min (Airlines for America 2025, CLAUDE.md §9)
+HOLDING_COST_PER_MIN = 98.0  # ~$98/block-min (Airlines for America 2025, docs/hackathon/mvp-spec.md §9)
 GROUND_DELAY_COST_PER_MIN = 49.0  # holding ~2x gate delay (Eurocontrol, research A8)
 EXTRA_FUEL_COST_PER_MIN = 5.0  # synthetic
 KNOCKON_COST_PER_MIN = HOLDING_COST_PER_MIN  # background flights near arrival absorb delay airborne (assumption)

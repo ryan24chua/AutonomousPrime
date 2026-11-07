@@ -1,4 +1,4 @@
-"""Shared agent message schema (CLAUDE.md section 7). Every agent's output must validate against AgentMessage.
+"""Shared agent message schema (docs/hackathon/mvp-spec.md section 7). Every agent's output must validate against AgentMessage.
 
 Owned jointly by the agent lanes and the middleman lane: change it only with the team.
 Ranges (minutes >= 0, HH:MM format, word limits) are enforced in Python by `validate_ranges`,

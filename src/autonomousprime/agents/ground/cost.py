@@ -1,4 +1,4 @@
-"""Ground-side cost (CLAUDE.md section 9). Pure code; weights live in cost_config.py."""
+"""Ground-side cost (docs/hackathon/mvp-spec.md section 9). Pure code; weights live in cost_config.py."""
 
 from autonomousprime.agents.ground import cost_config as C
 from autonomousprime.agents.ground.assumptions import OVERTIME_MULTIPLIER

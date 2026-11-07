@@ -31,7 +31,7 @@ DEFAULT_MODEL = "claude-sonnet-5-5"
 MAX_TOKENS = 4000
 EFFORT = "medium"
 PROMPT_PATH = Path(__file__).parent / "prompts" / "ground.md"
-# Outcome columns agents must never see (CLAUDE.md section 6, "No hindsight").
+# Outcome columns agents must never see (docs/hackathon/mvp-spec.md section 6, "No hindsight").
 FORBIDDEN_FIELDS = {
     "departure_time",
     "arrival_time",
@@ -345,7 +345,7 @@ class GroundAgent:
             icap=self._icap(facts, "Middleman: resend the current table plan", table_check),
         )
 
-    # Deterministic stand-in when the model gives nothing usable (treated as reject per CLAUDE.md).
+    # Deterministic stand-in when the model gives nothing usable (treated as reject per docs/hackathon/mvp-spec.md).
     # Args: facts - facts dict; why - short cause for the log.
     # Returns: reject AgentMessage.
     def _reject(self, facts: dict, round_no: int, why: str) -> AgentMessage:

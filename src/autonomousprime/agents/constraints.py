@@ -59,7 +59,7 @@ ASSUMPTIONS = {
     "alternate_approach_min": 10.0,  # approach and landing allowance at the alternate
     "crew_report_before_first_leg_min": 60.0,
     "widebody_if_distance_mi_at_least": 2500.0,
-    "minimum_fuel_margin_min": 10.0,  # CLAUDE.md pilot red line
+    "minimum_fuel_margin_min": 10.0,  # docs/hackathon/mvp-spec.md pilot red line
     "mct_min": {"Large hub": 45.0, "default": 35.0},
     "connection_window_min": (35.0, 180.0),
     "connection_pax_range": (3, 25),

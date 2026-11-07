@@ -1,4 +1,4 @@
-"""ATC agent: one Claude call per round, schema-validated, one re-ask, then reject (CLAUDE.md §5)."""
+"""ATC agent: one Claude call per round, schema-validated, one re-ask, then reject (docs/hackathon/mvp-spec.md §5)."""
 
 import hashlib
 import json
@@ -127,7 +127,7 @@ class ATCAgent:
     def _call(self, messages: list[dict]) -> str:
         key = hashlib.sha256(json.dumps([config.MODEL, SYSTEM, messages]).encode()).hexdigest()[:24]
         cached = CACHE_DIR / f"{key}.txt"
-        if cached.is_file():  # re-runs are free and reproducible (CLAUDE.md §13)
+        if cached.is_file():  # re-runs are free and reproducible (docs/hackathon/mvp-spec.md §13)
             return cached.read_text(encoding="utf-8")
         t0 = time.time()
         resp = self.client.messages.create(

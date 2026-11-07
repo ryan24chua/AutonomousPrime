@@ -1,4 +1,4 @@
-"""Validate an ATC message against agent contract v0.2, CLAUDE.md §7 and the ATC spec (CAP-4, 6, 7, 8, 10, 11)."""
+"""Validate an ATC message against agent contract v0.2, docs/hackathon/mvp-spec.md §7 and the ATC spec (CAP-4, 6, 7, 8, 10, 11)."""
 
 import re
 
