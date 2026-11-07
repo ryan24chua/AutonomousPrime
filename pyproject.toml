@@ -1,3 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autonomousprime"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=2.3",
+    "openpyxl>=3.1",
+    "pydantic==2.14.2",
+    "python-dotenv==1.2.4",
+    "streamlit>=1.40",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.2.0",
+    "ruff==0.17.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"autonomousprime.agents.pilot" = ["prompts/*.md"]
+"autonomousprime.agents.ground" = ["prompts/*.md"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 markers = ["live: calls the real Anthropic API and costs money; opt in with `pytest -m live`"]
@@ -14,11 +43,11 @@ select = ["E4", "E7", "E9", "F"]
 [tool.ruff.lint.per-file-ignores]
 # Pre-existing style findings; fixing them is out of scope for a behaviour-preserving refactor.
 # E741: short loop/comprehension variable `l` for "line"; renames deferred.
-"agents/pilot_inputs.py" = ["E741"]
+"src/autonomousprime/agents/pilot/inputs.py" = ["E741"]
 "app.py" = ["E741", "F841"]  # F841: `removed` assigned but unused; its right-hand side may have side effects
 "app_prime.py" = ["E741", "F841"]  # F841: same as app.py
-"evaluation/evaluate.py" = ["E741", "E731"]  # E731: lambda assigned to a name; rewrite deferred
-"mediator/report.py" = ["E741"]
+"src/autonomousprime/evaluation/evaluate.py" = ["E741", "E731"]  # E731: lambda assigned to a name; rewrite deferred
+"src/autonomousprime/mediator/report.py" = ["E741"]
 "middleman.py" = ["E741"]
 
 [tool.ruff.format]

@@ -1,7 +1,7 @@
 """Golden master: capture every dry-run output the published results and the console depend on.
 
 What is captured (no LLM calls, no files written in the repo):
-  * evaluation  - `evaluation.evaluate.evaluate_one` on the demo row + the 32-row stratified sample: every
+  * evaluation  - `autonomousprime.evaluation.evaluate.evaluate_one` on the demo row + the 32-row stratified sample: every
                   method's plan, cost and metrics, the ablations, and the mediator's step-by-step log.
   * console     - `middleman.negotiate` (live=False) on the five console demo rows: outcome, plan, UI log,
                   decision record.
@@ -38,8 +38,8 @@ def _patched(by_day: dict, out_dir: Path):
     """For the duration of a capture: serve the per-day and Ground CSV reads from memory (identical rows,
     identical order) and send the evaluation's per-row logs to `out_dir`. Everything is restored after."""
     import middleman
-    from evaluation import evaluate as ev
-    from ground_agent import inputs as ground_inputs
+    from autonomousprime.evaluation import evaluate as ev
+    from autonomousprime.agents.ground import inputs as ground_inputs
 
     def load_day(year: int, month: int, day: int) -> list[dict]:
         return [r for r in by_day.get((str(month), str(day)), []) if r["YEAR"] == str(year)]
@@ -66,7 +66,7 @@ def _patched(by_day: dict, out_dir: Path):
 
 
 def _evaluation(by_day: dict, out_dir: Path) -> list[dict]:
-    from evaluation import evaluate as ev
+    from autonomousprime.evaluation import evaluate as ev
 
     picks = [("demo", ev.demo_row(by_day))] + ev.sample(by_day)
     rows = []
@@ -95,7 +95,7 @@ def _console() -> dict[str, dict]:
 
 
 def capture() -> dict:
-    from evaluation.evaluate import load_rows
+    from autonomousprime.evaluation.evaluate import load_rows
 
     by_day = load_rows()
     with tempfile.TemporaryDirectory() as tmp, _patched(by_day, Path(tmp)):

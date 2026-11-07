@@ -4,7 +4,7 @@ import asyncio
 import tempfile
 from pathlib import Path
 
-from mediator.core import (
+from autonomousprime.mediator.core import (
     SCORE_FLOOR,
     Candidate,
     CheckResult,

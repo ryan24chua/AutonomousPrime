@@ -19,9 +19,9 @@ import re
 from collections import Counter
 from pathlib import Path
 
-from agents.pilot import PilotAgent
-from agents.pilot_inputs import FLIGHTS, Alternate, Connection, PilotInputs, build_pilot_inputs
-from agents.schema import Plan
+from autonomousprime.agents.pilot.agent import PilotAgent
+from autonomousprime.agents.pilot.inputs import FLIGHTS, Alternate, Connection, PilotInputs, build_pilot_inputs
+from autonomousprime.agents.schema import Plan
 
 OUT = Path(__file__).resolve().parents[2] / "results" / "pilot_live_eval.json"
 CONCURRENCY = asyncio.Semaphore(5)

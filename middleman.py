@@ -10,10 +10,10 @@ import json
 import os
 import time
 
-from mediator.adapters import REPO, LaneAgent, build_scenario, check_plan, plan_cost
-from mediator.core import AGENTS, Log, run_negotiation
-from mediator.report import render
-from atc_agent.world_stub import load_day
+from autonomousprime.mediator.adapters import REPO, LaneAgent, build_scenario, check_plan, plan_cost
+from autonomousprime.mediator.core import AGENTS, Log, run_negotiation
+from autonomousprime.mediator.report import render
+from autonomousprime.agents.atc.world_stub import load_day
 
 
 def _find_row(spec: dict) -> tuple[list[dict], dict]:
@@ -80,7 +80,7 @@ def negotiate(row: dict, seed: int = 7, live: bool | None = None) -> dict:
     out = asyncio.run(run_negotiation(agents, lambda pl: check_plan(s, pl), lambda pl: plan_cost(s, pl), log, context))
     fb = None
     if out.outcome != "consensus":
-        from fallback.scenario import solve_scenario
+        from autonomousprime.fallback.scenario import solve_scenario
 
         fb = solve_scenario(s, "no_valid_r1" if out.outcome == "no_valid_plan" else "no_consensus_r3")
         log.write(

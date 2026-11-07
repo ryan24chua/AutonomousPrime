@@ -6,9 +6,15 @@ import httpx2
 import pytest
 from pydantic import ValidationError
 
-from agents.schema import validate_ranges
-from ground_agent.agent import GroundAgent, GroundDecision, assert_no_hindsight, baseline_plan, build_ground_facts
-from ground_agent.checker import check_ground
+from autonomousprime.agents.schema import validate_ranges
+from autonomousprime.agents.ground.agent import (
+    GroundAgent,
+    GroundDecision,
+    assert_no_hindsight,
+    baseline_plan,
+    build_ground_facts,
+)
+from autonomousprime.agents.ground.checker import check_ground
 from tests.unit.ground.helpers import make_state
 
 

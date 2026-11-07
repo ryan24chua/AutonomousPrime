@@ -1,12 +1,12 @@
 import json
 
-from ground_agent.acdm import acdm_flags
-from ground_agent.agent import assert_no_hindsight
-from ground_agent.assumptions import ACDM_SOURCE
-from ground_agent.checker import check_ground
-from ground_agent.cost import cost_ground
-from ground_agent.icap import build_icap
-from ground_agent.inputs import BusyWindow
+from autonomousprime.agents.ground.acdm import acdm_flags
+from autonomousprime.agents.ground.agent import assert_no_hindsight
+from autonomousprime.agents.ground.assumptions import ACDM_SOURCE
+from autonomousprime.agents.ground.checker import check_ground
+from autonomousprime.agents.ground.cost import cost_ground
+from autonomousprime.agents.ground.icap import build_icap
+from autonomousprime.agents.ground.inputs import BusyWindow
 from tests.unit.ground.helpers import make_state, plan
 
 

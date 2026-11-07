@@ -5,12 +5,12 @@ from dataclasses import fields, replace
 
 import pytest
 
-from fallback import build_world, solve
-from fallback.config import HINDSIGHT_COLUMNS
-from fallback.rules import check
-from fallback.world import Alternate
+from autonomousprime.fallback import build_world, solve
+from autonomousprime.fallback.config import HINDSIGHT_COLUMNS
+from autonomousprime.fallback.rules import check
+from autonomousprime.fallback.world import Alternate
 
-from atc_agent.world_stub import load_day, pick_focal  # noqa: E402 (sys.path set by fallback.world)
+from autonomousprime.agents.atc.world_stub import load_day, pick_focal
 
 
 @pytest.fixture(scope="module")

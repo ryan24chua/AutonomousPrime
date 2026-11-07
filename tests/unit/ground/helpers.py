@@ -1,7 +1,7 @@
-from agents.constraints import airport_limits, fuel_crew_rules
-from agents.schema import Plan
-from ground_agent.inputs import BusyWindow, WorldState
-from ground_agent.timeutil import min_to_hhmm
+from autonomousprime.agents.constraints import airport_limits, fuel_crew_rules
+from autonomousprime.agents.schema import Plan
+from autonomousprime.agents.ground.inputs import BusyWindow, WorldState
+from autonomousprime.agents.ground.timeutil import min_to_hhmm
 
 
 # A small hand-built DFW state: arrival 20:00 (1200), gate A1 free, B2 busy to 20:20, no overtime.

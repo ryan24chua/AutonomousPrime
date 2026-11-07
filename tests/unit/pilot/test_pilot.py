@@ -5,10 +5,17 @@ import csv
 import time
 from types import SimpleNamespace
 
-from agents.constraints import fuel_crew_rules
-from agents.pilot import PilotAgent, assess_plan, fuel_budget, pilot_alternatives, pilot_concessions, pilot_facts
-from agents.pilot_inputs import FLIGHTS, Alternate, Connection, PilotInputs, build_pilot_inputs
-from agents.schema import AgentMessage, Plan
+from autonomousprime.agents.constraints import fuel_crew_rules
+from autonomousprime.agents.pilot.agent import (
+    PilotAgent,
+    assess_plan,
+    fuel_budget,
+    pilot_alternatives,
+    pilot_concessions,
+    pilot_facts,
+)
+from autonomousprime.agents.pilot.inputs import FLIGHTS, Alternate, Connection, PilotInputs, build_pilot_inputs
+from autonomousprime.agents.schema import AgentMessage, Plan
 
 RULES = fuel_crew_rules()
 
@@ -172,7 +179,7 @@ def test_red_lines_stated_up_front_and_code_derived():
 
 
 def test_rank_key_puts_last_of_day_before_pax_count():
-    from agents.pilot import _rank_key
+    from autonomousprime.agents.pilot.agent import _rank_key
 
     base = assess_plan("X", plan("17:40", gd=10), INP, RULES)
     strands_last = base.__class__(**{**base.__dict__, "pax_missed": 5, "last_of_day_missed": ("AA300",)})

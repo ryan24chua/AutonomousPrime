@@ -12,16 +12,16 @@ import html
 import json
 import time
 from datetime import datetime
-from pathlib import Path
 
 import streamlit as st
 from dotenv import load_dotenv
 
+from autonomousprime import paths
 from demo_rows import DAY, DEMO_ROWS, MONTH, SEED, row_date
 
-ROOT = Path(__file__).parent
-RESULTS = ROOT / "results"
-FLIGHTS = ROOT / "data/raw/dot2015/flights.csv"
+ROOT = paths.REPO
+RESULTS = paths.RESULTS
+FLIGHTS = paths.FLIGHTS
 SHOWN_COLS = [
     "AIRLINE",
     "FLIGHT_NUMBER",
@@ -110,10 +110,10 @@ def load_row(airline, flight_number, origin, month=MONTH, day=DAY):
 @st.cache_data(show_spinner=False)
 def key_constraints(airline, flight_number, origin, month=MONTH, day=DAY):
     try:
-        from agents.constraints import fuel_crew_rules
-        from agents.pilot import fuel_budget
-        from agents.pilot_inputs import build_pilot_inputs
-        from ground_agent.inputs import build_world
+        from autonomousprime.agents.constraints import fuel_crew_rules
+        from autonomousprime.agents.pilot.agent import fuel_budget
+        from autonomousprime.agents.pilot.inputs import build_pilot_inputs
+        from autonomousprime.agents.ground.inputs import build_world
 
         w = build_world(airline, flight_number, month, day, origin, SEED)
         raw = load_row(airline, flight_number, origin, month, day)
