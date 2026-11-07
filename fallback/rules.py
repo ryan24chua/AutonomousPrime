@@ -4,6 +4,7 @@ C-CAP-1 hourly arrival cap, C-WAKE-1 / C-SEP-1 spacing (seconds), C-FUEL-1 holdi
 C-GATE-2 gate-change notice, C-TURN-1 minimum turnaround, C-CREW-1 ground-crew overtime (hard beyond a cap).
 Soft quantities (overtime, next-leg delay, missed connections, fuel margin) are returned for the cost model.
 """
+
 from collections import Counter
 from functools import lru_cache
 
@@ -25,6 +26,7 @@ def to_min(hhmm: str, world: FallbackWorld) -> int:
 # Minutes to reach the alternate: cruise leg plus approach allowance (agents.constraints assumptions).
 def divert_flight_min(world: FallbackWorld) -> float:
     from agents.constraints import ASSUMPTIONS
+
     return world.alternate.distance_nm / ASSUMPTIONS["cruise_nm_per_min"] + ASSUMPTIONS["alternate_approach_min"]
 
 
@@ -60,7 +62,10 @@ def landing_stream(world: FallbackWorld, focal_slot: int | None = None) -> dict:
     focal = focal_arrival(world)
     order = sorted(base, key=base.get)
     n = 0
-    while n < len(order) and base[order[n]] + headway_s(world, world.background[order[n]], focal, base[order[n]]) / 60             <= focal_slot:
+    while (
+        n < len(order)
+        and base[order[n]] + headway_s(world, world.background[order[n]], focal, base[order[n]]) / 60 <= focal_slot
+    ):
         n += 1
     land = {k: base[k] for k in order[:n]} | {FOCAL: float(focal_slot)}
     prev = (FOCAL, focal)
@@ -73,8 +78,14 @@ def landing_stream(world: FallbackWorld, focal_slot: int | None = None) -> dict:
 
 # The focal flight as a stream arrival.
 def focal_arrival(world: FallbackWorld) -> Arrival:
-    return Arrival(world.flight, world.airline, world.tail, world.earliest_arr_min,
-                   atc_config.wake_class(world.tail, world.airline), "real")
+    return Arrival(
+        world.flight,
+        world.airline,
+        world.tail,
+        world.earliest_arr_min,
+        atc_config.wake_class(world.tail, world.airline),
+        "real",
+    )
 
 
 # Checks one plan against every hard rule.
@@ -88,16 +99,23 @@ def check(plan: dict, world: FallbackWorld) -> dict:
     hold, extra = plan.get("holding_min") or 0, plan.get("extra_fuel_min") or 0
 
     def add(rule_id: str, ok: bool, actual, limit, unit: str, msg: str) -> None:
-        checks.append({"rule_id": rule_id, "result": "PASS" if ok else "FAIL",
-                       "actual": actual, "limit": limit, "unit": unit})
+        checks.append(
+            {"rule_id": rule_id, "result": "PASS" if ok else "FAIL", "actual": actual, "limit": limit, "unit": unit}
+        )
         if not ok:
             violations.append(f"{rule_id}: {msg}")
 
     # C-FUEL-1: holding <= holdable + extra fuel; a diversion must reach the alternate on the same fuel.
     need = round(divert_flight_min(world), 1) if divert else hold
     limit = world.holdable_min + extra
-    add("C-FUEL-1", need <= limit, need, limit, "holding_min",
-        f"{'diversion flight' if divert else 'holding'} {need} min exceeds limit {limit} min")
+    add(
+        "C-FUEL-1",
+        need <= limit,
+        need,
+        limit,
+        "holding_min",
+        f"{'diversion flight' if divert else 'holding'} {need} min exceeds limit {limit} min",
+    )
     margin = limit - need
     flags = ["MINIMUM_FUEL"] if margin < config.MIN_FUEL_FLAG_MIN else []
 
@@ -111,8 +129,9 @@ def check(plan: dict, world: FallbackWorld) -> dict:
         hour = slot // 60
         over = [h for h, n in count.items() if n > world.hourly_cap.get(h, world.normal_cap) and n > base_count[h]]
         cap = world.hourly_cap.get(hour, world.normal_cap)
-        add("C-CAP-1", not over, count[hour], cap, "arrivals_per_hour",
-            f"hour(s) {over or [hour]} over the arrival cap")
+        add(
+            "C-CAP-1", not over, count[hour], cap, "arrivals_per_hour", f"hour(s) {over or [hour]} over the arrival cap"
+        )
         # C-WAKE-1 / C-SEP-1: tightest gap (s) to the focal flight's leader and follower in the stream.
         order = sorted(stream, key=stream.get)
         pos = order.index(FOCAL)
@@ -128,8 +147,14 @@ def check(plan: dict, world: FallbackWorld) -> dict:
             gap, lead, follow = min(pairs, key=lambda p: p[0] - atc_config.wake_gap_s(p[1].wake, p[2].wake))
             req = round(atc_config.wake_gap_s(lead.wake, follow.wake))
             known = (lead.wake, follow.wake) in atc_config.wake_table()
-            add("C-WAKE-1" if known else "C-SEP-1", round(gap) >= req, round(gap), req, "s",
-                f"gap {round(gap)} s below required {req} s")
+            add(
+                "C-WAKE-1" if known else "C-SEP-1",
+                round(gap) >= req,
+                round(gap),
+                req,
+                "s",
+                f"gap {round(gap)} s below required {req} s",
+            )
         # C-GATE-1: gate free for arrival -> end of minimum turnaround.
         gate, end = plan.get("gate"), slot + lims.min_turnaround_min
         busy = world.gate_busy.get(gate)
@@ -138,19 +163,37 @@ def check(plan: dict, world: FallbackWorld) -> dict:
         # C-GATE-2: a gate change needs notice before arrival.
         if gate != world.scheduled_gate:
             notice = slot - world.now_min
-            add("C-GATE-2", notice >= world.fuel.gate_change_notice_min, notice,
-                world.fuel.gate_change_notice_min, "min", f"gate change notice {notice} min too short")
+            add(
+                "C-GATE-2",
+                notice >= world.fuel.gate_change_notice_min,
+                notice,
+                world.fuel.gate_change_notice_min,
+                "min",
+                f"gate change notice {notice} min too short",
+            )
         # C-TURN-1: the gate is blocked for the full minimum turnaround above; a shortfall before the tail's
         # next departure is a soft next-leg delay, not a rule failure.
         add("C-TURN-1", True, lims.min_turnaround_min, lims.min_turnaround_min, "min", "")
         soft["next_leg_delay_min"] = max(0, end - world.next_departure_min)
         # C-CREW-1: ground-crew overtime is a soft cost, hard beyond a cap.
         ot = max(0, end - world.crew_shift_end_min)
-        add("C-CREW-1", ot <= config.CREW_MAX_OVERTIME_MIN, ot, config.CREW_MAX_OVERTIME_MIN, "min",
-            f"crew overtime {ot} min exceeds cap")
+        add(
+            "C-CREW-1",
+            ot <= config.CREW_MAX_OVERTIME_MIN,
+            ot,
+            config.CREW_MAX_OVERTIME_MIN,
+            "min",
+            f"crew overtime {ot} min exceeds cap",
+        )
         soft["crew_overtime_min"] = ot
     soft["missed_pax"] = world.connecting_pax if slot - world.sched_arr_min > world.connection_slack_min else 0
 
     valid = all(c["result"] == "PASS" for c in checks)
-    return {"status": "VALID" if valid else "INVALID", "valid": valid, "checks": checks,
-            "violations": violations, "flags": flags, "soft": soft}
+    return {
+        "status": "VALID" if valid else "INVALID",
+        "valid": valid,
+        "checks": checks,
+        "violations": violations,
+        "flags": flags,
+        "soft": soft,
+    }

@@ -3,6 +3,7 @@
 If this fails after a pure refactor, the refactor changed behaviour: fix the code, not the snapshot.
 If the change is intended, run `python -m tests.golden.update` and say in the commit which numbers moved.
 """
+
 import difflib
 import json
 

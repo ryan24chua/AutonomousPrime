@@ -9,6 +9,7 @@ Rounds 1-2 (plans + 0-1 scores) are computed from each lane's own code-side asse
 number is code. Round 3 votes call the lanes' real agents (Claude) when live=True, else their dry-run
 policies (ATC, Pilot) / Ground's hard check. Scores are normalised within the set being scored.
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -20,18 +21,18 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO / "atc-agent") not in sys.path:
     sys.path.insert(0, str(REPO / "atc-agent"))
 
-from agents.constraints import fuel_crew_rules                       # noqa: E402
+from agents.constraints import fuel_crew_rules  # noqa: E402
 from agents.pilot import PilotAgent, _rank_key, assess_plan, pilot_alternatives  # noqa: E402
-from agents.pilot_inputs import PilotInputs, build_pilot_inputs      # noqa: E402
-from agents.schema import Plan                                       # noqa: E402
-from atc_agent.agent import ATCAgent                                 # noqa: E402
+from agents.pilot_inputs import PilotInputs, build_pilot_inputs  # noqa: E402
+from agents.schema import Plan  # noqa: E402
+from atc_agent.agent import ATCAgent  # noqa: E402
 from atc_agent.menu import Option as ATCOption, build_menu, check_slot  # noqa: E402
 from atc_agent.world_stub import World, build_world as build_atc_world  # noqa: E402
-from ground_agent.agent import GroundAgent                           # noqa: E402
-from ground_agent.checker import check_ground                        # noqa: E402
-from ground_agent.cost import cost_ground                            # noqa: E402
+from ground_agent.agent import GroundAgent  # noqa: E402
+from ground_agent.checker import check_ground  # noqa: E402
+from ground_agent.cost import cost_ground  # noqa: E402
 from ground_agent.inputs import WorldState, build_world as build_ground_world  # noqa: E402
-from ground_agent.options import free_gate_ids                       # noqa: E402
+from ground_agent.options import free_gate_ids  # noqa: E402
 
 from .core import PLANS_PER_AGENT, CheckResult, ScoredPlan, Vote, plan_key  # noqa: E402
 
@@ -39,6 +40,7 @@ from .core import PLANS_PER_AGENT, CheckResult, ScoredPlan, Vote, plan_key  # no
 @dataclass
 class Scenario:
     """One disruption (one DOT row), built once per lane from the same row."""
+
     focal_row: dict
     atc_world: World
     atc_menu: list[ATCOption]
@@ -48,13 +50,19 @@ class Scenario:
     @property
     def negotiation_id(self) -> str:
         f = self.focal_row
-        return f'{f["DESTINATION_AIRPORT"]}-{self.atc_world.date.replace("-", "")}-{f["AIRLINE"]}{f["FLIGHT_NUMBER"]}'
+        return f"{f['DESTINATION_AIRPORT']}-{self.atc_world.date.replace('-', '')}-{f['AIRLINE']}{f['FLIGHT_NUMBER']}"
 
 
 def build_scenario(day_rows: list[dict], focal_row: dict, seed: int = 7) -> Scenario:
     world = build_atc_world(day_rows, focal_row, seed=seed)
-    ground = build_ground_world(focal_row["AIRLINE"], focal_row["FLIGHT_NUMBER"], int(focal_row["MONTH"]),
-                                int(focal_row["DAY"]), focal_row["ORIGIN_AIRPORT"], seed=seed)
+    ground = build_ground_world(
+        focal_row["AIRLINE"],
+        focal_row["FLIGHT_NUMBER"],
+        int(focal_row["MONTH"]),
+        int(focal_row["DAY"]),
+        focal_row["ORIGIN_AIRPORT"],
+        seed=seed,
+    )
     return Scenario(focal_row, world, build_menu(world), build_pilot_inputs(focal_row, seed=seed), ground)
 
 
@@ -67,7 +75,7 @@ def _atc_option(s: Scenario, plan: dict) -> ATCOption | None:
 def check_plan(s: Scenario, plan: dict) -> CheckResult:
     """Every lane's hard constraints, in code. A plan survives only if all pass."""
     violations: list[str] = []
-    slot = check_slot({**plan, "gate": None}, s.atc_menu)          # C-CAP-1 (+ ATC's fuel stub)
+    slot = check_slot({**plan, "gate": None}, s.atc_menu)  # C-CAP-1 (+ ATC's fuel stub)
     violations += [v for v in slot["violations"] if not v.startswith("C-FUEL-1")]  # Pilot owns fuel below
     p = Plan(**plan)
     a = assess_plan("chk", p, s.pilot_inputs, fuel_crew_rules())
@@ -98,18 +106,22 @@ def _key_atc(s: Scenario, p: dict):
     opt = _atc_option(s, p)
     if opt is None:
         return None, "Not in ATC arrival menu (C-CAP-1)."
-    return ((opt.total_system_delay_min, opt.holding_min, opt.cost_usd),
-            f"Slot {opt.arrival_slot}: system delay {opt.total_system_delay_min} min, holding {opt.holding_min} min, "
-            f"cost ${opt.cost_usd}.")
+    return (
+        (opt.total_system_delay_min, opt.holding_min, opt.cost_usd),
+        f"Slot {opt.arrival_slot}: system delay {opt.total_system_delay_min} min, holding {opt.holding_min} min, "
+        f"cost ${opt.cost_usd}.",
+    )
 
 
 def _key_pilot(s: Scenario, p: dict):
     a = assess_plan("p", Plan(**p), s.pilot_inputs, fuel_crew_rules())
     if not (a.fuel_ok and a.duty_ok):
         return None, f"Unsafe: fuel margin {a.fuel_margin_min} min, duty margin {a.duty_margin_min} min."
-    return ((*_rank_key(a), a.arrival_delay_min),
-            f"Fuel margin {a.fuel_margin_min} min, holding {a.holding_min} min, {a.pax_missed} pax miss "
-            f"connections, arrival delay {a.arrival_delay_min} min{', divert' if a.divert else ''}.")
+    return (
+        (*_rank_key(a), a.arrival_delay_min),
+        f"Fuel margin {a.fuel_margin_min} min, holding {a.holding_min} min, {a.pax_missed} pax miss "
+        f"connections, arrival delay {a.arrival_delay_min} min{', divert' if a.divert else ''}.",
+    )
 
 
 def _key_ground(s: Scenario, p: dict):
@@ -119,8 +131,10 @@ def _key_ground(s: Scenario, p: dict):
     if not chk.valid:
         return None, "Fails " + ", ".join(v.rule_id for v in chk.violations) + "."
     c, m = cost_ground(chk), chk.metrics
-    return ((c["total"], m["gate_wait_min"]),
-            f"Gate {p['gate']}: wait {m['gate_wait_min']} min, overtime {m['overtime_min']} min, ground cost ${c['total']:.0f}.")
+    return (
+        (c["total"], m["gate_wait_min"]),
+        f"Gate {p['gate']}: wait {m['gate_wait_min']} min, overtime {m['overtime_min']} min, ground cost ${c['total']:.0f}.",
+    )
 
 
 KEYS = {"atc": _key_atc, "pilot": _key_pilot, "ground": _key_ground}
@@ -223,16 +237,19 @@ class LaneAgent:
         p = Plan(**plan)
         if self.name == "atc":
             opt = _atc_option(self.s, plan)
-            table = {"plan_id": plan_id, "plan": {**plan, "gate": None, "divert": False},
-                     "check": check_slot({**plan, "gate": None}, self.s.atc_menu),
-                     "total_system_delay_min": opt.total_system_delay_min if opt else None}
+            table = {
+                "plan_id": plan_id,
+                "plan": {**plan, "gate": None, "divert": False},
+                "check": check_slot({**plan, "gate": None}, self.s.atc_menu),
+                "total_system_delay_min": opt.total_system_delay_min if opt else None,
+            }
             msg = await asyncio.to_thread(self.agent.respond, 3, table, table["check"], [])
             return Vote(msg.get("action") == "accept", msg.get("reason", ""))
         if self.name == "pilot":
             msg = await self.agent.respond(self.s.pilot_inputs, plan_id, p, check_plan(self.s, plan).__dict__, [], 3)
             return Vote(msg.action == "accept", msg.reason)
         chk = check_ground(p, self.s.ground_state)
-        if self.agent is None:                       # dry run: Ground accepts any plan passing its hard rules
+        if self.agent is None:  # dry run: Ground accepts any plan passing its hard rules
             return Vote(chk.valid, "Passes Ground hard rules." if chk.valid else "Fails Ground hard rules.")
         msg = await self.agent.respond(self.s.ground_state, 3, plan_id, p, chk, [])
         return Vote(msg.action == "accept", msg.reason)

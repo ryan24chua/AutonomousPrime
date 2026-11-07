@@ -3,6 +3,7 @@
 Candidates: slots (5-min grid, earliest arrival to +3 h) x {ground delay | holding + extra fuel} x gates,
 plus one diversion. Also the evaluation baseline (trigger "baseline").
 """
+
 import math
 from collections import Counter
 
@@ -25,11 +26,33 @@ def _enumerate(world: FallbackWorld) -> list[tuple[int, dict]]:
         levers = [(wait, 0, 0)] + ([(0, wait, x) for x in config.EXTRA_FUEL_OPTIONS] if wait > 0 else [])
         for ground, hold, extra in levers:
             for gate in world.gates:
-                out.append((slot, {"arrival_slot": _hhmm(slot), "ground_delay_min": ground, "holding_min": hold,
-                                   "extra_fuel_min": extra, "gate": gate, "divert": False}))
+                out.append(
+                    (
+                        slot,
+                        {
+                            "arrival_slot": _hhmm(slot),
+                            "ground_delay_min": ground,
+                            "holding_min": hold,
+                            "extra_fuel_min": extra,
+                            "gate": gate,
+                            "divert": False,
+                        },
+                    )
+                )
     alt_slot = world.earliest_arr_min + math.ceil(divert_flight_min(world))
-    out.append((alt_slot, {"arrival_slot": _hhmm(alt_slot), "ground_delay_min": 0, "holding_min": 0,
-                           "extra_fuel_min": 0, "gate": None, "divert": True}))
+    out.append(
+        (
+            alt_slot,
+            {
+                "arrival_slot": _hhmm(alt_slot),
+                "ground_delay_min": 0,
+                "holding_min": 0,
+                "extra_fuel_min": 0,
+                "gate": None,
+                "divert": True,
+            },
+        )
+    )
     return out
 
 
@@ -71,18 +94,43 @@ def solve(world: FallbackWorld, trigger: str) -> dict:
         key = (cost, delay, plan["holding_min"], plan["divert"], slot, plan["gate"] or "")
         scored.append((key, f"F{n}", plan, chk, cost, delay, parts))
     scored.sort(key=lambda s: s[0])
-    info = {"trigger": trigger, "candidates_enumerated": len(cands), "valid": len(scored),
-            "tie_break": TIE_BREAK, "rejected_by_rule": dict(sorted(rejected.items()))}
+    info = {
+        "trigger": trigger,
+        "candidates_enumerated": len(cands),
+        "valid": len(scored),
+        "tie_break": TIE_BREAK,
+        "rejected_by_rule": dict(sorted(rejected.items())),
+    }
     if not scored:
-        return {"outcome": "recommend_cancel", "proposed_by": "fallback", "plan": None, "check": None,
-                "cost_usd": config.CANCEL_COST, "total_system_delay_min": None,
-                "fallback": info | {"selected_source_id": None, "runner_up": None,
-                                    "note": "no valid plan: recommendation to the human, never auto-applied"}}
+        return {
+            "outcome": "recommend_cancel",
+            "proposed_by": "fallback",
+            "plan": None,
+            "check": None,
+            "cost_usd": config.CANCEL_COST,
+            "total_system_delay_min": None,
+            "fallback": info
+            | {
+                "selected_source_id": None,
+                "runner_up": None,
+                "note": "no valid plan: recommendation to the human, never auto-applied",
+            },
+        }
     _, sid, plan, chk, cost, delay, parts = scored[0]
     runner = None
     if len(scored) > 1:
-        runner = {"source_id": scored[1][1], "plan": scored[1][2], "cost_usd": scored[1][4],
-                  "total_system_delay_min": scored[1][5]}
-    return {"outcome": "halt_least_cost", "proposed_by": "fallback", "plan": plan, "check": chk,
-            "cost_usd": cost, "total_system_delay_min": delay,
-            "fallback": info | {"selected_source_id": sid, "runner_up": runner, "cost_breakdown": parts}}
+        runner = {
+            "source_id": scored[1][1],
+            "plan": scored[1][2],
+            "cost_usd": scored[1][4],
+            "total_system_delay_min": scored[1][5],
+        }
+    return {
+        "outcome": "halt_least_cost",
+        "proposed_by": "fallback",
+        "plan": plan,
+        "check": chk,
+        "cost_usd": cost,
+        "total_system_delay_min": delay,
+        "fallback": info | {"selected_source_id": sid, "runner_up": runner, "cost_breakdown": parts},
+    }

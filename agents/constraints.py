@@ -4,6 +4,7 @@ Organiser rule: "Use the limits in this workbook. Any limit you change must be s
 So limits are read from the workbook, never hardcoded. Team assumptions layered on top are listed in
 ASSUMPTIONS and must appear in the demo / decision document.
 """
+
 from __future__ import annotations
 
 import re
@@ -26,12 +27,12 @@ def _first_number(text) -> float:
 
 @dataclass(frozen=True)
 class FuelCrewRules:
-    final_reserve_min: float          # never plan below this (minutes of holding fuel)
-    contingency_pct: float            # % of trip fuel
+    final_reserve_min: float  # never plan below this (minutes of holding fuel)
+    contingency_pct: float  # % of trip fuel
     burn_narrowbody_kg_h: float
     burn_widebody_kg_h: float
-    spare_on_arrival_min: float       # minutes of holding fuel available on arrival
-    flight_crew_max_duty_h: float     # from report time
+    spare_on_arrival_min: float  # minutes of holding fuel available on arrival
+    flight_crew_max_duty_h: float  # from report time
     ground_crew_shift_h: float
     gate_change_notice_min: float
     source: str = str(WORKBOOK.relative_to(REPO))
@@ -51,8 +52,8 @@ class AirportLimits:
 # Team assumptions on top of the workbook. Every one must be stated in the demo.
 ASSUMPTIONS = {
     "contingency_inside_spare": "The 5% contingency fuel is counted inside the 45-min spare fuel, so "
-                                "holdable fuel = spare fuel; the 30-min final reserve is never used.",
-    "cruise_nm_per_min": 7.0,       # ~420 kt groundspeed to the alternate
+    "holdable fuel = spare fuel; the 30-min final reserve is never used.",
+    "cruise_nm_per_min": 7.0,  # ~420 kt groundspeed to the alternate
     "alternate_approach_min": 10.0,  # approach and landing allowance at the alternate
     "crew_report_before_first_leg_min": 60.0,
     "widebody_if_distance_mi_at_least": 2500.0,
@@ -94,12 +95,15 @@ def airport_limits(path: Path = WORKBOOK) -> dict[str, AirportLimits]:
     hdr = list(rows[hdr_i])
     col = {name: hdr.index(name) for name in hdr if name}
     out = {}
-    for r in rows[hdr_i + 1:]:
+    for r in rows[hdr_i + 1 :]:
         if not r or not r[0]:
             continue
         out[r[0]] = AirportLimits(
-            iata=r[0], size_class=r[col["size_class"]], active_runways=int(r[col["active_runways"]]),
-            gates=int(r[col["gates"]]), max_runway_ops_per_hour=int(r[col["max_runway_ops_per_hour"]]),
+            iata=r[0],
+            size_class=r[col["size_class"]],
+            active_runways=int(r[col["active_runways"]]),
+            gates=int(r[col["gates"]]),
+            max_runway_ops_per_hour=int(r[col["max_runway_ops_per_hour"]]),
             min_turnaround_min=int(r[col["min_turnaround_min"]]),
             spare_gates_at_any_time=int(r[col["spare_gates_at_any_time"]]),
         )

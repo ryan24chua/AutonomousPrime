@@ -10,6 +10,7 @@ Volatile values (timestamps, run ids, file paths, latency) are stripped so the s
 While capturing, two pure CSV readers are swapped for cached copies that return the same rows in the same
 order, only to keep the test fast; they are restored afterwards and the readers themselves are untouched.
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -51,8 +52,11 @@ def _patched(by_day: dict, out_dir: Path):
             cache[path] = list(original_read_rows(path))
         return iter(cache[path])
 
-    saved = [(middleman, "load_day", middleman.load_day), (ground_inputs, "_read_rows", original_read_rows),
-             (ev, "OUT", ev.OUT)]
+    saved = [
+        (middleman, "load_day", middleman.load_day),
+        (ground_inputs, "_read_rows", original_read_rows),
+        (ev, "OUT", ev.OUT),
+    ]
     middleman.load_day, ground_inputs._read_rows, ev.OUT = load_day, read_rows, out_dir
     try:
         yield
@@ -85,7 +89,7 @@ def _console() -> dict[str, dict]:
         log_path, run_id = res["log_path"], res["world"]["run_id"]
         doc = res["document"].replace(log_path, "<log_path>").replace(run_id, "<run_id>")
         res["document"] = re.sub(r"`[^`]*\.jsonl`", "`<log_path>`", doc)
-        Path(log_path).unlink(missing_ok=True)        # middleman writes one log per run under logs/
+        Path(log_path).unlink(missing_ok=True)  # middleman writes one log per run under logs/
         out[row_id] = _strip(res)
     return out
 

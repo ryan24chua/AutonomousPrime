@@ -1,8 +1,9 @@
 """Run the fallback on one DOT row (default: DFW, 24 Apr 2015 weather) and print provenance + the chosen plan.
 
-    python -m fallback
-    python -m fallback --seed 3 --flight MQ3086
+python -m fallback
+python -m fallback --seed 3 --flight MQ3086
 """
+
 import argparse
 import json
 
@@ -24,8 +25,10 @@ def main() -> None:
     rows = load_day(y, m, d)
     focal = pick_focal(rows, a.dest, a.flight)
     world = build_world(rows, focal, a.seed)
-    print(f"Focal {world.flight} {focal['ORIGIN_AIRPORT']}->{world.dest} {world.date} | event {world.event_type} "
-          f"{world.event_magnitude_min} min | background {len(world.background)} | seed {world.seed}")
+    print(
+        f"Focal {world.flight} {focal['ORIGIN_AIRPORT']}->{world.dest} {world.date} | event {world.event_type} "
+        f"{world.event_magnitude_min} min | background {len(world.background)} | seed {world.seed}"
+    )
     print("World provenance:")
     for field, label in world.provenance.items():
         print(f"  {field}: {label}")

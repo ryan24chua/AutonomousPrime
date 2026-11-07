@@ -3,6 +3,7 @@
 The world builder (role B) can call `build_pilot_inputs` or supply an equivalent PilotInputs itself.
 No hindsight: outcome columns (actual times, actual delays, taxi/air times) are never read here.
 """
+
 from __future__ import annotations
 
 import csv
@@ -18,9 +19,22 @@ FLIGHTS = REPO / "data" / "raw" / "dot2015" / "flights.csv"
 AIRPORTS = REPO / "data" / "raw" / "dot2015" / "airports.csv"
 
 # Columns the Pilot may see. Outcome columns are deliberately absent (CLAUDE.md "No hindsight").
-SCHEDULE_COLS = ("YEAR", "MONTH", "DAY", "AIRLINE", "FLIGHT_NUMBER", "TAIL_NUMBER", "ORIGIN_AIRPORT",
-                 "DESTINATION_AIRPORT", "SCHEDULED_DEPARTURE", "SCHEDULED_ARRIVAL", "SCHEDULED_TIME",
-                 "DISTANCE", "WEATHER_DELAY", "LATE_AIRCRAFT_DELAY")
+SCHEDULE_COLS = (
+    "YEAR",
+    "MONTH",
+    "DAY",
+    "AIRLINE",
+    "FLIGHT_NUMBER",
+    "TAIL_NUMBER",
+    "ORIGIN_AIRPORT",
+    "DESTINATION_AIRPORT",
+    "SCHEDULED_DEPARTURE",
+    "SCHEDULED_ARRIVAL",
+    "SCHEDULED_TIME",
+    "DISTANCE",
+    "WEATHER_DELAY",
+    "LATE_AIRCRAFT_DELAY",
+)
 
 
 @dataclass(frozen=True)
@@ -33,11 +47,11 @@ class Alternate:
 
 @dataclass(frozen=True)
 class Connection:
-    flight: str            # e.g. "DL1452"
-    to: str                # onward destination
-    sched_dep: str         # HH:MM, destination-local
-    pax: int               # connecting passengers from the focal flight
-    last_of_day: bool      # no later same-airline departure to that city in the data
+    flight: str  # e.g. "DL1452"
+    to: str  # onward destination
+    sched_dep: str  # HH:MM, destination-local
+    pax: int  # connecting passengers from the focal flight
+    last_of_day: bool  # no later same-airline departure to that city in the data
     provenance: str = "real onward flight (flights.csv); pax count synthetic (seeded)"
 
 
@@ -47,17 +61,17 @@ class PilotInputs:
     tail: str
     origin: str
     dest: str
-    date: str                      # YYYY-MM-DD
-    sched_dep: str                 # HH:MM origin-local
-    sched_arr: str                 # HH:MM dest-local
+    date: str  # YYYY-MM-DD
+    sched_dep: str  # HH:MM origin-local
+    sched_arr: str  # HH:MM dest-local
     sched_time_min: int
     distance_mi: int
-    aircraft_class: str            # "narrowbody" | "widebody" (assumption by distance)
-    event_type: str                # "weather" | "late_aircraft"
-    event_magnitude_min: int       # WEATHER_DELAY or LATE_AIRCRAFT_DELAY (reported cause minutes)
-    airborne: bool                 # MVP default False (pre-departure)
+    aircraft_class: str  # "narrowbody" | "widebody" (assumption by distance)
+    event_type: str  # "weather" | "late_aircraft"
+    event_magnitude_min: int  # WEATHER_DELAY or LATE_AIRCRAFT_DELAY (reported cause minutes)
+    airborne: bool  # MVP default False (pre-departure)
     alternate: Alternate
-    crew_report: str               # HH:MM origin-local (derived, approximate)
+    crew_report: str  # HH:MM origin-local (derived, approximate)
     mct_min: float
     connections: tuple[Connection, ...] = field(default_factory=tuple)
     seed: int = 0
@@ -117,9 +131,13 @@ def crew_report_time(row: dict, by_origin_day) -> str:
     """Earliest scheduled departure of this tail that day (from the data) minus 60 min.
     Approximate: flights.csv contains only delayed legs, so the true first leg may be earlier."""
     tail, mo, dy = row["TAIL_NUMBER"], row["MONTH"], row["DAY"]
-    first = min(to_min(hhmm(r["SCHEDULED_DEPARTURE"]))
-                for (m, d, _), legs in by_origin_day.items() if m == mo and d == dy
-                for r in legs if r["TAIL_NUMBER"] == tail)
+    first = min(
+        to_min(hhmm(r["SCHEDULED_DEPARTURE"]))
+        for (m, d, _), legs in by_origin_day.items()
+        if m == mo and d == dy
+        for r in legs
+        if r["TAIL_NUMBER"] == tail
+    )
     rep = max(first - int(ASSUMPTIONS["crew_report_before_first_leg_min"]), 0)
     return f"{rep // 60:02d}:{rep % 60:02d}"
 
@@ -136,12 +154,19 @@ def derive_connections(row: dict, by_origin_day, seed: int) -> tuple[Connection,
     for r in sorted(same_airline, key=lambda r: r["SCHEDULED_DEPARTURE"]):
         dep = to_min(hhmm(r["SCHEDULED_DEPARTURE"]))
         if lo <= dep - arr <= hi:
-            later = any(x["DESTINATION_AIRPORT"] == r["DESTINATION_AIRPORT"]
-                        and to_min(hhmm(x["SCHEDULED_DEPARTURE"])) > dep for x in same_airline)
-            out.append(Connection(flight=f"{r['AIRLINE']}{r['FLIGHT_NUMBER']}", to=r["DESTINATION_AIRPORT"],
-                                  sched_dep=hhmm(r["SCHEDULED_DEPARTURE"]),
-                                  pax=rng.randint(*ASSUMPTIONS["connection_pax_range"]),
-                                  last_of_day=not later))
+            later = any(
+                x["DESTINATION_AIRPORT"] == r["DESTINATION_AIRPORT"] and to_min(hhmm(x["SCHEDULED_DEPARTURE"])) > dep
+                for x in same_airline
+            )
+            out.append(
+                Connection(
+                    flight=f"{r['AIRLINE']}{r['FLIGHT_NUMBER']}",
+                    to=r["DESTINATION_AIRPORT"],
+                    sched_dep=hhmm(r["SCHEDULED_DEPARTURE"]),
+                    pax=rng.randint(*ASSUMPTIONS["connection_pax_range"]),
+                    last_of_day=not later,
+                )
+            )
     return tuple(out)
 
 
@@ -154,14 +179,22 @@ def build_pilot_inputs(row: dict, seed: int = 42, airborne: bool = False) -> Pil
     limits = airport_limits().get(row["DESTINATION_AIRPORT"])
     mct = ASSUMPTIONS["mct_min"].get(limits.size_class if limits else "", ASSUMPTIONS["mct_min"]["default"])
     return PilotInputs(
-        flight=f"{row['AIRLINE']}{row['FLIGHT_NUMBER']}", tail=row["TAIL_NUMBER"],
-        origin=row["ORIGIN_AIRPORT"], dest=row["DESTINATION_AIRPORT"],
+        flight=f"{row['AIRLINE']}{row['FLIGHT_NUMBER']}",
+        tail=row["TAIL_NUMBER"],
+        origin=row["ORIGIN_AIRPORT"],
+        dest=row["DESTINATION_AIRPORT"],
         date=f"{row['YEAR']}-{int(row['MONTH']):02d}-{int(row['DAY']):02d}",
-        sched_dep=hhmm(row["SCHEDULED_DEPARTURE"]), sched_arr=hhmm(row["SCHEDULED_ARRIVAL"]),
-        sched_time_min=int(float(row["SCHEDULED_TIME"])), distance_mi=dist,
+        sched_dep=hhmm(row["SCHEDULED_DEPARTURE"]),
+        sched_arr=hhmm(row["SCHEDULED_ARRIVAL"]),
+        sched_time_min=int(float(row["SCHEDULED_TIME"])),
+        distance_mi=dist,
         aircraft_class="widebody" if dist >= ASSUMPTIONS["widebody_if_distance_mi_at_least"] else "narrowbody",
-        event_type=event, event_magnitude_min=int(w if event == "weather" else l), airborne=airborne,
+        event_type=event,
+        event_magnitude_min=int(w if event == "weather" else l),
+        airborne=airborne,
         alternate=nearest_alternate(row["DESTINATION_AIRPORT"]),
-        crew_report=crew_report_time(row, by_origin_day), mct_min=mct,
-        connections=derive_connections(row, by_origin_day, seed), seed=seed,
+        crew_report=crew_report_time(row, by_origin_day),
+        mct_min=mct,
+        connections=derive_connections(row, by_origin_day, seed),
+        seed=seed,
     )

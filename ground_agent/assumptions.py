@@ -5,6 +5,7 @@ add or change must be stated in the demo, so `ASSUMPTIONS` is printed by ground_
 Limits that ARE in the workbook (crew shift, gate-change notice, gates, minimum turnaround) are
 read at runtime from agents.constraints and are not repeated here.
 """
+
 # Not in the workbook: longest a landed aircraft may wait for its gate before C-GATE-1 fails.
 MAX_GATE_WAIT_MIN = 30
 # Workbook fuel_and_crew text: "8 hours; overtime costs 1.5x after that". agents.constraints parses

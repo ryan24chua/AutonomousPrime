@@ -4,6 +4,7 @@ Owned jointly by the agent lanes and the middleman lane: change it only with the
 Ranges (minutes >= 0, HH:MM format, word limits) are enforced in Python by `validate_ranges`,
 because structured outputs do not support min/max constraints in the schema.
 """
+
 from __future__ import annotations
 
 import re
@@ -13,8 +14,9 @@ from pydantic import BaseModel, ConfigDict, Field
 
 AgentName = Literal["atc", "pilot", "ground"]
 Action = Literal["propose", "accept", "counter", "reject"]
-Flag = Literal["MINIMUM_FUEL", "DUTY_LIMIT", "DIVERT_RECOMMENDED", "CANCEL_RECOMMENDED",
-               "CREW_OVERTIME", "CONNECTION_RISK"]  # last two: Ground agent (soft cost, code-derived)
+Flag = Literal[
+    "MINIMUM_FUEL", "DUTY_LIMIT", "DIVERT_RECOMMENDED", "CANCEL_RECOMMENDED", "CREW_OVERTIME", "CONNECTION_RISK"
+]  # last two: Ground agent (soft cost, code-derived)
 
 
 class Plan(BaseModel):
@@ -40,8 +42,11 @@ class Alternative(BaseModel):
 class ICAPBrief(BaseModel):
     """Optional decision brief (Interests, Constraints, Alternatives, Priorities). Additive: agents and the
     middleman may ignore it; the consensus log and decision document show it."""
+
     interest: str = Field(description="The outcome being protected and why (interest, not position)")
-    red_lines: list[str] = Field(default_factory=list, description="Hard limits this agent will never trade, stated up front")
+    red_lines: list[str] = Field(
+        default_factory=list, description="Hard limits this agent will never trade, stated up front"
+    )
     failed_constraint: Optional[FailedConstraint] = None
     alternatives: list[Alternative] = Field(default_factory=list, description="Ranked, best first")
     concessions: list[str] = Field(default_factory=list, description="What this agent can give up")

@@ -1,4 +1,5 @@
 """Validate an ATC message against agent contract v0.2, CLAUDE.md §7 and the ATC spec (CAP-4, 6, 7, 8, 10, 11)."""
+
 import re
 
 from . import config
@@ -15,8 +16,9 @@ def numbers_in(text: str) -> set[str]:
     return set(NUM.findall(text or ""))
 
 
-def validate(msg: dict, round_no: int, menu: list[Option], allowed_text: str, flags: set[str],
-             table: dict | None = None) -> list[str]:
+def validate(
+    msg: dict, round_no: int, menu: list[Option], allowed_text: str, flags: set[str], table: dict | None = None
+) -> list[str]:
     """table = table-plan dict {plan_id, proposed_by, source_id, plan, check, cost_usd, total_system_delay_min}."""
     errs: list[str] = []
     if not isinstance(msg, dict):
@@ -40,9 +42,19 @@ def validate(msg: dict, round_no: int, menu: list[Option], allowed_text: str, fl
         raw_plan = None
     plan = raw_plan or {}
     table_plan = (table or {}).get("plan") or {}
-    table_opt = next((o for o in menu if (o.arrival_slot, o.ground_delay_min, o.holding_min) ==
-                      (table_plan.get("arrival_slot"), table_plan.get("ground_delay_min"),
-                       table_plan.get("holding_min"))), None) if table else None
+    table_opt = (
+        next(
+            (
+                o
+                for o in menu
+                if (o.arrival_slot, o.ground_delay_min, o.holding_min)
+                == (table_plan.get("arrival_slot"), table_plan.get("ground_delay_min"), table_plan.get("holding_min"))
+            ),
+            None,
+        )
+        if table
+        else None
+    )
 
     opt: Option | None = None  # the option the fuel and margin rules apply to
     if action in ("propose", "counter"):
@@ -79,11 +91,15 @@ def validate(msg: dict, round_no: int, menu: list[Option], allowed_text: str, fl
         elif opt and table_opt:
             if opt.option_id == table_opt.option_id:
                 errs.append('"counter" must name a different option')
-            elif ("EMERGENCY_FUEL" not in flags and opt.total_system_delay_min
-                  > table_opt.total_system_delay_min - config.CAP10_TOLERANCE_MIN):
-                errs.append(f"CAP-10: counter only if total_system_delay_min is at least "
-                            f"{config.CAP10_TOLERANCE_MIN} lower than the table's ({table_opt.total_system_delay_min}); "
-                            f"otherwise accept")
+            elif (
+                "EMERGENCY_FUEL" not in flags
+                and opt.total_system_delay_min > table_opt.total_system_delay_min - config.CAP10_TOLERANCE_MIN
+            ):
+                errs.append(
+                    f"CAP-10: counter only if total_system_delay_min is at least "
+                    f"{config.CAP10_TOLERANCE_MIN} lower than the table's ({table_opt.total_system_delay_min}); "
+                    f"otherwise accept"
+                )
 
     for field, limit in LIMITS.items():
         words = len(str(msg.get(field, "")).split())

@@ -9,6 +9,7 @@ Invalid output is re-asked once, then becomes `reject`.
 Shared with other agents: the message only (docs/agent-alignment.md). Everything else here is private.
 This module adds only Ground's role.
 """
+
 import json
 import time
 from pathlib import Path
@@ -32,19 +33,28 @@ EFFORT = "medium"
 PROMPT_PATH = Path(__file__).parent / "prompts" / "ground.md"
 # Outcome columns agents must never see (CLAUDE.md section 6, "No hindsight").
 FORBIDDEN_FIELDS = {
-    "departure_time", "arrival_time", "arrival_delay", "departure_delay",
-    "wheels_on", "wheels_off", "elapsed_time", "air_time", "taxi_in", "taxi_out",
+    "departure_time",
+    "arrival_time",
+    "arrival_delay",
+    "departure_delay",
+    "wheels_on",
+    "wheels_off",
+    "elapsed_time",
+    "air_time",
+    "taxi_in",
+    "taxi_out",
 }
 INTERESTS = {
     "weather": "Land onto a free gate with no wait, keep the turnaround at the airport minimum "
-               "and the crew inside its shift.",
+    "and the crew inside its shift.",
     "late_aircraft": "Protect the next departure: turnaround at the airport minimum, no crew overtime, "
-                     "gate ready when the aircraft is.",
+    "gate ready when the aircraft is.",
 }
 
 
 class GroundDecision(BaseModel):
     """What the model returns: Ground's one lever (the gate) plus the short text fields."""
+
     action: Literal["propose", "accept", "counter", "reject"]
     plan_id: Optional[str] = None
     gate: str
@@ -84,20 +94,26 @@ def build_ground_facts(state: WorldState) -> dict:
     facts = {
         "airport": state.airport,
         "limits": {
-            "gates": state.limits.gates, "min_turnaround_min": state.limits.min_turnaround_min,
-            "spare_gates_at_any_time": state.limits.spare_gates_at_any_time, "source": LIMITS_SOURCE,
+            "gates": state.limits.gates,
+            "min_turnaround_min": state.limits.min_turnaround_min,
+            "spare_gates_at_any_time": state.limits.spare_gates_at_any_time,
+            "source": LIMITS_SOURCE,
         },
         "rules": {
-            "gate_change_notice_min": state.gate_change_notice_min, "max_gate_wait_min": MAX_GATE_WAIT_MIN,
-            "crew_shift_min": state.crew_shift_min, "crew_overtime_multiplier": OVERTIME_MULTIPLIER,
+            "gate_change_notice_min": state.gate_change_notice_min,
+            "max_gate_wait_min": MAX_GATE_WAIT_MIN,
+            "crew_shift_min": state.crew_shift_min,
+            "crew_overtime_multiplier": OVERTIME_MULTIPLIER,
         },
         "event": {"type": state.event_type, "magnitude_min": state.event_magnitude_min},
         "focal_flight": {
-            "flight": state.focal_flight, "tail": state.tail,
+            "flight": state.focal_flight,
+            "tail": state.tail,
             "scheduled_arrival": min_to_hhmm(state.scheduled_arrival_min),
             "disrupted_arrival": min_to_hhmm(state.disrupted_arrival_min),
             "next_departure": min_to_hhmm(state.next_departure_min),
-            "connecting_pax": state.connecting_pax, "connection_slack_min": state.connection_slack_min,
+            "connecting_pax": state.connecting_pax,
+            "connection_slack_min": state.connection_slack_min,
         },
         "announced_at": min_to_hhmm(state.now_min),
         "scheduled_gate": state.scheduled_gate,
@@ -127,8 +143,12 @@ def build_ground_facts(state: WorldState) -> dict:
 # Returns: baseline Plan.
 def baseline_plan(state: WorldState) -> Plan:
     return Plan(
-        arrival_slot=min_to_hhmm(state.disrupted_arrival_min), ground_delay_min=0, holding_min=0,
-        extra_fuel_min=0, gate=state.scheduled_gate, divert=False,
+        arrival_slot=min_to_hhmm(state.disrupted_arrival_min),
+        ground_delay_min=0,
+        holding_min=0,
+        extra_fuel_min=0,
+        gate=state.scheduled_gate,
+        divert=False,
     )
 
 
@@ -157,15 +177,22 @@ class GroundAgent:
     #   table_check - check_ground result for it; history - negotiation log entries so far (dicts).
     # Returns: AgentMessage with action accept/counter/reject.
     async def respond(
-        self, state: WorldState, round_no: int, table_plan_id: str, table_plan: Plan,
-        table_check: GroundCheck, history: list[dict],
+        self,
+        state: WorldState,
+        round_no: int,
+        table_plan_id: str,
+        table_plan: Plan,
+        table_check: GroundCheck,
+        history: list[dict],
     ) -> AgentMessage:
         cost = cost_ground(table_check)
         batna = build_icap(state)["alternatives"]["batna"]
         payload = {
-            "round": round_no, "table_plan_id": table_plan_id,
+            "round": round_no,
+            "table_plan_id": table_plan_id,
             "table_plan": table_plan.model_dump(),
-            "ground_check": table_check.to_dict(), "ground_cost": cost,
+            "ground_check": table_check.to_dict(),
+            "ground_cost": cost,
             "ready_time": min_to_hhmm(table_check.metrics["ready_time_min"]),
             # Table plan's Ground cost minus the cheapest valid Ground option at the disrupted arrival.
             "vs_batna_usd": None if batna is None else round(cost["total"] - batna["cost_usd"], 2),
@@ -184,20 +211,29 @@ class GroundAgent:
         facts = build_ground_facts(state)
         system = [
             {"type": "text", "text": self._role_prompt},
-            {"type": "text", "text": "FACTS:\n" + json.dumps(facts, sort_keys=True),
-             "cache_control": {"type": "ephemeral"}},
+            {
+                "type": "text",
+                "text": "FACTS:\n" + json.dumps(facts, sort_keys=True),
+                "cache_control": {"type": "ephemeral"},
+            },
         ]
         messages = [{"role": "user", "content": user}]
         for attempt in (1, 2):
             t0 = time.time()
             try:
                 resp = await self.client.messages.parse(
-                    model=self.model, max_tokens=MAX_TOKENS, system=system, messages=messages,
-                    output_format=GroundDecision, output_config={"effort": EFFORT},
+                    model=self.model,
+                    max_tokens=MAX_TOKENS,
+                    system=system,
+                    messages=messages,
+                    output_format=GroundDecision,
+                    output_config={"effort": EFFORT},
                 )
             except ValidationError as e:
                 self._log(round_no, attempt, None, t0, error=f"schema: {e.errors()[0]['msg']}")
-                messages.append({"role": "user", "content": f"Your reply was invalid: {e.errors()[0]['msg']}. Reply again."})
+                messages.append(
+                    {"role": "user", "content": f"Your reply was invalid: {e.errors()[0]['msg']}. Reply again."}
+                )
                 continue
             except (anthropic.APIStatusError, anthropic.APIConnectionError) as e:
                 self._log(round_no, attempt, None, t0, error=f"api: {type(e).__name__}")
@@ -250,19 +286,32 @@ class GroundAgent:
         elif d.action in ("propose", "counter"):
             plan = base_plan.model_copy(update={"gate": d.gate})
         flags = check_ground(plan, state).metrics["flags"] if plan is not None else []
-        icap = self._icap(facts, d.requested_next_action, table_check if d.action in ("counter", "reject") else None,
-                          d.interests_cited)
+        icap = self._icap(
+            facts,
+            d.requested_next_action,
+            table_check if d.action in ("counter", "reject") else None,
+            d.interests_cited,
+        )
         return AgentMessage(
-            **{"from": "ground"}, round=round_no, action=d.action, plan_id=plan_id, plan=plan,
-            need=d.need, offer=d.offer, reason=d.reason, flags=flags, icap=icap,
+            **{"from": "ground"},
+            round=round_no,
+            action=d.action,
+            plan_id=plan_id,
+            plan=plan,
+            need=d.need,
+            offer=d.offer,
+            reason=d.reason,
+            flags=flags,
+            icap=icap,
         )
 
     # Builds the shared ICAPBrief from code facts (+ the model's requested next action).
     # Args: facts - facts dict; requested - model text; table_check - check of the plan being countered;
     #   cited - validated interest ids the decision relied on (shown after the interest text).
     # Returns: ICAPBrief.
-    def _icap(self, facts: dict, requested: str, table_check: Optional[GroundCheck],
-              cited: Optional[list[str]] = None) -> ICAPBrief:
+    def _icap(
+        self, facts: dict, requested: str, table_check: Optional[GroundCheck], cited: Optional[list[str]] = None
+    ) -> ICAPBrief:
         failed = None
         if table_check is not None and not table_check.valid:
             failed = FailedConstraint(
@@ -272,9 +321,12 @@ class GroundAgent:
         return ICAPBrief(
             interest=facts["interest"] + (f" [cites {', '.join(cited)}]" if cited else ""),
             failed_constraint=failed,
-            alternatives=[Alternative(plan_ref=a["plan_ref"], summary=a["summary"], status="candidate")
-                          for a in facts["alternatives"][:3]],
-            concessions=facts["concessions"], deadline=facts["deadline"],
+            alternatives=[
+                Alternative(plan_ref=a["plan_ref"], summary=a["summary"], status="candidate")
+                for a in facts["alternatives"][:3]
+            ],
+            concessions=facts["concessions"],
+            deadline=facts["deadline"],
             requested_next_action=requested or "see need",
         )
 
@@ -283,9 +335,13 @@ class GroundAgent:
     # Returns: reject AgentMessage.
     def _override(self, facts, round_no, table_check, why: str) -> AgentMessage:
         return AgentMessage(
-            **{"from": "ground"}, round=round_no, action="reject",
-            need="a table plan that passes the Ground check", offer="none",
-            reason=f"Code override: {why}.", flags=[],
+            **{"from": "ground"},
+            round=round_no,
+            action="reject",
+            need="a table plan that passes the Ground check",
+            offer="none",
+            reason=f"Code override: {why}.",
+            flags=[],
             icap=self._icap(facts, "Middleman: resend the current table plan", table_check),
         )
 
@@ -294,22 +350,36 @@ class GroundAgent:
     # Returns: reject AgentMessage.
     def _reject(self, facts: dict, round_no: int, why: str) -> AgentMessage:
         return AgentMessage(
-            **{"from": "ground"}, round=round_no, action="reject", need="a valid Ground reply", offer="none",
-            reason=f"Ground gave no valid response: {why}.", flags=[],
+            **{"from": "ground"},
+            round=round_no,
+            action="reject",
+            need="a valid Ground reply",
+            offer="none",
+            reason=f"Ground gave no valid response: {why}.",
+            flags=[],
             icap=self._icap(facts, "Middleman: use the table plan or the fallback", None),
         )
 
     # Appends one LLM-call record to memory and, if configured, to the JSONL log.
     # Args: resp - API response or None; error - failure text if no response.
     def _log(self, round_no: int, attempt: int, resp, t0: float, error: Optional[str] = None) -> None:
-        entry = {"ts": time.time(), "agent": "ground", "round": round_no, "attempt": attempt,
-                 "model": self.model, "latency_s": round(time.time() - t0, 2), "error": error}
+        entry = {
+            "ts": time.time(),
+            "agent": "ground",
+            "round": round_no,
+            "attempt": attempt,
+            "model": self.model,
+            "latency_s": round(time.time() - t0, 2),
+            "error": error,
+        }
         if resp is not None:
             u = resp.usage
             entry.update(
-                request_id=getattr(resp, "_request_id", None), stop_reason=resp.stop_reason,
+                request_id=getattr(resp, "_request_id", None),
+                stop_reason=resp.stop_reason,
                 usage={
-                    "input": u.input_tokens, "output": u.output_tokens,
+                    "input": u.input_tokens,
+                    "output": u.output_tokens,
                     "cache_creation": getattr(u, "cache_creation_input_tokens", None),
                     "cache_read": getattr(u, "cache_read_input_tokens", None),
                 },

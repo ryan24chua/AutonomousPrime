@@ -3,6 +3,7 @@
 Organiser limits are read from the Challenge #2 workbook and override CLAUDE.md.
 Spec: atc-agent/agent-spec/ (private-state.md, research.md).
 """
+
 from functools import lru_cache
 from pathlib import Path
 
@@ -22,15 +23,15 @@ WAKE_OVERRIDES: dict[str, str] = {}
 APPROACH_SPEED_KT = 140  # fleet midpoint: 737-700 130 kt, 737-800 142 kt (research A11)
 
 # --- Capacity (derived from organiser runway ops/h) ---
-ARRIVAL_SHARE = 0.5          # balanced arrival/departure rates, as in FAA capacity profiles
-WEATHER_CUT = 0.30           # convective cut: ATL 100->70, SFO 54->36 (research A5, A14)
+ARRIVAL_SHARE = 0.5  # balanced arrival/departure rates, as in FAA capacity profiles
+WEATHER_CUT = 0.30  # convective cut: ATL 100->70, SFO 54->36 (research A5, A14)
 WEATHER_CUT_SENSITIVITY = 0.17  # DFW IMC cut, FAA profile 2018 ~204->170 ops/h (research A12)
 WEATHER_WINDOW_MIN_DELAYED = 5  # hour is in the weather window if >= this many WEATHER_DELAY>15 arrivals (real data)
 
 # --- Synthetic filler arrivals ---
 # flights.csv holds delayed flights only. DFW 24 Apr 2015: 203 arrivals vs ~933 real (681,261 movements in 2015).
-FILE_SHARE_OF_REAL = 203 / 933           # 0.218, DFW-derived (research A13)
-CAPACITY_SCALE = 90 / 200                # workbook DFW ops/h vs real ~200 (research A12)
+FILE_SHARE_OF_REAL = 203 / 933  # 0.218, DFW-derived (research A13)
+CAPACITY_SCALE = 90 / 200  # workbook DFW ops/h vs real ~200 (research A12)
 FILLER_DEMAND_MULTIPLIER = CAPACITY_SCALE / FILE_SHARE_OF_REAL  # ~2.06x file arrivals per hour
 
 # --- Option menu (synthetic) ---
@@ -42,9 +43,9 @@ HORIZON_HOURS = 1  # focal hour +/- 1 h
 HOLDABLE_MIN = 45
 
 # --- Cost stub (until team B's cost model lands) ---
-HOLDING_COST_PER_MIN = 98.0       # ~$98/block-min (Airlines for America 2025, CLAUDE.md §9)
+HOLDING_COST_PER_MIN = 98.0  # ~$98/block-min (Airlines for America 2025, CLAUDE.md §9)
 GROUND_DELAY_COST_PER_MIN = 49.0  # holding ~2x gate delay (Eurocontrol, research A8)
-EXTRA_FUEL_COST_PER_MIN = 5.0     # synthetic
+EXTRA_FUEL_COST_PER_MIN = 5.0  # synthetic
 KNOCKON_COST_PER_MIN = HOLDING_COST_PER_MIN  # background flights near arrival absorb delay airborne (assumption)
 
 # --- Agent contract v0.2 (hybrid) ---
@@ -56,12 +57,27 @@ CAP10_TOLERANCE_MIN = 5  # counter only if own option beats the table by >= this
 # --- Model ---
 MODEL = "claude-sonnet-5-5"
 MAX_TOKENS = 700
-HINDSIGHT_COLUMNS = frozenset({
-    "DEPARTURE_TIME", "ARRIVAL_TIME", "ARRIVAL_DELAY", "DEPARTURE_DELAY", "WHEELS_ON", "WHEELS_OFF",
-    "ELAPSED_TIME", "AIR_TIME", "TAXI_IN", "TAXI_OUT",
-    # delay-cause columns are outcomes too, except the event magnitude itself
-    "AIR_SYSTEM_DELAY", "SECURITY_DELAY", "AIRLINE_DELAY", "DIVERTED", "CANCELLED", "CANCELLATION_REASON",
-})
+HINDSIGHT_COLUMNS = frozenset(
+    {
+        "DEPARTURE_TIME",
+        "ARRIVAL_TIME",
+        "ARRIVAL_DELAY",
+        "DEPARTURE_DELAY",
+        "WHEELS_ON",
+        "WHEELS_OFF",
+        "ELAPSED_TIME",
+        "AIR_TIME",
+        "TAXI_IN",
+        "TAXI_OUT",
+        # delay-cause columns are outcomes too, except the event magnitude itself
+        "AIR_SYSTEM_DELAY",
+        "SECURITY_DELAY",
+        "AIRLINE_DELAY",
+        "DIVERTED",
+        "CANCELLED",
+        "CANCELLATION_REASON",
+    }
+)
 
 WAKE_CLASSES = ("Super", "Heavy", "Large", "Small")
 

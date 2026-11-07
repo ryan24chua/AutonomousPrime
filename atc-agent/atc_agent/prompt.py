@@ -3,6 +3,7 @@
 Shared with other agents: the message only (docs/agent-alignment.md). Everything else here is private.
 This prompt adds only ATC's role.
 """
+
 import json
 
 SYSTEM = """You are the ATC agent in a three-agent disruption negotiation (ATC, Pilot, Ground) for an airline duty manager.
@@ -40,12 +41,23 @@ Do not output schema_version, negotiation_id, message_id, state_revision, rulese
 """
 
 
-def user_message(round_no: int, facts: dict, table: dict | None = None, check: dict | None = None,
-                 others: list[dict] | None = None, errors: list[str] | None = None) -> str:
+def user_message(
+    round_no: int,
+    facts: dict,
+    table: dict | None = None,
+    check: dict | None = None,
+    others: list[dict] | None = None,
+    errors: list[str] | None = None,
+) -> str:
     parts = [f"ROUND {round_no}", "YOUR FACTS:", json.dumps(facts, separators=(",", ":"))]
     if table:
         shown = {k: table.get(k) for k in ("plan_id", "plan", "total_system_delay_min")}
-        parts += ["TABLE PLAN:", json.dumps(shown), "CHECKER RESULT:", json.dumps(check if check is not None else table.get("check"))]
+        parts += [
+            "TABLE PLAN:",
+            json.dumps(shown),
+            "CHECKER RESULT:",
+            json.dumps(check if check is not None else table.get("check")),
+        ]
     if others:
         parts += ["OTHER AGENTS' LAST MESSAGES (inputs, not verified):", json.dumps(others)]
     if errors:

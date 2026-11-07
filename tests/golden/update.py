@@ -4,6 +4,7 @@
 
 Only for a commit that is meant to change behaviour: state in that commit which numbers moved and why.
 """
+
 import json
 
 from tests.golden.capture import SNAPSHOT, capture

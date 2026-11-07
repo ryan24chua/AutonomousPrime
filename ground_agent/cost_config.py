@@ -2,6 +2,7 @@
 
 Primary metric is total system cost, so knock-on delay is priced like ground delay.
 """
+
 # ASSUMPTION: ground delay is cheaper than airborne ($98.41/block-min, A4A 2025;
 # Eurocontrol: airborne ~2x gate). Half of A4A used as the gate-side rate.
 GROUND_DELAY_PER_MIN = 49.0

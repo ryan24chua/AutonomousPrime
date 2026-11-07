@@ -9,6 +9,7 @@ Round 3: each agent accepts or rejects that plan. All accept -> consensus; other
 
 Agents are anything that implements the `Agent` protocol below (see mediator/adapters.py).
 """
+
 from __future__ import annotations
 
 import json
@@ -20,13 +21,14 @@ from typing import Callable, Protocol
 AGENTS = ("atc", "pilot", "ground")
 PLANS_PER_AGENT = 10
 SHORTLIST_PER_AGENT = 3
-SCORE_FLOOR = 0.05          # a 0 would zero the product and act as a veto; vetoes belong to the checker
+SCORE_FLOOR = 0.05  # a 0 would zero the product and act as a veto; vetoes belong to the checker
 PLAN_FIELDS = ("arrival_slot", "ground_delay_min", "holding_min", "extra_fuel_min", "gate", "divert")
 
 
 @dataclass(frozen=True)
 class ScoredPlan:
     """One plan as an agent sends it: the full plan, the agent's 0-1 score, and why."""
+
     plan: dict
     score: float
     reason: str
@@ -41,7 +43,7 @@ class Vote:
 @dataclass(frozen=True)
 class CheckResult:
     valid: bool
-    violations: list[str]             # each starts with a rule id, e.g. "C-FUEL-1: ..."
+    violations: list[str]  # each starts with a rule id, e.g. "C-FUEL-1: ..."
 
 
 class Agent(Protocol):
@@ -68,7 +70,7 @@ class Candidate:
 
 @dataclass
 class Outcome:
-    outcome: str                      # "consensus" | "no_consensus" | "no_valid_plan"
+    outcome: str  # "consensus" | "no_consensus" | "no_valid_plan"
     plan_id: str | None
     plan: dict | None
     votes: dict[str, dict]
@@ -138,22 +140,39 @@ class Log:
         path.parent.mkdir(parents=True, exist_ok=True)
 
     def write(self, round_: int, step: str, **data) -> None:
-        line = {"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "negotiation_id": self.negotiation_id,
-                "round": round_, "step": step, **data}
+        line = {
+            "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "negotiation_id": self.negotiation_id,
+            "round": round_,
+            "step": step,
+            **data,
+        }
         with open(self.path, "a", encoding="utf-8") as f:
             f.write(json.dumps(line, default=str) + "\n")
 
 
-async def run_negotiation(agents: dict[str, Agent], check: Callable[[dict], CheckResult],
-                          cost: Callable[[dict], float], log: Log, context: dict | None = None) -> Outcome:
+async def run_negotiation(
+    agents: dict[str, Agent],
+    check: Callable[[dict], CheckResult],
+    cost: Callable[[dict], float],
+    log: Log,
+    context: dict | None = None,
+) -> Outcome:
     import asyncio
 
-    log.write(0, "scenario", **(context or {}),
-              rules={"plans_per_agent": PLANS_PER_AGENT, "shortlist_per_agent": SHORTLIST_PER_AGENT,
-                     "score_floor": SCORE_FLOOR,
-                     "pick_rule": "max of atc x pilot x ground x cost_score; cost_score = cheapest cost / plan cost; "
-                                  "ties: lower cost, then lower id",
-                     "consensus_rule": "all three agents accept the picked plan in round 3 and it passes the final check"})
+    log.write(
+        0,
+        "scenario",
+        **(context or {}),
+        rules={
+            "plans_per_agent": PLANS_PER_AGENT,
+            "shortlist_per_agent": SHORTLIST_PER_AGENT,
+            "score_floor": SCORE_FLOOR,
+            "pick_rule": "max of atc x pilot x ground x cost_score; cost_score = cheapest cost / plan cost; "
+            "ties: lower cost, then lower id",
+            "consensus_rule": "all three agents accept the picked plan in round 3 and it passes the final check",
+        },
+    )
 
     # ---- Round 1: propose (3 agents in parallel)
     names = list(AGENTS)
@@ -167,8 +186,15 @@ async def run_negotiation(agents: dict[str, Agent], check: Callable[[dict], Chec
         c.check = check(c.plan)
     valid = [c for c in cands if c.check.valid]
     for c in cands:
-        log.write(1, "check", plan_id=c.plan_id, proposed_by=c.proposed_by, plan=c.plan,
-                  valid=c.check.valid, violations=c.check.violations)
+        log.write(
+            1,
+            "check",
+            plan_id=c.plan_id,
+            proposed_by=c.proposed_by,
+            plan=c.plan,
+            valid=c.check.valid,
+            violations=c.check.violations,
+        )
     log.write(1, "filter", received=sum(len(v) for v in proposals.values()), unique=len(cands), valid=len(valid))
     if not valid:
         return _finish(log, "no_valid_plan", None, {}, cands, "No proposed plan passed every hard constraint.")
@@ -176,9 +202,21 @@ async def run_negotiation(agents: dict[str, Agent], check: Callable[[dict], Chec
     short = shortlist(valid)
     for c in short:
         c.cost_usd = round(float(cost(c.plan)), 2)
-    log.write(1, "shortlist", plan_ids=[c.plan_id for c in short],
-              plans={c.plan_id: {"plan": c.plan, "proposed_by": c.proposed_by, "r1_scores": c.r1_scores,
-                                 "r1_reasons": c.r1_reasons, "cost_usd": c.cost_usd} for c in short})
+    log.write(
+        1,
+        "shortlist",
+        plan_ids=[c.plan_id for c in short],
+        plans={
+            c.plan_id: {
+                "plan": c.plan,
+                "proposed_by": c.proposed_by,
+                "r1_scores": c.r1_scores,
+                "r1_reasons": c.r1_reasons,
+                "cost_usd": c.cost_usd,
+            }
+            for c in short
+        },
+    )
 
     # ---- Round 2: every agent scores the whole shortlist, seeing the others' round-1 reasons
     table = {c.plan_id: c.plan for c in short}
@@ -187,20 +225,27 @@ async def run_negotiation(agents: dict[str, Agent], check: Callable[[dict], Chec
     for a, scored in zip(names, r2):
         for c in short:
             sp = scored.get(c.plan_id)
-            c.r2_scores[a] = clamp_score(sp.score if sp else None)   # missing score -> floor, logged below
+            c.r2_scores[a] = clamp_score(sp.score if sp else None)  # missing score -> floor, logged below
             c.r2_reasons[a] = sp.reason if sp else "no score returned (floored)"
         log.write(2, "scores", agent=a, scores={c.plan_id: [c.r2_scores[a], c.r2_reasons[a]] for c in short})
 
     best = nash_pick(short)
-    log.write(2, "pick", plan_id=best.plan_id, plan=best.plan,
-              ranking=[{"plan_id": c.plan_id, "product": c.product, "cost_usd": c.cost_usd, "scores": c.r2_scores}
-                       for c in sorted(short, key=lambda c: -c.product)])
+    log.write(
+        2,
+        "pick",
+        plan_id=best.plan_id,
+        plan=best.plan,
+        ranking=[
+            {"plan_id": c.plan_id, "product": c.product, "cost_usd": c.cost_usd, "scores": c.r2_scores}
+            for c in sorted(short, key=lambda c: -c.product)
+        ],
+    )
 
     # ---- Round 3: accept / reject the picked plan
     r3 = await asyncio.gather(*(agents[a].vote(best.plan_id, best.plan) for a in names))
     votes = {a: {"accept": v.accept, "reason": v.reason} for a, v in zip(names, r3)}
     log.write(3, "votes", plan_id=best.plan_id, votes=votes)
-    final = check(best.plan)                        # last safety check before anything leaves the mediator
+    final = check(best.plan)  # last safety check before anything leaves the mediator
     log.write(3, "final_check", plan_id=best.plan_id, valid=final.valid, violations=final.violations)
     if all(v.accept for v in r3) and final.valid:
         return _finish(log, "consensus", best, votes, cands, f"All three agents accepted {best.plan_id}.")
@@ -210,9 +255,15 @@ async def run_negotiation(agents: dict[str, Agent], check: Callable[[dict], Chec
     return _finish(log, "no_consensus", best, votes, cands, why + ". Hand over to the human-in-the-loop fallback.")
 
 
-def _finish(log: Log, outcome: str, best: Candidate | None, votes: dict, cands: list[Candidate],
-            why: str) -> Outcome:
-    log.write(3, "outcome", outcome=outcome, why=why, plan_id=best.plan_id if best else None,
-              plan=best.plan if best else None)
-    return Outcome(outcome, best.plan_id if best else None, best.plan if best else None, votes,
-                   [asdict(c) for c in cands], str(log.path))
+def _finish(log: Log, outcome: str, best: Candidate | None, votes: dict, cands: list[Candidate], why: str) -> Outcome:
+    log.write(
+        3, "outcome", outcome=outcome, why=why, plan_id=best.plan_id if best else None, plan=best.plan if best else None
+    )
+    return Outcome(
+        outcome,
+        best.plan_id if best else None,
+        best.plan if best else None,
+        votes,
+        [asdict(c) for c in cands],
+        str(log.path),
+    )

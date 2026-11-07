@@ -1,4 +1,5 @@
 """Fallback solver tests: determinism, cancel path, fuel rule, re-check, no hindsight."""
+
 import json
 from dataclasses import fields, replace
 
@@ -30,8 +31,9 @@ def test_deterministic(world, rows):
 
 
 def test_all_blocked_recommends_cancel(world):
-    blocked = replace(world, gate_busy={g: ((0, 10**6),) for g in world.gates},
-                      alternate=Alternate("XXX", "too far", 5000.0))
+    blocked = replace(
+        world, gate_busy={g: ((0, 10**6),) for g in world.gates}, alternate=Alternate("XXX", "too far", 5000.0)
+    )
     out = solve(blocked, "no_valid_r1")
     assert out["outcome"] == "recommend_cancel" and out["plan"] is None
     assert out["fallback"]["valid"] == 0 and out["fallback"]["rejected_by_rule"]["C-FUEL-1"] > 0
@@ -39,8 +41,14 @@ def test_all_blocked_recommends_cancel(world):
 
 def test_holding_beyond_holdable_is_invalid(world):
     slot = "%02d:%02d" % divmod(world.earliest_arr_min + 60, 60)
-    plan = {"arrival_slot": slot, "ground_delay_min": 0, "holding_min": world.holdable_min + 15,
-            "extra_fuel_min": 0, "gate": world.gates[1], "divert": False}
+    plan = {
+        "arrival_slot": slot,
+        "ground_delay_min": 0,
+        "holding_min": world.holdable_min + 15,
+        "extra_fuel_min": 0,
+        "gate": world.gates[1],
+        "divert": False,
+    }
     res = check(plan, world)
     assert not res["valid"] and any(v.startswith("C-FUEL-1") for v in res["violations"])
     assert check(plan | {"extra_fuel_min": 15}, world)["flags"] == ["MINIMUM_FUEL"]  # margin 0 < 10 min

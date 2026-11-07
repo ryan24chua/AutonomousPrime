@@ -1,8 +1,9 @@
 """Run one negotiation end to end (default: DFW, 24 Apr 2015 weather row).
 
-    .venv/bin/python -m mediator.run              # dry run: no LLM calls
-    .venv/bin/python -m mediator.run --live       # round-3 votes by the lanes' Claude agents
+.venv/bin/python -m mediator.run              # dry run: no LLM calls
+.venv/bin/python -m mediator.run --live       # round-3 votes by the lanes' Claude agents
 """
+
 import argparse
 import asyncio
 import json
@@ -30,25 +31,41 @@ def main() -> None:
     if a.live:
         import anthropic
         from dotenv import load_dotenv
+
         load_dotenv(REPO / ".env.local")
         client = anthropic.AsyncAnthropic()
     agents = {n: LaneAgent(n, s, live=a.live, client=client) for n in AGENTS}
     run_id = time.strftime("%Y%m%d-%H%M%S")
-    log = Log(REPO / "logs" / f"mediator-{s.negotiation_id}-{run_id}.jsonl", s.negotiation_id)   # one file per run
+    log = Log(REPO / "logs" / f"mediator-{s.negotiation_id}-{run_id}.jsonl", s.negotiation_id)  # one file per run
     f = s.focal_row
-    context = {"run_id": run_id, "mode": "live (round-3 votes by Claude agents)" if a.live else "dry run (no LLM)",
-               "flight": f'{f["AIRLINE"]}{f["FLIGHT_NUMBER"]} {f["ORIGIN_AIRPORT"]}->{f["DESTINATION_AIRPORT"]}',
-               "date": s.atc_world.date, "scheduled_arrival": f["SCHEDULED_ARRIVAL"],
-               "event": s.atc_world.event, "seed": a.seed, "data": "DOT 2015 flights.csv row + organiser workbook limits",
-               "synthetic_inputs": "gate occupancy, filler arrivals, connecting pax, crew report (labelled in each lane)"}
+    context = {
+        "run_id": run_id,
+        "mode": "live (round-3 votes by Claude agents)" if a.live else "dry run (no LLM)",
+        "flight": f"{f['AIRLINE']}{f['FLIGHT_NUMBER']} {f['ORIGIN_AIRPORT']}->{f['DESTINATION_AIRPORT']}",
+        "date": s.atc_world.date,
+        "scheduled_arrival": f["SCHEDULED_ARRIVAL"],
+        "event": s.atc_world.event,
+        "seed": a.seed,
+        "data": "DOT 2015 flights.csv row + organiser workbook limits",
+        "synthetic_inputs": "gate occupancy, filler arrivals, connecting pax, crew report (labelled in each lane)",
+    }
     out = asyncio.run(run_negotiation(agents, lambda pl: check_plan(s, pl), lambda pl: plan_cost(s, pl), log, context))
     fb = None
-    if out.outcome != "consensus":                    # deterministic non-AI fallback (fallback/ lane)
-        from fallback.scenario import solve_scenario   # same menu, gates and checker as the negotiation
+    if out.outcome != "consensus":  # deterministic non-AI fallback (fallback/ lane)
+        from fallback.scenario import solve_scenario  # same menu, gates and checker as the negotiation
+
         trigger = "no_valid_r1" if out.outcome == "no_valid_plan" else "no_consensus_r3"
         fb = solve_scenario(s, trigger)
-        log.write(3, "fallback", trigger=trigger, outcome=fb["outcome"], plan=fb["plan"], cost_usd=fb["cost_usd"],
-                  total_system_delay_min=fb["total_system_delay_min"], detail=fb["fallback"])
+        log.write(
+            3,
+            "fallback",
+            trigger=trigger,
+            outcome=fb["outcome"],
+            plan=fb["plan"],
+            cost_usd=fb["cost_usd"],
+            total_system_delay_min=fb["total_system_delay_min"],
+            detail=fb["fallback"],
+        )
     report = write_report(log.path)
 
     print(f"Negotiation {s.negotiation_id}: {out.outcome}")

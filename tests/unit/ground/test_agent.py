@@ -14,8 +14,16 @@ from tests.unit.ground.helpers import make_state
 
 # Builds a GroundDecision with sensible defaults.
 def decision(**over) -> GroundDecision:
-    kw = dict(action="propose", plan_id=None, gate="A1", interests_cited=["I1"], need="n", offer="o",
-              reason="C-GATE-1 gate free", requested_next_action="ATC: confirm slot")
+    kw = dict(
+        action="propose",
+        plan_id=None,
+        gate="A1",
+        interests_cited=["I1"],
+        need="n",
+        offer="o",
+        reason="C-GATE-1 gate free",
+        requested_next_action="ATC: confirm slot",
+    )
     kw.update(over)
     return GroundDecision(**kw)
 
@@ -121,16 +129,22 @@ def test_accept_of_off_table_plan_id_is_overridden_to_reject():
 def test_accept_carries_table_plan_and_id():
     s = make_state()
     table = baseline_plan(s)
-    m = run(GroundAgent(FakeClient([resp(decision(action="accept", plan_id="P1"))])).respond(
-        s, 2, "P1", table, check_ground(table, s), []))
+    m = run(
+        GroundAgent(FakeClient([resp(decision(action="accept", plan_id="P1"))])).respond(
+            s, 2, "P1", table, check_ground(table, s), []
+        )
+    )
     assert (m.action, m.plan_id, m.plan) == ("accept", "P1", table)
 
 
 def test_counter_against_invalid_table_plan_records_failed_constraint():
     s = make_state()
     bad = baseline_plan(s).model_copy(update={"gate": "Z99"})
-    m = run(GroundAgent(FakeClient([resp(decision(action="counter", gate="A2"))])).respond(
-        s, 2, "P1", bad, check_ground(bad, s), []))
+    m = run(
+        GroundAgent(FakeClient([resp(decision(action="counter", gate="A2"))])).respond(
+            s, 2, "P1", bad, check_ground(bad, s), []
+        )
+    )
     assert m.action == "counter" and m.plan.gate == "A2"
     assert m.icap.failed_constraint is not None and m.icap.failed_constraint.rule == "gate"
 
@@ -185,6 +199,7 @@ def test_facts_include_icap_and_stay_deterministic():
     a, b = build_ground_facts(s), build_ground_facts(s)
     assert a["icap"]["priorities"]["ranked"][0]["id"] == "I5"
     import json
+
     assert json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)  # keeps the prompt cache valid
 
 

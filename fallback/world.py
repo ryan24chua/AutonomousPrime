@@ -4,6 +4,7 @@ Real: focal row (hindsight never read), same-destination background arrivals, ta
 Workbook: gates, turnaround, spare gates/fuel, crew shift, gate-change notice, runway ops.
 Synthetic (seeded, labelled in `provenance`): filler arrivals, gate occupancy, crew shift end, connections.
 """
+
 import random
 import sys
 from collections import Counter
@@ -34,25 +35,25 @@ class FallbackWorld:
     sched_arr_min: int
     sched_time_min: int
     distance_mi: int
-    event_type: str                   # "weather" | "late_aircraft"
+    event_type: str  # "weather" | "late_aircraft"
     event_magnitude_min: int
-    earliest_arr_min: int             # scheduled arrival, pushed by a late-aircraft delay
-    background: tuple                 # tuple[Arrival, ...]: passive arrivals at dest (real + labelled filler)
+    earliest_arr_min: int  # scheduled arrival, pushed by a late-aircraft delay
+    background: tuple  # tuple[Arrival, ...]: passive arrivals at dest (real + labelled filler)
     next_departure_min: int
     # workbook limits
     limits: AirportLimits
     fuel: FuelCrewRules
     # derived / synthetic
-    normal_cap: int                   # arrivals per hour, no weather (C-CAP-1)
-    hourly_cap: dict                  # hour -> arrivals per hour, cut in weather hours
-    gates: tuple                      # candidate gates: scheduled + spare
+    normal_cap: int  # arrivals per hour, no weather (C-CAP-1)
+    hourly_cap: dict  # hour -> arrivals per hour, cut in weather hours
+    gates: tuple  # candidate gates: scheduled + spare
     scheduled_gate: str
-    gate_busy: dict                   # gate -> ((start_min, end_min), ...)
-    now_min: int                      # when the disruption is announced
+    gate_busy: dict  # gate -> ((start_min, end_min), ...)
+    now_min: int  # when the disruption is announced
     crew_shift_end_min: int
     connecting_pax: int
     connection_slack_min: int
-    holdable_min: int                 # holding allowed before the final reserve
+    holdable_min: int  # holding allowed before the final reserve
     alternate: Alternate
     airborne: bool = False
     seed: int = 0
@@ -83,18 +84,38 @@ def build_world(day_rows: list[dict], focal_row: dict, seed: int = 0) -> Fallbac
         m = hhmm_to_min(r["SCHEDULED_ARRIVAL"])
         if first_h <= m // 60 <= last_h:
             real_per_hour[m // 60] += 1
-            background.append(Arrival(f'{r["AIRLINE"]}{r["FLIGHT_NUMBER"]}', r["AIRLINE"], r["TAIL_NUMBER"], m,
-                                      atc_config.wake_class(r["TAIL_NUMBER"], r["AIRLINE"]), "real"))
+            background.append(
+                Arrival(
+                    f"{r['AIRLINE']}{r['FLIGHT_NUMBER']}",
+                    r["AIRLINE"],
+                    r["TAIL_NUMBER"],
+                    m,
+                    atc_config.wake_class(r["TAIL_NUMBER"], r["AIRLINE"]),
+                    "real",
+                )
+            )
     for h in range(first_h, last_h + 1):
         for i in range(round(real_per_hour[h] * (atc_config.FILLER_DEMAND_MULTIPLIER - 1))):
-            background.append(Arrival(f"SYN{h:02d}{i:02d}", "SYN", "", h * 60 + rng.randrange(60),
-                                      atc_config.DEFAULT_WAKE_CLASS, "synthetic"))
+            background.append(
+                Arrival(
+                    f"SYN{h:02d}{i:02d}",
+                    "SYN",
+                    "",
+                    h * 60 + rng.randrange(60),
+                    atc_config.DEFAULT_WAKE_CLASS,
+                    "synthetic",
+                )
+            )
     background.sort(key=lambda a: a.sched_min)
 
     # Focal tail's next departure from dest later that day (real), else synthetic.
-    nxt = [hhmm_to_min(r["SCHEDULED_DEPARTURE"]) for r in day_rows
-           if r["TAIL_NUMBER"] == focal_row["TAIL_NUMBER"] and r["ORIGIN_AIRPORT"] == dest
-           and hhmm_to_min(r["SCHEDULED_DEPARTURE"]) > sched]
+    nxt = [
+        hhmm_to_min(r["SCHEDULED_DEPARTURE"])
+        for r in day_rows
+        if r["TAIL_NUMBER"] == focal_row["TAIL_NUMBER"]
+        and r["ORIGIN_AIRPORT"] == dest
+        and hhmm_to_min(r["SCHEDULED_DEPARTURE"]) > sched
+    ]
     next_dep = min(nxt) if nxt else sched + config.DEFAULT_NEXT_LEG_GAP_MIN
 
     # Hourly arrival cap: workbook runway ops x arrival share, cut in the weather window (real, clustered).
@@ -112,19 +133,33 @@ def build_world(day_rows: list[dict], focal_row: dict, seed: int = 0) -> Fallbac
     gate_busy.update({g: () for g in sorted(spares)})
 
     return FallbackWorld(
-        date=f'{focal_row["YEAR"]}-{int(focal_row["MONTH"]):02d}-{int(focal_row["DAY"]):02d}', dest=dest,
-        flight=f'{focal_row["AIRLINE"]}{focal_row["FLIGHT_NUMBER"]}', tail=focal_row["TAIL_NUMBER"],
-        airline=focal_row["AIRLINE"], sched_arr_min=sched,
-        sched_time_min=int(focal_row["SCHEDULED_TIME"] or 0), distance_mi=int(focal_row["DISTANCE"] or 0),
-        event_type=event["type"], event_magnitude_min=event["magnitude_min"], earliest_arr_min=earliest,
-        background=tuple(background), next_departure_min=next_dep, limits=limits, fuel=fuel,
-        normal_cap=atc_config.arrival_cap_per_hour(dest, False), hourly_cap=hourly_cap,
-        gates=(scheduled_gate, *sorted(spares)), scheduled_gate=scheduled_gate, gate_busy=gate_busy,
+        date=f"{focal_row['YEAR']}-{int(focal_row['MONTH']):02d}-{int(focal_row['DAY']):02d}",
+        dest=dest,
+        flight=f"{focal_row['AIRLINE']}{focal_row['FLIGHT_NUMBER']}",
+        tail=focal_row["TAIL_NUMBER"],
+        airline=focal_row["AIRLINE"],
+        sched_arr_min=sched,
+        sched_time_min=int(focal_row["SCHEDULED_TIME"] or 0),
+        distance_mi=int(focal_row["DISTANCE"] or 0),
+        event_type=event["type"],
+        event_magnitude_min=event["magnitude_min"],
+        earliest_arr_min=earliest,
+        background=tuple(background),
+        next_departure_min=next_dep,
+        limits=limits,
+        fuel=fuel,
+        normal_cap=atc_config.arrival_cap_per_hour(dest, False),
+        hourly_cap=hourly_cap,
+        gates=(scheduled_gate, *sorted(spares)),
+        scheduled_gate=scheduled_gate,
+        gate_busy=gate_busy,
         now_min=earliest - 60,
         crew_shift_end_min=earliest + limits.min_turnaround_min + rng.randint(*config.CREW_END_SLACK_RANGE),
         connecting_pax=rng.randint(*config.CONNECTING_PAX_RANGE),
         connection_slack_min=rng.randint(*config.CONNECTION_SLACK_RANGE),
-        holdable_min=round(fuel.spare_on_arrival_min), alternate=nearest_alternate(dest), seed=seed,
+        holdable_min=round(fuel.spare_on_arrival_min),
+        alternate=nearest_alternate(dest),
+        seed=seed,
         provenance={
             "flight, tail, airline, scheduled times, distance, event type/magnitude": "real (DOT 2015)",
             "background arrivals (real part)": "real (DOT 2015, same dest, slot-horizon hours)",

@@ -3,6 +3,7 @@
 Model: one aggregated arrival stream. Minimum headway between consecutive landings =
 max(3600 / hourly arrival cap, wake gap for the pair / arrival runways). The agent never computes any of this.
 """
+
 from dataclasses import asdict, dataclass
 
 from . import config
@@ -28,9 +29,14 @@ class Option:
     violations: list[str]
 
     def plan(self, gate: str | None = None) -> dict:
-        return {"arrival_slot": self.arrival_slot, "ground_delay_min": self.ground_delay_min,
-                "holding_min": self.holding_min, "extra_fuel_min": self.extra_fuel_min,
-                "gate": gate, "divert": False}
+        return {
+            "arrival_slot": self.arrival_slot,
+            "ground_delay_min": self.ground_delay_min,
+            "holding_min": self.holding_min,
+            "extra_fuel_min": self.extra_fuel_min,
+            "gate": gate,
+            "divert": False,
+        }
 
 
 def _headway_s(world: World, leader: Arrival, follower: Arrival, t_min: float) -> float:
@@ -56,9 +62,15 @@ def sequence(world: World, arrivals: list[Arrival], ready: dict[str, float]) -> 
 
 def _focal_arrival(world: World) -> Arrival:
     f = world.focal
-    fid = f'{f["AIRLINE"]}{f["FLIGHT_NUMBER"]}'
-    return Arrival(fid, f["AIRLINE"], f["TAIL_NUMBER"], world.focal_earliest_arr_min,
-                   config.wake_class(f["TAIL_NUMBER"], f["AIRLINE"]), "real")
+    fid = f"{f['AIRLINE']}{f['FLIGHT_NUMBER']}"
+    return Arrival(
+        fid,
+        f["AIRLINE"],
+        f["TAIL_NUMBER"],
+        world.focal_earliest_arr_min,
+        config.wake_class(f["TAIL_NUMBER"], f["AIRLINE"]),
+        "real",
+    )
 
 
 def build_menu(world: World) -> list[Option]:
@@ -91,10 +103,29 @@ def build_menu(world: World) -> list[Option]:
             if lever == "hold" and wait == 0:
                 continue
             extra = max(0, hold - config.HOLDABLE_MIN)
-            cost = (ground * config.GROUND_DELAY_COST_PER_MIN + hold * config.HOLDING_COST_PER_MIN
-                    + extra * config.EXTRA_FUEL_COST_PER_MIN + knock_min * config.KNOCKON_COST_PER_MIN)
-            opt = Option(f"O{len(options) + 1}", min_to_hhmm(slot), ground, hold, extra, focal_delay,
-                         knock_min, knock_n, focal_delay + knock_min, round(cost), spare, cap, arrivals, True, [])
+            cost = (
+                ground * config.GROUND_DELAY_COST_PER_MIN
+                + hold * config.HOLDING_COST_PER_MIN
+                + extra * config.EXTRA_FUEL_COST_PER_MIN
+                + knock_min * config.KNOCKON_COST_PER_MIN
+            )
+            opt = Option(
+                f"O{len(options) + 1}",
+                min_to_hhmm(slot),
+                ground,
+                hold,
+                extra,
+                focal_delay,
+                knock_min,
+                knock_n,
+                focal_delay + knock_min,
+                round(cost),
+                spare,
+                cap,
+                arrivals,
+                True,
+                [],
+            )
             options.append(opt)
         seen[slot] = options[-1]
     return options
@@ -108,13 +139,26 @@ def check_slot(plan: dict, menu: list[Option]) -> dict:
     if opt is None:
         violations.append("C-CAP-1: plan not in code-computed arrival menu")
     cap_ok = opt is not None and opt.valid and opt.arrivals_in_hour <= opt.cap_in_hour
-    checks = [{"rule_id": "C-CAP-1", "result": "PASS" if cap_ok else "FAIL",
-               "actual": opt.arrivals_in_hour if opt else None, "limit": opt.cap_in_hour if opt else None,
-               "unit": "arrivals_per_hour"}]
+    checks = [
+        {
+            "rule_id": "C-CAP-1",
+            "result": "PASS" if cap_ok else "FAIL",
+            "actual": opt.arrivals_in_hour if opt else None,
+            "limit": opt.cap_in_hour if opt else None,
+            "unit": "arrivals_per_hour",
+        }
+    ]
     if plan.get("holding_min") is not None:
         hold, limit = plan["holding_min"], config.HOLDABLE_MIN + (plan.get("extra_fuel_min") or 0)
-        checks.append({"rule_id": "C-FUEL-1", "result": "PASS" if hold <= limit else "FAIL",
-                       "actual": hold, "limit": limit, "unit": "holding_min"})
+        checks.append(
+            {
+                "rule_id": "C-FUEL-1",
+                "result": "PASS" if hold <= limit else "FAIL",
+                "actual": hold,
+                "limit": limit,
+                "unit": "holding_min",
+            }
+        )
         if hold > limit:
             violations.append(f"C-FUEL-1: holding {hold} min exceeds limit {limit} min")
     valid = cap_ok and all(c["result"] == "PASS" for c in checks)

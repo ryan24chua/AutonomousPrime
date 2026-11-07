@@ -5,6 +5,7 @@ notice, C-TURN-1 minimum turnaround (hard), C-CREW-1 crew overtime (soft: cost +
 `check_ground` is the entry point for the shared checker.py. Limits come from the workbook
 (via WorldState); the wait cap is a labelled assumption (ground_agent/assumptions.py).
 """
+
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -74,7 +75,10 @@ def _earliest_free_start(windows, arrival: int, turnaround: int) -> int:
 #   None means the scheduled ready time (scheduled arrival + minimum turnaround).
 # Returns: GroundCheck (valid=False if any hard rule is violated; A-CDM flags are report-only).
 def check_ground(
-    plan: Plan, state: WorldState, turnaround_min: Optional[int] = None, previous_ready_min: Optional[int] = None,
+    plan: Plan,
+    state: WorldState,
+    turnaround_min: Optional[int] = None,
+    previous_ready_min: Optional[int] = None,
 ) -> GroundCheck:
     arrival = _slot_to_min(plan.arrival_slot, state.scheduled_arrival_min)
     turnaround = turnaround_min if turnaround_min is not None else state.limits.min_turnaround_min
@@ -88,29 +92,39 @@ def check_ground(
             violations.append(Violation(rule, bad_detail, values))
 
     # C-TURN-1
-    hard("C-TURN-1", turnaround >= state.limits.min_turnaround_min,
-         f"turnaround {turnaround} min >= airport minimum {state.limits.min_turnaround_min}",
-         f"turnaround {turnaround} min < airport minimum {state.limits.min_turnaround_min}",
-         {"turnaround_min": turnaround, "minimum": state.limits.min_turnaround_min})
+    hard(
+        "C-TURN-1",
+        turnaround >= state.limits.min_turnaround_min,
+        f"turnaround {turnaround} min >= airport minimum {state.limits.min_turnaround_min}",
+        f"turnaround {turnaround} min < airport minimum {state.limits.min_turnaround_min}",
+        {"turnaround_min": turnaround, "minimum": state.limits.min_turnaround_min},
+    )
 
     # C-GATE-1
     gate_known = plan.gate in state.gate_busy
     wait = 0
     if gate_known:
         wait = _earliest_free_start(state.gate_busy[plan.gate], arrival, turnaround) - arrival
-    hard("C-GATE-1", gate_known and wait <= MAX_GATE_WAIT_MIN,
-         f"gate {plan.gate} free after {wait} min wait (cap {MAX_GATE_WAIT_MIN})",
-         f"unknown gate {plan.gate}" if not gate_known
-         else f"gate {plan.gate} not free within {MAX_GATE_WAIT_MIN} min of arrival (wait {wait})",
-         {"gate": plan.gate, "gate_wait_min": wait, "cap": MAX_GATE_WAIT_MIN})
+    hard(
+        "C-GATE-1",
+        gate_known and wait <= MAX_GATE_WAIT_MIN,
+        f"gate {plan.gate} free after {wait} min wait (cap {MAX_GATE_WAIT_MIN})",
+        f"unknown gate {plan.gate}"
+        if not gate_known
+        else f"gate {plan.gate} not free within {MAX_GATE_WAIT_MIN} min of arrival (wait {wait})",
+        {"gate": plan.gate, "gate_wait_min": wait, "cap": MAX_GATE_WAIT_MIN},
+    )
 
     # C-GATE-2
     changed = plan.gate != state.scheduled_gate
     notice = arrival - state.now_min
-    hard("C-GATE-2", not changed or notice >= state.gate_change_notice_min,
-         "gate unchanged" if not changed else f"gate change notice {notice} min >= {state.gate_change_notice_min}",
-         f"gate change notice {notice} min < {state.gate_change_notice_min}",
-         {"changed": changed, "notice_min": notice, "required": state.gate_change_notice_min})
+    hard(
+        "C-GATE-2",
+        not changed or notice >= state.gate_change_notice_min,
+        "gate unchanged" if not changed else f"gate change notice {notice} min >= {state.gate_change_notice_min}",
+        f"gate change notice {notice} min < {state.gate_change_notice_min}",
+        {"changed": changed, "notice_min": notice, "required": state.gate_change_notice_min},
+    )
 
     # C-CREW-1 (soft)
     occ_start = arrival + wait
@@ -118,9 +132,14 @@ def check_ground(
     overtime = max(0, occ_end - state.crew_shift_end_min)
     if overtime:
         flags.append("CREW_OVERTIME")
-    checks.append(Check("C-CREW-1", True,
-                        f"crew overtime {overtime} min (soft cost)" if overtime else "within crew shift",
-                        {"overtime_min": overtime, "shift_end_min": state.crew_shift_end_min}))
+    checks.append(
+        Check(
+            "C-CREW-1",
+            True,
+            f"crew overtime {overtime} min (soft cost)" if overtime else "within crew shift",
+            {"overtime_min": overtime, "shift_end_min": state.crew_shift_end_min},
+        )
+    )
 
     # Knock-on to the next leg. The part present even in the best case (arrive at the disrupted
     # time, minimum turnaround) is the event's fault and identical across plans, so cost ignores it.
@@ -129,7 +148,8 @@ def check_ground(
     unavoidable = max(0, best_case_end - state.next_departure_min)
 
     reference_ready = (
-        previous_ready_min if previous_ready_min is not None
+        previous_ready_min
+        if previous_ready_min is not None
         else state.scheduled_arrival_min + state.limits.min_turnaround_min
     )
 
@@ -138,15 +158,19 @@ def check_ground(
     if missed:
         flags.append("CONNECTION_RISK")
     metrics = {
-        "gate_wait_min": wait, "turnaround_min": turnaround,
-        "occupancy_start_min": occ_start, "occupancy_end_min": occ_end,
+        "gate_wait_min": wait,
+        "turnaround_min": turnaround,
+        "occupancy_start_min": occ_start,
+        "occupancy_end_min": occ_end,
         "overtime_min": overtime,
         "turnaround_delay_min": max(0, occ_end - (arrival + state.limits.min_turnaround_min)),
         "ready_time_min": occ_end,  # earliest ready for the next departure (TOBT-style)
         "acdm_flags": acdm_flags(occ_end, reference_ready, state.next_departure_min),
         "knock_on_delay_min": knock_on,
         "avoidable_knock_on_min": max(0, knock_on - unavoidable),
-        "gate_changed": changed, "walk_min": walk, "missed_connections": missed,
+        "gate_changed": changed,
+        "walk_min": walk,
+        "missed_connections": missed,
         "flags": flags,
     }
     return GroundCheck(not violations, violations, checks, metrics)

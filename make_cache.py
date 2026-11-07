@@ -3,6 +3,7 @@
 Usage: .venv/bin/python make_cache.py [row_id ...]
 Expects middleman.negotiate(row, seed) -> dict (see app.py for the keys it reads).
 """
+
 import json
 import sys
 from pathlib import Path

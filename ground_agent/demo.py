@@ -3,6 +3,7 @@
 Stub table plan only: the real ATC/Pilot agents and the middleman belong to other lanes.
 Usage: .venv/bin/python -m ground_agent.demo
 """
+
 import asyncio
 import json
 
@@ -36,8 +37,10 @@ async def main():
     load_dotenv(REPO / ".env.local")
     load_dotenv(REPO / ".env")
     state = build_world()
-    print(f"{state.focal_flight} {state.tail} {state.event_type} +{state.event_magnitude_min} min at {state.airport}; "
-          f"scheduled {min_to_hhmm(state.scheduled_arrival_min)}, disrupted {min_to_hhmm(state.disrupted_arrival_min)}")
+    print(
+        f"{state.focal_flight} {state.tail} {state.event_type} +{state.event_magnitude_min} min at {state.airport}; "
+        f"scheduled {min_to_hhmm(state.scheduled_arrival_min)}, disrupted {min_to_hhmm(state.disrupted_arrival_min)}"
+    )
     print("provenance:", json.dumps(state.provenance, indent=2))
     print("Ground assumptions to state in the demo:", json.dumps(ASSUMPTIONS, indent=2))
 

@@ -1,10 +1,11 @@
 """Run the ATC agent on one DOT row (default: DFW, 24 Apr 2015 weather) for rounds 1-3.
 
-    python -m atc_agent.demo                      # live Claude call
-    python -m atc_agent.demo --dry-run            # no LLM, deterministic stand-in
-    python -m atc_agent.demo --flag MINIMUM_FUEL  # Pilot raises a fuel flag in round 2
-    python -m atc_agent.demo --sensitivity        # 17% weather cut instead of 30%
+python -m atc_agent.demo                      # live Claude call
+python -m atc_agent.demo --dry-run            # no LLM, deterministic stand-in
+python -m atc_agent.demo --flag MINIMUM_FUEL  # Pilot raises a fuel flag in round 2
+python -m atc_agent.demo --sensitivity        # 17% weather cut instead of 30%
 """
+
 import argparse
 import json
 
@@ -15,15 +16,21 @@ from .world_stub import build_world, load_day, pick_focal
 
 
 def table_plan(plan_id: str, proposed_by: str, opt: Option, menu: list[Option]) -> dict:
-    return {"plan_id": plan_id, "proposed_by": proposed_by, "source_id": opt.option_id, "plan": opt.plan(),
-            "check": check_slot(opt.plan(), menu), "cost_usd": opt.cost_usd,
-            "total_system_delay_min": opt.total_system_delay_min}
+    return {
+        "plan_id": plan_id,
+        "proposed_by": proposed_by,
+        "source_id": opt.option_id,
+        "plan": opt.plan(),
+        "check": check_slot(opt.plan(), menu),
+        "cost_usd": opt.cost_usd,
+        "total_system_delay_min": opt.total_system_delay_min,
+    }
 
 
 def summary(r: dict, menu: list[Option]) -> str:
     plan = r.get("plan")
     check = check_slot(plan, menu)["status"] if plan else "n/a"
-    return f'action={r["action"]} plan_id={r["plan_id"]} status={r["status"]} check={check}'
+    return f"action={r['action']} plan_id={r['plan_id']} status={r['status']} check={check}"
 
 
 def main() -> None:
@@ -44,9 +51,11 @@ def main() -> None:
     agent = ATCAgent(world, dry_run=a.dry_run)
 
     print(f"Negotiation {agent.negotiation_id}")
-    print(f"Focal {focal['AIRLINE']}{focal['FLIGHT_NUMBER']} {focal['ORIGIN_AIRPORT']}->{a.dest} "
-          f"sched arr {focal['SCHEDULED_ARRIVAL']} | event {world.event} | weather hours {world.weather_hours} "
-          f"| weather cut {cut:.0%} | menu {len(agent.menu)} options")
+    print(
+        f"Focal {focal['AIRLINE']}{focal['FLIGHT_NUMBER']} {focal['ORIGIN_AIRPORT']}->{a.dest} "
+        f"sched arr {focal['SCHEDULED_ARRIVAL']} | event {world.event} | weather hours {world.weather_hours} "
+        f"| weather cut {cut:.0%} | menu {len(agent.menu)} options"
+    )
 
     r1 = agent.propose()
     print("\nROUND 1", json.dumps(r1, indent=1))
@@ -58,12 +67,19 @@ def main() -> None:
         p1 = table_plan("P1", "atc", o1, agent.menu)
     else:
         p1 = table_plan("P1", "fallback", cheapest_valid(agent.menu), agent.menu)
-    pilot = {"from": "pilot", "round": 2, "action": "counter", "flags": [a.flag] if a.flag else [],
-             "reason": "stand-in Pilot message (demo only)"}
+    pilot = {
+        "from": "pilot",
+        "round": 2,
+        "action": "counter",
+        "flags": [a.flag] if a.flag else [],
+        "reason": "stand-in Pilot message (demo only)",
+    }
     r2 = agent.respond(2, p1, p1["check"], [pilot])
-    print(f"\nROUND 2 (table {p1['plan_id']} {p1['plan']['arrival_slot']} by {p1['proposed_by']}/{p1['source_id']}, "
-          f"Pilot flags {pilot['flags']})",
-          json.dumps(r2, indent=1))
+    print(
+        f"\nROUND 2 (table {p1['plan_id']} {p1['plan']['arrival_slot']} by {p1['proposed_by']}/{p1['source_id']}, "
+        f"Pilot flags {pilot['flags']})",
+        json.dumps(r2, indent=1),
+    )
 
     # Round 3 table: ATC's counter becomes P2; otherwise P1 stays.
     table = p1

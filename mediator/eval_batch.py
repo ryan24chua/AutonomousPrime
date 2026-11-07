@@ -6,6 +6,7 @@
 Writes results/eval_flights.json (one record per flight) and results/eval_summary.json (read by the UI).
 Every number comes from the mediator's own run, the same checker and the same cost function.
 """
+
 import argparse
 import asyncio
 import json
@@ -25,8 +26,10 @@ def sample_rows(rows: list[dict], dest: str, n_each: int, seed: int) -> list[dic
     rng = random.Random(seed)
     out = []
     for kind in ("weather", "late_aircraft"):
-        pool = sorted((r for r in cands if event_of(r)["type"] == kind),
-                      key=lambda r: (r["AIRLINE"], r["FLIGHT_NUMBER"], r["ORIGIN_AIRPORT"]))
+        pool = sorted(
+            (r for r in cands if event_of(r)["type"] == kind),
+            key=lambda r: (r["AIRLINE"], r["FLIGHT_NUMBER"], r["ORIGIN_AIRPORT"]),
+        )
         out += rng.sample(pool, min(n_each, len(pool)))
     return out
 
@@ -40,8 +43,13 @@ def run_one(rows, focal, seed, live, client) -> dict:
     log.path.unlink(missing_ok=True)
     out = asyncio.run(run_negotiation(agents, lambda pl: check_plan(s, pl), lambda pl: plan_cost(s, pl), log))
     fb = solve_scenario(s, "baseline")
-    rec = {"flight": s.negotiation_id, "event": s.atc_world.event["type"], "outcome": out.outcome,
-           "fallback_outcome": fb["outcome"], "fallback_cost": fb["cost_usd"]}
+    rec = {
+        "flight": s.negotiation_id,
+        "event": s.atc_world.event["type"],
+        "outcome": out.outcome,
+        "fallback_outcome": fb["outcome"],
+        "fallback_cost": fb["cost_usd"],
+    }
     if out.plan:
         rec["agents_plan_cost"] = round(plan_cost(s, out.plan), 2)
         rec["chosen_plan_valid"] = check_plan(s, out.plan).valid
@@ -60,16 +68,17 @@ def main() -> None:
     if not a.dry_run:
         import anthropic
         from dotenv import load_dotenv
+
         load_dotenv(REPO / ".env.local")
         client = anthropic.AsyncAnthropic()
     rows = load_day(2015, 4, 24)
     picked = sample_rows(rows, "DFW", a.n_each, a.seed)
     recs, t0 = [], time.time()
     for i, focal in enumerate(picked, 1):
-        name = f'{focal["AIRLINE"]}{focal["FLIGHT_NUMBER"]} {focal["ORIGIN_AIRPORT"]}'
+        name = f"{focal['AIRLINE']}{focal['FLIGHT_NUMBER']} {focal['ORIGIN_AIRPORT']}"
         try:
             r = run_one(rows, focal, a.seed, not a.dry_run, client)
-        except Exception as e:                        # record, never hide, a failed run
+        except Exception as e:  # record, never hide, a failed run
             r = {"flight": name, "outcome": "error", "error": repr(e)[:200]}
         recs.append(r)
         print(f"{i:2d}/{len(picked)} {name:12s} {r['outcome']}", flush=True)
@@ -79,9 +88,11 @@ def main() -> None:
     both = [r for r in cons if r.get("fallback_cost") is not None]
     avg = lambda xs: round(sum(xs) / len(xs), 2) if xs else None  # noqa: E731
     summary = {
-        "flights": n, "weather": sum(r.get("event") == "weather" for r in recs),
+        "flights": n,
+        "weather": sum(r.get("event") == "weather" for r in recs),
         "late_aircraft": sum(r.get("event") == "late_aircraft" for r in recs),
-        "consensus": len(cons), "consensus_pct": round(100 * len(cons) / n, 1) if n else None,
+        "consensus": len(cons),
+        "consensus_pct": round(100 * len(cons) / n, 1) if n else None,
         "no_consensus_or_no_valid_plan": sum(r["outcome"] in ("no_consensus", "no_valid_plan") for r in recs),
         "errors": sum(r["outcome"] == "error" for r in recs),
         "unsafe_plans_chosen": sum(1 for r in recs if r.get("plan") and not r.get("chosen_plan_valid")),

@@ -7,6 +7,7 @@ organiser workbook via agents.constraints. Synthetic (seeded, labelled in `prove
 occupancy, crew shift start, connecting pax, notice time. No outcome columns are ever read:
 see ALLOWED_COLUMNS.
 """
+
 import csv
 import random
 from dataclasses import dataclass, field
@@ -19,9 +20,18 @@ from ground_agent.timeutil import hhmm_to_min
 FLIGHTS_CSV = REPO / "data" / "raw" / "dot2015" / "flights.csv"
 # Whitelist: outcome columns (DEPARTURE_TIME, ARRIVAL_TIME, ARRIVAL_DELAY, ...) are never read.
 ALLOWED_COLUMNS = (
-    "AIRLINE", "FLIGHT_NUMBER", "TAIL_NUMBER", "ORIGIN_AIRPORT", "DESTINATION_AIRPORT",
-    "MONTH", "DAY", "SCHEDULED_DEPARTURE", "SCHEDULED_ARRIVAL", "SCHEDULED_TIME",
-    "WEATHER_DELAY", "LATE_AIRCRAFT_DELAY",
+    "AIRLINE",
+    "FLIGHT_NUMBER",
+    "TAIL_NUMBER",
+    "ORIGIN_AIRPORT",
+    "DESTINATION_AIRPORT",
+    "MONTH",
+    "DAY",
+    "SCHEDULED_DEPARTURE",
+    "SCHEDULED_ARRIVAL",
+    "SCHEDULED_TIME",
+    "WEATHER_DELAY",
+    "LATE_AIRCRAFT_DELAY",
 )
 
 
@@ -99,13 +109,21 @@ def _read_rows(path: Path):
 # Returns: WorldState.
 # Raises: LookupError if the row is not found or is not a weather/late-aircraft disruption.
 def build_world(
-    airline: str = "AA", flight_number: str = "1480", month: int = 4, day: int = 24,
-    origin: str = "MCI", seed: int = 7, flights_csv: Path = FLIGHTS_CSV,
+    airline: str = "AA",
+    flight_number: str = "1480",
+    month: int = 4,
+    day: int = 24,
+    origin: str = "MCI",
+    seed: int = 7,
+    flights_csv: Path = FLIGHTS_CSV,
 ) -> WorldState:
     rows = [r for r in _read_rows(flights_csv) if r["MONTH"] == str(month) and r["DAY"] == str(day)]
     focal = next(
-        (r for r in rows if r["AIRLINE"] == airline and r["FLIGHT_NUMBER"] == flight_number
-         and r["ORIGIN_AIRPORT"] == origin),
+        (
+            r
+            for r in rows
+            if r["AIRLINE"] == airline and r["FLIGHT_NUMBER"] == flight_number and r["ORIGIN_AIRPORT"] == origin
+        ),
         None,
     )
     if focal is None:
@@ -128,8 +146,10 @@ def build_world(
     rng = random.Random(seed)
 
     nxt = [
-        hhmm_to_min(r["SCHEDULED_DEPARTURE"]) for r in rows
-        if r["TAIL_NUMBER"] == focal["TAIL_NUMBER"] and r["ORIGIN_AIRPORT"] == airport
+        hhmm_to_min(r["SCHEDULED_DEPARTURE"])
+        for r in rows
+        if r["TAIL_NUMBER"] == focal["TAIL_NUMBER"]
+        and r["ORIGIN_AIRPORT"] == airport
         and hhmm_to_min(r["SCHEDULED_DEPARTURE"]) > sched_arr
     ]
     if nxt:
@@ -153,15 +173,23 @@ def build_world(
     )
 
     return WorldState(
-        seed=seed, airport=airport, limits=limits,
-        focal_flight=f"{airline}{flight_number}", tail=focal["TAIL_NUMBER"],
-        event_type=event_type, event_magnitude_min=magnitude,
-        scheduled_arrival_min=sched_arr, disrupted_arrival_min=disrupted_arr,
-        scheduled_gate=scheduled_gate, now_min=disrupted_arr - 60,
+        seed=seed,
+        airport=airport,
+        limits=limits,
+        focal_flight=f"{airline}{flight_number}",
+        tail=focal["TAIL_NUMBER"],
+        event_type=event_type,
+        event_magnitude_min=magnitude,
+        scheduled_arrival_min=sched_arr,
+        disrupted_arrival_min=disrupted_arr,
+        scheduled_gate=scheduled_gate,
+        now_min=disrupted_arr - 60,
         next_departure_min=next_dep,
         crew_shift_start_min=disrupted_arr + rng.randint(10, 30) - shift_min,
-        connecting_pax=rng.randint(18, 40), connection_slack_min=rng.randint(8, 20),
-        crew_shift_min=shift_min, gate_change_notice_min=notice_min,
+        connecting_pax=rng.randint(18, 40),
+        connection_slack_min=rng.randint(8, 20),
+        crew_shift_min=shift_min,
+        gate_change_notice_min=notice_min,
         gate_busy=busy,
         provenance={
             "flight, tail, scheduled times, event type/magnitude": "real (DOT 2015)",
