@@ -1,0 +1,50 @@
+# Epics of initiative-post-hackathon, in build order (table order = build order; ids are permanent).
+# Rule that cut them: one epic per distinct outcome that can merge to main on its own; the two refactor
+# epics come first because every later epic would otherwise be built four times (once per lane).
+
+[[epic]]
+id = 1
+slug = "epic-safety-net-and-hygiene"
+title = "Behaviour is pinned by tests and CI; the repo holds only the product"
+description = "A golden-master test pins today's outputs, CI runs every test on every push, the code is one installable package, dead and unrelated files are gone, and the repo instructions describe the project as it is."
+covers = ["R1", "R10"]
+
+[[epic]]
+id = 2
+slug = "epic-one-core"
+title = "One implementation of each concern, behind one negotiate()"
+description = "World, data, time, hindsight, contracts, rules, cost and LLM access each exist once; CLI, UI and evaluation call one negotiate(); a dry run takes under 2 s; the golden master is unchanged."
+covers = ["R2", "R3", "R4"]
+after = [{ epic = 1, needs = "golden-master test and the installable package" }]
+
+[[epic]]
+id = 3
+slug = "epic-known-gaps-closed"
+title = "The bugs RESULTS.md lists are fixed with measured numbers, and the human decision is logged"
+description = "Each RESULTS.md §5 bug is fixed in the one place it now lives, with the golden master and RESULTS.md updated per fix; approve/reject is written to the run's log."
+covers = ["R6", "R8"]
+after = [{ epic = 2, needs = "one world, one rule registry, one cost module, one log writer" }]
+
+[[epic]]
+id = 4
+slug = "epic-negotiation-beyond-three-rounds"
+title = "Agents negotiate in every round under a configurable, bounded policy"
+description = "NegotiationPolicy replaces the fixed three rounds; Claude chooses among code options in every round; agents can concede; vote and pick rules agree; the fallback ranks by safety priority before cost; ADR-0004 supersedes ADR-0003."
+covers = ["R5"]
+after = [{ epic = 2, needs = "contracts with flags, the LLM client, agents/base.py" }]
+
+[[epic]]
+id = 5
+slug = "epic-airborne-and-diversion"
+title = "Airborne flights hold within fuel on board and can divert"
+description = "Airborne scenarios run end to end: holding limited by fuel on board, diversion to the alternate available to mediator and fallback, shown to the duty manager; cancellation stays a recommendation."
+covers = ["R7"]
+after = [{ epic = 3, needs = "corrected extra-fuel sizing and missed-connection cost" }]
+
+[[epic]]
+id = 6
+slug = "epic-evaluation-at-scale"
+title = "Results are measured on 200+ disruptions with live cost and latency"
+description = "One evaluation runs ≥ 200 rows over ≥ 3 world seeds, live and dry, with LLM cost, latency and tokens from the call log, a weight-sensitivity sweep, ablations, and at least one explained failure, published in RESULTS.md."
+covers = ["R9"]
+after = [{ epic = 4, needs = "agents acting in every round" }]

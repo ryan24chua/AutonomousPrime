@@ -1,6 +1,6 @@
 # Challenge #2 — brief and judging rubric (source of truth)
 
-Transcribed from `Autonomous SG 2026_Airbus Track.pdf` (AI & Aerospace track, Airbus). Read this before designing or building anything.
+Transcribed from `docs/hackathon/Autonomous SG 2026_Airbus Track.pdf` (AI & Aerospace track, Airbus). Read this before designing or building anything.
 
 ## Brief
 

@@ -5,11 +5,11 @@ For the person who owns the recovery decision: an airline operations centre duty
 ## Start it
 
 ```bash
-.venv/bin/pip install -r requirements.txt
+.venv/bin/pip install -e ".[dev]"
 .venv/bin/streamlit run app_prime.py
 ```
 
-Open the address it prints (usually http://localhost:8501). `app.py` is an alternative layout over the same engine.
+Open the address it prints (usually http://localhost:8501).
 
 ## Run a disruption
 
@@ -60,10 +60,10 @@ More limits and their causes: [RESULTS.md §5](RESULTS.md).
 ## Command line
 
 ```bash
-.venv/bin/python -m mediator.run                         # one negotiation, no LLM (DFW, 24 Apr 2015, MQ3086)
-.venv/bin/python -m mediator.run --date 2015-08-03 --dest ORD --flight OO6213
-.venv/bin/python -m mediator.run --live                  # round-3 votes by Claude
-.venv/bin/python -m evaluation.evaluate                  # 32-row evaluation -> docs/RESULTS.md
+.venv/bin/python -m autonomousprime.mediator.run                         # one negotiation, no LLM (DFW, 24 Apr 2015, MQ3086)
+.venv/bin/python -m autonomousprime.mediator.run --date 2015-08-03 --dest ORD --flight OO6213
+.venv/bin/python -m autonomousprime.mediator.run --live                  # round-3 votes by Claude
+.venv/bin/python -m autonomousprime.evaluation.evaluate                  # 32-row evaluation -> docs/RESULTS.md
 ```
 
 Each run writes a JSONL consensus log and a plain-English decision record to `logs/`.

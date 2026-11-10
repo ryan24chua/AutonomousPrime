@@ -1,0 +1,2 @@
+# Package plus pytest and ruff (the dev extra in pyproject.toml); kept so old install commands still work.
+-e .[dev]

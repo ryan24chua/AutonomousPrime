@@ -1,0 +1,68 @@
+# Stories of epic-safety-net-and-hygiene, in build order.
+
+[[entry]]
+id = 1
+type = "story"
+title = "Golden master pins today's dry-run outputs"
+description = "Adds tests/golden/: runs the dry-run negotiation and fallback for the 32-row evaluation sample, the five demo rows and the default MQ3086 row, and compares plans, costs, outcomes and round counts with a committed snapshot (timestamps and paths stripped)."
+verify = "pytest tests/golden passes on 3dd2f6f; editing ground_agent/cost_config.GROUND_DELAY_PER_MIN makes it fail with a readable diff."
+covers = ["R1"]
+after = []
+hitl = false
+risk = "medium"
+notes = ["Snapshot generation must not rewrite docs/RESULTS.md or results/ (evaluation.evaluate does today)."]
+
+[[entry]]
+id = 2
+type = "story"
+title = "One test tree, pytest config and CI"
+description = "Moves tests into tests/unit/<area>/, turns tests/live_pilot_eval.py into a tests/live/ test skipped without ANTHROPIC_API_KEY, adds pytest config, ruff config (format + lint, autofix only), and a GitHub Actions workflow."
+verify = "A pushed branch shows a green CI run with 74+ tests and the golden master; a deliberately broken test turns it red."
+covers = ["R1", "R2"]
+after = [1]
+hitl = true
+risk = "low"
+
+[[entry]]
+id = 3
+type = "story"
+title = "Console smoke test"
+description = "Adds a Streamlit AppTest that opens app_prime.py in replay mode, selects each demo row, runs 'Find a recovery plan' and finds the recommendation and the Approve/Reject buttons."
+verify = "pytest tests/unit/ui passes headless in CI."
+covers = ["R1"]
+after = [2]
+hitl = false
+risk = "low"
+
+[[entry]]
+id = 4
+type = "story"
+title = "One installable package"
+description = "Adds pyproject.toml and src/autonomousprime/; moves mediator, fallback, evaluation and the three lanes (atc-agent/atc_agent, agents, ground_agent) under it with git mv and rewritten imports; prompts move with their agents; sys.path hacks removed. File moves only, no logic edits."
+verify = "pip install -e . in a fresh venv, then pytest (golden master unchanged) and python -m autonomousprime.mediator.run both pass; grep finds no sys.path.insert."
+covers = ["R3"]
+after = [1, 2]
+hitl = false
+risk = "medium"
+
+[[entry]]
+id = 5
+type = "story"
+title = "Delete unused code and archive hackathon material"
+description = "Deletes app.py, the standalone fallback (fallback/world.py, rules.py, solver.py, __main__.py and their tests; TIE_BREAK moves to scenario.py), ui/ui_implementation_plan_mock_data.md, atc-agent/requirements.txt and .gitignore; archives atc-agent/agent-spec/, atc-agent/docs/, the pitch deck and the PDF under docs/hackathon/. Keeps mediator/eval_batch.py (the console reads its output) and .claude/skills/."
+verify = "Golden master and console smoke test pass; no import of a deleted module remains (pytest collects cleanly)."
+covers = ["R5"]
+after = [3, 4]
+hitl = true
+risk = "low"
+
+[[entry]]
+id = 6
+type = "story"
+title = "Repo instructions describe the real project"
+description = "Rewrites CLAUDE.md as project instructions (stack, layout, commands, invariants K1–K10 from constraints-audit.md, no hackathon timeline or lanes), runs bmad-project-context to write a verified AGENTS.md block, trims .env.example to ANTHROPIC_API_KEY, updates the README layout table and docs/usage.md commands."
+verify = "bmad-project-context audit reports no stale claims; grep for 'TBD', 'Singapore', 'Singpass', '15:00', 'one owner per folder' in CLAUDE.md returns nothing."
+covers = ["R4"]
+after = [4, 5]
+hitl = true
+risk = "low"

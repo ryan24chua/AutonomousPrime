@@ -1,17 +1,18 @@
 """Run negotiate() on every demo row and save results/<row_id>.json so the demo works offline.
 
 Usage: .venv/bin/python make_cache.py [row_id ...]
-Expects middleman.negotiate(row, seed) -> dict (see app.py for the keys it reads).
+Expects middleman.negotiate(row, seed) -> dict (see app_prime.py for the keys it reads).
 """
+
 import json
 import sys
-from pathlib import Path
 
 from dotenv import load_dotenv
 
+from autonomousprime import paths
 from demo_rows import DEMO_ROWS, SEED, row_date
 
-RESULTS = Path(__file__).parent / "results"
+RESULTS = paths.RESULTS
 
 
 # Runs negotiate() for one demo row and writes results/<row_id>.json.
@@ -29,8 +30,8 @@ def cache_one(row_id, negotiate):
 
 # Caches every requested demo row, continuing past per-row failures.
 def main():
-    load_dotenv(Path(__file__).parent / ".env.local")
-    load_dotenv(Path(__file__).parent / ".env")
+    load_dotenv(paths.REPO / ".env.local")
+    load_dotenv(paths.REPO / ".env")
     try:
         from middleman import negotiate
     except ImportError:

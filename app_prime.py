@@ -1,4 +1,4 @@
-"""AutonomousPrime polished demo UI (alternative to app.py; same data, same backend).
+"""AutonomousPrime polished demo UI (the console; same data, same backend).
 
 Run: .venv/bin/streamlit run app_prime.py
 Reads results/<row_id>.json (written by make_cache.py or a live negotiate() call).
@@ -6,27 +6,38 @@ Result keys read: outcome ("consensus" | "halt_least_cost"), rounds, final_plan,
 optional document (str) and world (dict). Each log entry: round, agent, message{action,
 plan_id, plan, need, offer, reason, flags}, checker{valid, violations, cost}, table_plan_id.
 """
+
 import csv
 import html
 import json
 import time
 from datetime import datetime
-from pathlib import Path
 
 import streamlit as st
 from dotenv import load_dotenv
 
+from autonomousprime import paths
 from demo_rows import DAY, DEMO_ROWS, MONTH, SEED, row_date
 
-ROOT = Path(__file__).parent
-RESULTS = ROOT / "results"
-FLIGHTS = ROOT / "data/raw/dot2015/flights.csv"
-SHOWN_COLS = ["AIRLINE", "FLIGHT_NUMBER", "TAIL_NUMBER", "ORIGIN_AIRPORT", "DESTINATION_AIRPORT",
-              "SCHEDULED_DEPARTURE", "SCHEDULED_ARRIVAL", "SCHEDULED_TIME", "DISTANCE",
-              "WEATHER_DELAY", "LATE_AIRCRAFT_DELAY"]  # no outcome columns, ever
+ROOT = paths.REPO
+RESULTS = paths.RESULTS
+FLIGHTS = paths.FLIGHTS
+SHOWN_COLS = [
+    "AIRLINE",
+    "FLIGHT_NUMBER",
+    "TAIL_NUMBER",
+    "ORIGIN_AIRPORT",
+    "DESTINATION_AIRPORT",
+    "SCHEDULED_DEPARTURE",
+    "SCHEDULED_ARRIVAL",
+    "SCHEDULED_TIME",
+    "DISTANCE",
+    "WEATHER_DELAY",
+    "LATE_AIRCRAFT_DELAY",
+]  # no outcome columns, ever
 
 
-# Workflow from CLAUDE.md §5: (title, who, what happens)
+# Workflow from docs/hackathon/mvp-spec.md §5: (title, who, what happens)
 STAGES = [
     ("1. Disruption", "real 2015 flight", "A delayed flight comes in"),
     ("2. Each team weighs in", "ATC · Pilot · Ground", "Each team suggests its best plan"),
@@ -61,8 +72,10 @@ def render_stages(slot, active):
     for i, (title, _who, what) in enumerate(STAGES):
         cls = "done" if i < active else "active" if i == active else "todo"
         mark = "✓" if i < active else str(i + 1)
-        steps.append(f'<div class="step {cls}"><div class="dot">{mark}</div><div><div class="t">{title.split(". ", 1)[-1]}</div>'
-                     f'<div class="d">{what}</div></div></div>')
+        steps.append(
+            f'<div class="step {cls}"><div class="dot">{mark}</div><div><div class="t">{title.split(". ", 1)[-1]}</div>'
+            f'<div class="d">{what}</div></div></div>'
+        )
     slot.markdown(PULSE_CSS + '<div class="stepper">' + "".join(steps) + "</div>", unsafe_allow_html=True)
 
 
@@ -82,7 +95,12 @@ def load_row(airline, flight_number, origin, month=MONTH, day=DAY):
     with open(FLIGHTS, newline="") as f:
         for r in csv.DictReader(f):
             if (r["MONTH"], r["DAY"], r["AIRLINE"], r["FLIGHT_NUMBER"], r["ORIGIN_AIRPORT"]) == (
-                    str(month), str(day), airline, flight_number, origin):
+                str(month),
+                str(day),
+                airline,
+                flight_number,
+                origin,
+            ):
                 return {c: r[c] for c in SHOWN_COLS}
     return None
 
@@ -92,20 +110,28 @@ def load_row(airline, flight_number, origin, month=MONTH, day=DAY):
 @st.cache_data(show_spinner=False)
 def key_constraints(airline, flight_number, origin, month=MONTH, day=DAY):
     try:
-        from agents.constraints import fuel_crew_rules
-        from agents.pilot import fuel_budget
-        from agents.pilot_inputs import build_pilot_inputs
-        from ground_agent.inputs import build_world
+        from autonomousprime.agents.constraints import fuel_crew_rules
+        from autonomousprime.agents.pilot.agent import fuel_budget
+        from autonomousprime.agents.pilot.inputs import build_pilot_inputs
+        from autonomousprime.agents.ground.inputs import build_world
+
         w = build_world(airline, flight_number, month, day, origin, SEED)
         raw = load_row(airline, flight_number, origin, month, day)
-        fuel = fuel_budget(build_pilot_inputs({**raw, "MONTH": str(month), "DAY": str(day), "YEAR": "2015"}, SEED),
-                           fuel_crew_rules())
+        fuel = fuel_budget(
+            build_pilot_inputs({**raw, "MONTH": str(month), "DAY": str(day), "YEAR": "2015"}, SEED), fuel_crew_rules()
+        )
         free = [g for g, ws in w.gate_busy.items() if not ws]
         return [
             ("Holdable fuel before divert", f"{fuel.holdable_before_divert_min:g} min (derived)"),
-            ("Scheduled gate", f"{w.scheduled_gate} (synthetic) — busy until {hhmm(w.gate_busy[w.scheduled_gate][-1].end)} (synthetic)"),
+            (
+                "Scheduled gate",
+                f"{w.scheduled_gate} (synthetic) — busy until {hhmm(w.gate_busy[w.scheduled_gate][-1].end)} (synthetic)",
+            ),
             ("Free gates now", f"{', '.join(free) or 'none'} (synthetic)"),
-            ("Slot capacity", f"{w.limits.max_runway_ops_per_hour} runway ops/hour, {w.limits.active_runways} runways (workbook)"),
+            (
+                "Slot capacity",
+                f"{w.limits.max_runway_ops_per_hour} runway ops/hour, {w.limits.active_runways} runways (workbook)",
+            ),
             ("Connecting pax", f"{w.connecting_pax} (synthetic)"),
             ("Ground crew shift ends", f"{hhmm(w.crew_shift_end_min)} (synthetic)"),
         ]
@@ -123,6 +149,7 @@ def load_result(row_id):
 def run_live(row_id):
     from make_cache import cache_one
     from middleman import negotiate
+
     return cache_one(row_id, negotiate)
 
 
@@ -151,16 +178,24 @@ def plan_line(p):
     return " · ".join(bits)
 
 
-ROUND_TITLES = {1: "Round 1: each team suggests a plan", 2: "Round 2: each team rates the options",
-                3: "Round 3: final yes/no vote"}
-ACTIONS = {"propose": "Suggested", "score": "Rated", "accept": "Agreed", "counter": "Countered",
-           "reject": "Rejected"}
+ROUND_TITLES = {
+    1: "Round 1: each team suggests a plan",
+    2: "Round 2: each team rates the options",
+    3: "Round 3: final yes/no vote",
+}
+ACTIONS = {"propose": "Suggested", "score": "Rated", "accept": "Agreed", "counter": "Countered", "reject": "Rejected"}
 TEAM = {"atc": "Air traffic control", "pilot": "Pilot", "ground": "Ground crew"}
 TEAM_TAG = {"atc": "ATC", "pilot": "PLT", "ground": "GND"}
 # Plain-English meaning of each constraint rule family (rule IDs from docs/challenge-2-framing.md).
-RULES = {"C-FUEL": "not enough fuel to hold safely", "C-CREW-1": "ground crew shift would run over",
-         "C-CREW-2": "flight crew would exceed legal duty hours", "C-GATE": "no gate free in time",
-         "C-SLOT": "no runway slot within capacity", "C-TURN": "turnaround too short", "C-WAKE": "wake separation too tight"}
+RULES = {
+    "C-FUEL": "not enough fuel to hold safely",
+    "C-CREW-1": "ground crew shift would run over",
+    "C-CREW-2": "flight crew would exceed legal duty hours",
+    "C-GATE": "no gate free in time",
+    "C-SLOT": "no runway slot within capacity",
+    "C-TURN": "turnaround too short",
+    "C-WAKE": "wake separation too tight",
+}
 
 
 # Translates a checker violation like "C-CREW-2: flight crew duty margin -104.0 min < 0" into plain English.
@@ -195,29 +230,42 @@ def render_log(log):
                 check = "Safe" + (f" · ${c['cost']:,.0f}" if isinstance(c.get("cost"), (int, float)) else "")
             else:
                 check = "Unsafe: " + "; ".join(str(v).split(":")[0] for v in c.get("violations") or ["invalid"])
-            rows.append({"Team": TEAM.get(e["agent"], e["agent"]), "Did": ACTIONS.get(m.get("action"), m.get("action", "?")),
-                         "Plan": (f"{m['plan_id']}: " if m.get("plan_id") else "") + plan_line(m.get("plan")),
-                         "Safe?": check, "Why": m.get("reason", "")})
+            rows.append(
+                {
+                    "Team": TEAM.get(e["agent"], e["agent"]),
+                    "Did": ACTIONS.get(m.get("action"), m.get("action", "?")),
+                    "Plan": (f"{m['plan_id']}: " if m.get("plan_id") else "") + plan_line(m.get("plan")),
+                    "Safe?": check,
+                    "Why": m.get("reason", ""),
+                }
+            )
         st.table(rows)
 
 
 # Builds the decision document from the log only (used when the result has no crafted document).
 def template_document(res):
     log, rounds = res.get("log", []), res.get("rounds")
-    how = (f"Consensus in {rounds} round(s)." if res.get("outcome") == "consensus"
-           else "No consensus; least-cost valid plan chosen by the deterministic fallback (non-AI).")
+    how = (
+        f"Consensus in {rounds} round(s)."
+        if res.get("outcome") == "consensus"
+        else "No consensus; least-cost valid plan chosen by the deterministic fallback (non-AI)."
+    )
     lines = ["### Decision", f"Final plan: {plan_str(res.get('final_plan'))}", "### How reached", how, "### Why"]
     last = {}
     for e in log:
         last[e["agent"]] = e
     for a, e in last.items():
-        lines.append(f"- **{a.upper()}** ({(e.get('message') or {}).get('action', '?')}): “{(e.get('message') or {}).get('reason', '—')}”")
+        lines.append(
+            f"- **{a.upper()}** ({(e.get('message') or {}).get('action', '?')}): “{(e.get('message') or {}).get('reason', '—')}”"
+        )
     lines.append("### Checker results")
     for e in log:
         c = e.get("checker") or {}
         if c:
-            lines.append(f"- R{e['round']} {e['agent'].upper()}: {'valid' if c.get('valid') else 'INVALID ' + str(c.get('violations'))}"
-                         + (f", cost ${c['cost']:,.0f}" if isinstance(c.get("cost"), (int, float)) else ""))
+            lines.append(
+                f"- R{e['round']} {e['agent'].upper()}: {'valid' if c.get('valid') else 'INVALID ' + str(c.get('violations'))}"
+                + (f", cost ${c['cost']:,.0f}" if isinstance(c.get("cost"), (int, float)) else "")
+            )
     return "\n\n".join(lines)
 
 
@@ -241,9 +289,12 @@ def render_summary(res, row):
     for col, (a, e) in zip(cols, last.items()):
         msg = e.get("message") or {}
         act = msg.get("action", "")
-        col.markdown(f'<div class="team"><div class="team-h"><span class="badge b-{a}">{TEAM_TAG.get(a, a)}</span>'
-                     f'<b>{TEAM.get(a, a)}</b><span class="vote v-{act}">{ACTIONS.get(act, act)}</span></div>'
-                     f'<div class="why">{html.escape(msg.get("reason", ""))}</div></div>', unsafe_allow_html=True)
+        col.markdown(
+            f'<div class="team"><div class="team-h"><span class="badge b-{a}">{TEAM_TAG.get(a, a)}</span>'
+            f'<b>{TEAM.get(a, a)}</b><span class="vote v-{act}">{ACTIONS.get(act, act)}</span></div>'
+            f'<div class="why">{html.escape(msg.get("reason", ""))}</div></div>',
+            unsafe_allow_html=True,
+        )
 
 
 # Writes a short plain-English story of the negotiation from the log only (no new facts).
@@ -253,8 +304,13 @@ def plain_explanation(res):
         out = ["#### What we recommend", f"**{plan_line(p)}**."]
     else:
         out = ["#### What we recommend", "**Cancel this flight.** No plan from any team passed every safety rule:"]
-        out += [f"- {TEAM.get(a, a)}'s best plan: {meaning} (`{rule}`: {raw})" for a, rule, meaning, raw in blocking_reasons(log)]
-        out.append("Cancellation is never decided by the agents. It is a recommendation for you to confirm or override.")
+        out += [
+            f"- {TEAM.get(a, a)}'s best plan: {meaning} (`{rule}`: {raw})"
+            for a, rule, meaning, raw in blocking_reasons(log)
+        ]
+        out.append(
+            "Cancellation is never decided by the agents. It is a recommendation for you to confirm or override."
+        )
     first = [e for e in log if e["round"] == 1]
     if first:
         out.append("#### What each team wanted first")
@@ -266,12 +322,16 @@ def plain_explanation(res):
         for e in scored:
             r = (e.get("message") or {}).get("reason", "")
             score, _, why = r.partition(":") if r.startswith("scored") else ("", "", r)
-            out.append(f"- {TEAM.get(e['agent'], e['agent'])} ({score.replace('scored', '').split(' for')[0].strip() or '?'}): {why.strip()}")
+            out.append(
+                f"- {TEAM.get(e['agent'], e['agent'])} ({score.replace('scored', '').split(' for')[0].strip() or '?'}): {why.strip()}"
+            )
     removed = {v for e in log for v in ((e.get("checker") or {}).get("violations") or [])}
     out.append("#### How they settled")
-    out.append("Any plan that broke a safety rule (fuel, gate, runway slots, crew hours) was thrown out "
-               "automatically, so no team ever saw an unsafe option. Each team then rated the safe options, "
-               "and the plan with the best balance for all three, at a reasonable cost, went to a final vote.")
+    out.append(
+        "Any plan that broke a safety rule (fuel, gate, runway slots, crew hours) was thrown out "
+        "automatically, so no team ever saw an unsafe option. Each team then rated the safe options, "
+        "and the plan with the best balance for all three, at a reasonable cost, went to a final vote."
+    )
     if res.get("outcome") == "consensus":
         out.append(f"All three teams said **yes** in round {res.get('rounds')}, and a final safety check passed.")
     elif p:
@@ -283,10 +343,14 @@ def plain_explanation(res):
         out.append("#### Final vote, in each team's words")
         for e in last:
             m = e.get("message") or {}
-            out.append(f"- {TEAM.get(e['agent'], e['agent'])} ({ACTIONS.get(m.get('action'), m.get('action', ''))}): {m.get('reason', '')}")
+            out.append(
+                f"- {TEAM.get(e['agent'], e['agent'])} ({ACTIONS.get(m.get('action'), m.get('action', ''))}): {m.get('reason', '')}"
+            )
     out.append("#### What is real and what is simulated")
-    out.append("Flight times and delays are real 2015 records. Gate bookings, crew shifts and connecting "
-               "passengers are simulated for the demo. All numbers are calculated by code, not by the AI.")
+    out.append(
+        "Flight times and delays are real 2015 records. Gate bookings, crew shifts and connecting "
+        "passengers are simulated for the demo. All numbers are calculated by code, not by the AI."
+    )
     return "\n\n".join(out)
 
 
@@ -369,22 +433,32 @@ h1,h2,h3,h4{color:var(--ink);letter-spacing:-.02em;text-wrap:balance}
 .sb-card b{color:#fff}
 :focus-visible{outline:2px solid var(--navy-2)!important;outline-offset:2px}
 </style>"""
-st.markdown(PAGE_CSS + '<div class="hero"><div><h1>Flight Disruption Assistant by AutonomousPrime</h1>'
-            '<p>Air traffic control, the pilot and the ground crew negotiate a recovery plan. '
-            'Code checks every safety rule. You make the final call.</p></div>'
-            '<div class="by">Airbus Challenge 2 · Autonomous SG 2026</div></div>',
-            unsafe_allow_html=True)
+st.markdown(
+    PAGE_CSS + '<div class="hero"><div><h1>Flight Disruption Assistant by AutonomousPrime</h1>'
+    "<p>Air traffic control, the pilot and the ground crew negotiate a recovery plan. "
+    "Code checks every safety rule. You make the final call.</p></div>"
+    '<div class="by">Airbus Challenge 2 · Autonomous SG 2026</div></div>',
+    unsafe_allow_html=True,
+)
 
 with st.sidebar:
-    st.markdown('<div class="sb-brand">AutonomousPrime</div><div class="sb-sub">Duty manager console · DOT 2015 disruptions</div>',
-                unsafe_allow_html=True)
+    st.markdown(
+        '<div class="sb-brand">AutonomousPrime</div><div class="sb-sub">Duty manager console · DOT 2015 disruptions</div>',
+        unsafe_allow_html=True,
+    )
     row_id = st.selectbox("Disrupted flight", list(DEMO_ROWS), format_func=lambda k: DEMO_ROWS[k]["label"])
-    use_cache = st.toggle("Replay saved run", value=True,
-                          help="On: replay a saved negotiation instantly. Off: the three Claude agents negotiate live.")
-    st.markdown('<div class="sb-card"><b>Who is at the table</b><br>Air traffic control: runway slots<br>'
-                'Pilot: fuel, duty hours, diversion<br>Ground crew: gates and staff</div>'
-                '<div class="sb-card"><b>Ground rules</b><br>Code checks every safety rule<br>Three rounds at most<br>'
-                'No deal: cheapest safe plan, chosen by rule<br>You make the final call</div>', unsafe_allow_html=True)
+    use_cache = st.toggle(
+        "Replay saved run",
+        value=True,
+        help="On: replay a saved negotiation instantly. Off: the three Claude agents negotiate live.",
+    )
+    st.markdown(
+        '<div class="sb-card"><b>Who is at the table</b><br>Air traffic control: runway slots<br>'
+        "Pilot: fuel, duty hours, diversion<br>Ground crew: gates and staff</div>"
+        '<div class="sb-card"><b>Ground rules</b><br>Code checks every safety rule<br>Three rounds at most<br>'
+        "No deal: cheapest safe plan, chosen by rule<br>You make the final call</div>",
+        unsafe_allow_html=True,
+    )
 spec = DEMO_ROWS[row_id]
 if st.session_state.get("row_id") != row_id:
     st.session_state.update(row_id=row_id, stage=0)
@@ -405,8 +479,10 @@ c1, c2, c3 = st.columns(3)
 c1.metric("Problem", event)
 c2.metric("Flight", f"{row['AIRLINE']}{row['FLIGHT_NUMBER']} · {row['TAIL_NUMBER']}")
 c3.metric("Route", f"{row['ORIGIN_AIRPORT']} → {row['DESTINATION_AIRPORT']}")
-st.write(f"Was due to leave at **{hhmm(row['SCHEDULED_DEPARTURE'])}** and land at **{hhmm(row['SCHEDULED_ARRIVAL'])}** "
-         f"on {datetime(2015, *row_date(spec)).strftime('%d %b %Y').lstrip('0')} (real flight record).")
+st.write(
+    f"Was due to leave at **{hhmm(row['SCHEDULED_DEPARTURE'])}** and land at **{hhmm(row['SCHEDULED_ARRIVAL'])}** "
+    f"on {datetime(2015, *row_date(spec)).strftime('%d %b %Y').lstrip('0')} (real flight record)."
+)
 with st.expander("Limits we have to respect"):
     cells = []
     with st.spinner("Loading limits…"):
@@ -448,26 +524,44 @@ if res and res.get("row_id") == row_id:
     st.subheader("Recommended plan")
     plan, log = res.get("final_plan"), res.get("log", [])
     if res.get("outcome") == "consensus":
-        st.markdown(f'<div class="verdict vd-ok"><div class="h">All three teams agreed in round {res.get("rounds")}. '
-                    'Every safety check passed.</div></div>', unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="verdict vd-ok"><div class="h">All three teams agreed in round {res.get("rounds")}. '
+            "Every safety check passed.</div></div>",
+            unsafe_allow_html=True,
+        )
     elif plan:
-        st.markdown('<div class="verdict vd-warn"><div class="h">No agreement after 3 rounds. The cheapest safe plan '
-                    'was chosen by rule, without AI.</div></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="verdict vd-warn"><div class="h">No agreement after 3 rounds. The cheapest safe plan '
+            "was chosen by rule, without AI.</div></div>",
+            unsafe_allow_html=True,
+        )
     else:
-        items = "".join(f"<li><b>{TEAM.get(a, a)}</b>'s best plan: {html.escape(m)} <code>{html.escape(r)}: {html.escape(raw)}</code></li>"
-                        for a, r, m, raw in blocking_reasons(log))
-        st.markdown('<div class="verdict vd-bad"><div class="h">No safe plan exists. We recommend cancelling this flight.</div>'
-                    f'<ul>{items}</ul></div>', unsafe_allow_html=True)
+        items = "".join(
+            f"<li><b>{TEAM.get(a, a)}</b>'s best plan: {html.escape(m)} <code>{html.escape(r)}: {html.escape(raw)}</code></li>"
+            for a, r, m, raw in blocking_reasons(log)
+        )
+        st.markdown(
+            '<div class="verdict vd-bad"><div class="h">No safe plan exists. We recommend cancelling this flight.</div>'
+            f"<ul>{items}</ul></div>",
+            unsafe_allow_html=True,
+        )
     if plan:
         st.markdown(f"### {plan_line(plan)}")
         render_summary(res, row)
     # Button labels name the action they take; a cancellation is confirmed or overridden, never auto-applied.
-    choices = ((("Approve plan", "Approved"), ("Reject plan", "Rejected")) if plan
-               else (("Confirm cancellation", "Cancellation confirmed"), ("Override: keep flying", "Overridden")))
+    choices = (
+        (("Approve plan", "Approved"), ("Reject plan", "Rejected"))
+        if plan
+        else (("Confirm cancellation", "Cancellation confirmed"), ("Override: keep flying", "Overridden"))
+    )
     a, b, _ = st.columns([1.3, 1.3, 3])
     for (label, past), col in zip(choices, (a, b)):
         if col.button(label, key=label, type="primary" if col is a else "secondary", width="stretch"):
-            st.session_state["approval"] = {"row_id": row_id, "decision": past, "at": datetime.now().isoformat(timespec="seconds")}
+            st.session_state["approval"] = {
+                "row_id": row_id,
+                "decision": past,
+                "at": datetime.now().isoformat(timespec="seconds"),
+            }
             st.session_state["stage"] = 5
             st.toast(f"{past} by the duty manager")
             render_stages(stage_slot, 5)
@@ -475,12 +569,17 @@ if res and res.get("row_id") == row_id:
         d = st.session_state["approval"]
         ok = d["decision"] in ("Approved", "Cancellation confirmed")
         when = datetime.fromisoformat(d["at"]).strftime("%H:%M:%S on %d %b %Y")
-        detail = {"Approved": "Recovery plan released to ATC, the pilot and the ground crew.",
-                  "Rejected": "Plan sent back. No action taken.",
-                  "Cancellation confirmed": "Cancellation passed to the airline's rebooking process.",
-                  "Overridden": "Cancellation overridden. The flight stays on manual control."}[d["decision"]]
-        st.markdown(f'<div class="decision {"d-ok" if ok else "d-no"}"><div class="h">{d["decision"]} by the duty manager</div>'
-                    f'<div class="s">{detail} Logged at {when}.</div></div>', unsafe_allow_html=True)
+        detail = {
+            "Approved": "Recovery plan released to ATC, the pilot and the ground crew.",
+            "Rejected": "Plan sent back. No action taken.",
+            "Cancellation confirmed": "Cancellation passed to the airline's rebooking process.",
+            "Overridden": "Cancellation overridden. The flight stays on manual control.",
+        }[d["decision"]]
+        st.markdown(
+            f'<div class="decision {"d-ok" if ok else "d-no"}"><div class="h">{d["decision"]} by the duty manager</div>'
+            f'<div class="s">{detail} Logged at {when}.</div></div>',
+            unsafe_allow_html=True,
+        )
 
     # 7. Supporting detail, collapsed by default
     with st.expander("Why this plan? (plain-English explanation)", expanded=True):
@@ -498,16 +597,29 @@ if ev.exists():
         e = data[0] if isinstance(data, list) else data
         if "flights" in e:
             n_cons = e["agents_cost_le_fallback"] + e["agents_cost_gt_fallback"]
-            tiles = [(f"{e['unsafe_plans_chosen']}", "unsafe plans chosen"),
-                     (f"{e['consensus']} of {e['flights']}", f"flights reached agreement ({e['consensus_pct']:g}%)"),
-                     (f"${e['avg_cost_agents_usd']:,.0f}", f"average cost of the agents' plan, vs ${e['avg_cost_fallback_usd']:,.0f} for the rule-based fallback"),
-                     (f"{e['no_consensus_or_no_valid_plan']}", "flights handed to the fallback or to you")]
-            st.markdown('<div class="evals">' + "".join(f'<div><div class="n">{n}</div><div class="l">{l}</div></div>' for n, l in tiles)
-                        + "</div>", unsafe_allow_html=True)
-            st.markdown(f"**Where it falls short.** The agents' plan cost more than the fallback's in "
-                        f"**{e['agents_cost_gt_fallback']} of {n_cons}** agreed flights. The rule-based fallback stays the cost "
-                        f"baseline, and the code safety checker, not the AI, is what keeps every plan safe.")
-            st.caption(f"{e['flights']} DFW flights ({e['weather']} weather, {e['late_aircraft']} late aircraft), "
-                       f"mode: {e['mode']}, {e['errors']} errors, {e['seconds']} s total.")
+            tiles = [
+                (f"{e['unsafe_plans_chosen']}", "unsafe plans chosen"),
+                (f"{e['consensus']} of {e['flights']}", f"flights reached agreement ({e['consensus_pct']:g}%)"),
+                (
+                    f"${e['avg_cost_agents_usd']:,.0f}",
+                    f"average cost of the agents' plan, vs ${e['avg_cost_fallback_usd']:,.0f} for the rule-based fallback",
+                ),
+                (f"{e['no_consensus_or_no_valid_plan']}", "flights handed to the fallback or to you"),
+            ]
+            st.markdown(
+                '<div class="evals">'
+                + "".join(f'<div><div class="n">{n}</div><div class="l">{l}</div></div>' for n, l in tiles)
+                + "</div>",
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f"**Where it falls short.** The agents' plan cost more than the fallback's in "
+                f"**{e['agents_cost_gt_fallback']} of {n_cons}** agreed flights. The rule-based fallback stays the cost "
+                f"baseline, and the code safety checker, not the AI, is what keeps every plan safe."
+            )
+            st.caption(
+                f"{e['flights']} DFW flights ({e['weather']} weather, {e['late_aircraft']} late aircraft), "
+                f"mode: {e['mode']}, {e['errors']} errors, {e['seconds']} s total."
+            )
         else:
             st.table(data if isinstance(data, list) else [data])
