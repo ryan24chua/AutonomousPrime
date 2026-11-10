@@ -60,3 +60,4 @@ The team and coding agents work from a repo where `pytest` in CI fails on any un
 - Decision: 2026-11-03 — user: stories 2–5 are built by delegated subagents from one brief per story, each reviewed and merged by the orchestrator onto `refactor/safety-net-and-hygiene`; stories 1 and 6 by the orchestrator (`delegation-plan.md`).
 - Decision: 2026-11-07 — user: run mode auto — stories 1 → 6 run without check-ins, stopping only on a stop condition in `delegation-plan.md`; the AGENTS.md block is reviewed at the end-of-epic pause.
 - Decision: 2026-11-07 — Done-when and story 4 verify use `python -m autonomousprime.mediator.run`: the `autonomousprime run` CLI belongs to epic-one-core story 1.
+- Decision: 2026-11-10 — user: approved the five ground-4 ledger deletions in story 6 and the `AGENTS.md` block; epic closed, PR to `main` opened.

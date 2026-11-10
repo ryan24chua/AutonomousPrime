@@ -3,7 +3,7 @@ title: 'Repo instructions describe the real project'
 type: 'chore'
 ticket: '6'
 created: '2026-11-07'
-status: 'in-review'
+status: 'done'
 baseline_revision: '9be63c7'
 route: 'full'
 route_source: 'pinned'
@@ -58,7 +58,7 @@ Grounds: 1 stale or incorrect · 2 mechanically enforced · 3 harmful or contrad
 | Stack TBD, candidates Next.js/FastAPI | delete | Ground 1: the stack is chosen (Python 3.13, Streamlit, Anthropic SDK) and is stated in Orientation. |
 | Roles: one owner per folder, don't edit another person's folder | delete | Ground 4 (plan: lanes) and ground 3: it caused four world builders and three cost tables (constraints-audit X4). |
 | Contracts: schema, log format and rule IDs defined in framing §4–5; change only there, in their own commit; tell the team | rewrite | Policy line. The current definitions live in code and `docs/architecture.md` §5–6, so the pointer moved there. "Own commit" and "tell the team" are kept. |
-| Models: Haiku for bulk, Sonnet default, Opus for one hard step; cache system prompt and tools | rewrite, narrowed | Conventions: agents use `claude-sonnet-5-5` with `max_tokens` and cached system prompts (verified in all three agents). Haiku/Opus guidance dropped: no code path uses them. **Needs approval (ground 4).** |
+| Models: Haiku for bulk, Sonnet default, Opus for one hard step; cache system prompt and tools | rewrite, narrowed | Conventions: agents use `claude-sonnet-5-5` with `max_tokens` and cached system prompts (verified in all three agents). Haiku/Opus guidance dropped: no code path uses them. Approved by user 2026-11-10 (ground 4). |
 | Never commit keys; `.env.local`; add names to `.env.example` | retain | Policy (K9). |
 | Irreversible actions (send, submit, pay) wait for the user's approval click | rewrite | Invariant "a human decides: Approve/Reject is the decision; cancellation only a recommendation" (K6). Send/pay do not exist in this product. |
 | No Singpass, CAPTCHAs or logins in the demo path | delete | Ground 1: no such path exists (Singapore template). |
@@ -67,7 +67,7 @@ Grounds: 1 stale or incorrect · 2 mechanically enforced · 3 harmful or contrad
 | Skip test-first TDD; verify the change actually works before saying it's done | retain | Running and verifying. |
 | §1 Event and deadlines (16:15, 15:45, 3-min pitch) | delete | Ground 4 (plan: timeline) and ground 1: past. |
 | §2 Challenge essentials (structured messages, constraint checking, log, fallback, ≤3 turns, avoid merged roles / unbounded loops / ignoring safety) | rewrite | The kept intents are the Product invariants (K1–K4, K7). "≤3 turns" retired (X1). |
-| §3 Rubric weights | delete | Ground 1: the hackathon rubric no longer scores anything (constraints-audit X10). Kept in `docs/challenge-2-brief.md` and the archive. **Needs approval (ground 4).** |
+| §3 Rubric weights | delete | Ground 1: the hackathon rubric no longer scores anything (constraints-audit X10). Kept in `docs/challenge-2-brief.md` and the archive. Approved by user 2026-11-10 (ground 4). |
 | §4 Scope: two events, three decisions, pre-departure default, 3 agents, passive background flights, out-of-scope list | relocate | `docs/architecture.md` §1–3 describes what is built. The out-of-scope list is now the initiative's roadmap (epics 4–6). The archive keeps the text. |
 | §5 Workflow and middle-man pseudocode; invalid plans hidden; re-ask once then reject | relocate | `docs/architecture.md` §3–4, ADR-0003, and the code (`mediator/core.py`). The termination intent is in the invariants. |
 | §6 World-state table and fuel formula | relocate | `docs/architecture.md` §6–7 and `docs/challenge-2-framing.md` §6. "No hindsight" is retained verbatim as an invariant (K5). |
@@ -84,9 +84,9 @@ Grounds: 1 stale or incorrect · 2 mechanically enforced · 3 harmful or contrad
 | §17 Timeline | delete | Ground 4 (plan: timeline). |
 | §18 Never put arithmetic, scheduling or legality checks in a prompt | retain | Invariant (K1). |
 | §18 Never merge agent roles; one call per agent per round | retain | Invariant (K2). |
-| §18 Simplest end-to-end first (terminal), then UI | delete | Ground 1: both exist. A build-order hint for an empty repo. **Needs approval (ground 4).** |
-| §18 Log every LLM call during development | rewrite | Invariant "log every step to the consensus log". Agents also log their own calls (`logs/atc/`, the Ground log path). **Narrowed: needs approval.** |
-| §18 If something is ambiguous enough to change the design, ask before building | delete | A platitude: asking on design-changing ambiguity is the default. **Needs approval (ground 4).** |
+| §18 Simplest end-to-end first (terminal), then UI | delete | Ground 1: both exist. A build-order hint for an empty repo. Approved by user 2026-11-10 (ground 4). |
+| §18 Log every LLM call during development | rewrite | Invariant "log every step to the consensus log". Agents also log their own calls (`logs/atc/`, the Ground log path). Narrowed; approved by user 2026-11-10 (ground 4). |
+| §18 If something is ambiguous enough to change the design, ask before building | delete | A platitude: asking on design-changing ambiguity is the default. Approved by user 2026-11-10 (ground 4). |
 | §18 Ask before adding dependencies or external services | retain | Policy. |
 
 New lines (not in the old file):
@@ -102,7 +102,7 @@ New lines (not in the old file):
 ## Implementation Notes
 
 - Built by the orchestrator, not delegated: the skill is conversational and the user approves instruction writes.
-- Auto mode (2026-11-07): the block is committed on `refactor/safety-net-and-hygiene` for review at the end-of-epic pause. It is not on `main`, and no PR is open.
+- Auto mode (2026-11-07): the block is committed on `refactor/safety-net-and-hygiene` for review at the end-of-epic pause. It is not on `main`; a PR to `main` was opened at the end-of-epic pause (2026-11-10).
 - Verification:
   - Every backticked path in the block exists; the only non-paths are column names and bare filenames the block also gives in full.
   - Commands named:
@@ -113,6 +113,8 @@ New lines (not in the old file):
   - The ticket's grep for `TBD|Singapore|Singpass|15:00|one owner per folder` in `CLAUDE.md` and `AGENTS.md` is empty.
 
 ## Review Triage Log
+
+- 2026-11-10: user approved all five ground-4 ledger rows (Haiku/Opus guidance narrowed, §3 rubric, §18 simplest end-to-end first, §18 log every LLM call narrowed, §18 ask if ambiguous) and the `AGENTS.md` block as committed in d7b0692. No changes requested.
 
 ## Verification
 
