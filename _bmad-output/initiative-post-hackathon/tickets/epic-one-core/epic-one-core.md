@@ -23,7 +23,7 @@ Anyone extending the system changes a concern in one place, and a dry run is fas
 ## Requirements
 
 - R1 (parent R3): CLI, UI, cache script and evaluation all call `service.negotiate()`; `middleman.py` and `mediator/run.py` no longer exist; the outcome reports the rounds actually used.
-- R2 (parent R4): flights.csv is parsed at most once per process and cached on disk; a dry-run negotiation takes < 2 s on the reference container (9.2 s today).
+- R2 (parent R4): flights.csv is parsed at most once per process and cached on disk; a dry-run negotiation takes < 2 s on the reference container (9.2 s at planning; 6.5 s on 2026-11-10 after epic-safety-net-and-hygiene, with `flights.csv` read 3 times).
 - R3 (parent R2; AD-8): outcome columns are unreachable from agents and core; a test enforces the import boundary.
 - R4 (parent R2; AD-4): one `build_world()` per run; ATC, Pilot, Ground and fallback consume views of it; a test shows each view excludes the other roles' private fields.
 - R5 (parent R2): one contracts module holds Plan, AgentMessage, ScoredPlan, Vote (with flags), CheckResult and the log-line schema.
@@ -62,4 +62,4 @@ Anyone extending the system changes a concern in one place, and a dry run is fas
 
 - Decision: 2026-11-02 — tracer bullet is story 1 (`service.negotiate()`): every entry point goes through it first, so each later story refactors behind a stable seam.
 - Decision: 2026-11-02 — the world story keeps each lane's current derived values (Ground's `now`, ATC's weather hours) to hold the golden master; unifying their meaning is epic 3's bug 4.
-- Assumption: stdlib pickle cache for parsed rows unless the user allows a columnar reader.
+- Decision: 2026-11-10 — user: the loader uses the standard library only, no pyarrow or duckdb. It caches parsed rows on disk as one file per date, keyed by the `flights.csv` hash and Python version, in the gitignored `.cache/`; values stay the exact strings `csv` returns. Benchmark on the reference container (24 Apr 2015, 1,729 rows): warm one-day load 0.005 s and 17 MB; cold build 1.4 s; a single whole-file cache gave 0.8 s and 533 MB, so the per-day split is what makes it fast. pyarrow's default type inference turns `SCHEDULED_DEPARTURE` "0930" into 930 (28,569 rows) and would move the golden master. Revisit duckdb when the full BTS data (5.8 M rows) or epic-evaluation-at-scale starts: callers use the loader's functions only, so the swap stays inside `infra/data.py`.

@@ -84,12 +84,11 @@ For the OCC duty manager (and the team extending the system), a recovery plan co
 - Assumption: GitHub Actions is acceptable for CI.
 - Assumption: extension order after the refactor is real negotiation, then realism (airborne, bug fixes), then trust and scale; epic order in `tickets/tickets.toml` follows it.
 - Open question: which extension matters most to you — real negotiation, airborne/diversion realism, multi-flight negotiation, or scale/evaluation? (Epic order waits on this; the two refactor epics do not.)
-- Open question: may the opening epic add dev dependencies (ruff; a columnar reader such as pyarrow or duckdb), or should the data cache use the stdlib only?
 - Open question: `flights.csv` (38 MB) in git, Git LFS, or a checksummed fetch script? Full BTS 2015 data (~565 MB) for real background traffic cannot live in git.
-- Open question: keep the 19 generic Anthropic skills in `.claude/skills/` (438 files)? Commit the BMad skills for the team, or keep them local as `.gitignore` says today?
-- Open question: keep `pitch.pptx` and the hackathon PDF in the repo, move them to `docs/hackathon/`, or attach them to a GitHub release?
 - Open question: is multi-flight negotiation in scope for this initiative?
 - Decision: 2026-11-02 — the hackathon is over; contest-only constraints are retired per constraints-audit.md (user direction, this session).
 - Decision: 2026-11-02 — refactor before features, behind a golden master; bug fixes that move numbers come after, one per commit.
 - Decision: 2026-11-02 — split into six epics by outcome (see `tickets/tickets.toml`); the first two are the refactor and are sliced into stories now; epics 3–6 stay thin until refined.
 - Decision: 2026-11-02 — architecture spine `architecture-target/` adopted as a companion; epics cite its AD ids.
+- Decision: 2026-11-03 — user: dev-only ruff and a GitHub Actions CI are allowed; `pitch.pptx`, the hackathon PDFs and the ATC specs move to `docs/hackathon/`; `.claude/skills/` stays as is; BMad skills stay local.
+- Decision: 2026-11-10 — user: no columnar reader for now. The data cache uses the standard library, one cache file per date (epic-one-core story 2). Revisit duckdb when the full BTS data or epic-evaluation-at-scale starts.
