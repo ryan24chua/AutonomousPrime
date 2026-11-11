@@ -180,7 +180,7 @@ flowchart TD
 
 ## 5. The agent contract
 
-Agents share only messages; each keeps its own facts, constraints and ranking ([agent-alignment.md](agent-alignment.md)). The mediator speaks to every lane through one interface:
+Agents share only messages; each keeps its own facts, constraints and ranking ([agent-alignment.md](hackathon/agent-alignment.md), archived). The mediator speaks to every lane through one interface:
 
 ```mermaid
 classDiagram
@@ -237,7 +237,7 @@ A plan has the same six fields everywhere:
 
 ## 6. Safety rules
 
-Every rule is code. A plan that breaks a hard rule is removed before it is priced ([ADR-002](adr/0002-safety-as-filter-not-cost.md)). Limits come from `data/raw/challenge2/challenge-2-operational-constraints.xlsx`; full registry in [rule-registry.md](hackathon/atc-agent-spec/agent-contract/rule-registry.md).
+Every rule is code. A plan that breaks a hard rule is removed before it is priced ([ADR-002](adr/0002-safety-as-filter-not-cost.md)). Limits come from `data/raw/challenge2/challenge-2-operational-constraints.xlsx`; the code is the registry. [rule-registry.md](hackathon/atc-agent-spec/agent-contract/rule-registry.md) is the archived build-day design, kept for provenance.
 
 | Rule | Limit | Type | Checked by |
 |---|---|---|---|

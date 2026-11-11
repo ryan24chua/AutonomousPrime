@@ -9,7 +9,7 @@ Split (rubric: technical soundness): code computes every number (`assess_plan`, 
 after the LLM answers (`_enforce`), so an unsafe accept, or an accept of a plan not on the table, can never
 leave this module.
 
-Shared with other agents: the message only (docs/agent-alignment.md). Everything else here is private.
+Shared with other agents: the message only (docs/hackathon/agent-alignment.md). Everything else here is private.
 This module adds only the Pilot's role.
 """
 

@@ -1,12 +1,12 @@
 # ADR-0001: Pick the plan with the highest Nash product
 
-**Status:** Accepted. Rationale written after the fact (1 Nov 2026); the switch from the framing doc's rule wasn't recorded at the time.
+**Status:** Accepted as the current default ([ADR-0004](0004-post-hackathon-design-baseline.md), 11 Nov 2026); revisited in epic-negotiation-beyond-three-rounds. Rationale written after the fact (1 Nov 2026); the switch from the framing doc's rule wasn't recorded at the time.
 
 ## Context
 
 After round 2, the mediator holds a shortlist of safe plans, each scored 0–1 by ATC, Pilot and Ground. It needs a deterministic rule to pick one for the final vote. The agents' objectives are in different units: ATC minimises system delay in minutes, the Pilot protects fuel margin and connections, and Ground minimises gate and crew cost in dollars. The airline also cares about total cost.
 
-The design doc ([challenge-2-framing.md §3](../challenge-2-framing.md), rule 5) specified "maximise the minimum agent utility". The implementation (`nash_pick` in `mediator/core.py`) uses the Nash product instead.
+The design doc ([challenge-2-framing.md §3](../hackathon/challenge-2-framing.md), rule 5) specified "maximise the minimum agent utility". The implementation (`nash_pick` in `mediator/core.py`) uses the Nash product instead.
 
 ## Decision
 

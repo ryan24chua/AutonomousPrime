@@ -1,5 +1,7 @@
 # Challenge #2 — brief and judging rubric (source of truth)
 
+> **Archived 2026-11-11.** Hackathon material, kept for provenance; it is not a current requirement. The current rules are in `AGENTS.md`, `docs/architecture.md` and `docs/adr/` (see ADR-0004).
+
 Transcribed from `docs/hackathon/Autonomous SG 2026_Airbus Track.pdf` (AI & Aerospace track, Airbus). Read this before designing or building anything.
 
 ## Brief

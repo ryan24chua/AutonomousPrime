@@ -70,8 +70,8 @@ Stated in full, with causes and fixes, in [RESULTS.md §5](docs/RESULTS.md). In 
 | [docs/architecture.md](docs/architecture.md) | Developers and reviewers: components, sequence and flow diagrams, safety rules, cost model, glossary |
 | [docs/adr/](docs/adr/README.md) | Why: Nash product pick, safety as filter, code mediator with three rounds |
 | [docs/RESULTS.md](docs/RESULTS.md) | Evaluation: baselines, cost savings by decision, failures and bugs |
-| [docs/challenge-2-brief.md](docs/challenge-2-brief.md) | The Airbus brief and judging rubric |
-| [docs/challenge-2-framing.md](docs/challenge-2-framing.md) | The team's design framing and [key citations](docs/challenge-2-framing.md#key-citations) from its literature review |
+| [docs/hackathon/challenge-2-brief.md](docs/hackathon/challenge-2-brief.md) | The Airbus brief and judging rubric (archived) |
+| [docs/hackathon/challenge-2-framing.md](docs/hackathon/challenge-2-framing.md) | The team's design framing and [key citations](docs/hackathon/challenge-2-framing.md#key-citations) from its literature review (archived) |
 
 ## Repository layout
 
@@ -96,6 +96,6 @@ Stated in full, with causes and fixes, in [RESULTS.md §5](docs/RESULTS.md). In 
 
 ## How this was built
 
-- **The team** (4 people: Ryan Chua, cibichandar, jon, vishnuroxx) did the problem framing, the literature review ([key citations](docs/challenge-2-framing.md#key-citations)), the system architecture and every design decision: the agent roles and contract, the three-round protocol, safety as a filter, the Nash product pick and the evaluation design.
+- **The team** (4 people: Ryan Chua, cibichandar, jon, vishnuroxx) did the problem framing, the literature review ([key citations](docs/hackathon/challenge-2-framing.md#key-citations)), the system architecture and every design decision: the agent roles and contract, the three-round protocol, safety as a filter, the Nash product pick and the evaluation design.
 - **Claude** (via Claude Code) wrote the implementation under the team's direction: the agents, mediator, checker, fallback, UI, evaluation and these documents. The design-decision records in [docs/adr/](docs/adr/README.md) were written up afterwards from the team's decisions.
 - **At runtime**, the three agents are Claude Sonnet (`claude-sonnet-5-5`), called through the Anthropic API.

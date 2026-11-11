@@ -186,7 +186,7 @@ ROUND_TITLES = {
 ACTIONS = {"propose": "Suggested", "score": "Rated", "accept": "Agreed", "counter": "Countered", "reject": "Rejected"}
 TEAM = {"atc": "Air traffic control", "pilot": "Pilot", "ground": "Ground crew"}
 TEAM_TAG = {"atc": "ATC", "pilot": "PLT", "ground": "GND"}
-# Plain-English meaning of each constraint rule family (rule IDs from docs/challenge-2-framing.md).
+# Plain-English meaning of each constraint rule family (rule IDs from docs/hackathon/challenge-2-framing.md).
 RULES = {
     "C-FUEL": "not enough fuel to hold safely",
     "C-CREW-1": "ground crew shift would run over",

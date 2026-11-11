@@ -6,7 +6,7 @@ concessions, deadline, failed constraint). An accept of a plan that is not on th
 fails the Ground check, is overridden to `reject` in code (same pattern as the Pilot agent).
 Invalid output is re-asked once, then becomes `reject`.
 
-Shared with other agents: the message only (docs/agent-alignment.md). Everything else here is private.
+Shared with other agents: the message only (docs/hackathon/agent-alignment.md). Everything else here is private.
 This module adds only Ground's role.
 """
 

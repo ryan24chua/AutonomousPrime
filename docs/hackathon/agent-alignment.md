@@ -1,5 +1,7 @@
 # Agent agreement: ATC · Pilot · Ground (PROPOSED)
 
+> **Archived 2026-11-11.** Hackathon material, kept for provenance; it is not a current requirement. The current rules are in `AGENTS.md`, `docs/architecture.md` and `docs/adr/` (see ADR-0004).
+
 Three independent agents. They share one thing: the message they send to the middleman.
 Everything else is private to each agent. Lane owners: object by 15:00 or it stands.
 

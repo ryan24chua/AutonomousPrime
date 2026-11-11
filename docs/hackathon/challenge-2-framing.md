@@ -1,5 +1,7 @@
 # Challenge #2 framing: negotiated disruption recovery
 
+> **Archived 2026-11-11.** Hackathon material, kept for provenance; it is not a current requirement. The current rules are in `AGENTS.md`, `docs/architecture.md` and `docs/adr/` (see ADR-0004).
+
 Synthesis of four research reports (domain and constraints, literature, Claude implementation, data and evaluation), written 31 Oct 2026. The brief and rubric are in `docs/challenge-2-brief.md`. Where reports disagreed, the choice made is noted.
 
 ## Change log
