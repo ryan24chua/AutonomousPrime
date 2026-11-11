@@ -1,6 +1,6 @@
 # ADR-0003: A pure-code mediator runs exactly three rounds
 
-**Status:** Accepted.
+**Status:** Accepted; amended by [ADR-0004](0004-post-hackathon-design-baseline.md) (11 Nov 2026). The code mediator, code termination and the fallback stand. "Exactly three rounds" is today's default, not a rule: epic-negotiation-beyond-three-rounds makes the round cap configuration, and its ADR-0005 supersedes this record.
 
 ## Context
 

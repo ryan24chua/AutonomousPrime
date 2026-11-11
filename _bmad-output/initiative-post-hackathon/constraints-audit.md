@@ -1,9 +1,11 @@
 # Constraints audit: what the hackathon imposed, and what still binds
 
+> **Superseded on 2026-11-11 by [design-register.md](design-register.md),** which re-rules every row below (mapping at its end) and adds the choices this audit missed. Kept as history.
+
 Every constraint the build followed, where it came from, and whether it still matters now that the contest is over.
 **Retire** = drop it. **Relax** = keep the intent, change the rule. **Keep** = still a product invariant (carried into the architecture spine as an `AD`).
 
-Sources: `docs/challenge-2-brief.md` (brief, rubric), `CLAUDE.md` (§ numbers refer to its second half), `docs/challenge-2-framing.md`, `docs/adr/`.
+Sources: `docs/hackathon/challenge-2-brief.md` (brief, rubric), `CLAUDE.md` as it was on 2026-11-02, now `docs/hackathon/mvp-spec.md` (§ numbers refer to its second half), `docs/hackathon/challenge-2-framing.md`, `docs/adr/`.
 
 ## Retire
 

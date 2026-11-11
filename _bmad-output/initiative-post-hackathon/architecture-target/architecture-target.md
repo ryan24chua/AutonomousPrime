@@ -7,7 +7,7 @@ paradigm: 'functional core, imperative shell; LLM-Modulo generate-and-test'
 scope: 'the whole repository after the refactor epics; binding on every later epic'
 status: draft
 created: '2026-11-02'
-updated: '2026-11-02'
+updated: '2026-11-11'
 binds: [R1, R2, R3, R4, R5, R6, R7, R8, R9, R10]
 sources:
   - _bmad-output/initiative-post-hackathon/initiative-post-hackathon.md
@@ -42,17 +42,17 @@ flowchart LR
     core -. "imports nothing outside core" .-> core
 ```
 
-### AD-1 — Code decides; the LLM chooses and explains [ADOPTED]
+### AD-1 — Code decides; the LLM proposes, chooses and explains [ADOPTED; amended 2026-11-11, ADR-0004]
 
 - **Binds:** all agents, mediator, fallback; R5
 - **Prevents:** LLM arithmetic, LLM legality checks, LLM-decided termination or pick.
-- **Rule:** an LLM output may contain only ids of code-generated options, scores/votes, flags from a closed enum, and short text. Any number in it is ignored and re-derived by code. Every plan an agent accepts or proposes is re-checked by `core.rules` before it counts.
+- **Rule:** an LLM output may contain ids of code-generated options, scores/votes, flags from a closed enum, short text, and proposals (a plan, or a relaxed bound in a concession) in the contract's typed fields. Code validates every proposal and recomputes every number from the world before it counts; a number in free text is ignored. Every plan an agent accepts or proposes is re-checked by `core.rules` before it counts. Choosing only from code menus is today's default, not this rule (register G3).
 
-### AD-2 — One role, one call, own facts [ADOPTED]
+### AD-2 — One role, one call, own facts [DEFAULT, ADR-0004]
 
 - **Binds:** `agents/*`; R5
 - **Prevents:** merged-role prompts; one agent reading another's private state.
-- **Rule:** an agent's prompt is built only from `world.view(role)`. Other agents are visible only through the shared message (`action`, `plan_id`, `reason`, `flags`). A test asserts each view excludes the other roles' private fields.
+- **Rule:** roles come from one registry (today `atc`, `pilot`, `ground`); the mediator, contracts, report and UI iterate it and never hard-code the set. An agent's prompt is built only from `world.view(role)`. Other agents are visible only through the shared message (`action`, `plan_id`, `reason`, `flags`). A test asserts each view excludes the other roles' private fields.
 
 ### AD-3 — Safety is a filter, applied before cost [ADOPTED, ADR-0002]
 
@@ -76,13 +76,13 @@ flowchart LR
 
 - **Binds:** `core.policy`, `core.mediator`; R5
 - **Prevents:** unbounded loops (brief) and a hard-coded round count spread across mediator, bridge and UI (review F10).
-- **Rule:** `NegotiationPolicy(max_rounds, deadline_s, max_llm_calls, require_concession)` is the only place limits live; default `max_rounds = 3` (golden master holds). The mediator stops on: unanimous accept of a checked plan → consensus; round cap, deadline or budget reached, or a round with no new valid plan or concession → fallback. The outcome records the actual rounds used. Only code decides termination.
+- **Rule:** `NegotiationPolicy(max_rounds, deadline_s, max_llm_calls, require_concession)` is the only place limits live; default `max_rounds = 3`. The mediator stops on: unanimous accept of a checked plan → consensus; round cap, deadline or budget reached, or a round with no new valid plan or concession → fallback. A policy may add other bounded exits decided by code, such as a re-vote on the runner-up or a hand-over to the human (register G2). The outcome records the actual rounds used. Only code decides termination.
 
 ### AD-7 — All LLM access goes through `infra.llm`
 
 - **Binds:** `agents/*`, document crafter; R2, R9
 - **Prevents:** three integrations with different retries, parsing, caching and logs (review F8).
-- **Rule:** only `infra/llm.py` imports `anthropic`. It provides: async client, structured output via Pydantic (`messages.parse`), cached system prompt, retry once then a typed failure (the agent turns it into `reject`), response cache keyed by (model, system, messages, schema), and one JSONL call log with request id, usage, latency and stop reason. Model per role comes from settings.
+- **Rule:** only `infra/llm.py` imports an LLM SDK (today `anthropic`); an agent framework or another provider needs an ADR (ADR-0004, register G4). It provides: async client, structured output via Pydantic (`messages.parse`), cached system prompt, retry once then a typed failure (the agent turns it into `reject`), response cache keyed by (model, system, messages, schema), and one JSONL call log with request id, usage, latency and stop reason. Model per role comes from settings.
 
 ### AD-8 — No hindsight, by construction
 
@@ -100,21 +100,21 @@ flowchart LR
 
 - **Binds:** `core.cost`, `infra.limits`; R2, R6
 - **Prevents:** three copies of cost weights and literal numbers in evaluation (review F3).
-- **Rule:** cost weights are in `config/cost.toml`, each with a source label; operational limits come from the organiser workbook via `infra.limits` (overridable per airport). No numeric weight or limit literal appears outside config and tests.
+- **Rule:** cost weights are in `config/cost.toml`, each with a source label; operational limits come from the organiser workbook via `infra.limits` as the default config, overridable per airport; every override carries its own source label (register S3). No numeric weight or limit literal appears outside config and tests.
 
-### AD-11 — The golden master gates behaviour
+### AD-11 — The golden master gates behaviour [amended 2026-11-11, ADR-0004]
 
 - **Binds:** every refactor commit; R1
 - **Prevents:** a "pure refactor" silently changing published numbers.
-- **Rule:** `tests/golden/` holds the dry-run outputs of the 32-row evaluation sample and the five demo rows (plans, costs, outcomes, round counts). Refactor commits leave it unchanged. A commit that changes behaviour updates the snapshot in the same commit and states which numbers moved and why.
+- **Rule:** `tests/golden/` holds the dry-run plans, costs, outcomes, rule ids and round counts of the evaluation sample and the five demo rows; reason text, log wording and decision-record prose are not pinned (epic-one-core story 12 narrows today's byte-identical snapshot). Refactor commits leave it unchanged. A commit that changes behaviour, including a bug fix inside a refactor epic, is its own commit, updates the snapshot and states which numbers moved and why.
 
 ## Consistency Conventions
 
 | Concern | Convention |
 | --- | --- |
-| Roles | `atc`, `pilot`, `ground` (lower case) everywhere: contracts, logs, config keys. |
+| Roles | Lower-case role ids from the role registry (today `atc`, `pilot`, `ground`) in contracts, logs and config keys; nothing outside the registry lists them (AD-2). |
 | Ids | Rule `C-<AREA>-<n>`; candidate plan `C<n>`; fallback plan `F<n>`; run `<DEST>-<YYYYMMDD>-<AIRLINE><FLIGHT>-s<seed>-<UTC timestamp>`. |
-| Time | Integer minutes after local midnight inside core; `"HH:MM"` only in contracts, logs and UI; DOT `"2400"`/zero-padded strings parsed only in `core.timeutil`. |
+| Time | Target: absolute local time inside core (service date + minutes after local midnight + the airport's timezone), so overnight arrivals, duty clocks and several airports work (register W2, epic-plans-time-and-events). Until then, integer minutes after local midnight. `"HH:MM"` only for display; DOT `"2400"`/zero-padded strings parsed only in `core.timeutil`. |
 | Money | USD floats; round only when rendering. |
 | Errors | Rule failures are data (`CheckResult`), never exceptions. Exceptions only for programmer errors or missing input data. |
 | Async | Agents and mediator are `async`; no sync client wrapped in `to_thread`. |
@@ -199,9 +199,13 @@ Where today's code goes:
 
 ## Deferred
 
+Each item is "not yet", with the trigger that brings it in (register P4). None is ruled out.
+
 - **Deployment target** for the UI (Streamlit Community Cloud, container, local only): not needed until someone outside the team runs it.
 - **Persistence beyond JSONL** (database, run index): JSONL per run is enough until runs are browsed across sessions.
 - **Multi-flight negotiation** (several Pilot agents sharing one slot menu): needs its own AD on slot allocation between Pilot agents; decide when the initiative scopes it.
 - **Real data sources** (full BTS on-time data, METARs, real gate maps): waits on the data-storage question; the world builder's provenance labels already allow mixing.
 - **Static typing** (mypy/pyright): useful after the package move; not required by any R line.
-- **Replacing Streamlit**: out of scope for this initiative.
+- **Another front end or an API** beside or instead of Streamlit: when a user outside the duty-manager console needs it (register S1, U1).
+- **Agent framework or another LLM provider**: when a need the gateway cannot meet appears; needs an ADR (AD-7).
+- **Realism the hackathon framing put out of scope** (live operational feeds, real gate layouts, FAA Part 117 crew legality, RECAT/CWT wake categories, aircraft type enrichment): when a data source exists for it; each lands as a world field with provenance and, if it is a rule, a new rule id.

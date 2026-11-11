@@ -10,18 +10,27 @@ Decision support for an airline operations-control duty manager at a US hub. ATC
 - Never commit keys. Real keys go in `.env.local` (gitignored); add new variable names to `.env.example`.
 - Name branches by purpose (`refactor/…`, `fix/…`, `docs/…`), never with a `claude/` prefix.
 - Commit small, `git pull --rebase` before pushing, keep `main` deployable.
-- Ask before adding a dependency or an external service. Use the Anthropic SDK and our own loop, never an agent framework.
-- Change the message schema or the rule IDs (`C-WAKE-1`, `C-FUEL-1`, …) in their own commit, update `docs/architecture.md` §5–6 in that commit, and tell the team.
+- Ask before adding a dependency or an external service.
+- Change the message schema or a rule ID (`C-WAKE-1`, `C-FUEL-1`, …) in its own commit, with a version bump, and update `docs/architecture.md` §5–6 in that commit. A rule whose meaning changes gets a new ID.
 
 ## Product invariants
 
-- Code computes every number, checks every rule and decides termination. An agent's LLM only proposes, chooses among code-built options and explains. Never put arithmetic, scheduling or legality checks in a prompt; write code.
-- Keep ATC, Pilot and Ground as separate prompts and separate calls, each seeing only its own facts; never one call for several roles.
-- Every negotiation terminates in code: no consensus ends in the deterministic fallback (`fallback/scenario.py`), never in another agent turn.
+- Code computes every number, checks every rule and decides termination and the pick. An agent's LLM proposes, chooses and explains; code validates anything it proposes and recomputes every number in it. Never put arithmetic, scheduling or legality checks in a prompt; write code.
+- Every negotiation is bounded and terminates in code, and a deterministic fallback (`fallback/scenario.py`) always exists for a negotiation that ends without consensus.
 - Safety is a filter, not a price: drop a plan that breaks a hard rule before costing it, and re-check the picked plan before it leaves the mediator.
 - No hindsight: agents never see `DEPARTURE_TIME`, `ARRIVAL_TIME`, `ARRIVAL_DELAY`, `DEPARTURE_DELAY`, `WHEELS_ON/OFF`, `ELAPSED_TIME`, `AIR_TIME`, `TAXI_IN/OUT`. Only evaluation reads them, as a historical reference.
-- A human decides: the duty manager's Approve/Reject in the console is the decision, and cancellation is only ever a recommendation.
+- A human decides: the duty manager approves or rejects every outcome, and cancellation is only ever a recommendation.
 - Log every step to the append-only JSONL consensus log. Seed and label every synthetic input (`real`, `derived`, `workbook`, `synthetic`).
+
+## Current design defaults (change by ADR)
+
+These came from the hackathon brief and are the design today, not rules. Changing one takes an ADR; see `docs/adr/0004-post-hackathon-design-baseline.md`.
+
+- Three roles, ATC, Pilot and Ground, each with its own prompt and its own call and seeing only its own facts. No call plays several roles.
+- Agents choose among code-built options; today every plan comes from ATC's arrival menu.
+- A negotiation without consensus goes to the fallback, today after three rounds.
+- All LLM access goes through one gateway on the Anthropic SDK with our own loop; no agent framework today.
+- Scope today: an airline OCC duty manager at a US hub, one delayed arrival, the organisers' DOT 2015 file, a Streamlit console. `_bmad-output/initiative-post-hackathon/design-register.md` lists every choice like these, with its ruling.
 
 ## Where things are
 
@@ -32,7 +41,7 @@ Decision support for an airline operations-control duty manager at a US hub. ATC
   - `mediator/report.py`: decision record.
 - Console: `app_prime.py` → `middleman.py` → mediator. The replay files are `results/<row_id>.json`.
 - Resolve repo paths through `autonomousprime/paths.py`, never `Path(__file__).parents[n]`.
-- `docs/hackathon/` is archived hackathon material; `mvp-spec.md` there is the old `CLAUDE.md` that code comments cite. Read it for provenance, never as current rules: this block and `docs/architecture.md` win.
+- `docs/hackathon/` is archived hackathon material (brief, framing, specs); `mvp-spec.md` there is the old `CLAUDE.md` that code comments cite. Read it for provenance, never as current rules: this block and `docs/architecture.md` win.
 - Cost weights are duplicated in `agents/ground/cost_config.py`, `agents/atc/config.py` and `fallback/config.py` until epic-one-core merges them. Change all three together.
 
 ## Running and verifying

@@ -4,8 +4,9 @@ Each record captures one design choice: the context, what we decided, the altern
 
 | ADR | Decision | Status |
 |---|---|---|
-| [0001](0001-nash-product-pick.md) | The mediator picks the plan with the highest Nash product of agent scores and a cost score | Accepted |
+| [0001](0001-nash-product-pick.md) | The mediator picks the plan with the highest Nash product of agent scores and a cost score | Accepted; current default per 0004 |
 | [0002](0002-safety-as-filter-not-cost.md) | Safety rules filter plans out before any cost is computed; they are never priced | Accepted, with known gaps |
-| [0003](0003-code-mediator-fixed-three-rounds.md) | A pure-code mediator runs exactly three rounds; the LLM never decides termination | Accepted |
+| [0003](0003-code-mediator-fixed-three-rounds.md) | A pure-code mediator runs exactly three rounds; the LLM never decides termination | Accepted; amended by 0004 |
+| [0004](0004-post-hackathon-design-baseline.md) | After the hackathon, only rules with a product reason stay invariants; brief-only rules become defaults that change by ADR | Accepted |
 
 Records 0001–0003 were written after the hackathon (1 Nov 2026) from the code, commit history and team design docs. Where the reasoning wasn't written down at the time, the record says so.
