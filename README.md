@@ -36,6 +36,7 @@ flowchart LR
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
+# or, with uv, exact versions from uv.lock: uv sync --extra dev
 
 .venv/bin/streamlit run app_prime.py         # duty manager console (replays saved runs, no API key needed)
 .venv/bin/python -m autonomousprime.mediator.run   # one negotiation in the terminal, no LLM calls

@@ -6,6 +6,7 @@ For the person who owns the recovery decision: an airline operations centre duty
 
 ```bash
 .venv/bin/pip install -e ".[dev]"
+# or, with uv, exact versions from uv.lock: uv sync --extra dev
 .venv/bin/streamlit run app_prime.py
 ```
 

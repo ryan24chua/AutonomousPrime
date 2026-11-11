@@ -44,7 +44,8 @@ These came from the hackathon brief and are the design today, not rules. Changin
 
 ## Running and verifying
 
-- Install editable: `pip install -e ".[dev]"`. `paths.py` reads `data/` from the source checkout, so a regular install cannot find it.
+- Install with `uv sync --extra dev`. It gives the exact versions in `uv.lock`, which CI uses with `--locked`. `pip install -e ".[dev]"` also works. Editable is still required, because `paths.py` reads `data/` from the checkout.
+- Upgrade on purpose with `uv lock --upgrade` (or `uv lock --upgrade-package <name>`), run the checks, and commit the new `uv.lock` in its own commit.
 - `pytest` (about 40 s) runs the unit tests, the golden master and the console smoke test. Live tests are deselected; opt in with `pytest -m live`, which makes real API calls and costs money.
 - The golden master (`tests/golden/snapshot.json`) pins outcomes: plans, costs, metrics, scores, votes, rule ids and round counts, not prose. Leave it unchanged in a refactor. A behaviour change lands as its own commit that regenerates it with `python -m tests.golden.update` and says in its message which numbers moved and why.
 - `python -m autonomousprime.mediator.run` runs one negotiation without the LLM (`--live` uses Claude) and writes its log and decision record to `logs/`.
