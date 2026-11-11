@@ -36,7 +36,7 @@ The world and plan model can carry overnight arrivals, new levers, new event typ
 
 - Belongs to epic-airborne-and-diversion: airborne scenarios and diversion as a chosen plan, which build on this epic's plan types.
 - Belongs to epic-several-flights-at-once: negotiating several flights. The flight id in the plan contract is what makes that possible.
-- Open: whether an event's size stays the realised delay-cause minutes (a labelled hindsight hole) or becomes a forecast (register S5).
+- Decided (register S5, 2026-11-11): an event's size stays the recorded delay-cause minutes, the given disruption labelled "known at decision time". No forecast of whether delays happen; only the knock-on is predicted (epic-cascading-effects).
 
 ## References
 
