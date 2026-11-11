@@ -1,6 +1,7 @@
 # Epics of initiative-post-hackathon, in build order (table order = build order; ids are permanent).
 # Rule that cut them: one epic per distinct outcome that can merge to main on its own; the two refactor
 # epics come first because every later epic would otherwise be built four times (once per lane).
+# Epic 7 was added 2026-11-11 from the design-choice register; the order after epic 2 is still open (register P6).
 
 [[epic]]
 id = 1
@@ -29,9 +30,17 @@ after = [{ epic = 2, needs = "one world, one rule registry, one cost module, one
 id = 4
 slug = "epic-negotiation-beyond-three-rounds"
 title = "Agents negotiate in every round under a configurable, bounded policy"
-description = "NegotiationPolicy replaces the fixed three rounds; Claude chooses among code options in every round; agents can concede; vote and pick rules agree; the fallback ranks by safety priority before cost; ADR-0004 supersedes ADR-0003."
+description = "NegotiationPolicy replaces the fixed three rounds; Claude chooses among code options in every round; agents can concede; vote and pick rules agree; the fallback ranks by safety priority before cost; the two protocols in the code become one; ADR-0005 supersedes ADR-0003."
 covers = ["R5"]
 after = [{ epic = 2, needs = "contracts with flags, the LLM client, agents/base.py" }]
+
+[[epic]]
+id = 7
+slug = "epic-plans-time-and-events"
+title = "Plans, time and events are not tied to one day, six fields or two causes"
+description = "Core time becomes absolute local time with the airport's timezone; the plan contract is versioned and carries a flight id and absolute times; a core plan generator combines each role's declared levers instead of ATC's menu being the universe of plans; events become an interface with one classifier; ATC world parameters move to config."
+covers = ["R2", "R7"]
+after = [{ epic = 2, needs = "one world, one contracts module, one timeutil" }]
 
 [[epic]]
 id = 5
@@ -39,7 +48,7 @@ slug = "epic-airborne-and-diversion"
 title = "Airborne flights hold within fuel on board and can divert"
 description = "Airborne scenarios run end to end: holding limited by fuel on board, diversion to the alternate available to mediator and fallback, shown to the duty manager; cancellation stays a recommendation."
 covers = ["R7"]
-after = [{ epic = 3, needs = "corrected extra-fuel sizing and missed-connection cost" }]
+after = [{ epic = 3, needs = "corrected extra-fuel sizing and missed-connection cost" }, { epic = 7, needs = "plan types beyond the ATC menu, absolute time" }]
 
 [[epic]]
 id = 6

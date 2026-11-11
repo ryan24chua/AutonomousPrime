@@ -1,13 +1,25 @@
-# Stories of epic-one-core, in build order. Every story's check includes: golden master unchanged.
+# Stories of epic-one-core, in build order (ids are permanent; story 12 was added 2026-11-11 and runs first).
+# Every story's check includes: golden master unchanged, except where a story names the numbers it moves (ADR-0004).
+
+[[entry]]
+id = 12
+type = "story"
+title = "Golden master pins outcomes, not prose"
+description = "tests/golden/capture.py projects each captured run onto what the golden master now pins (AD-11 as amended 2026-11-11): per method and ablation the plan, cost, outcome, rule ids of violations and round count, and per console row the outcome and plan. Reason text, mediator log wording, the UI log and the decision-record markdown leave the snapshot. snapshot.json is regenerated once with no pinned value changing. design-register P1."
+verify = "A scratch script shows every pinned value in the old snapshot equals the new one; pytest green; editing a reason string no longer fails tests/golden, editing a cost weight still does."
+covers = ["R1"]
+after = ["1.1"]
+hitl = false
+risk = "low"
 
 [[entry]]
 id = 1
 type = "story"
 title = "One negotiate() for CLI, UI and cache script"
-description = "Adds service.negotiate(flight_key, seed, live) -> RunResult (outcome, plan, rounds used, log path, decision record) and cli.py; middleman.py, mediator/run.py and make_cache.py call it, then middleman.py and mediator/run.py are deleted."
+description = "Adds service.negotiate(flight_key, seed, live) -> RunResult (outcome, plan, rounds used, log path, decision record) and cli.py; middleman.py, mediator/run.py and make_cache.py call it, then middleman.py and mediator/run.py are deleted. live is an explicit argument defaulting to False; no entry point infers it from ANTHROPIC_API_KEY (design-register P7). RunResult is the versioned outcome object the UI and report read, instead of log step names (N8)."
 verify = "python -m autonomousprime run reproduces the old mediator.run output; console smoke test passes; golden master unchanged."
 covers = ["R1"]
-after = ["1.4"]
+after = ["1.4", 12]
 hitl = false
 risk = "medium"
 
@@ -15,7 +27,7 @@ risk = "medium"
 id = 2
 type = "story"
 title = "One cached data loader with hindsight removed"
-description = "infra/data.py reads flights.csv once with the standard library csv module, caches parsed rows on disk as one file per date keyed by file hash and Python version (gitignored .cache/; no pyarrow or duckdb, decision 2026-11-10), keeps values as the exact csv strings, indexes by date/airport and tail, and returns rows without outcome columns; data.outcomes() is the only path to them; world_stub.load_day, pilot_inputs.load_schedule, ground_agent _read_rows and the UI readers use it."
+description = "infra/data.py reads flights.csv once with the standard library csv module, caches parsed rows on disk as one file per date keyed by file hash and Python version (gitignored .cache/; no pyarrow or duckdb, decision 2026-11-10), keeps values as the exact csv strings, indexes by full date (year, month, day) with airport, by flight key and by tail, and returns rows without outcome columns; the data directory is a setting that defaults to the source checkout's data/ (design-register W6); data.outcomes() is the only path to them; world_stub.load_day, pilot_inputs.load_schedule, ground_agent _read_rows and the UI readers use it."
 verify = "Timed dry run < 2 s (warm cache); test fails if any module outside evaluation/ imports data.outcomes; golden master unchanged."
 covers = ["R2", "R3"]
 after = [1]
@@ -26,8 +38,8 @@ risk = "low"
 id = 3
 type = "story"
 title = "One world with per-role views"
-description = "core/world.py builds one frozen WorldState per run from the loader rows (background arrivals, filler, gates, crew, connections, alternate, fuel, provenance) and exposes atc/pilot/ground/fallback views; the four builders are deleted. Lane-specific derived values that disagree today are kept as separate fields, named and labelled."
-verify = "Golden master unchanged; a test shows each role view excludes other roles' private fields; build_world is called once per negotiate()."
+description = "core/world.py builds one frozen WorldState per run from the loader rows (background arrivals, filler, gates, crew, connections, alternate, fuel, provenance) and exposes atc/pilot/ground/fallback views; the four builders are deleted. Where the lanes disagree today (disrupted arrival and Ground's now, event type, year filter, 2400 handling, seeding) the world keeps one value, and each unification is its own commit that regenerates the golden master and states which numbers moved (design-register P2, W1; fixes RESULTS §5.4). The gate world works at every airport size and its random draws are keyed per flight, not one global seed (W3)."
+verify = "Pure-move commits leave the golden master unchanged and each unification commit states its moved numbers; DFW-20150303-MQ3275 no longer ends in a false no valid plan; build_world succeeds for a Small hub and a Non-hub row; a test shows each role view excludes other roles' private fields; build_world is called once per negotiate()."
 covers = ["R4"]
 after = [2]
 hitl = false
@@ -37,7 +49,7 @@ risk = "high"
 id = 4
 type = "story"
 title = "One contracts module"
-description = "core/contracts.py replaces agents/schema.py, atc_agent/schema.py and mediator.core ScoredPlan/Vote/CheckResult; Vote gains flags; the JSONL log line gets a schema with a version; time helpers consolidate into core/timeutil.py."
+description = "core/contracts.py replaces agents/schema.py, atc_agent/schema.py and mediator.core ScoredPlan/Vote/CheckResult; Vote gains flags; the JSONL log line gets a schema with a version; time helpers consolidate into core/timeutil.py; message word limits and the retry count are settings, validated in one place (design-register N7)."
 verify = "Schema round-trip tests for each model; golden master unchanged; docs/architecture.md §5 matches the module."
 covers = ["R5"]
 after = [3]
@@ -82,7 +94,7 @@ notes = ["hitl: a person runs the live test with an API key."]
 id = 8
 type = "story"
 title = "Mediator, fallback and agents on the core"
-description = "mediator/adapters.py dissolves: proposers and scoring keys move to agents/<role>/policy.py, LaneAgent to agents/base.py, fallback/scenario.py to core/fallback.py, mediator/core.py to core/mediator.py."
+description = "mediator/adapters.py dissolves: proposers and scoring keys move to agents/<role>/policy.py, LaneAgent to agents/base.py, fallback/scenario.py to core/fallback.py, mediator/core.py to core/mediator.py. Roles come from one registry that the mediator, nash_pick, contracts and report iterate; no module outside it lists atc, pilot, ground (design-register G1)."
 verify = "Golden master unchanged; the dependency-direction rule holds (test: core imports nothing from agents, infra or app)."
 covers = ["R4", "R6"]
 after = [5, 6, 7]
@@ -93,7 +105,7 @@ risk = "medium"
 id = 9
 type = "story"
 title = "One evaluation harness and summary"
-description = "Merges mediator/eval_batch.py into evaluation/ (live and dry modes, one summary file, one RESULTS.md writer); the console reads that summary; generated results stop being committed except dated snapshots."
+description = "Merges mediator/eval_batch.py into evaluation/ (live and dry modes, one summary file, one RESULTS.md writer); the console reads that summary; generated results stop being committed except dated snapshots. The RESULTS.md generator writes numbers and tables only; the findings narrative moves to a hand-written section, so a fix cannot leave stale prose behind (design-register C3)."
 verify = "python -m autonomousprime eval --dry reproduces docs/RESULTS.md tables; console shows the same consensus rate as RESULTS.md."
 covers = ["R9"]
 after = [8]
@@ -105,7 +117,7 @@ notes = ["Changes the numbers the console displays (today it shows the live 26/3
 id = 10
 type = "story"
 title = "The console inside the package"
-description = "app_prime.py becomes autonomousprime/ui/app.py, split into render helpers; it imports only service and the evaluation summary; streamlit run path updated in README and docs/usage.md."
+description = "app_prime.py becomes autonomousprime/ui/app.py, split into render helpers; it imports only service and the evaluation summary; streamlit run path updated in README and docs/usage.md. Streamlit moves to a [ui] extra. The demo-first leftovers go: replay is no longer the default, a non-replay run never overwrites committed replays, hackathon branding, time.sleep staging, the 'released to ATC, the pilot and the ground crew' and 'Logged at' text that nothing backs, and the teammates' laptop paths in results/*.json. Round, stage and team labels come from RunResult and the role registry, not '3 rounds' or 'three teams' literals (design-register U1, K1, N8)."
 verify = "Console smoke test passes against the new path; manual run of all five demo rows matches the snapshot."
 covers = ["R10"]
 after = [9]
@@ -116,7 +128,7 @@ risk = "low"
 id = 11
 type = "story"
 title = "Refactor sweep"
-description = "Cleanup only, scoped at its start from deferred review findings in this epic's plans: dead helpers, naming per the spine's conventions, docstrings, docs/architecture.md component diagram and layout table updated to the new tree."
+description = "Cleanup only, scoped at its start from deferred review findings in this epic's plans: dead helpers, naming per the spine's conventions, docstrings, docs/architecture.md component diagram and layout table updated to the new tree. Also: code comments that cite the hackathon (mvp-spec section numbers, team B, lane, MVP, stub) either point at the current doc or are deleted, and the ruff per-file ignore for the deleted app.py goes (design-register G7, K1)."
 verify = "Golden master, unit, smoke and CI green; docs/architecture.md component table lists only modules that exist."
 covers = ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10"]
 after = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

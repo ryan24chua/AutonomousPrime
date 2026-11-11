@@ -3,7 +3,7 @@ type: epic
 title: "Airborne flights hold within fuel on board and can divert"
 parent: initiative-post-hackathon
 covers: [R7]
-after: [epic-known-gaps-closed]
+after: [epic-known-gaps-closed, epic-plans-time-and-events]
 refined: false
 risk: medium
 ---
@@ -27,12 +27,12 @@ The duty manager gets a safe recommendation for a flight already in the air, inc
 
 ## Boundaries
 
-- Out: choosing among several alternates, en-route weather, real fuel-on-board data (synthetic, labelled).
+- Not yet: choosing among several alternates (trigger: a second alternate passes the runway and fuel checks), en-route weather (trigger: a weather source), real fuel-on-board data (trigger: a data source; until then synthetic, labelled).
 - Belongs to epic-negotiation-beyond-three-rounds: the fallback's priority order itself.
 
 ## References
 
 - parent — `_bmad-output/initiative-post-hackathon/initiative-post-hackathon.md`, R7
-- constraints — `_bmad-output/initiative-post-hackathon/constraints-audit.md`, L3, L4, K6
+- register — `_bmad-output/initiative-post-hackathon/design-register.md`, N4, N9, G5
 - adr — `docs/adr/0002-safety-as-filter-not-cost.md`, Known gaps
 - architecture — AD-3, AD-4, AD-5
