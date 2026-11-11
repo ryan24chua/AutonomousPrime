@@ -1,6 +1,3 @@
-<!-- bmad:context -->
-<!-- Verified 2026-11-07 against 9be63c7. Managed by bmad-project-context; edits inside this block are replaced on refresh. Keep anything you want preserved outside the markers. -->
-
 ## AutonomousPrime
 
 Decision support for an airline operations-control duty manager at a US hub. ATC, Pilot and Ground Claude agents negotiate a recovery plan for a real DOT 2015 disruption. Code checks and prices every plan, a deterministic solver is the fallback, and the human approves or rejects. Python 3.13 package `autonomousprime` (src layout), Anthropic SDK, Streamlit console. Design lives in `docs/architecture.md` and `docs/adr/`; the refactor roadmap and tickets live in `_bmad-output/initiative-post-hackathon/`.
@@ -26,11 +23,12 @@ Decision support for an airline operations-control duty manager at a US hub. ATC
 
 These came from the hackathon brief and are the design today, not rules. Changing one takes an ADR; see `docs/adr/0004-post-hackathon-design-baseline.md`.
 
-- Three roles, ATC, Pilot and Ground, each with its own prompt and its own call and seeing only its own facts. No call plays several roles.
+- Three roles, ATC, Pilot and Ground, each with its own prompt and its own call and seeing only its own facts. No call plays several roles. Each role acts as its organisation's delegate: ATC for the airport's traffic management, Pilot for the airline's flight operations, Ground for the airport and ground handler.
 - Agents choose among code-built options; today every plan comes from ATC's arrival menu.
-- A negotiation without consensus goes to the fallback, today after three rounds.
+- A negotiation without consensus goes to the fallback, today after three rounds. Target (epic-negotiation): the fallback is still computed, and the duty manager chooses between the two best checked plans with each organisation's objection.
 - All LLM access goes through one gateway on the Anthropic SDK with our own loop; no agent framework today.
 - Scope today: an airline OCC duty manager at a US hub, one delayed arrival, the organisers' DOT 2015 file, a Streamlit console. `_bmad-output/initiative-post-hackathon/design-register.md` lists every choice like these, with its ruling.
+- Direction (decided 2026-11-11): several flights recovered at once, cascading effects predicted in code, the full 2015 DOT data; agents negotiate under an authority model with typed proposals. Build order in `_bmad-output/initiative-post-hackathon/tickets/tickets.toml`.
 
 ## Where things are
 
@@ -61,5 +59,3 @@ These came from the hackathon brief and are the design today, not rules. Changin
 
 - `middleman.negotiate(row)` and `make_cache.py` go live whenever `ANTHROPIC_API_KEY` is set. In code and tests, pass `live=False` or unset the key. `make_cache.py` also overwrites the console's replay files.
 - Each uncached world build re-reads the 37 MB `flights.csv` (about 3 s). In tests, load the rows once and reuse them (see `tests/golden/capture.py`).
-
-<!-- /bmad:context -->

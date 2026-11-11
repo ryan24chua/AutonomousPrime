@@ -69,5 +69,15 @@ The contest is over. A sweep of the repository on 11 Nov 2026 found about 290 pl
 
 ## Follow-ups
 
-- Still open in the register: the persona (S1), the data (S2), single-flight recovery (S4), the size of an event (S5), the AGENTS.md bmad markers (G8), the epic order (P6), a lockfile and where run logs are kept (K1).
-- Epic-negotiation's protocol ADR (ADR-0005) supersedes ADR-0003's fixed three rounds and keeps one of the two protocols in the code (register N2).
+- Settled in the register's second pass (11 Nov 2026), so none is open:
+  - **Persona (S1):** the user stays the OCC duty manager. The agents are delegates of their organisations: traffic management, the airline's flight operations, and the airport and ground handler.
+  - **Data (S2):** the full 2015 DOT file, fetched and checksummed, not in git (epic-full-2015-data).
+  - **Several flights (S4):** recovering several flights at once and predicting cascading effects are in scope (epic-several-flights-at-once, epic-cascading-effects).
+  - **Event size (S5):** the recorded delay stays the given disruption, labelled "known at decision time"; only the knock-on is predicted.
+  - **Repo (G8, K1):** the AGENTS.md bmad markers are removed; a lockfile is added; run logs stay per-run JSONL files.
+  - **Epic order (P6):** recorded in `tickets/tickets.toml`.
+- Epic-negotiation's protocol ADR (ADR-0005) supersedes ADR-0003's fixed three rounds and keeps one of the two protocols in the code (register N2). It records four decisions already taken:
+  - **N10, authority:** each organisation decides its own domain, and they negotiate where domains meet.
+  - **N11, proposals:** agents make typed proposals that code validates.
+  - **N12, sharing:** organisations share need, offer, interests, red lines, concessions and flags; raw data stays private.
+  - **N13, no agreement:** the duty manager chooses between the two best plans, with the fallback computed.

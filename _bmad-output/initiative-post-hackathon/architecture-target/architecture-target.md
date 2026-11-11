@@ -52,7 +52,7 @@ flowchart LR
 
 - **Binds:** `agents/*`; R5
 - **Prevents:** merged-role prompts; one agent reading another's private state.
-- **Rule:** roles come from one registry (today `atc`, `pilot`, `ground`); the mediator, contracts, report and UI iterate it and never hard-code the set. An agent's prompt is built only from `world.view(role)`. Other agents are visible only through the shared message (`action`, `plan_id`, `reason`, `flags`). A test asserts each view excludes the other roles' private fields.
+- **Rule:** roles come from one registry (today `atc`, `pilot`, `ground`); the mediator, contracts, report and UI iterate it and never hard-code the set. Each role is its organisation's delegate: traffic management, the airline's flight operations, the airport and ground handler (register S1). An agent's prompt is built only from `world.view(role)`. Other agents are visible only through the shared message: `action`, `plan_id`, `reason`, `flags`, and (epic-negotiation, register N12) `need`, `offer`, interests, red lines and concessions. Raw private data such as fuel figures, crew rosters and gate bookings never crosses. A test asserts each view excludes the other roles' private fields.
 
 ### AD-3 — Safety is a filter, applied before cost [ADOPTED, ADR-0002]
 
@@ -76,7 +76,7 @@ flowchart LR
 
 - **Binds:** `core.policy`, `core.mediator`; R5
 - **Prevents:** unbounded loops (brief) and a hard-coded round count spread across mediator, bridge and UI (review F10).
-- **Rule:** `NegotiationPolicy(max_rounds, deadline_s, max_llm_calls, require_concession)` is the only place limits live; default `max_rounds = 3`. The mediator stops on: unanimous accept of a checked plan → consensus; round cap, deadline or budget reached, or a round with no new valid plan or concession → fallback. A policy may add other bounded exits decided by code, such as a re-vote on the runner-up or a hand-over to the human (register G2). The outcome records the actual rounds used. Only code decides termination.
+- **Rule:** `NegotiationPolicy(max_rounds, deadline_s, max_llm_calls, require_concession)` is the only place limits live; default `max_rounds = 3`. The mediator stops on: every organisation accepting the parts of a checked plan in its own domain → agreement (authority model, register N10; today: unanimous accept); round cap, deadline or budget reached, or a round with no new valid plan or concession → fallback. A policy may add other bounded exits decided by code, such as a re-vote on the runner-up (register G2). Without agreement the fallback is always computed and logged, and the duty manager is shown the two best checked plans with each organisation's objection to choose from (register N13). The outcome records the actual rounds used. Only code decides termination.
 
 ### AD-7 — All LLM access goes through `infra.llm`
 
@@ -203,8 +203,8 @@ Each item is "not yet", with the trigger that brings it in (register P4). None i
 
 - **Deployment target** for the UI (Streamlit Community Cloud, container, local only): not needed until someone outside the team runs it.
 - **Persistence beyond JSONL** (database, run index): JSONL per run is enough until runs are browsed across sessions.
-- **Multi-flight negotiation** (several Pilot agents sharing one slot menu): needs its own AD on slot allocation between Pilot agents; decide when the initiative scopes it.
-- **Real data sources** (full BTS on-time data, METARs, real gate maps): waits on the data-storage question; the world builder's provenance labels already allow mixing.
+- **Multi-flight negotiation**: scheduled (epic-several-flights-at-once, decision 2026-11-11). Needs its own AD on slot allocation between airlines, written in that epic.
+- **Real data sources**: the full 2015 BTS on-time data is scheduled (epic-full-2015-data, decision 2026-11-11). METARs and real gate maps are not yet; their trigger is a source. The world builder's provenance labels already allow mixing.
 - **Static typing** (mypy/pyright): useful after the package move; not required by any R line.
 - **Another front end or an API** beside or instead of Streamlit: when a user outside the duty-manager console needs it (register S1, U1).
 - **Agent framework or another LLM provider**: when a need the gateway cannot meet appears; needs an ADR (AD-7).
