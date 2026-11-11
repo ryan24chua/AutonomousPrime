@@ -1,7 +1,8 @@
 # Epics of initiative-post-hackathon, in build order (table order = build order; ids are permanent).
 # Rule that cut them: one epic per distinct outcome that can merge to main on its own; the two refactor
 # epics come first because every later epic would otherwise be built four times (once per lane).
-# Epic 7 was added 2026-11-11 from the design-choice register; the order after epic 2 is still open (register P6).
+# Epics 7-10 were added 2026-11-11 from the design-choice register; the order after epic 1 was decided by the
+# user the same day (register P6): honest numbers first, then the protocol, then many parties.
 
 [[epic]]
 id = 1
@@ -14,7 +15,7 @@ covers = ["R1", "R10"]
 id = 2
 slug = "epic-one-core"
 title = "One implementation of each concern, behind one negotiate()"
-description = "World, data, time, hindsight, contracts, rules, cost and LLM access each exist once; CLI, UI and evaluation call one negotiate(); a dry run takes under 2 s; the golden master is unchanged."
+description = "World, data, time, hindsight, contracts, rules, cost and LLM access each exist once; CLI, UI and evaluation call one negotiate(); a dry run takes under 2 s; the golden master's plans, costs and outcomes change only in commits that state which numbers moved (ADR-0004)."
 covers = ["R2", "R3", "R4"]
 after = [{ epic = 1, needs = "golden-master test and the installable package" }]
 
@@ -27,20 +28,44 @@ covers = ["R6", "R8"]
 after = [{ epic = 2, needs = "one world, one rule registry, one cost module, one log writer" }]
 
 [[epic]]
-id = 4
-slug = "epic-negotiation-beyond-three-rounds"
-title = "Agents negotiate in every round under a configurable, bounded policy"
-description = "NegotiationPolicy replaces the fixed three rounds; Claude chooses among code options in every round; agents can concede; vote and pick rules agree; the fallback ranks by safety priority before cost; the two protocols in the code become one; ADR-0005 supersedes ADR-0003."
-covers = ["R5"]
-after = [{ epic = 2, needs = "contracts with flags, the LLM client, agents/base.py" }]
-
-[[epic]]
 id = 7
 slug = "epic-plans-time-and-events"
 title = "Plans, time and events are not tied to one day, six fields or two causes"
 description = "Core time becomes absolute local time with the airport's timezone; the plan contract is versioned and carries a flight id and absolute times; a core plan generator combines each role's declared levers instead of ATC's menu being the universe of plans; events become an interface with one classifier; ATC world parameters move to config."
 covers = ["R2", "R7"]
 after = [{ epic = 2, needs = "one world, one contracts module, one timeutil" }]
+
+[[epic]]
+id = 8
+slug = "epic-full-2015-data"
+title = "Every 2015 flight is available, not only the delayed ones"
+description = "A checksummed fetch script downloads the full 2015 DOT on-time data (about 5.8 M flights, same 31 columns) outside git; the one loader reads it with the per-day cache; real flights replace synthetic background traffic; tail rotations are complete; airport timezones come from a labelled source. The download source is approved when the epic starts."
+covers = ["R13"]
+after = [{ epic = 2, needs = "the one cached loader" }, { epic = 7, needs = "absolute time with airport timezones" }]
+
+[[epic]]
+id = 10
+slug = "epic-cascading-effects"
+title = "A plan's knock-on through the rest of the day is predicted and costed"
+description = "Code propagates a plan's delays along the aircraft's later legs, the crew's duty and the passengers' connections for the rest of the day, from delays known at decision time; the predicted cascade is part of each plan's cost and shown to the duty manager; evaluation alone compares it with what happened in 2015."
+covers = ["R12"]
+after = [{ epic = 8, needs = "complete tail rotations and real flights" }, { epic = 7, needs = "absolute time across midnight and airports" }]
+
+[[epic]]
+id = 4
+slug = "epic-negotiation-beyond-three-rounds"
+title = "Organisations' agents negotiate in every round under a bounded policy"
+description = "Agents negotiate as delegates of their organisations under the authority model: each decides its own domain (ATC capacity, airline slot choice for its flights, Ground gates), and negotiation happens where domains meet. NegotiationPolicy bounds rounds, time and LLM calls; every agent calls its LLM every round; agents send typed proposals within their own levers and concessions that code validates; need, offer, interests, red lines, concessions and flags reach the other parties, raw data stays private; the two protocols in the code become one; without agreement the duty manager chooses between the two best checked plans and the fallback (ranked safety first) is still computed. Built for N parties. ADR-0005 supersedes ADR-0003 (register N1, N2, N10-N13)."
+covers = ["R5"]
+after = [{ epic = 2, needs = "contracts with flags, the LLM client, agents/base.py" }, { epic = 7, needs = "plan contract v2 and declared levers for typed proposals" }, { epic = 10, needs = "plans costed with their predicted cascade" }]
+
+[[epic]]
+id = 9
+slug = "epic-several-flights-at-once"
+title = "One disruption, every affected flight, one negotiation"
+description = "A disruption hits every flight in its window and one negotiation recovers them together under the authority model: ATC allocates the reduced arrival slots, the airline reassigns its own flights to its slots (swaps, extra delay, cancellation recommendations), Ground fits gates. Stage 1: the duty manager's airline brings all its affected flights and other airlines take ATC's allocation; stage 2: other airlines get their own agents. Slot-allocation rules are decided in the epic's ADR."
+covers = ["R11"]
+after = [{ epic = 4, needs = "the N-party protocol" }, { epic = 10, needs = "cascade prediction" }]
 
 [[epic]]
 id = 5
@@ -56,4 +81,4 @@ slug = "epic-evaluation-at-scale"
 title = "Results are measured on 200+ disruptions with live cost and latency"
 description = "One evaluation runs ≥ 200 rows over ≥ 3 world seeds, live and dry, with LLM cost, latency and tokens from the call log, a weight-sensitivity sweep, ablations, and at least one explained failure, published in RESULTS.md."
 covers = ["R9"]
-after = [{ epic = 4, needs = "agents acting in every round" }]
+after = [{ epic = 4, needs = "agents acting in every round" }, { epic = 8, needs = "real background traffic and tail rotations" }]

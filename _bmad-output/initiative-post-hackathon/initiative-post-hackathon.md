@@ -28,7 +28,7 @@ The hackathon build works end to end and is honestly documented, but it carries 
 
 ## Outcome
 
-For the OCC duty manager (and the team extending the system), a recovery plan comes from a negotiation in which every agent acts in every round under a bounded, configurable protocol, on one consistent world model, with the decision logged, measured on ≥ 200 real disruptions against the same baselines as today (RESULTS.md headline table).
+For the OCC duty manager (and the team extending the system), a recovery plan comes from a negotiation between delegates of the organisations involved (traffic management, the airline, the airport and ground handler). In it every agent acts in every round under a bounded, configurable protocol, on one consistent world model built from the full 2015 data. The plan covers every flight a disruption hits, with its cascading effects predicted, and the decision is logged. It is measured on ≥ 200 real disruptions against the same baselines as today (RESULTS.md headline table).
 
 ## Requirements
 
@@ -42,6 +42,9 @@ For the OCC duty manager (and the team extending the system), a recovery plan co
 - R8 (review F9; architecture §9): the duty manager's approve/reject is appended to the run's consensus log with timestamp and plan id.
 - R9 (constraints-audit X12; framing §7): the evaluation covers ≥ 200 rows over ≥ 3 world seeds, reports live-LLM cost, latency and tokens per run, and shows at least one failure with its cause.
 - R10 (review F13): the repo's agent instructions describe the project as it is now; no hackathon template, SG API keys, TBD sections or folder-ownership rule remain.
+- R11 (design-register S1, S4, N10–N13): one disruption that hits several flights is recovered in one negotiation. Each agent is its organisation's delegate and decides its own domain, and they negotiate where domains meet. Agents make typed proposals that code validates. Without agreement, the duty manager chooses between the two best checked plans, with the fallback computed.
+- R12 (design-register S4, S5): a plan's cascading effects along tail rotations, crew duty and passenger connections for the rest of the day are predicted and costed in code from the delays already known at decision time. Evaluation alone compares them with the 2015 record.
+- R13 (design-register S2): the full 2015 DOT data (all flights, ~5.8 M rows) is fetched by a checksummed script, kept out of git and read through the one loader; real flights replace synthetic background traffic.
 
 ## Constraints
 
@@ -70,7 +73,8 @@ Rules for the work:
 Nothing below is ruled out. Each item is "Not yet", with the trigger that brings it in (design-register P4).
 - Not yet: live operational feeds, real gate layouts, FAA Part 117 crew legality, RECAT/CWT wake categories, aircraft registry enrichment. Trigger: a data source for it. Each lands as a world field with provenance and, if it is a rule, a new rule id.
 - Not yet: another front end or an API, an agent framework or another LLM provider, a database beyond JSONL logs. Trigger: a user or a need the current stack cannot meet; each needs an ADR (architecture spine "Deferred").
-- Not yet: multi-flight negotiation (several Pilot agents). Trigger: the scope question below (design-register S4); it becomes its own initiative if chosen.
+- In (decision 2026-11-11, design-register S4): several flights recovered at once (epic-several-flights-at-once), staged so the duty manager's airline brings all its affected flights first and other airlines get their own agents next.
+- Not yet: other years and non-US data. Trigger: a question the 2015 US data cannot answer.
 - Must not change: the product invariants (AGENTS.md, ADR-0004). The meaning of an existing rule id (C-CAP-1, C-FUEL-1, C-CREW-1/2, C-GATE-1/2, C-TURN-1) never changes; a changed meaning gets a new id.
 - Tracer path: DOT row → one world → three agents → mediator → checker/cost → fallback → decision record → UI approve → log line.
 
@@ -85,18 +89,9 @@ Nothing below is ruled out. Each item is "Not yet", with the trigger that brings
 
 ## Notes
 
-- Current scope (design-register S1, S2, S4; open): the airline OCC duty manager at a US hub, one delayed arrival at a time, the organisers' DOT 2015 delayed-flight subset.
+- Scope (decided 2026-11-11): the airline OCC duty manager at a US hub is the user; agents are delegates of their organisations; several flights at once with cascading effects; the full 2015 DOT data. Today's code still handles one delayed arrival on the organisers' delayed-only subset.
 - Assumption: Python 3.13; package `autonomousprime` under `src/`. Streamlit is the current UI, a default rather than an assumption (design-register P5).
 - Assumption: GitHub Actions is acceptable for CI.
-- Assumption: extension order after the refactor is real negotiation, then realism (airborne, bug fixes), then trust and scale; epic order in `tickets/tickets.toml` follows it.
-- Open question: which extension matters most to you — real negotiation, airborne/diversion realism, multi-flight negotiation, or scale/evaluation? (Epic order waits on this; the two refactor epics do not.)
-- Open question: `flights.csv` (38 MB) in git, Git LFS, or a checksummed fetch script? Full BTS 2015 data (~565 MB) for real background traffic cannot live in git.
-- Open question (design-register S1): is the user still only the OCC duty manager, or also traffic management, ramp control or crew scheduling?
-- Open question (design-register S2): does the data move beyond the organisers' delayed-only 2015 subset (full BTS, other years, real airport limits, non-US)?
-- Open question (design-register S5): does an event's size stay the realised delay-cause minutes (a labelled hindsight hole), or become a forecast?
-- Open question (design-register G8): remove the bmad markers from AGENTS.md so the block is hand-edited, or keep editing it through bmad-project-context?
-- Open question (design-register K1): add a lockfile (`uv.lock`) for reproducible CI, and keep run logs only locally or somewhere shared?
-- Open question (design-register S4): is multi-flight negotiation in scope for this initiative?
 - Decision: 2026-11-02 — the hackathon is over; contest-only constraints are retired per constraints-audit.md (user direction, this session).
 - Decision: 2026-11-02 — refactor before features, behind a golden master; bug fixes that move numbers come after, one per commit.
 - Decision: 2026-11-02 — split into six epics by outcome (see `tickets/tickets.toml`); the first two are the refactor and are sliced into stories now; epics 3–6 stay thin until refined.
@@ -104,3 +99,6 @@ Nothing below is ruled out. Each item is "Not yet", with the trigger that brings
 - Decision: 2026-11-03 — user: dev-only ruff and a GitHub Actions CI are allowed; `pitch.pptx`, the hackathon PDFs and the ATC specs move to `docs/hackathon/`; `.claude/skills/` stays as is; BMad skills stay local.
 - Decision: 2026-11-10 — user: no columnar reader for now. The data cache uses the standard library, one cache file per date (epic-one-core story 2). Revisit duckdb when the full BTS data or epic-evaluation-at-scale starts.
 - Decision: 2026-11-11 — user approved the design-choice register (`design-register.md`, 45 rows) with its recommended rulings. Only rules with a product reason stay invariants (ADR-0004); brief-only rules become defaults changed by ADR; the golden master pins plans, costs, outcomes, rule ids and round counts, and bug fixes may land inside refactor epics as their own commits; "Out" lists become "Not yet" with triggers. Open: S1, S2, S4, S5, G8, P6, K1.
+- Decision: 2026-11-11 — user, register second pass. The OCC duty manager stays the user, and the agents are delegates of their organisations (S1). The full 2015 DOT file is fetched by a checksummed script and kept out of git, which also answers the `flights.csv` storage question (S2). Several flights at once and cascading effects are in scope (S4). The recorded delay is the given disruption, labelled "known at decision time" (S5). The AGENTS.md bmad markers are removed (G8). A lockfile is added and run logs stay per-run JSONL (K1).
+- Decision: 2026-11-11 — user: build order after epic 1 is 2 → 3 → 7 → 8 → 10 → 4 → 9 → 5 → 6 (one core, known gaps, plans/time/events, full data, cascades, negotiation, several flights, airborne, evaluation at scale): honest numbers first, then the protocol, then many parties (P6). New epics 8, 9, 10.
+- Decision: 2026-11-11 — user, for epic-negotiation (register N10–N13). The authority model: each organisation decides its own domain, and they negotiate where domains meet. Typed proposals are validated by code. Organisations share need, offer, interests, red lines, concessions and flags, and keep raw data private. Without agreement the duty manager chooses between the two best checked plans, with the fallback still computed.

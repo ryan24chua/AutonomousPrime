@@ -1,4 +1,4 @@
-# Stories of epic-one-core, in build order (ids are permanent; story 12 was added 2026-11-11 and runs first).
+# Stories of epic-one-core, in build order (ids are permanent; stories 12 and 13 were added 2026-11-11 and run first).
 # Every story's check includes: golden master unchanged, except where a story names the numbers it moves (ADR-0004).
 
 [[entry]]
@@ -13,13 +13,24 @@ hitl = false
 risk = "low"
 
 [[entry]]
+id = 13
+type = "story"
+title = "Locked dependencies"
+description = "uv lock writes uv.lock with the exact version of every installed package; CI installs with uv sync --locked (dev extra) instead of resolving floor-only pins on every run; AGENTS.md 'Running and verifying' says how to upgrade on purpose (uv lock --upgrade). pip install -e . keeps working for anyone not using uv. design-register K1."
+verify = "CI green installing from uv.lock; a fresh clone with uv sync --locked runs pytest green; pip install -e .[dev] still works."
+covers = ["R1"]
+after = [12]
+hitl = false
+risk = "low"
+
+[[entry]]
 id = 1
 type = "story"
 title = "One negotiate() for CLI, UI and cache script"
 description = "Adds service.negotiate(flight_key, seed, live) -> RunResult (outcome, plan, rounds used, log path, decision record) and cli.py; middleman.py, mediator/run.py and make_cache.py call it, then middleman.py and mediator/run.py are deleted. live is an explicit argument defaulting to False; no entry point infers it from ANTHROPIC_API_KEY (design-register P7). RunResult is the versioned outcome object the UI and report read, instead of log step names (N8)."
 verify = "python -m autonomousprime run reproduces the old mediator.run output; console smoke test passes; golden master unchanged."
 covers = ["R1"]
-after = ["1.4", 12]
+after = ["1.4", 13]
 hitl = false
 risk = "medium"
 

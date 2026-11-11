@@ -3,7 +3,7 @@ type: epic
 title: "Results are measured on 200+ disruptions with live cost and latency"
 parent: initiative-post-hackathon
 covers: [R9]
-after: [epic-negotiation-beyond-three-rounds]
+after: [epic-negotiation-beyond-three-rounds, epic-full-2015-data]
 refined: false
 risk: medium
 ---
@@ -12,7 +12,7 @@ risk: medium
 
 ## Description
 
-Retire the 32-row, one-seed evaluation sized for a hackathon (constraints-audit X12). Run ≥ 200 stratified rows over ≥ 3 world seeds, across every hub size (the Ground world works at every airport after epic-one-core story 3), in dry and live modes on the same sample (not a re-run of the no-consensus subset), with LLM cost, latency and tokens taken from the call log, bootstrap CIs, a cost-weight sensitivity sweep, and a failure section that names at least one case where the agents do worse than the fallback or fail to agree, with its cause. Live runs use the response cache so re-runs are free. Every method is also scored by a reference the system does not optimise, such as the realised 2015 delay read only by evaluation (AD-8), because scoring the baselines with the same `plan_cost` the mediator minimises makes the comparison circular (design-register C2). Optionally, add the LLM-written explanation the original design called the document crafter (mvp-spec §12): prose only, from the log only, numbers filled by code. If the data-storage question allows, replace synthetic filler traffic with real on-time flights from the full BTS 2015 file.
+Retire the 32-row, one-seed evaluation sized for a hackathon (constraints-audit X12). Run ≥ 200 stratified rows over ≥ 3 world seeds, across every hub size (the Ground world works at every airport after epic-one-core story 3), in dry and live modes on the same sample (not a re-run of the no-consensus subset), with LLM cost, latency and tokens taken from the call log, bootstrap CIs, a cost-weight sensitivity sweep, and a failure section that names at least one case where the agents do worse than the fallback or fail to agree, with its cause. Live runs use the response cache so re-runs are free. Every method is also scored by a reference the system does not optimise, such as the realised 2015 delay read only by evaluation (AD-8), because scoring the baselines with the same `plan_cost` the mediator minimises makes the comparison circular (design-register C2). Optionally, add the LLM-written explanation the original design called the document crafter (mvp-spec §12): prose only, from the log only, numbers filled by code. Real background traffic and tail rotations come from epic-full-2015-data, and each plan's predicted cascade is scored against what happened in 2015 (epic-cascading-effects).
 
 ## Outcome
 
