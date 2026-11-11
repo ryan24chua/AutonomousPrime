@@ -46,7 +46,7 @@ These came from the hackathon brief and are the design today, not rules. Changin
 
 - Install editable: `pip install -e ".[dev]"`. `paths.py` reads `data/` from the source checkout, so a regular install cannot find it.
 - `pytest` (about 40 s) runs the unit tests, the golden master and the console smoke test. Live tests are deselected; opt in with `pytest -m live`, which makes real API calls and costs money.
-- Leave `tests/golden/snapshot.json` unchanged in a refactor. A commit meant to change behaviour regenerates it with `python -m tests.golden.update` and says in its message which numbers moved and why.
+- The golden master (`tests/golden/snapshot.json`) pins outcomes: plans, costs, metrics, scores, votes, rule ids and round counts, not prose. Leave it unchanged in a refactor. A behaviour change lands as its own commit that regenerates it with `python -m tests.golden.update` and says in its message which numbers moved and why.
 - `python -m autonomousprime.mediator.run` runs one negotiation without the LLM (`--live` uses Claude) and writes its log and decision record to `logs/`.
 - Run `python -m autonomousprime.evaluation.evaluate` only to republish results: it rewrites `docs/RESULTS.md` and `results/evaluation/`.
 - Verify a change by running it (tests, golden master, console) before calling it done; test-first TDD is not required.
