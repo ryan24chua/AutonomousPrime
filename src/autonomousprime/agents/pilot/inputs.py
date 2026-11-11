@@ -15,6 +15,7 @@ from functools import lru_cache
 
 from autonomousprime import paths
 from autonomousprime.agents.constraints import ASSUMPTIONS, airport_limits
+from autonomousprime.infra import data
 
 FLIGHTS = paths.FLIGHTS
 AIRPORTS = paths.AIRPORTS
@@ -102,16 +103,15 @@ def load_airports() -> dict[str, dict]:
         return {r["IATA_CODE"]: r for r in csv.DictReader(f)}
 
 
-@lru_cache(maxsize=1)
-def load_schedule() -> tuple[list[dict], dict]:
-    """Schedule-only view of flights.csv plus an index by (month, day, origin)."""
-    rows, by_origin_day = [], defaultdict(list)
-    with open(FLIGHTS, newline="") as f:
-        for r in csv.DictReader(f):
-            row = {k: r[k] for k in SCHEDULE_COLS}
-            rows.append(row)
-            by_origin_day[(row["MONTH"], row["DAY"], row["ORIGIN_AIRPORT"])].append(row)
-    return rows, by_origin_day
+@lru_cache(maxsize=8)
+def load_schedule(year: int, month: int, day: int) -> dict:
+    """Schedule-only view of one date of flights.csv, indexed by (month, day, origin).
+    Every use needs only the focal flight's own date (the crew's day, the connections at its destination)."""
+    by_origin_day = defaultdict(list)
+    for r in data.day(year, month, day):
+        row = {k: r[k] for k in SCHEDULE_COLS}
+        by_origin_day[(row["MONTH"], row["DAY"], row["ORIGIN_AIRPORT"])].append(row)
+    return by_origin_day
 
 
 def nearest_alternate(dest: str, min_nm: float = 100.0) -> Alternate:
@@ -172,7 +172,7 @@ def derive_connections(row: dict, by_origin_day, seed: int) -> tuple[Connection,
 
 
 def build_pilot_inputs(row: dict, seed: int = 42, airborne: bool = False) -> PilotInputs:
-    _, by_origin_day = load_schedule()
+    by_origin_day = load_schedule(int(row["YEAR"]), int(row["MONTH"]), int(row["DAY"]))
     row = {k: row[k] for k in SCHEDULE_COLS}  # strip outcome columns defensively
     w, l = float(row["WEATHER_DELAY"] or 0), float(row["LATE_AIRCRAFT_DELAY"] or 0)
     event = "weather" if (w > 15 and w >= l) else "late_aircraft"

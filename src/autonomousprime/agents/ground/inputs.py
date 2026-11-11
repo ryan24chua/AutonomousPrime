@@ -8,7 +8,6 @@ occupancy, crew shift start, connecting pax, notice time. No outcome columns are
 see ALLOWED_COLUMNS.
 """
 
-import csv
 import random
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -17,6 +16,7 @@ from autonomousprime import paths
 from autonomousprime.agents.constraints import AirportLimits, airport_limits, fuel_crew_rules
 from autonomousprime.agents.ground.assumptions import LIMITS_SOURCE, WALK_OTHER_TERMINAL_MIN, WALK_SAME_TERMINAL_MIN
 from autonomousprime.agents.ground.timeutil import hhmm_to_min
+from autonomousprime.infra import data
 
 FLIGHTS_CSV = paths.FLIGHTS
 # Whitelist: outcome columns (DEPARTURE_TIME, ARRIVAL_TIME, ARRIVAL_DELAY, ...) are never read.
@@ -95,13 +95,11 @@ def _gate_ids(n: int) -> list[str]:
     return [f"{'ABCDEFGH'[i // 30]}{i % 30 + 1}" for i in range(n)]
 
 
-# Reads the whitelisted columns of every flights.csv row.
-# Args: path - CSV path.
-# Returns: generator of row dicts containing only ALLOWED_COLUMNS.
-def _read_rows(path: Path):
-    with open(path, newline="") as f:
-        for r in csv.DictReader(f):
-            yield {k: r[k] for k in ALLOWED_COLUMNS}
+# Reads the whitelisted columns of one date's flights.csv rows.
+# Args: path - CSV path; month, day - the date (the file is all 2015).
+# Returns: list of row dicts containing only ALLOWED_COLUMNS, in file order.
+def _read_rows(path: Path, month: int, day: int) -> list[dict]:
+    return [{k: r[k] for k in ALLOWED_COLUMNS} for r in data.day(2015, month, day, path=path)]
 
 
 # Builds the demo WorldState for one real disrupted arrival.
@@ -118,7 +116,7 @@ def build_world(
     seed: int = 7,
     flights_csv: Path = FLIGHTS_CSV,
 ) -> WorldState:
-    rows = [r for r in _read_rows(flights_csv) if r["MONTH"] == str(month) and r["DAY"] == str(day)]
+    rows = _read_rows(flights_csv, month, day)
     focal = next(
         (
             r

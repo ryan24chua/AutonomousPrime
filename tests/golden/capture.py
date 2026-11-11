@@ -10,8 +10,8 @@ Only outcomes are pinned (ADR-0004): plans, plan ids, costs, metrics, scores, vo
 their rule ids, and round counts. Prose is dropped, so editing a reason, a decision-record sentence or a
 violation message does not fail the test; changing a number, a plan, a rule id or an outcome does.
 Volatile values (timestamps, run ids, file paths, latency) are stripped so the snapshot is deterministic.
-While capturing, two pure CSV readers are swapped for cached copies that return the same rows in the same
-order, only to keep the test fast; they are restored afterwards and the readers themselves are untouched.
+While capturing, only the evaluation's output folder is redirected to a temp dir; the data comes from the
+cached loader (autonomousprime.infra.data), so nothing is swapped to keep the test fast.
 """
 
 from __future__ import annotations
@@ -68,35 +68,16 @@ def project(obj):
 
 
 @contextmanager
-def _patched(by_day: dict, out_dir: Path):
-    """For the duration of a capture: serve the per-day and Ground CSV reads from memory (identical rows,
-    identical order) and send the evaluation's per-row logs to `out_dir`. Everything is restored after."""
-    from autonomousprime import service
+def _patched(out_dir: Path):
+    """For the duration of a capture: send the evaluation's per-row logs to `out_dir`. Restored after."""
     from autonomousprime.evaluation import evaluate as ev
-    from autonomousprime.agents.ground import inputs as ground_inputs
 
-    def load_day(year: int, month: int, day: int) -> list[dict]:
-        return [r for r in by_day.get((str(month), str(day)), []) if r["YEAR"] == str(year)]
-
-    original_read_rows = ground_inputs._read_rows
-    cache: dict = {}
-
-    def read_rows(path):
-        if path not in cache:
-            cache[path] = list(original_read_rows(path))
-        return iter(cache[path])
-
-    saved = [
-        (service, "load_day", service.load_day),
-        (ground_inputs, "_read_rows", original_read_rows),
-        (ev, "OUT", ev.OUT),
-    ]
-    service.load_day, ground_inputs._read_rows, ev.OUT = load_day, read_rows, out_dir
+    saved = ev.OUT
+    ev.OUT = out_dir
     try:
         yield
     finally:
-        for module, name, value in saved:
-            setattr(module, name, value)
+        ev.OUT = saved
 
 
 def _evaluation(by_day: dict, out_dir: Path) -> list[dict]:
@@ -130,7 +111,7 @@ def capture() -> dict:
     from autonomousprime.evaluation.evaluate import load_rows
 
     by_day = load_rows()
-    with tempfile.TemporaryDirectory() as tmp, _patched(by_day, Path(tmp)):
+    with tempfile.TemporaryDirectory() as tmp, _patched(Path(tmp)):
         data = {"evaluation": _evaluation(by_day, Path(tmp)), "console": _console()}
     # Round-trip through JSON so the captured value compares equal to the stored one.
     return json.loads(json.dumps(data, default=str))

@@ -13,14 +13,14 @@ what Claude tried to do as well as what was allowed through.
 """
 
 import asyncio
-import csv
 import json
 import re
 from collections import Counter
 from pathlib import Path
 
 from autonomousprime.agents.pilot.agent import PilotAgent
-from autonomousprime.agents.pilot.inputs import FLIGHTS, Alternate, Connection, PilotInputs, build_pilot_inputs
+from autonomousprime.infra import data
+from autonomousprime.agents.pilot.inputs import Alternate, Connection, PilotInputs, build_pilot_inputs
 from autonomousprime.agents.schema import Plan
 
 OUT = Path(__file__).resolve().parents[2] / "results" / "pilot_live_eval.json"
@@ -34,15 +34,9 @@ def plan(slot, gd=0, hold=0, extra=0, divert=False):
 
 
 def real_row():
-    with open(FLIGHTS, newline="") as f:
-        return next(
-            r
-            for r in csv.DictReader(f)
-            if r["MONTH"] == "4"
-            and r["DAY"] == "24"
-            and r["DESTINATION_AIRPORT"] == "DFW"
-            and float(r["WEATHER_DELAY"] or 0) > 15
-        )
+    return next(
+        r for r in data.day(2015, 4, 24) if r["DESTINATION_AIRPORT"] == "DFW" and float(r["WEATHER_DELAY"] or 0) > 15
+    )
 
 
 REAL = build_pilot_inputs(real_row(), seed=7)  # AA36 SAN->DFW, weather

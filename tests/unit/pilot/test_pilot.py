@@ -1,7 +1,6 @@
 """Pilot agent tests. No API calls (dry-run policy). Run: .venv/bin/python -m tests.unit.pilot.test_pilot"""
 
 import asyncio
-import csv
 import time
 from types import SimpleNamespace
 
@@ -14,7 +13,8 @@ from autonomousprime.agents.pilot.agent import (
     pilot_concessions,
     pilot_facts,
 )
-from autonomousprime.agents.pilot.inputs import FLIGHTS, Alternate, Connection, PilotInputs, build_pilot_inputs
+from autonomousprime.infra import data
+from autonomousprime.agents.pilot.inputs import Alternate, Connection, PilotInputs, build_pilot_inputs
 from autonomousprime.agents.schema import AgentMessage, Plan
 
 RULES = fuel_crew_rules()
@@ -223,15 +223,9 @@ def test_agents_run_concurrently_not_sequentially():
 
 
 def test_real_row_dfw_demo_day():
-    with open(FLIGHTS, newline="") as f:
-        row = next(
-            r
-            for r in csv.DictReader(f)
-            if r["MONTH"] == "4"
-            and r["DAY"] == "24"
-            and r["DESTINATION_AIRPORT"] == "DFW"
-            and float(r["WEATHER_DELAY"] or 0) > 15
-        )
+    row = next(
+        r for r in data.day(2015, 4, 24) if r["DESTINATION_AIRPORT"] == "DFW" and float(r["WEATHER_DELAY"] or 0) > 15
+    )
     inp = build_pilot_inputs(row, seed=7)
     assert inp.event_type == "weather" and inp.alternate.iata != "DFW" and inp.alternate.distance_nm > 100
     facts = pilot_facts(inp, {"P1": plan(inp.sched_arr, gd=0)})

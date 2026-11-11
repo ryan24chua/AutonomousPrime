@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import argparse
 import asyncio
-import csv
 import json
 import math
 import random
@@ -54,6 +53,7 @@ from autonomousprime.fallback.scenario import solve_scenario
 from autonomousprime.agents.ground.checker import check_ground
 
 from autonomousprime.agents.atc.world_stub import event_of
+from autonomousprime.infra import data
 
 FLIGHTS = paths.FLIGHTS
 OUT = paths.RESULTS / "evaluation"  # own folder: results/eval_summary.json is the live batch eval the UI shows
@@ -79,9 +79,8 @@ LABELS = {
 # ---------------------------------------------------------------- data + sampling
 def load_rows() -> dict[tuple[str, str], list[dict]]:
     by_day = defaultdict(list)
-    with open(FLIGHTS, newline="") as f:
-        for r in csv.DictReader(f):
-            by_day[(r["MONTH"], r["DAY"])].append(r)
+    for (_, month, day), rows in data.days().items():
+        by_day[(str(month), str(day))].extend(rows)
     return by_day
 
 
@@ -195,7 +194,14 @@ async def evaluate_one(stratum: str, row: dict, day_rows: list[dict], live_clien
     t0 = time.perf_counter()
     s = build_scenario(day_rows, row, seed=seed)
     sid = s.negotiation_id
-    hist = row.get("ARRIVAL_DELAY")
+    hist = data.outcomes(
+        int(row["YEAR"]),
+        int(row["MONTH"]),
+        int(row["DAY"]),
+        row["AIRLINE"],
+        row["FLIGHT_NUMBER"],
+        row["ORIGIN_AIRPORT"],
+    )["ARRIVAL_DELAY"]  # the historical reference: evaluation is the only reader of outcomes
     rec = {
         "id": sid,
         "stratum": stratum,

@@ -4,10 +4,11 @@ Real: focal row, background arrivals (same dest + date), weather window (cluster
 Synthetic: filler arrivals (flights.csv holds delayed flights only), wake class default.
 """
 
-import csv
 import random
 from collections import Counter
 from dataclasses import dataclass, field
+
+from autonomousprime.infra import data
 
 from . import config
 
@@ -46,10 +47,7 @@ def min_to_hhmm(m: int) -> str:
 
 
 def load_day(year: int, month: int, day: int) -> list[dict]:
-    with open(config.FLIGHTS_CSV, newline="") as f:
-        return [
-            r for r in csv.DictReader(f) if r["YEAR"] == str(year) and r["MONTH"] == str(month) and r["DAY"] == str(day)
-        ]
+    return data.day(year, month, day)
 
 
 def _num(v: str) -> float:

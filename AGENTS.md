@@ -38,6 +38,7 @@ These came from the hackathon brief and are the design today, not rules. Changin
   - `mediator/adapters.py`: `check_plan`, `plan_cost`, `LaneAgent`.
   - `mediator/report.py`: decision record.
 - Console: `app_prime.py` → `service.negotiate()` → mediator. The replay files are `results/<row_id>.json`.
+- `infra/data.py`: the one `flights.csv` loader (stdlib csv, per-day pickle cache, outcome columns removed).
 - Resolve repo paths through `autonomousprime/paths.py`, never `Path(__file__).parents[n]`.
 - `docs/hackathon/` is archived hackathon material (brief, framing, specs); `mvp-spec.md` there is the old `CLAUDE.md` that code comments cite. Read it for provenance, never as current rules: this block and `docs/architecture.md` win.
 - Cost weights are duplicated in `agents/ground/cost_config.py`, `agents/atc/config.py` and `fallback/config.py` until epic-one-core merges them. Change all three together.
@@ -59,4 +60,4 @@ These came from the hackathon brief and are the design today, not rules. Changin
 ## Known pitfalls
 
 - A run is live only when asked: `negotiate(..., live=True)`, `run --live`, `make_cache.py --live`; an API key alone never turns it on. `make_cache.py --live` overwrites the console's replay files.
-- Each uncached world build re-reads the 37 MB `flights.csv` (about 3 s). In tests, load the rows once and reuse them (see `tests/golden/capture.py`).
+- The first run builds a per-day cache of `flights.csv` in `.cache/` (about 1.5 s); after that a day loads in milliseconds. Outcome columns come only through `infra.data.outcomes()`, called only in evaluation.

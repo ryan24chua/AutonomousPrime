@@ -7,7 +7,6 @@ optional document (str) and world (dict). Each log entry: round, agent, message{
 plan_id, plan, need, offer, reason, flags}, checker{valid, violations, cost}, table_plan_id.
 """
 
-import csv
 import html
 import json
 import time
@@ -17,6 +16,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 from autonomousprime import paths
+from autonomousprime.infra import data
 from autonomousprime.service import LiveUnavailable
 from demo_rows import DAY, DEMO_ROWS, MONTH, SEED, row_date
 
@@ -93,17 +93,8 @@ def hhmm(v):
 # Returns: dict of SHOWN_COLS, or None if the row is missing.
 @st.cache_data(show_spinner=False)
 def load_row(airline, flight_number, origin, month=MONTH, day=DAY):
-    with open(FLIGHTS, newline="") as f:
-        for r in csv.DictReader(f):
-            if (r["MONTH"], r["DAY"], r["AIRLINE"], r["FLIGHT_NUMBER"], r["ORIGIN_AIRPORT"]) == (
-                str(month),
-                str(day),
-                airline,
-                flight_number,
-                origin,
-            ):
-                return {c: r[c] for c in SHOWN_COLS}
-    return None
+    r = data.flight(2015, int(month), int(day), airline, flight_number, origin)
+    return {c: r[c] for c in SHOWN_COLS} if r else None
 
 
 # Gathers the key constraints (holdable fuel, gate, slot capacity) from the agents' world builders.
