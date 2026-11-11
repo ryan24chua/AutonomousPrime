@@ -3,7 +3,7 @@
 What is captured (no LLM calls, no files written in the repo):
   * evaluation  - `autonomousprime.evaluation.evaluate.evaluate_one` on the demo row + the 32-row stratified sample: every
                   method's plan, cost and metrics, the ablations, and the mediator's step-by-step log.
-  * console     - `middleman.negotiate` (live=False) on the five console demo rows: outcome, plan, round count and
+  * console     - `service.negotiate` (live=False) on the five console demo rows: outcome, plan, round count and
                   the per-agent log.
 
 Only outcomes are pinned (ADR-0004): plans, plan ids, costs, metrics, scores, vote booleans, check results with
@@ -71,7 +71,7 @@ def project(obj):
 def _patched(by_day: dict, out_dir: Path):
     """For the duration of a capture: serve the per-day and Ground CSV reads from memory (identical rows,
     identical order) and send the evaluation's per-row logs to `out_dir`. Everything is restored after."""
-    import middleman
+    from autonomousprime import service
     from autonomousprime.evaluation import evaluate as ev
     from autonomousprime.agents.ground import inputs as ground_inputs
 
@@ -87,11 +87,11 @@ def _patched(by_day: dict, out_dir: Path):
         return iter(cache[path])
 
     saved = [
-        (middleman, "load_day", middleman.load_day),
+        (service, "load_day", service.load_day),
         (ground_inputs, "_read_rows", original_read_rows),
         (ev, "OUT", ev.OUT),
     ]
-    middleman.load_day, ground_inputs._read_rows, ev.OUT = load_day, read_rows, out_dir
+    service.load_day, ground_inputs._read_rows, ev.OUT = load_day, read_rows, out_dir
     try:
         yield
     finally:
@@ -113,14 +113,15 @@ def _evaluation(by_day: dict, out_dir: Path) -> list[dict]:
 
 
 def _console() -> dict[str, dict]:
-    import middleman
+    from autonomousprime import service
+    from autonomousprime.service import FlightKey
     from demo_rows import DEMO_ROWS, SEED, row_date
 
     out = {}
     for row_id, spec in DEMO_ROWS.items():
         month, day = row_date(spec)
-        res = middleman.negotiate({**spec, "month": month, "day": day}, SEED, live=False)
-        Path(res["log_path"]).unlink(missing_ok=True)  # middleman writes one log per run under logs/
+        res = service.negotiate(FlightKey.from_spec({**spec, "month": month, "day": day}), SEED, live=False).to_dict()
+        Path(res["log_path"]).unlink(missing_ok=True)  # service.negotiate writes one log per run under logs/
         out[row_id] = project(res)
     return out
 

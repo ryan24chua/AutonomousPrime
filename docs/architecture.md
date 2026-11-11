@@ -40,7 +40,7 @@ The duty manager is the only human in the loop and makes the final call. The sys
 flowchart TB
     subgraph UI["UI (Streamlit)"]
         APP["app_prime.py"]
-        MM["middleman.py<br/>negotiate()"]
+        MM["service.py<br/>negotiate()"]
     end
     subgraph MED["Mediator: pure code"]
         CORE["src/autonomousprime/mediator/core.py<br/>rounds, shortlist, Nash pick, log"]
@@ -84,7 +84,7 @@ flowchart TB
 | Ground lane | `src/autonomousprime/agents/ground/` | Gate timelines, minimum turnaround, gate-change notice, ground-crew overtime. |
 | Mediator | `src/autonomousprime/mediator/` | Runs the 3 rounds, merges duplicate plans, runs the checker, shortlists, picks, records every step. Never calls an LLM. |
 | Fallback | `src/autonomousprime/fallback/` | Enumerates every slot × gate plan, drops unsafe ones, returns the cheapest, or recommends cancellation. Also the evaluation baseline. |
-| UI | `app_prime.py`, `middleman.py` | Pick a flight, replay or run a negotiation, read the recommendation, approve or reject. |
+| UI | `app_prime.py`, `src/autonomousprime/service.py` | Pick a flight, replay or run a negotiation, read the recommendation, approve or reject. |
 | Evaluation | `src/autonomousprime/evaluation/` | Batch run on 32 stratified real rows against status-quo and single-agent baselines. Writes [RESULTS.md](RESULTS.md). |
 
 ## 3. One negotiation, step by step

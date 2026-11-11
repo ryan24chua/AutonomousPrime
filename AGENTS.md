@@ -37,7 +37,7 @@ These came from the hackathon brief and are the design today, not rules. Changin
   - `mediator/core.py`: rounds, Nash pick, log.
   - `mediator/adapters.py`: `check_plan`, `plan_cost`, `LaneAgent`.
   - `mediator/report.py`: decision record.
-- Console: `app_prime.py` → `middleman.py` → mediator. The replay files are `results/<row_id>.json`.
+- Console: `app_prime.py` → `service.negotiate()` → mediator. The replay files are `results/<row_id>.json`.
 - Resolve repo paths through `autonomousprime/paths.py`, never `Path(__file__).parents[n]`.
 - `docs/hackathon/` is archived hackathon material (brief, framing, specs); `mvp-spec.md` there is the old `CLAUDE.md` that code comments cite. Read it for provenance, never as current rules: this block and `docs/architecture.md` win.
 - Cost weights are duplicated in `agents/ground/cost_config.py`, `agents/atc/config.py` and `fallback/config.py` until epic-one-core merges them. Change all three together.
@@ -48,7 +48,7 @@ These came from the hackathon brief and are the design today, not rules. Changin
 - Upgrade on purpose with `uv lock --upgrade` (or `uv lock --upgrade-package <name>`), run the checks, and commit the new `uv.lock` in its own commit.
 - `pytest` (about 40 s) runs the unit tests, the golden master and the console smoke test. Live tests are deselected; opt in with `pytest -m live`, which makes real API calls and costs money.
 - The golden master (`tests/golden/snapshot.json`) pins outcomes: plans, costs, metrics, scores, votes, rule ids and round counts, not prose. Leave it unchanged in a refactor. A behaviour change lands as its own commit that regenerates it with `python -m tests.golden.update` and says in its message which numbers moved and why.
-- `python -m autonomousprime.mediator.run` runs one negotiation without the LLM (`--live` uses Claude) and writes its log and decision record to `logs/`.
+- `python -m autonomousprime run` runs one negotiation without the LLM (`--live` uses Claude) and writes its log and decision record to `logs/`.
 - Run `python -m autonomousprime.evaluation.evaluate` only to republish results: it rewrites `docs/RESULTS.md` and `results/evaluation/`.
 - Verify a change by running it (tests, golden master, console) before calling it done; test-first TDD is not required.
 
@@ -58,5 +58,5 @@ These came from the hackathon brief and are the design today, not rules. Changin
 
 ## Known pitfalls
 
-- `middleman.negotiate(row)` and `make_cache.py` go live whenever `ANTHROPIC_API_KEY` is set. In code and tests, pass `live=False` or unset the key. `make_cache.py` also overwrites the console's replay files.
+- A run is live only when asked: `negotiate(..., live=True)`, `run --live`, `make_cache.py --live`; an API key alone never turns it on. `make_cache.py --live` overwrites the console's replay files.
 - Each uncached world build re-reads the 37 MB `flights.csv` (about 3 s). In tests, load the rows once and reuse them (see `tests/golden/capture.py`).

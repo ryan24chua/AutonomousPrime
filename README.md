@@ -39,11 +39,11 @@ python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
 # or, with uv, exact versions from uv.lock: uv sync --extra dev
 
 .venv/bin/streamlit run app_prime.py         # duty manager console (replays saved runs, no API key needed)
-.venv/bin/python -m autonomousprime.mediator.run   # one negotiation in the terminal, no LLM calls
+.venv/bin/python -m autonomousprime run   # one negotiation in the terminal, no LLM calls
 .venv/bin/python -m autonomousprime.evaluation.evaluate # 32-row evaluation, writes docs/RESULTS.md (~30 s, no LLM calls)
 ```
 
-For live Claude votes, put `ANTHROPIC_API_KEY` in `.env.local` (see `.env.example`), then run `.venv/bin/python -m autonomousprime.mediator.run --live` or turn off **Replay saved run** in the console. Each run writes a JSONL consensus log and a plain-English decision record to `logs/`.
+For live Claude votes, put `ANTHROPIC_API_KEY` in `.env.local` (see `.env.example`), then run `.venv/bin/python -m autonomousprime run --live` or turn off **Replay saved run** in the console. Each run writes a JSONL consensus log and a plain-English decision record to `logs/`.
 
 ## Guarantees
 
@@ -84,7 +84,7 @@ Stated in full, with causes and fixes, in [RESULTS.md §5](docs/RESULTS.md). In 
 | `src/autonomousprime/mediator/` | 3-round negotiation, safety checks, cost, consensus log, decision record |
 | `src/autonomousprime/fallback/` | Deterministic least-cost fallback and cost weights |
 | `src/autonomousprime/evaluation/` | Batch evaluation against status-quo and single-agent baselines |
-| `app_prime.py`, `middleman.py` | Streamlit console and its bridge to the mediator |
+| `app_prime.py`, `src/autonomousprime/service.py` | Streamlit console and its bridge to the mediator |
 | `data/raw/` | DOT 2015 flight data and the organiser's operational-limits workbook |
 | `tests/` | Golden master, unit and live tests |
 | `docs/hackathon/` | Hackathon-era pitch, briefs and greenfield specs, kept for the record |

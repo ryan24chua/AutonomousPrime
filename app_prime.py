@@ -17,6 +17,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 from autonomousprime import paths
+from autonomousprime.service import LiveUnavailable
 from demo_rows import DAY, DEMO_ROWS, MONTH, SEED, row_date
 
 ROOT = paths.REPO
@@ -148,9 +149,8 @@ def load_result(row_id):
 # Runs negotiate() live and saves the result to results/<row_id>.json.
 def run_live(row_id):
     from make_cache import cache_one
-    from middleman import negotiate
 
-    return cache_one(row_id, negotiate)
+    return cache_one(row_id, live=True)
 
 
 # Renders a plan dict as a one-line summary.
@@ -514,6 +514,10 @@ if st.button("Find a recovery plan", type="primary"):
             st.session_state.pop("approval", None)
     except ImportError as e:
         st.error(f"Negotiation backend not available: {e}")
+    except LiveUnavailable:
+        st.error(
+            "Live mode needs ANTHROPIC_API_KEY in .env.local. Turn Replay saved run back on to use the saved runs."
+        )
     except Exception as e:
         st.error(f"Negotiation failed: {e!r}")
     render_stages(stage_slot, st.session_state["stage"])

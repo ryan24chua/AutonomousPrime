@@ -61,9 +61,9 @@ More limits and their causes: [RESULTS.md §5](RESULTS.md).
 ## Command line
 
 ```bash
-.venv/bin/python -m autonomousprime.mediator.run                         # one negotiation, no LLM (DFW, 24 Apr 2015, MQ3086)
-.venv/bin/python -m autonomousprime.mediator.run --date 2015-08-03 --dest ORD --flight OO6213
-.venv/bin/python -m autonomousprime.mediator.run --live                  # round-3 votes by Claude
+.venv/bin/python -m autonomousprime run                         # one negotiation, no LLM (DFW, 24 Apr 2015, MQ3086)
+.venv/bin/python -m autonomousprime run --date 2015-08-03 --dest ORD --flight OO6213
+.venv/bin/python -m autonomousprime run --live                  # round-3 votes by Claude
 .venv/bin/python -m autonomousprime.evaluation.evaluate                  # 32-row evaluation -> docs/RESULTS.md
 ```
 
