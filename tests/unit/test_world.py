@@ -118,3 +118,12 @@ def test_world_refuses_rows_from_another_date():
     focal = next(r for r in rows if (r["AIRLINE"], r["FLIGHT_NUMBER"], r["ORIGIN_AIRPORT"]) == ("AA", "1480", "MCI"))
     with pytest.raises(ValueError, match="another|dated"):
         build_world(rows + data.day(2015, 4, 25)[:1], focal, seed=7)
+
+
+def test_synthetic_draws_are_keyed_per_flight():
+    a = build_world_for(DEMO, seed=7)
+    b = build_world_for(FlightKey(2015, 4, 24, "AA", "36", "SAN"), seed=7)  # same airport (DFW), same day
+    assert a.ground.airport == b.ground.airport
+    spares = lambda w: [g for g, busy in w.ground.gate_busy.items() if not busy]  # noqa: E731
+    assert spares(a) != spares(b), "two flights must not share the same synthetic gate world"
+    assert spares(build_world_for(DEMO, seed=7)) == spares(a), "same flight and seed must repeat exactly"

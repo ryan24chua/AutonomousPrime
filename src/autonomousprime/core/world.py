@@ -8,8 +8,8 @@ removed). Each role reads only its own view:
 The checker, the cost and the fallback are code, not parties: they read the whole state.
 
 Every synthetic or derived value carries a label (`real`, `derived`, `workbook`, `synthetic`); `WorldState.provenance`
-collects them. The three views were built by three separate lanes and still disagree on some derived values
-(the seeding); it is unified in its own commit.
+collects them. Every view uses the same rules for the disrupted arrival, the event, the date, "2400" and the
+seeding (`flight_rng`).
 """
 
 from __future__ import annotations
@@ -195,6 +195,14 @@ def date_of(row: dict) -> tuple[str, str, str]:
     return row["YEAR"], row["MONTH"], row["DAY"]
 
 
+def flight_rng(seed: int, row: dict, view: str) -> random.Random:
+    """The one seeding rule: every synthetic draw for a view of a flight comes from the run seed, the flight's
+    full date, airline, number and origin, and the view's name. Two flights never share draws; the same
+    flight, seed and view always get the same ones."""
+    key = f"{seed}-{'-'.join(date_of(row))}-{row['AIRLINE']}{row['FLIGHT_NUMBER']}-{row['ORIGIN_AIRPORT']}-{view}"
+    return random.Random(key)
+
+
 def _check_one_date(day_rows: list[dict], focal_row: dict) -> None:
     """The one year filter: a world is built from the rows of the focal's full date only."""
     date = date_of(focal_row)
@@ -278,7 +286,7 @@ def _atc_view(day_rows: list[dict], focal_row: dict, seed: int, weather_cut: flo
                 )
             )
 
-    rng = random.Random(f"{seed}-{focal_row['AIRLINE']}{focal_row['FLIGHT_NUMBER']}")
+    rng = flight_rng(seed, focal_row, "atc")
     for h in hours:
         n_fill = round(real_per_hour[h] * (atc_config.FILLER_DEMAND_MULTIPLIER - 1))
         for i in range(n_fill):
@@ -373,12 +381,11 @@ def crew_report_time(row: dict, by_origin_day) -> str:
     return f"{rep // 60:02d}:{rep % 60:02d}"
 
 
-def derive_connections(row: dict, by_origin_day, seed: int) -> tuple[Connection, ...]:
+def derive_connections(row: dict, by_origin_day, rng: random.Random) -> tuple[Connection, ...]:
     """Same-airline departures from the destination 35-180 min after scheduled arrival (real flights),
     with a seeded connecting-passenger count. Undercounts: only delayed flights are in the data."""
     lo, hi = ASSUMPTIONS["connection_window_min"]
     arr = to_min(dot_to_hhmm(row["SCHEDULED_ARRIVAL"]))
-    rng = random.Random(f"{seed}-{row['AIRLINE']}{row['FLIGHT_NUMBER']}-{row['MONTH']}-{row['DAY']}")
     departures = by_origin_day.get((row["MONTH"], row["DAY"], row["DESTINATION_AIRPORT"]), [])
     same_airline = [r for r in departures if r["AIRLINE"] == row["AIRLINE"]]
     out = []
@@ -426,7 +433,7 @@ def _pilot_view(day_rows: list[dict], focal_row: dict, seed: int, airborne: bool
         alternate=nearest_alternate(row["DESTINATION_AIRPORT"]),
         crew_report=crew_report_time(row, by_origin_day),
         mct_min=mct,
-        connections=derive_connections(row, by_origin_day, seed),
+        connections=derive_connections(row, by_origin_day, flight_rng(seed, focal_row, "pilot")),
         seed=seed,
     )
 
@@ -487,7 +494,7 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
     # The synthetic gate occupancy and crew shift are anchored on when the event clears: the scheduled
     # arrival plus the reported delay minutes (the airport is backed up until then).
     event_end = sched_arr + magnitude
-    rng = random.Random(seed)
+    rng = flight_rng(seed, focal_row, "ground")
 
     nxt = [
         hhmm_to_min(r["SCHEDULED_DEPARTURE"])
@@ -542,7 +549,7 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
             "announce time": "synthetic (60 min before the disrupted arrival)",
             "next departure": next_src,
             "gate count, min turnaround, spare gates, crew shift, gate-change notice": LIMITS_SOURCE,
-            "gate occupancy, scheduled gate, crew shift start, connections": f"synthetic (seed {seed}), "
+            "gate occupancy, scheduled gate, crew shift start, connections": f"synthetic (seed {seed}, keyed per flight), "
             "anchored on scheduled arrival + reported delay",
         },
     )
