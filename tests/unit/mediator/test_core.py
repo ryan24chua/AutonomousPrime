@@ -126,7 +126,7 @@ def test_every_log_line_is_versioned_and_vote_flags_reach_the_log():
         path = Path(d) / "l.jsonl"
         asyncio.run(run_negotiation(agents, lambda q: CheckResult(True, []), lambda q: 1000.0, Log(path, "T")))
         lines = [json.loads(line) for line in path.read_text().splitlines()]
-    assert lines and all(line["schema"] == LOG_SCHEMA_VERSION == "consensus-log/1.1" for line in lines)
+    assert lines and all(line["schema"] == LOG_SCHEMA_VERSION == "consensus-log/1.2" for line in lines)
     votes = next(line for line in lines if line["step"] == "votes")["votes"]
     assert votes["pilot"]["flags"] == ["MINIMUM_FUEL"] and votes["atc"]["flags"] == []
 

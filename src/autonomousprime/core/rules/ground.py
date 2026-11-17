@@ -1,7 +1,7 @@
 """Ground's rules, read off `check_ground` (the arithmetic stays in agents/ground/checker.py).
 
-Ground checks a plan only when it names a gate. A plan without one is C-GATE-1's to refuse ("no gate in
-plan") and the other Ground rules stay silent, as before the registry.
+Ground checks a plan only when it names a gate. A plan without one is refused by C-PLAN-1 (core/rules/plan.py)
+and Ground's rules stay silent.
 """
 
 from autonomousprime.agents.ground.checker import check_ground
@@ -20,7 +20,7 @@ def _violation(rule_id: str):
     def check(ctx: RuleContext) -> str | None:
         g = _ground(ctx)
         if g is None:
-            return "no gate in plan" if rule_id == "C-GATE-1" else None
+            return None
         return next((v.message for v in g.violations if v.rule_id == rule_id), None)
 
     return check

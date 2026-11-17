@@ -249,11 +249,11 @@ Limits are one frozen settings object, `contracts.LIMITS`, validated at construc
 | `word_tolerance` | 5 | Extra words `validate_ranges` allows; ATC's validator allows none |
 | `max_attempts` | 2 | Calls for one turn: ask, then re-ask once on a malformed reply |
 
-Every line of the consensus log carries `"schema": "consensus-log/1.1"` (`contracts.LOG_SCHEMA_VERSION`), besides `ts`, `negotiation_id`, `round` and `step`. Version 1.1 added that key and `flags` on each round-3 vote: `votes.<agent> = {accept, reason, flags}`, where `flags` is the list of flags the agent sent with its vote (empty in a dry run).
+Every line of the consensus log carries `"schema": "consensus-log/1.2"` (`contracts.LOG_SCHEMA_VERSION`), besides `ts`, `negotiation_id`, `round` and `step`. Version 1.1 added that key and `flags` on each round-3 vote: `votes.<agent> = {accept, reason, flags}`, where `flags` is the list of flags the agent sent with its vote (empty in a dry run). Version 1.2 gave a plan without a gate its own violation id, `C-PLAN-1`; before, it was reported as `C-GATE-1`, Ground's gate-availability rule. Logs written under 1.1 keep the old id.
 
 ## 6. Safety rules
 
-Every rule is code. A plan that breaks a hard rule is removed before it is priced ([ADR-002](adr/0002-safety-as-filter-not-cost.md)). Limits come from `data/raw/challenge2/challenge-2-operational-constraints.xlsx`; the code is the registry. [rule-registry.md](hackathon/atc-agent-spec/agent-contract/rule-registry.md) is the archived build-day design, kept for provenance.
+Every rule is code. A plan that breaks a hard rule is removed before it is priced ([ADR-002](adr/0002-safety-as-filter-not-cost.md)). Limits come from `data/raw/challenge2/challenge-2-operational-constraints.xlsx`; the registry is `src/autonomousprime/core/rules/` (one registration per id, one fixed order). [rule-registry.md](hackathon/atc-agent-spec/agent-contract/rule-registry.md) is the archived build-day design, kept for provenance.
 
 | Rule | Limit | Type | Checked by |
 |---|---|---|---|
@@ -261,6 +261,7 @@ Every rule is code. A plan that breaks a hard rule is removed before it is price
 | `C-WAKE-1` / `C-SEP-1` | Spacing between landings by wake class | hard | ATC (built into the menu's landing times) |
 | `C-FUEL-1` | Holding ≤ fuel available before the must-divert point; the 30-min final reserve is never used | hard | Pilot |
 | `C-CREW-2` | Flight crew duty ≤ 13 h | hard | Pilot |
+| `C-PLAN-1` | Every plan names a gate (checked before Ground's rules, which only run on a plan with a gate) | hard | Mediator (`core/rules`) |
 | `C-GATE-1` | Gate free within 30 min of landing for the full turnaround | hard | Ground |
 | `C-GATE-2` | Gate change needs ≥ 20 min notice | hard | Ground |
 | `C-TURN-1` | Turnaround ≥ airport minimum | hard | Ground |

@@ -123,7 +123,7 @@ def write_results(summary: dict, recs: list[dict]) -> Path:
     )
     w(
         f"| Explicit constraint checking in code (brief, rubric 25%) | Met | `core.rules.check`: C-CAP-1, C-FUEL-1, C-CREW-2, "
-        f"C-GATE-1/2, C-TURN-1; {A['unsafe_candidates_caught']} unsafe plans caught |"
+        f"C-PLAN-1, C-GATE-1/2, C-TURN-1; {A['unsafe_candidates_caught']} unsafe plans caught |"
     )
     w(
         "| Traceable consensus log (brief) | Met | JSONL per run + plain-English decision record (`mediator/report.py`) |"

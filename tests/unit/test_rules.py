@@ -43,6 +43,7 @@ def test_kinds_and_owners():
     assert by_id["C-CREW-1"].kind == "soft"
     assert all(r.kind == "hard" for i, r in by_id.items() if i != "C-CREW-1")
     assert by_id["C-CAP-1"].owner == "atc"
+    assert by_id["C-PLAN-1"].owner == "mediator"
     assert by_id["C-FUEL-1"].owner == by_id["C-CREW-2"].owner == "pilot"
     assert {by_id[i].owner for i in ("C-TURN-1", "C-GATE-1", "C-GATE-2", "C-CREW-1")} == {"ground"}
 
@@ -133,8 +134,8 @@ def test_check_reports_violations_in_the_documented_order(monkeypatch):
 def test_a_plan_without_a_gate_skips_the_other_ground_rules(monkeypatch):
     _all_failing(monkeypatch)
     res = rules.check(_scenario(), _plan(gate=None))
-    assert [v.split(":")[0] for v in res.violations] == ["C-CAP-1", "C-FUEL-1", "C-CREW-2", "C-GATE-1"]
-    assert res.violations[-1] == "C-GATE-1: no gate in plan"
+    assert [v.split(":")[0] for v in res.violations] == ["C-CAP-1", "C-FUEL-1", "C-CREW-2", "C-PLAN-1"]
+    assert res.violations[-1] == "C-PLAN-1: no gate in plan"
 
 
 def test_a_passing_plan_is_valid_and_soft_rules_never_filter(monkeypatch):

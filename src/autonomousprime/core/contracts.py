@@ -42,7 +42,7 @@ class MessageLimits:
 LIMITS = MessageLimits()
 
 # Version of every consensus-log line (docs/architecture.md section 5). Bump on any change to a line's shape.
-LOG_SCHEMA_VERSION = "consensus-log/1.1"
+LOG_SCHEMA_VERSION = "consensus-log/1.2"
 
 AgentName = Literal["atc", "pilot", "ground"]
 Action = Literal["propose", "accept", "counter", "reject"]
