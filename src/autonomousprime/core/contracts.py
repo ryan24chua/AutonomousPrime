@@ -41,6 +41,9 @@ class MessageLimits:
 
 LIMITS = MessageLimits()
 
+# Version of every consensus-log line (docs/architecture.md section 5). Bump on any change to a line's shape.
+LOG_SCHEMA_VERSION = "consensus-log/1.1"
+
 AgentName = Literal["atc", "pilot", "ground"]
 Action = Literal["propose", "accept", "counter", "reject"]
 Flag = Literal[
@@ -134,6 +137,7 @@ class ScoredPlan:
 class Vote:
     accept: bool
     reason: str
+    flags: tuple[str, ...] = ()  # the agent's flags when it votes; empty in a dry run
 
 
 @dataclass(frozen=True)

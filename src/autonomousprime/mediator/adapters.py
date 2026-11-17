@@ -232,12 +232,12 @@ class LaneAgent:
                 "total_system_delay_min": opt.total_system_delay_min if opt else None,
             }
             msg = await asyncio.to_thread(self.agent.respond, 3, table, table["check"], [])
-            return Vote(msg.get("action") == "accept", msg.get("reason", ""))
+            return Vote(msg.get("action") == "accept", msg.get("reason", ""), tuple(msg.get("flags") or ()))
         if self.name == "pilot":
             msg = await self.agent.respond(self.s.pilot_inputs, plan_id, p, check_plan(self.s, plan).__dict__, [], 3)
-            return Vote(msg.action == "accept", msg.reason)
+            return Vote(msg.action == "accept", msg.reason, tuple(msg.flags))
         chk = check_ground(p, self.s.ground_state)
         if self.agent is None:  # dry run: Ground accepts any plan passing its hard rules
             return Vote(chk.valid, "Passes Ground hard rules." if chk.valid else "Fails Ground hard rules.")
         msg = await self.agent.respond(self.s.ground_state, 3, plan_id, p, chk, [])
-        return Vote(msg.action == "accept", msg.reason)
+        return Vote(msg.action == "accept", msg.reason, tuple(msg.flags))

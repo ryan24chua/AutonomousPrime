@@ -65,7 +65,7 @@ def test_agent_message_roundtrip(with_plan, with_icap):
 def test_dataclass_roundtrips():
     for obj in (
         ScoredPlan({"arrival_slot": "14:30"}, 0.8, "why"),
-        Vote(True, "ok"),
+        Vote(True, "ok", ("DUTY_LIMIT",)),
         CheckResult(False, ["C-FUEL-1: short"]),
     ):
         assert type(obj)(**asdict(obj)) == obj

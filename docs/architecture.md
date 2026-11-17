@@ -204,6 +204,7 @@ classDiagram
     class Vote {
         +accept: bool
         +reason: str
+        +flags: tuple~str~
     }
     class Candidate {
         +plan_id: str
@@ -222,7 +223,7 @@ classDiagram
     Candidate --> "0..1" CheckResult : check
 ```
 
-*`LaneAgent` (`src/autonomousprime/mediator/adapters.py`) wraps each lane's own code and Claude agent. Score dictionaries on `Candidate` are left out.*
+*These types, `AgentMessage` and the message limits are defined once, in `src/autonomousprime/core/contracts.py`. `LaneAgent` (`src/autonomousprime/mediator/adapters.py`) wraps each lane's own code and Claude agent. Score dictionaries on `Candidate` are left out.*
 
 A plan has the same six fields everywhere:
 
@@ -234,6 +235,21 @@ A plan has the same six fields everywhere:
 | `extra_fuel_min` | int | Pilot | Extra holding fuel loaded before departure |
 | `gate` | str | Ground | Arrival gate |
 | `divert` | bool | Pilot | Divert to the alternate airport |
+
+### Agent message, limits and log line
+
+`AgentMessage` (`core/contracts.py`) is what a Pilot or Ground agent returns; ATC's dict is checked by `agents/atc/validate.py` against the same shape. Fields: `from` (`atc`, `pilot` or `ground`), `round`, `action` (`propose`, `accept`, `counter`, `reject`), `plan_id`, `plan` (the six fields above), `need`, `offer`, `reason`, `flags` and an optional `icap` brief.
+
+Limits are one frozen settings object, `contracts.LIMITS`, validated at construction (positive integers; tolerance ≥ 0):
+
+| Setting | Value | Meaning |
+|---|---|---|
+| `need_words`, `offer_words` | 20 | Word limit for `need` and `offer` |
+| `reason_words` | 30 | Word limit for `reason` |
+| `word_tolerance` | 5 | Extra words `validate_ranges` allows; ATC's validator allows none |
+| `max_attempts` | 2 | Calls for one turn: ask, then re-ask once on a malformed reply |
+
+Every line of the consensus log carries `"schema": "consensus-log/1.1"` (`contracts.LOG_SCHEMA_VERSION`), besides `ts`, `negotiation_id`, `round` and `step`. Version 1.1 added that key and `flags` on each round-3 vote: `votes.<agent> = {accept, reason, flags}`, where `flags` is the list of flags the agent sent with its vote (empty in a dry run).
 
 ## 6. Safety rules
 

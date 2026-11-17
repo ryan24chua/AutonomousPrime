@@ -1,16 +1,15 @@
 """Mediator core tests (pure code, no API). Run: .venv/bin/python -m tests.unit.mediator.test_core"""
 
 import asyncio
+import json
 import tempfile
 from pathlib import Path
 
+from autonomousprime.core.contracts import LOG_SCHEMA_VERSION, CheckResult, ScoredPlan, Vote
 from autonomousprime.mediator.core import (
     SCORE_FLOOR,
     Candidate,
-    CheckResult,
     Log,
-    ScoredPlan,
-    Vote,
     merge_duplicates,
     nash_pick,
     run_negotiation,
@@ -63,8 +62,8 @@ def test_nash_cost_factor_and_floor():
 
 
 class FakeAgent:
-    def __init__(self, name, plans, accept=True):
-        self.name, self.plans, self.accept = name, plans, accept
+    def __init__(self, name, plans, accept=True, flags=()):
+        self.name, self.plans, self.accept, self.flags = name, plans, accept, flags
 
     async def propose(self):
         return [ScoredPlan(p, s, f"{self.name} likes it") for p, s in self.plans]
@@ -83,7 +82,7 @@ class FakeAgent:
         }
 
     async def vote(self, plan_id, p):
-        return Vote(self.accept, "ok" if self.accept else "no")
+        return Vote(self.accept, "ok" if self.accept else "no", self.flags)
 
 
 def _run(agents, invalid_slots=()):
@@ -116,6 +115,20 @@ def test_any_reject_means_no_consensus():
 def test_no_valid_plan():
     agents = {n: FakeAgent(n, [(plan("20:00"), 1.0)]) for n in ("atc", "pilot", "ground")}
     assert _run(agents, invalid_slots={"20:00"}).outcome == "no_valid_plan"
+
+
+def test_every_log_line_is_versioned_and_vote_flags_reach_the_log():
+    p = plan("20:10")
+    agents = {
+        n: FakeAgent(n, [(p, 1.0)], flags=("MINIMUM_FUEL",) if n == "pilot" else ()) for n in ("atc", "pilot", "ground")
+    }
+    with tempfile.TemporaryDirectory() as d:
+        path = Path(d) / "l.jsonl"
+        asyncio.run(run_negotiation(agents, lambda q: CheckResult(True, []), lambda q: 1000.0, Log(path, "T")))
+        lines = [json.loads(line) for line in path.read_text().splitlines()]
+    assert lines and all(line["schema"] == LOG_SCHEMA_VERSION == "consensus-log/1.1" for line in lines)
+    votes = next(line for line in lines if line["step"] == "votes")["votes"]
+    assert votes["pilot"]["flags"] == ["MINIMUM_FUEL"] and votes["atc"]["flags"] == []
 
 
 if __name__ == "__main__":

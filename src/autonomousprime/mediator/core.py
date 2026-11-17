@@ -18,7 +18,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Callable, Protocol
 
-from autonomousprime.core.contracts import CheckResult, ScoredPlan, Vote
+from autonomousprime.core.contracts import LOG_SCHEMA_VERSION, CheckResult, ScoredPlan, Vote
 
 AGENTS = ("atc", "pilot", "ground")
 PLANS_PER_AGENT = 10
@@ -122,6 +122,7 @@ class Log:
 
     def write(self, round_: int, step: str, **data) -> None:
         line = {
+            "schema": LOG_SCHEMA_VERSION,
             "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "negotiation_id": self.negotiation_id,
             "round": round_,
@@ -224,7 +225,7 @@ async def run_negotiation(
 
     # ---- Round 3: accept / reject the picked plan
     r3 = await asyncio.gather(*(agents[a].vote(best.plan_id, best.plan) for a in names))
-    votes = {a: {"accept": v.accept, "reason": v.reason} for a, v in zip(names, r3)}
+    votes = {a: {"accept": v.accept, "reason": v.reason, "flags": list(v.flags)} for a, v in zip(names, r3)}
     log.write(3, "votes", plan_id=best.plan_id, votes=votes)
     final = check(best.plan)  # last safety check before anything leaves the mediator
     log.write(3, "final_check", plan_id=best.plan_id, valid=final.valid, violations=final.violations)

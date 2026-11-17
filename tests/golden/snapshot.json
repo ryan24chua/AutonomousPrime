@@ -1233,6 +1233,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "demo"
     },
@@ -1352,6 +1353,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -1470,6 +1472,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -1588,6 +1591,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -1605,6 +1609,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1624,6 +1629,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1644,6 +1650,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1664,6 +1671,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1683,6 +1691,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -1704,6 +1713,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -1725,6 +1735,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -1746,6 +1757,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -1768,6 +1780,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1788,6 +1801,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1808,6 +1822,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1827,6 +1842,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1846,6 +1862,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1865,6 +1882,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1884,6 +1902,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1903,6 +1922,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1922,6 +1942,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1941,6 +1962,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -1960,6 +1982,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -1981,6 +2004,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -2002,6 +2026,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -2021,6 +2046,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -2042,6 +2068,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -2061,6 +2088,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -2080,6 +2108,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -2090,6 +2119,7 @@
      "negotiation_id": "DFW-20150424-MQ3086",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 25,
      "valid": 17
@@ -2273,12 +2303,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DFW-20150424-MQ3086",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.375,
@@ -2296,6 +2328,7 @@
      "agent": "pilot",
      "negotiation_id": "DFW-20150424-MQ3086",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.375,
       "C10": 0.125,
@@ -2313,6 +2346,7 @@
      "agent": "ground",
      "negotiation_id": "DFW-20150424-MQ3086",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C10": 0.8,
@@ -2430,22 +2464,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -2453,6 +2492,7 @@
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -2470,6 +2510,7 @@
      },
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -2716,6 +2757,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/weather"
     },
@@ -2835,6 +2877,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -2953,6 +2996,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -3071,6 +3115,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -3090,6 +3135,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3111,6 +3157,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3132,6 +3179,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3153,6 +3201,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3172,6 +3221,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3192,6 +3242,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3211,6 +3262,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3231,6 +3283,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3250,6 +3303,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -3272,6 +3326,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3291,6 +3346,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3310,6 +3366,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3329,6 +3386,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3348,6 +3406,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3367,6 +3426,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3386,6 +3446,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3405,6 +3466,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3424,6 +3486,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3443,6 +3506,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -3451,6 +3515,7 @@
      "negotiation_id": "DFW-20150216-MQ3161",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 19,
      "valid": 18
@@ -3550,12 +3615,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DFW-20150216-MQ3161",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -3568,6 +3635,7 @@
      "agent": "pilot",
      "negotiation_id": "DFW-20150216-MQ3161",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -3580,6 +3648,7 @@
      "agent": "ground",
      "negotiation_id": "DFW-20150216-MQ3161",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 1.0,
@@ -3642,22 +3711,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DFW-20150216-MQ3161",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -3665,6 +3739,7 @@
      "negotiation_id": "DFW-20150216-MQ3161",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -3682,6 +3757,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -3928,6 +4004,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/weather"
     },
@@ -4047,6 +4124,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -4165,6 +4243,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -4283,6 +4362,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -4301,6 +4381,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4321,6 +4402,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4340,6 +4422,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4360,6 +4443,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4379,6 +4463,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4399,6 +4484,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4418,6 +4504,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4438,6 +4525,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4457,6 +4545,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -4479,6 +4568,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4499,6 +4589,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4519,6 +4610,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4539,6 +4631,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4559,6 +4652,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4578,6 +4672,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -4599,6 +4694,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -4620,6 +4716,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -4641,6 +4738,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -4660,6 +4758,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -4681,6 +4780,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -4691,6 +4791,7 @@
      "negotiation_id": "DFW-20150126-AA2349",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 14
@@ -4840,12 +4941,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DFW-20150126-AA2349",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C12": 0.333,
@@ -4861,6 +4964,7 @@
      "agent": "pilot",
      "negotiation_id": "DFW-20150126-AA2349",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C12": 0.5,
@@ -4876,6 +4980,7 @@
      "agent": "ground",
      "negotiation_id": "DFW-20150126-AA2349",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.2,
       "C12": 0.6,
@@ -4971,22 +5076,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DFW-20150126-AA2349",
      "plan_id": "C4",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -4994,6 +5104,7 @@
      "negotiation_id": "DFW-20150126-AA2349",
      "plan_id": "C4",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -5011,6 +5122,7 @@
      },
      "plan_id": "C4",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -5257,6 +5369,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/weather"
     },
@@ -5376,6 +5489,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -5494,6 +5608,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -5612,6 +5727,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -5630,6 +5746,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5650,6 +5767,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5670,6 +5788,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5690,6 +5809,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5709,6 +5829,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5729,6 +5850,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5748,6 +5870,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5769,6 +5892,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5789,6 +5913,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -5812,6 +5937,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5832,6 +5958,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5851,6 +5978,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5870,6 +5998,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5889,6 +6018,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5908,6 +6038,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -5929,6 +6060,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -5950,6 +6082,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -5969,6 +6102,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -5990,6 +6124,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -6000,6 +6135,7 @@
      "negotiation_id": "DFW-20150302-AA1176",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 19,
      "valid": 14
@@ -6127,12 +6263,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DFW-20150302-AA1176",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C11": 0.4,
@@ -6147,6 +6285,7 @@
      "agent": "pilot",
      "negotiation_id": "DFW-20150302-AA1176",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C11": 0.4,
@@ -6161,6 +6300,7 @@
      "agent": "ground",
      "negotiation_id": "DFW-20150302-AA1176",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C11": 0.75,
@@ -6245,22 +6385,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DFW-20150302-AA1176",
      "plan_id": "C2",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -6268,6 +6413,7 @@
      "negotiation_id": "DFW-20150302-AA1176",
      "plan_id": "C2",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -6285,6 +6431,7 @@
      },
      "plan_id": "C2",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -6531,6 +6678,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/weather"
     },
@@ -6650,6 +6798,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -6768,6 +6917,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -6886,6 +7036,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -6904,6 +7055,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -6923,6 +7075,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -6943,6 +7096,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -6962,6 +7116,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -6982,6 +7137,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7001,6 +7157,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7021,6 +7178,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7040,6 +7198,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7060,6 +7219,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7079,6 +7239,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -7100,6 +7261,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7119,6 +7281,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7138,6 +7301,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7157,6 +7321,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7176,6 +7341,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7195,6 +7361,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7214,6 +7381,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -7235,6 +7403,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7254,6 +7423,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -7275,6 +7445,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7294,6 +7465,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -7315,6 +7487,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7334,6 +7507,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -7355,6 +7529,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -7374,6 +7549,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -7384,6 +7560,7 @@
      "negotiation_id": "DFW-20150220-AA1131",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 25,
      "valid": 19
@@ -7527,12 +7704,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DFW-20150220-AA1131",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C16": 0.167,
@@ -7548,6 +7727,7 @@
      "agent": "pilot",
      "negotiation_id": "DFW-20150220-AA1131",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C16": 0.333,
@@ -7563,6 +7743,7 @@
      "agent": "ground",
      "negotiation_id": "DFW-20150220-AA1131",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C16": 1.0,
@@ -7658,22 +7839,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
      "plan_id": "C16",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -7681,6 +7867,7 @@
      "negotiation_id": "DFW-20150220-AA1131",
      "plan_id": "C16",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -7698,6 +7885,7 @@
      },
      "plan_id": "C16",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -7944,6 +8132,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/weather"
     },
@@ -8063,6 +8252,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -8181,6 +8371,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -8299,6 +8490,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -8318,6 +8510,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8338,6 +8531,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8358,6 +8552,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8378,6 +8573,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8398,6 +8594,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8418,6 +8615,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8437,6 +8635,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8456,6 +8655,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -8477,6 +8677,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -8499,6 +8700,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -8520,6 +8722,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8539,6 +8742,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8558,6 +8762,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8577,6 +8782,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8596,6 +8802,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8615,6 +8822,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -8636,6 +8844,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8655,6 +8864,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -8676,6 +8886,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8695,6 +8906,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -8716,6 +8928,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -8735,6 +8948,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -8745,6 +8959,7 @@
      "negotiation_id": "ORD-20151117-UA1195",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 22,
      "valid": 15
@@ -8930,12 +9145,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "ORD-20151117-UA1195",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C11": 0.375,
@@ -8953,6 +9170,7 @@
      "agent": "pilot",
      "negotiation_id": "ORD-20151117-UA1195",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.375,
       "C11": 0.875,
@@ -8970,6 +9188,7 @@
      "agent": "ground",
      "negotiation_id": "ORD-20151117-UA1195",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.625,
       "C11": 0.125,
@@ -9087,22 +9306,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "ORD-20151117-UA1195",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -9110,6 +9334,7 @@
      "negotiation_id": "ORD-20151117-UA1195",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -9127,6 +9352,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -9373,6 +9599,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/weather"
     },
@@ -9492,6 +9719,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -9610,6 +9838,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -9728,6 +9957,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -9746,6 +9976,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9766,6 +9997,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9785,6 +10017,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9805,6 +10038,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9824,6 +10058,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9844,6 +10079,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9863,6 +10099,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9883,6 +10120,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9902,6 +10140,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -9924,6 +10163,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9943,6 +10183,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9962,6 +10203,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -9981,6 +10223,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -10000,6 +10243,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -10019,6 +10263,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -10038,6 +10283,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -10059,6 +10305,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -10078,6 +10325,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -10099,6 +10347,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -10118,6 +10367,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -10139,6 +10389,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -10158,6 +10409,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -10179,6 +10431,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -10198,6 +10451,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -10208,6 +10462,7 @@
      "negotiation_id": "ORD-20150803-OO6213",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 24,
      "valid": 18
@@ -10351,12 +10606,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "ORD-20150803-OO6213",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 0.05,
@@ -10372,6 +10629,7 @@
      "agent": "pilot",
      "negotiation_id": "ORD-20150803-OO6213",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 0.167,
@@ -10387,6 +10645,7 @@
      "agent": "ground",
      "negotiation_id": "ORD-20150803-OO6213",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C15": 1.0,
@@ -10482,22 +10741,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan_id": "C19",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -10505,6 +10769,7 @@
      "negotiation_id": "ORD-20150803-OO6213",
      "plan_id": "C19",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -10522,6 +10787,7 @@
      },
      "plan_id": "C19",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -10768,6 +11034,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/weather"
     },
@@ -10887,6 +11154,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -11005,6 +11273,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -11123,6 +11392,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -11142,6 +11412,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11162,6 +11433,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11182,6 +11454,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11202,6 +11475,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11222,6 +11496,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11241,6 +11516,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11261,6 +11537,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11280,6 +11557,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11300,6 +11578,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11320,6 +11599,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -11341,6 +11621,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11360,6 +11641,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11379,6 +11661,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11398,6 +11681,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11417,6 +11701,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11436,6 +11721,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -11457,6 +11743,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -11478,6 +11765,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11497,6 +11785,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11516,6 +11805,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -11535,6 +11825,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -11545,6 +11836,7 @@
      "negotiation_id": "DFW-20150303-MQ3275",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 21,
      "valid": 17
@@ -11654,12 +11946,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DFW-20150303-MQ3275",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C14": 1.0,
@@ -11673,6 +11967,7 @@
      "agent": "pilot",
      "negotiation_id": "DFW-20150303-MQ3275",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C14": 1.0,
@@ -11686,6 +11981,7 @@
      "agent": "ground",
      "negotiation_id": "DFW-20150303-MQ3275",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C14": 1.0,
@@ -11759,22 +12055,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -11782,6 +12083,7 @@
      "negotiation_id": "DFW-20150303-MQ3275",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -11799,6 +12101,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -12045,6 +12348,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/weather"
     },
@@ -12164,6 +12468,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -12282,6 +12587,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -12400,6 +12706,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -12419,6 +12726,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12440,6 +12748,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12461,6 +12770,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12482,6 +12792,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12501,6 +12812,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12521,6 +12833,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12540,6 +12853,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -12562,6 +12876,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12581,6 +12896,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12601,6 +12917,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12620,6 +12937,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12639,6 +12957,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12658,6 +12977,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12677,6 +12997,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12696,6 +13017,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12715,6 +13037,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12734,6 +13057,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12753,6 +13077,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12772,6 +13097,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -12780,6 +13106,7 @@
      "negotiation_id": "DFW-20150812-AS662",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 19,
      "valid": 18
@@ -12915,12 +13242,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DFW-20150812-AS662",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C14": 1.0,
@@ -12935,6 +13264,7 @@
      "agent": "pilot",
      "negotiation_id": "DFW-20150812-AS662",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C14": 1.0,
@@ -12949,6 +13279,7 @@
      "agent": "ground",
      "negotiation_id": "DFW-20150812-AS662",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C14": 1.0,
@@ -13033,22 +13364,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DFW-20150812-AS662",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -13056,6 +13392,7 @@
      "negotiation_id": "DFW-20150812-AS662",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -13073,6 +13410,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -13315,6 +13653,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/late_aircraft"
     },
@@ -13434,6 +13773,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -13552,6 +13892,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -13670,6 +14011,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -13689,6 +14031,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13709,6 +14052,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13729,6 +14073,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13749,6 +14094,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13770,6 +14116,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13790,6 +14137,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13811,6 +14159,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13831,6 +14180,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -13854,6 +14204,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13874,6 +14225,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -13896,6 +14248,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13915,6 +14268,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13934,6 +14288,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13953,6 +14308,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -13972,6 +14328,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -13982,6 +14339,7 @@
      "negotiation_id": "ATL-20150706-DL760",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 15,
      "valid": 12
@@ -14119,12 +14477,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "ATL-20150706-DL760",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C11": 0.05,
@@ -14139,6 +14499,7 @@
      "agent": "pilot",
      "negotiation_id": "ATL-20150706-DL760",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.6,
       "C11": 0.05,
@@ -14153,6 +14514,7 @@
      "agent": "ground",
      "negotiation_id": "ATL-20150706-DL760",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.25,
       "C11": 0.75,
@@ -14237,22 +14599,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "ATL-20150706-DL760",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -14260,6 +14627,7 @@
      "negotiation_id": "ATL-20150706-DL760",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -14277,6 +14645,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -14519,6 +14888,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/late_aircraft"
     },
@@ -14638,6 +15008,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -14756,6 +15127,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -14874,6 +15246,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -14892,6 +15265,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -14912,6 +15286,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -14931,6 +15306,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -14951,6 +15327,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -14970,6 +15347,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -14991,6 +15369,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -15011,6 +15390,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -15032,6 +15412,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -15052,6 +15433,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -15075,6 +15457,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -15095,6 +15478,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -15115,6 +15499,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -15134,6 +15519,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -15153,6 +15539,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -15172,6 +15559,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -15193,6 +15581,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -15214,6 +15603,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -15224,6 +15614,7 @@
      "negotiation_id": "DFW-20150109-MQ2947",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 17,
      "valid": 13
@@ -15377,12 +15768,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DFW-20150109-MQ2947",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.167,
@@ -15398,6 +15791,7 @@
      "agent": "pilot",
      "negotiation_id": "DFW-20150109-MQ2947",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.333,
@@ -15413,6 +15807,7 @@
      "agent": "ground",
      "negotiation_id": "DFW-20150109-MQ2947",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C10": 1.0,
@@ -15508,22 +15903,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DFW-20150109-MQ2947",
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -15531,6 +15931,7 @@
      "negotiation_id": "DFW-20150109-MQ2947",
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -15548,6 +15949,7 @@
      },
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -15790,6 +16192,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/late_aircraft"
     },
@@ -15909,6 +16312,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -16027,6 +16431,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -16145,6 +16550,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -16164,6 +16570,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16185,6 +16592,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16205,6 +16613,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16226,6 +16635,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16245,6 +16655,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16265,6 +16676,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16284,6 +16696,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16304,6 +16717,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16323,6 +16737,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16343,6 +16758,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16362,6 +16778,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16381,6 +16798,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16400,6 +16818,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16419,6 +16838,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16438,6 +16858,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16457,6 +16878,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16476,6 +16898,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16495,6 +16918,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16514,6 +16938,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16533,6 +16958,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -16541,6 +16967,7 @@
      "negotiation_id": "DEN-20151228-WN576",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 20
@@ -16674,12 +17101,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DEN-20151228-WN576",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -16694,6 +17123,7 @@
      "agent": "pilot",
      "negotiation_id": "DEN-20151228-WN576",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -16708,6 +17138,7 @@
      "agent": "ground",
      "negotiation_id": "DEN-20151228-WN576",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -16792,22 +17223,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DEN-20151228-WN576",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -16815,6 +17251,7 @@
      "negotiation_id": "DEN-20151228-WN576",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -16832,6 +17269,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -17074,6 +17512,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/late_aircraft"
     },
@@ -17193,6 +17632,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -17311,6 +17751,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -17429,6 +17870,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -17447,6 +17889,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17467,6 +17910,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17487,6 +17931,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17507,6 +17952,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17527,6 +17973,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17547,6 +17994,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17568,6 +18016,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17588,6 +18037,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17609,6 +18059,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17629,6 +18080,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17648,6 +18100,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17668,6 +18121,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17687,6 +18141,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -17708,6 +18163,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17727,6 +18183,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -17748,6 +18205,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -17767,6 +18225,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -17777,6 +18236,7 @@
      "negotiation_id": "ORD-20151120-EV2848",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 17,
      "valid": 14
@@ -17908,12 +18368,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "ORD-20151120-EV2848",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C12": 0.2,
@@ -17928,6 +18390,7 @@
      "agent": "pilot",
      "negotiation_id": "ORD-20151120-EV2848",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C12": 0.2,
@@ -17942,6 +18405,7 @@
      "agent": "ground",
      "negotiation_id": "ORD-20151120-EV2848",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C12": 1.0,
@@ -18026,22 +18490,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "ORD-20151120-EV2848",
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -18049,6 +18518,7 @@
      "negotiation_id": "ORD-20151120-EV2848",
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -18066,6 +18536,7 @@
      },
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -18308,6 +18779,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/late_aircraft"
     },
@@ -18427,6 +18899,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -18545,6 +19018,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -18663,6 +19137,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -18682,6 +19157,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18703,6 +19179,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18723,6 +19200,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18744,6 +19222,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18763,6 +19242,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18783,6 +19263,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18802,6 +19283,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18822,6 +19304,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18841,6 +19324,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -18863,6 +19347,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18882,6 +19367,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18901,6 +19387,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18920,6 +19407,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18939,6 +19427,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18958,6 +19447,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18977,6 +19467,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -18996,6 +19487,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -19015,6 +19507,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -19034,6 +19527,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -19053,6 +19547,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -19061,6 +19556,7 @@
      "negotiation_id": "LAX-20150227-OO5173",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 19
@@ -19194,12 +19690,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "LAX-20150227-OO5173",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -19214,6 +19712,7 @@
      "agent": "pilot",
      "negotiation_id": "LAX-20150227-OO5173",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -19228,6 +19727,7 @@
      "agent": "ground",
      "negotiation_id": "LAX-20150227-OO5173",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -19312,22 +19812,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "LAX-20150227-OO5173",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -19335,6 +19840,7 @@
      "negotiation_id": "LAX-20150227-OO5173",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -19352,6 +19858,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -19594,6 +20101,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/late_aircraft"
     },
@@ -19713,6 +20221,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -19831,6 +20340,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -19949,6 +20459,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -19968,6 +20479,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -19989,6 +20501,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20009,6 +20522,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20030,6 +20544,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20049,6 +20564,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20069,6 +20585,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20088,6 +20605,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20108,6 +20626,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20127,6 +20646,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20147,6 +20667,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20166,6 +20687,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20185,6 +20707,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20204,6 +20727,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20223,6 +20747,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20242,6 +20767,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20261,6 +20787,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20280,6 +20807,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20299,6 +20827,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20318,6 +20847,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20337,6 +20867,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -20345,6 +20876,7 @@
      "negotiation_id": "ORD-20150614-MQ3420",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 20
@@ -20478,12 +21010,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "ORD-20150614-MQ3420",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -20498,6 +21032,7 @@
      "agent": "pilot",
      "negotiation_id": "ORD-20150614-MQ3420",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -20512,6 +21047,7 @@
      "agent": "ground",
      "negotiation_id": "ORD-20150614-MQ3420",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -20596,22 +21132,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "ORD-20150614-MQ3420",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -20619,6 +21160,7 @@
      "negotiation_id": "ORD-20150614-MQ3420",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -20636,6 +21178,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -20878,6 +21421,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/late_aircraft"
     },
@@ -20997,6 +21541,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -21115,6 +21660,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -21233,6 +21779,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -21251,6 +21798,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21271,6 +21819,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21290,6 +21839,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21310,6 +21860,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21329,6 +21880,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21350,6 +21902,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21370,6 +21923,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21391,6 +21945,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21411,6 +21966,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -21434,6 +21990,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21454,6 +22011,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21474,6 +22032,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21493,6 +22052,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21512,6 +22072,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -21531,6 +22092,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -21552,6 +22114,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -21573,6 +22136,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -21583,6 +22147,7 @@
      "negotiation_id": "LAX-20150104-OO2577",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 17,
      "valid": 13
@@ -21736,12 +22301,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "LAX-20150104-OO2577",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.167,
@@ -21757,6 +22324,7 @@
      "agent": "pilot",
      "negotiation_id": "LAX-20150104-OO2577",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.333,
@@ -21772,6 +22340,7 @@
      "agent": "ground",
      "negotiation_id": "LAX-20150104-OO2577",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C10": 0.8,
@@ -21867,22 +22436,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "LAX-20150104-OO2577",
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -21890,6 +22464,7 @@
      "negotiation_id": "LAX-20150104-OO2577",
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -21907,6 +22482,7 @@
      },
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -22149,6 +22725,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "large/late_aircraft"
     },
@@ -22268,6 +22845,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -22386,6 +22964,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -22504,6 +23083,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -22523,6 +23103,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22544,6 +23125,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22564,6 +23146,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22585,6 +23168,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22604,6 +23188,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22624,6 +23209,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22643,6 +23229,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22663,6 +23250,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22682,6 +23270,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22702,6 +23291,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22721,6 +23311,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22740,6 +23331,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22759,6 +23351,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22778,6 +23371,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22797,6 +23391,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22816,6 +23411,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22835,6 +23431,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22854,6 +23451,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22873,6 +23471,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22892,6 +23491,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -22900,6 +23500,7 @@
      "negotiation_id": "ORD-20151214-NK168",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 20
@@ -23033,12 +23634,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "ORD-20151214-NK168",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -23053,6 +23656,7 @@
      "agent": "pilot",
      "negotiation_id": "ORD-20151214-NK168",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -23067,6 +23671,7 @@
      "agent": "ground",
      "negotiation_id": "ORD-20151214-NK168",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -23151,22 +23756,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "ORD-20151214-NK168",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -23174,6 +23784,7 @@
      "negotiation_id": "ORD-20151214-NK168",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -23191,6 +23802,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -23433,6 +24045,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/weather"
     },
@@ -23552,6 +24165,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -23670,6 +24284,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -23788,6 +24403,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -23807,6 +24423,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -23828,6 +24445,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -23849,6 +24467,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -23869,6 +24488,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -23888,6 +24508,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -23908,6 +24529,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -23927,6 +24549,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -23947,6 +24570,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -23966,6 +24590,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -23989,6 +24614,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24008,6 +24634,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24027,6 +24654,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24046,6 +24674,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24065,6 +24694,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24084,6 +24714,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24103,6 +24734,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24122,6 +24754,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24141,6 +24774,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -24160,6 +24794,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -24170,6 +24805,7 @@
      "negotiation_id": "DAL-20151102-WN714",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 19,
      "valid": 17
@@ -24247,12 +24883,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DAL-20151102-WN714",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.5,
@@ -24264,6 +24902,7 @@
      "agent": "pilot",
      "negotiation_id": "DAL-20151102-WN714",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.5,
@@ -24275,6 +24914,7 @@
      "agent": "ground",
      "negotiation_id": "DAL-20151102-WN714",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 1.0,
@@ -24326,22 +24966,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -24349,6 +24994,7 @@
      "negotiation_id": "DAL-20151102-WN714",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -24366,6 +25012,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -24608,6 +25255,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/weather"
     },
@@ -24727,6 +25375,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -24845,6 +25494,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -24963,6 +25613,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -24982,6 +25633,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25003,6 +25655,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25023,6 +25676,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25043,6 +25697,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25062,6 +25717,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25082,6 +25738,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25101,6 +25758,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25121,6 +25779,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25140,6 +25799,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -25163,6 +25823,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25182,6 +25843,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25201,6 +25863,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25220,6 +25883,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25239,6 +25903,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25258,6 +25923,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25277,6 +25943,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25296,6 +25963,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25315,6 +25983,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25334,6 +26003,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -25353,6 +26023,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -25363,6 +26034,7 @@
      "negotiation_id": "MSP-20150816-UA672",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 18
@@ -25458,12 +26130,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "MSP-20150816-UA672",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -25476,6 +26150,7 @@
      "agent": "pilot",
      "negotiation_id": "MSP-20150816-UA672",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -25488,6 +26163,7 @@
      "agent": "ground",
      "negotiation_id": "MSP-20150816-UA672",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 1.0,
@@ -25550,22 +26226,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "MSP-20150816-UA672",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -25573,6 +26254,7 @@
      "negotiation_id": "MSP-20150816-UA672",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -25590,6 +26272,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -25832,6 +26515,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/weather"
     },
@@ -25951,6 +26635,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -26069,6 +26754,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -26187,6 +26873,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -26206,6 +26893,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26226,6 +26914,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26247,6 +26936,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26267,6 +26957,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26287,6 +26978,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26306,6 +26998,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26326,6 +27019,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26345,6 +27039,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26365,6 +27060,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26384,6 +27080,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -26405,6 +27102,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26424,6 +27122,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26443,6 +27142,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26462,6 +27162,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26481,6 +27182,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26500,6 +27202,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26519,6 +27222,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -26540,6 +27244,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26559,6 +27264,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -26580,6 +27286,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -26599,6 +27306,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -26609,6 +27317,7 @@
      "negotiation_id": "SEA-20150303-AA235",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 21,
      "valid": 17
@@ -26704,12 +27413,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "SEA-20150303-AA235",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -26722,6 +27433,7 @@
      "agent": "pilot",
      "negotiation_id": "SEA-20150303-AA235",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.05,
@@ -26734,6 +27446,7 @@
      "agent": "ground",
      "negotiation_id": "SEA-20150303-AA235",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 1.0,
@@ -26796,22 +27509,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -26819,6 +27537,7 @@
      "negotiation_id": "SEA-20150303-AA235",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -26836,6 +27555,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -27078,6 +27798,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/weather"
     },
@@ -27197,6 +27918,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -27315,6 +28037,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -27433,6 +28156,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -27452,6 +28176,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27473,6 +28198,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27493,6 +28219,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27513,6 +28240,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27532,6 +28260,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27552,6 +28281,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27571,6 +28301,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27591,6 +28322,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27610,6 +28342,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -27633,6 +28366,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27652,6 +28386,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27671,6 +28406,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27690,6 +28426,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27709,6 +28446,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27728,6 +28466,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27747,6 +28486,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27766,6 +28506,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27785,6 +28526,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27804,6 +28546,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -27823,6 +28566,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -27833,6 +28577,7 @@
      "negotiation_id": "FLL-20150818-B61315",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 18
@@ -27928,12 +28673,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "FLL-20150818-B61315",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -27946,6 +28693,7 @@
      "agent": "pilot",
      "negotiation_id": "FLL-20150818-B61315",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -27958,6 +28706,7 @@
      "agent": "ground",
      "negotiation_id": "FLL-20150818-B61315",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 1.0,
@@ -28020,22 +28769,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -28043,6 +28797,7 @@
      "negotiation_id": "FLL-20150818-B61315",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -28060,6 +28815,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -28302,6 +29058,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/weather"
     },
@@ -28421,6 +29178,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -28539,6 +29297,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -28657,6 +29416,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -28676,6 +29436,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28697,6 +29458,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28718,6 +29480,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28738,6 +29501,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28757,6 +29521,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28777,6 +29542,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28796,6 +29562,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28816,6 +29583,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28835,6 +29603,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -28857,6 +29626,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28876,6 +29646,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28895,6 +29666,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28914,6 +29686,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28933,6 +29706,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28952,6 +29726,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28971,6 +29746,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -28990,6 +29766,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -29009,6 +29786,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -29028,6 +29806,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -29047,6 +29826,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -29055,6 +29835,7 @@
      "negotiation_id": "MDW-20150620-WN1509",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 19
@@ -29152,12 +29933,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "MDW-20150620-WN1509",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -29170,6 +29953,7 @@
      "agent": "pilot",
      "negotiation_id": "MDW-20150620-WN1509",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -29182,6 +29966,7 @@
      "agent": "ground",
      "negotiation_id": "MDW-20150620-WN1509",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.5,
@@ -29244,22 +30029,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "MDW-20150620-WN1509",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -29267,6 +30057,7 @@
      "negotiation_id": "MDW-20150620-WN1509",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -29284,6 +30075,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -29526,6 +30318,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/weather"
     },
@@ -29645,6 +30438,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -29763,6 +30557,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -29881,6 +30676,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -29900,6 +30696,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -29921,6 +30718,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -29942,6 +30740,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -29962,6 +30761,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -29982,6 +30782,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30002,6 +30803,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30021,6 +30823,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30041,6 +30844,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30060,6 +30864,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30080,6 +30885,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30099,6 +30905,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30118,6 +30925,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30137,6 +30945,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30156,6 +30965,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30175,6 +30985,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30194,6 +31005,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30213,6 +31025,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30232,6 +31045,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30251,6 +31065,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -30259,6 +31074,7 @@
      "negotiation_id": "CLT-20150106-US1821",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 19,
      "valid": 19
@@ -30356,12 +31172,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "CLT-20150106-US1821",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -30374,6 +31192,7 @@
      "agent": "pilot",
      "negotiation_id": "CLT-20150106-US1821",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.667,
@@ -30386,6 +31205,7 @@
      "agent": "ground",
      "negotiation_id": "CLT-20150106-US1821",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 1.0,
@@ -30448,22 +31268,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "CLT-20150106-US1821",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -30471,6 +31296,7 @@
      "negotiation_id": "CLT-20150106-US1821",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -30488,6 +31314,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -30730,6 +31557,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/weather"
     },
@@ -30849,6 +31677,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -30967,6 +31796,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -31085,6 +31915,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -31103,6 +31934,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31123,6 +31955,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31143,6 +31976,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31163,6 +31997,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31184,6 +32019,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31205,6 +32041,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31225,6 +32062,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31244,6 +32082,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31263,6 +32102,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -31284,6 +32124,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -31305,6 +32146,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31324,6 +32166,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31343,6 +32186,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31362,6 +32206,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31381,6 +32226,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -31402,6 +32248,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31421,6 +32268,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -31442,6 +32290,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31461,6 +32310,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -31482,6 +32332,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -31501,6 +32352,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -31511,6 +32363,7 @@
      "negotiation_id": "DTW-20150531-DL1683",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 21,
      "valid": 15
@@ -31664,12 +32517,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DTW-20150531-DL1683",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C14": 0.05,
@@ -31685,6 +32540,7 @@
      "agent": "pilot",
      "negotiation_id": "DTW-20150531-DL1683",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.333,
       "C14": 0.05,
@@ -31700,6 +32556,7 @@
      "agent": "ground",
      "negotiation_id": "DTW-20150531-DL1683",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C14": 0.75,
@@ -31795,22 +32652,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DTW-20150531-DL1683",
      "plan_id": "C5",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -31818,6 +32680,7 @@
      "negotiation_id": "DTW-20150531-DL1683",
      "plan_id": "C5",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -31835,6 +32698,7 @@
      },
      "plan_id": "C5",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -32077,6 +32941,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/weather"
     },
@@ -32196,6 +33061,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -32314,6 +33180,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -32432,6 +33299,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -32451,6 +33319,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32471,6 +33340,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32490,6 +33360,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32510,6 +33381,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32529,6 +33401,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32549,6 +33422,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32568,6 +33442,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32588,6 +33463,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32607,6 +33483,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32628,6 +33505,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32647,6 +33525,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32666,6 +33545,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32685,6 +33565,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32704,6 +33585,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32723,6 +33605,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32742,6 +33625,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32761,6 +33645,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32780,6 +33665,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32799,6 +33685,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -32818,6 +33705,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -32839,6 +33727,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -32860,6 +33749,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -32870,6 +33760,7 @@
      "negotiation_id": "LGA-20150327-WN2583",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 22,
      "valid": 19
@@ -33001,12 +33892,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "LGA-20150327-WN2583",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.05,
@@ -33021,6 +33914,7 @@
      "agent": "pilot",
      "negotiation_id": "LGA-20150327-WN2583",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.25,
@@ -33035,6 +33929,7 @@
      "agent": "ground",
      "negotiation_id": "LGA-20150327-WN2583",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.05,
@@ -33119,22 +34014,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -33142,6 +34042,7 @@
      "negotiation_id": "LGA-20150327-WN2583",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -33159,6 +34060,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -33401,6 +34303,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/late_aircraft"
     },
@@ -33520,6 +34423,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -33638,6 +34542,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -33756,6 +34661,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -33774,6 +34680,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33794,6 +34701,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33813,6 +34721,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33833,6 +34742,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33852,6 +34762,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33873,6 +34784,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33893,6 +34805,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33914,6 +34827,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33934,6 +34848,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33955,6 +34870,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33975,6 +34891,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -33995,6 +34912,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -34014,6 +34932,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -34033,6 +34952,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -34052,6 +34972,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -34073,6 +34994,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -34094,6 +35016,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -34104,6 +35027,7 @@
      "negotiation_id": "MDW-20150214-WN3790",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 17,
      "valid": 14
@@ -34257,12 +35181,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "MDW-20150214-WN3790",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.167,
@@ -34278,6 +35204,7 @@
      "agent": "pilot",
      "negotiation_id": "MDW-20150214-WN3790",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.333,
@@ -34293,6 +35220,7 @@
      "agent": "ground",
      "negotiation_id": "MDW-20150214-WN3790",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C10": 1.0,
@@ -34388,22 +35316,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "MDW-20150214-WN3790",
      "plan_id": "C2",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -34411,6 +35344,7 @@
      "negotiation_id": "MDW-20150214-WN3790",
      "plan_id": "C2",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -34428,6 +35362,7 @@
      },
      "plan_id": "C2",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -34670,6 +35605,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/late_aircraft"
     },
@@ -34789,6 +35725,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -34907,6 +35844,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -35025,6 +35963,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -35043,6 +35982,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35063,6 +36003,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35082,6 +36023,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35103,6 +36045,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35123,6 +36066,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35144,6 +36088,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35164,6 +36109,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35185,6 +36131,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35205,6 +36152,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35226,6 +36174,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35246,6 +36195,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35265,6 +36215,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35284,6 +36235,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35303,6 +36255,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -35322,6 +36275,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -35343,6 +36297,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -35353,6 +36308,7 @@
      "negotiation_id": "LGA-20150527-WN299",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 16,
      "valid": 14
@@ -35508,12 +36464,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "LGA-20150527-WN299",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.833,
@@ -35529,6 +36487,7 @@
      "agent": "pilot",
      "negotiation_id": "LGA-20150527-WN299",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.833,
@@ -35544,6 +36503,7 @@
      "agent": "ground",
      "negotiation_id": "LGA-20150527-WN299",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C2": 0.25,
@@ -35639,22 +36599,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "LGA-20150527-WN299",
      "plan_id": "C4",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -35662,6 +36627,7 @@
      "negotiation_id": "LGA-20150527-WN299",
      "plan_id": "C4",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -35679,6 +36645,7 @@
      },
      "plan_id": "C4",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -35921,6 +36888,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/late_aircraft"
     },
@@ -36040,6 +37008,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -36158,6 +37127,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -36276,6 +37246,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -36294,6 +37265,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36314,6 +37286,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36334,6 +37307,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36354,6 +37328,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36375,6 +37350,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36395,6 +37371,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36416,6 +37393,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36436,6 +37414,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36457,6 +37436,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36477,6 +37457,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36497,6 +37478,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36517,6 +37499,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36536,6 +37519,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -36555,6 +37539,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -36576,6 +37561,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -36586,6 +37572,7 @@
      "negotiation_id": "PHX-20150803-AA703",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 15,
      "valid": 13
@@ -36721,12 +37708,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "PHX-20150803-AA703",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.05,
@@ -36741,6 +37730,7 @@
      "agent": "pilot",
      "negotiation_id": "PHX-20150803-AA703",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.05,
@@ -36755,6 +37745,7 @@
      "agent": "ground",
      "negotiation_id": "PHX-20150803-AA703",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C10": 1.0,
@@ -36839,22 +37830,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "PHX-20150803-AA703",
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -36862,6 +37858,7 @@
      "negotiation_id": "PHX-20150803-AA703",
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -36879,6 +37876,7 @@
      },
      "plan_id": "C3",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -37121,6 +38119,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/late_aircraft"
     },
@@ -37240,6 +38239,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -37358,6 +38358,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -37476,6 +38477,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -37495,6 +38497,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37516,6 +38519,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37536,6 +38540,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37557,6 +38562,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37576,6 +38582,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37596,6 +38603,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37615,6 +38623,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37635,6 +38644,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37654,6 +38664,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -37676,6 +38687,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37695,6 +38707,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37714,6 +38727,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37733,6 +38747,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37752,6 +38767,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37771,6 +38787,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37790,6 +38807,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37809,6 +38827,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37828,6 +38847,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37847,6 +38867,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37866,6 +38887,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -37874,6 +38896,7 @@
      "negotiation_id": "BOS-20150213-US2002",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 20,
      "valid": 19
@@ -38007,12 +39030,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "BOS-20150213-US2002",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -38027,6 +39052,7 @@
      "agent": "pilot",
      "negotiation_id": "BOS-20150213-US2002",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -38041,6 +39067,7 @@
      "agent": "ground",
      "negotiation_id": "BOS-20150213-US2002",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C15": 1.0,
@@ -38125,22 +39152,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "BOS-20150213-US2002",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -38148,6 +39180,7 @@
      "negotiation_id": "BOS-20150213-US2002",
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -38165,6 +39198,7 @@
      },
      "plan_id": "C1",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -38407,6 +39441,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/late_aircraft"
     },
@@ -38526,6 +39561,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -38644,6 +39680,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -38762,6 +39799,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -38780,6 +39818,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38800,6 +39839,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38819,6 +39859,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38840,6 +39881,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38860,6 +39902,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38881,6 +39924,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38901,6 +39945,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38922,6 +39967,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38942,6 +39988,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38963,6 +40010,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -38983,6 +40031,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -39002,6 +40051,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -39021,6 +40071,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -39040,6 +40091,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -39059,6 +40111,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -39080,6 +40133,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -39090,6 +40144,7 @@
      "negotiation_id": "JFK-20150730-AA1312",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 16,
      "valid": 14
@@ -39245,12 +40300,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "JFK-20150730-AA1312",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.05,
@@ -39266,6 +40323,7 @@
      "agent": "pilot",
      "negotiation_id": "JFK-20150730-AA1312",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.333,
@@ -39281,6 +40339,7 @@
      "agent": "ground",
      "negotiation_id": "JFK-20150730-AA1312",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C10": 0.75,
@@ -39376,22 +40435,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "JFK-20150730-AA1312",
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -39399,6 +40463,7 @@
      "negotiation_id": "JFK-20150730-AA1312",
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -39416,6 +40481,7 @@
      },
      "plan_id": "C8",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -39658,6 +40724,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/late_aircraft"
     },
@@ -39777,6 +40844,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -39895,6 +40963,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -40013,6 +41082,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -40031,6 +41101,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40051,6 +41122,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40070,6 +41142,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40091,6 +41164,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40111,6 +41185,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40132,6 +41207,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40152,6 +41228,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40173,6 +41250,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40193,6 +41271,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -40216,6 +41295,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40236,6 +41316,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40255,6 +41336,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40274,6 +41356,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40293,6 +41376,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -40312,6 +41396,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -40333,6 +41418,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -40343,6 +41429,7 @@
      "negotiation_id": "SEA-20150614-OO6531",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 16,
      "valid": 13
@@ -40498,12 +41585,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "SEA-20150614-OO6531",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.833,
@@ -40519,6 +41608,7 @@
      "agent": "pilot",
      "negotiation_id": "SEA-20150614-OO6531",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.833,
@@ -40534,6 +41624,7 @@
      "agent": "ground",
      "negotiation_id": "SEA-20150614-OO6531",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C2": 0.25,
@@ -40629,22 +41720,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "SEA-20150614-OO6531",
      "plan_id": "C6",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -40652,6 +41748,7 @@
      "negotiation_id": "SEA-20150614-OO6531",
      "plan_id": "C6",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -40669,6 +41766,7 @@
      },
      "plan_id": "C6",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -40911,6 +42009,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/late_aircraft"
     },
@@ -41030,6 +42129,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -41148,6 +42248,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -41266,6 +42367,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -41284,6 +42386,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41304,6 +42407,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41323,6 +42427,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41344,6 +42449,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41364,6 +42470,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41385,6 +42492,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41405,6 +42513,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41426,6 +42535,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41446,6 +42556,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41467,6 +42578,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41487,6 +42599,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41506,6 +42619,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41525,6 +42639,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41544,6 +42659,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -41563,6 +42679,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -41584,6 +42701,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -41594,6 +42712,7 @@
      "negotiation_id": "BWI-20150531-DL1924",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 16,
      "valid": 14
@@ -41749,12 +42868,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "BWI-20150531-DL1924",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.833,
@@ -41770,6 +42891,7 @@
      "agent": "pilot",
      "negotiation_id": "BWI-20150531-DL1924",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C2": 0.833,
@@ -41785,6 +42907,7 @@
      "agent": "ground",
      "negotiation_id": "BWI-20150531-DL1924",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C2": 0.25,
@@ -41880,22 +43003,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "BWI-20150531-DL1924",
      "plan_id": "C6",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -41903,6 +43031,7 @@
      "negotiation_id": "BWI-20150531-DL1924",
      "plan_id": "C6",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -41920,6 +43049,7 @@
      },
      "plan_id": "C6",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
@@ -42162,6 +43292,7 @@
       "score_floor": 0.05,
       "shortlist_per_agent": 3
      },
+     "schema": "consensus-log/1.1",
      "step": "scenario",
      "stratum": "medium/late_aircraft"
     },
@@ -42281,6 +43412,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -42399,6 +43531,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -42517,6 +43650,7 @@
       }
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "proposals"
     },
     {
@@ -42535,6 +43669,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42555,6 +43690,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42574,6 +43710,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42594,6 +43731,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42613,6 +43751,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42633,6 +43772,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42652,6 +43792,7 @@
       "atc"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42673,6 +43814,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42693,6 +43835,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42714,6 +43857,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42734,6 +43878,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42754,6 +43899,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42774,6 +43920,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42793,6 +43940,7 @@
       "pilot"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": true,
      "violations": []
@@ -42812,6 +43960,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -42833,6 +43982,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -42854,6 +44004,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -42875,6 +44026,7 @@
       "ground"
      ],
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "check",
      "valid": false,
      "violations": [
@@ -42885,6 +44037,7 @@
      "negotiation_id": "DCA-20150127-WN3134",
      "received": 30,
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "filter",
      "unique": 18,
      "valid": 14
@@ -43036,12 +44189,14 @@
       }
      },
      "round": 1,
+     "schema": "consensus-log/1.1",
      "step": "shortlist"
     },
     {
      "agent": "atc",
      "negotiation_id": "DCA-20150127-WN3134",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.333,
@@ -43057,6 +44212,7 @@
      "agent": "pilot",
      "negotiation_id": "DCA-20150127-WN3134",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 1.0,
       "C10": 0.5,
@@ -43072,6 +44228,7 @@
      "agent": "ground",
      "negotiation_id": "DCA-20150127-WN3134",
      "round": 2,
+     "schema": "consensus-log/1.1",
      "scores": {
       "C1": 0.05,
       "C10": 1.0,
@@ -43167,22 +44324,27 @@
       }
      ],
      "round": 2,
+     "schema": "consensus-log/1.1",
      "step": "pick"
     },
     {
      "negotiation_id": "DCA-20150127-WN3134",
      "plan_id": "C10",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": false,
+       "flags": []
       },
       "ground": {
-       "accept": true
+       "accept": true,
+       "flags": []
       },
       "pilot": {
-       "accept": true
+       "accept": true,
+       "flags": []
       }
      }
     },
@@ -43190,6 +44352,7 @@
      "negotiation_id": "DCA-20150127-WN3134",
      "plan_id": "C10",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "final_check",
      "valid": true,
      "violations": []
@@ -43207,6 +44370,7 @@
      },
      "plan_id": "C10",
      "round": 3,
+     "schema": "consensus-log/1.1",
      "step": "outcome"
     }
    ],
