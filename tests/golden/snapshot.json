@@ -1,16 +1,21 @@
 {
  "console": {
   "AA1480_MCI_DFW_weather": {
-   "final_plan": null,
+   "final_plan": {
+    "arrival_slot": "18:22",
+    "divert": false,
+    "extra_fuel_min": 0,
+    "gate": "B20",
+    "ground_delay_min": 48,
+    "holding_min": 0
+   },
    "log": [
     {
      "agent": "atc",
      "checker": {
-      "cost": 12766.5,
-      "valid": false,
-      "violations": [
-       "C-GATE-1"
-      ]
+      "cost": 3046.0,
+      "valid": true,
+      "violations": []
      },
      "message": {
       "action": "propose",
@@ -19,7 +24,7 @@
        "arrival_slot": "18:26",
        "divert": false,
        "extra_fuel_min": 0,
-       "gate": "A12",
+       "gate": "B20",
        "ground_delay_min": 52,
        "holding_min": 0
       },
@@ -31,11 +36,9 @@
     {
      "agent": "pilot",
      "checker": {
-      "cost": 16188.5,
-      "valid": false,
-      "violations": [
-       "C-GATE-1"
-      ]
+      "cost": 4467.0,
+      "valid": true,
+      "violations": []
      },
      "message": {
       "action": "propose",
@@ -44,7 +47,7 @@
        "arrival_slot": "17:57",
        "divert": false,
        "extra_fuel_min": 0,
-       "gate": "A12",
+       "gate": "B20",
        "ground_delay_min": 23,
        "holding_min": 0
       },
@@ -52,10 +55,171 @@
      },
      "round": 1,
      "table_plan_id": null
+    },
+    {
+     "agent": "ground",
+     "checker": {
+      "cost": 4467.0,
+      "valid": true,
+      "violations": []
+     },
+     "message": {
+      "action": "propose",
+      "flags": [],
+      "plan": {
+       "arrival_slot": "17:57",
+       "divert": false,
+       "extra_fuel_min": 0,
+       "gate": "B20",
+       "ground_delay_min": 23,
+       "holding_min": 0
+      },
+      "plan_id": null
+     },
+     "round": 1,
+     "table_plan_id": null
+    },
+    {
+     "agent": "atc",
+     "checker": {
+      "cost": 3242.0,
+      "valid": true,
+      "violations": []
+     },
+     "message": {
+      "action": "score",
+      "flags": [],
+      "plan": {
+       "arrival_slot": "18:22",
+       "divert": false,
+       "extra_fuel_min": 0,
+       "gate": "B20",
+       "ground_delay_min": 48,
+       "holding_min": 0
+      },
+      "plan_id": "C4"
+     },
+     "round": 2,
+     "table_plan_id": "C4"
+    },
+    {
+     "agent": "pilot",
+     "checker": {
+      "cost": 3242.0,
+      "valid": true,
+      "violations": []
+     },
+     "message": {
+      "action": "score",
+      "flags": [],
+      "plan": {
+       "arrival_slot": "18:22",
+       "divert": false,
+       "extra_fuel_min": 0,
+       "gate": "B20",
+       "ground_delay_min": 48,
+       "holding_min": 0
+      },
+      "plan_id": "C4"
+     },
+     "round": 2,
+     "table_plan_id": "C4"
+    },
+    {
+     "agent": "ground",
+     "checker": {
+      "cost": 3242.0,
+      "valid": true,
+      "violations": []
+     },
+     "message": {
+      "action": "score",
+      "flags": [],
+      "plan": {
+       "arrival_slot": "18:22",
+       "divert": false,
+       "extra_fuel_min": 0,
+       "gate": "B20",
+       "ground_delay_min": 48,
+       "holding_min": 0
+      },
+      "plan_id": "C4"
+     },
+     "round": 2,
+     "table_plan_id": "C4"
+    },
+    {
+     "agent": "atc",
+     "checker": {
+      "cost": 3242.0,
+      "valid": true,
+      "violations": []
+     },
+     "message": {
+      "action": "accept",
+      "flags": [],
+      "plan": {
+       "arrival_slot": "18:22",
+       "divert": false,
+       "extra_fuel_min": 0,
+       "gate": "B20",
+       "ground_delay_min": 48,
+       "holding_min": 0
+      },
+      "plan_id": "C4"
+     },
+     "round": 3,
+     "table_plan_id": "C4"
+    },
+    {
+     "agent": "pilot",
+     "checker": {
+      "cost": 3242.0,
+      "valid": true,
+      "violations": []
+     },
+     "message": {
+      "action": "accept",
+      "flags": [],
+      "plan": {
+       "arrival_slot": "18:22",
+       "divert": false,
+       "extra_fuel_min": 0,
+       "gate": "B20",
+       "ground_delay_min": 48,
+       "holding_min": 0
+      },
+      "plan_id": "C4"
+     },
+     "round": 3,
+     "table_plan_id": "C4"
+    },
+    {
+     "agent": "ground",
+     "checker": {
+      "cost": 3242.0,
+      "valid": true,
+      "violations": []
+     },
+     "message": {
+      "action": "accept",
+      "flags": [],
+      "plan": {
+       "arrival_slot": "18:22",
+       "divert": false,
+       "extra_fuel_min": 0,
+       "gate": "B20",
+       "ground_delay_min": 48,
+       "holding_min": 0
+      },
+      "plan_id": "C4"
+     },
+     "round": 3,
+     "table_plan_id": "C4"
     }
    ],
-   "outcome": "recommend_cancel",
-   "rounds": 1,
+   "outcome": "consensus",
+   "rounds": 3,
    "world": {
     "date": "2015-04-24",
     "event": {
@@ -598,22 +762,20 @@
   },
   "OO6213_CVG_ORD_weather": {
    "final_plan": {
-    "arrival_slot": "08:40",
+    "arrival_slot": "08:05",
     "divert": false,
     "extra_fuel_min": 0,
     "gate": "B20",
-    "ground_delay_min": 35,
+    "ground_delay_min": 0,
     "holding_min": 0
    },
    "log": [
     {
      "agent": "atc",
      "checker": {
-      "cost": 7291.5,
-      "valid": false,
-      "violations": [
-       "C-GATE-1"
-      ]
+      "cost": 400.0,
+      "valid": true,
+      "violations": []
      },
      "message": {
       "action": "propose",
@@ -622,7 +784,7 @@
        "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
-       "gate": "A12",
+       "gate": "B20",
        "ground_delay_min": 0,
        "holding_min": 0
       },
@@ -634,11 +796,9 @@
     {
      "agent": "pilot",
      "checker": {
-      "cost": 7291.5,
-      "valid": false,
-      "violations": [
-       "C-GATE-1"
-      ]
+      "cost": 400.0,
+      "valid": true,
+      "violations": []
      },
      "message": {
       "action": "propose",
@@ -647,7 +807,7 @@
        "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
-       "gate": "A12",
+       "gate": "B20",
        "ground_delay_min": 0,
        "holding_min": 0
       },
@@ -659,7 +819,7 @@
     {
      "agent": "ground",
      "checker": {
-      "cost": 2115.0,
+      "cost": 400.0,
       "valid": true,
       "violations": []
      },
@@ -667,11 +827,11 @@
       "action": "propose",
       "flags": [],
       "plan": {
-       "arrival_slot": "08:40",
+       "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
        "gate": "B20",
-       "ground_delay_min": 35,
+       "ground_delay_min": 0,
        "holding_min": 0
       },
       "plan_id": null
@@ -682,7 +842,7 @@
     {
      "agent": "atc",
      "checker": {
-      "cost": 2115.0,
+      "cost": 400.0,
       "valid": true,
       "violations": []
      },
@@ -690,22 +850,22 @@
       "action": "score",
       "flags": [],
       "plan": {
-       "arrival_slot": "08:40",
+       "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
        "gate": "B20",
-       "ground_delay_min": 35,
+       "ground_delay_min": 0,
        "holding_min": 0
       },
-      "plan_id": "C12"
+      "plan_id": "C1"
      },
      "round": 2,
-     "table_plan_id": "C12"
+     "table_plan_id": "C1"
     },
     {
      "agent": "pilot",
      "checker": {
-      "cost": 2115.0,
+      "cost": 400.0,
       "valid": true,
       "violations": []
      },
@@ -713,22 +873,22 @@
       "action": "score",
       "flags": [],
       "plan": {
-       "arrival_slot": "08:40",
+       "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
        "gate": "B20",
-       "ground_delay_min": 35,
+       "ground_delay_min": 0,
        "holding_min": 0
       },
-      "plan_id": "C12"
+      "plan_id": "C1"
      },
      "round": 2,
-     "table_plan_id": "C12"
+     "table_plan_id": "C1"
     },
     {
      "agent": "ground",
      "checker": {
-      "cost": 2115.0,
+      "cost": 400.0,
       "valid": true,
       "violations": []
      },
@@ -736,45 +896,45 @@
       "action": "score",
       "flags": [],
       "plan": {
-       "arrival_slot": "08:40",
+       "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
        "gate": "B20",
-       "ground_delay_min": 35,
+       "ground_delay_min": 0,
        "holding_min": 0
       },
-      "plan_id": "C12"
+      "plan_id": "C1"
      },
      "round": 2,
-     "table_plan_id": "C12"
+     "table_plan_id": "C1"
     },
     {
      "agent": "atc",
      "checker": {
-      "cost": 2115.0,
+      "cost": 400.0,
       "valid": true,
       "violations": []
      },
      "message": {
-      "action": "reject",
+      "action": "accept",
       "flags": [],
       "plan": {
-       "arrival_slot": "08:40",
+       "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
        "gate": "B20",
-       "ground_delay_min": 35,
+       "ground_delay_min": 0,
        "holding_min": 0
       },
-      "plan_id": "C12"
+      "plan_id": "C1"
      },
      "round": 3,
-     "table_plan_id": "C12"
+     "table_plan_id": "C1"
     },
     {
      "agent": "pilot",
      "checker": {
-      "cost": 2115.0,
+      "cost": 400.0,
       "valid": true,
       "violations": []
      },
@@ -782,22 +942,22 @@
       "action": "accept",
       "flags": [],
       "plan": {
-       "arrival_slot": "08:40",
+       "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
        "gate": "B20",
-       "ground_delay_min": 35,
+       "ground_delay_min": 0,
        "holding_min": 0
       },
-      "plan_id": "C12"
+      "plan_id": "C1"
      },
      "round": 3,
-     "table_plan_id": "C12"
+     "table_plan_id": "C1"
     },
     {
      "agent": "ground",
      "checker": {
-      "cost": 2115.0,
+      "cost": 400.0,
       "valid": true,
       "violations": []
      },
@@ -805,20 +965,20 @@
       "action": "accept",
       "flags": [],
       "plan": {
-       "arrival_slot": "08:40",
+       "arrival_slot": "08:05",
        "divert": false,
        "extra_fuel_min": 0,
        "gate": "B20",
-       "ground_delay_min": 35,
+       "ground_delay_min": 0,
        "holding_min": 0
       },
-      "plan_id": "C12"
+      "plan_id": "C1"
      },
      "round": 3,
-     "table_plan_id": "C12"
+     "table_plan_id": "C1"
     }
    ],
-   "outcome": "halt_least_cost",
+   "outcome": "consensus",
    "rounds": 3,
    "world": {
     "date": "2015-08-03",
@@ -838,10 +998,8 @@
     "candidates": 24,
     "pick_unsafe": false,
     "pick_violations": [],
-    "unsafe_agent_favourites": [
-     "pilot"
-    ],
-    "unsafe_candidates": 16
+    "unsafe_agent_favourites": [],
+    "unsafe_candidates": 8
    },
    "ablation_extra_fuel": {
     "fuel_fail_as_shipped": 18,
@@ -854,7 +1012,7 @@
     "gate_only_cost": 15394.0
    },
    "b1_candidates": 144,
-   "b1_valid": 30,
+   "b1_valid": 57,
    "connecting_pax_pilot": 287,
    "dest": "DFW",
    "event": "weather",
@@ -953,26 +1111,26 @@
     },
     "NEG": {
      "co2_kg": 0,
-     "cost_usd": 11915.0,
+     "cost_usd": 14561.0,
      "crew_overtime_min": 0,
-     "focal_delay_min": 105,
+     "focal_delay_min": 51,
      "forced_divert": false,
      "fuel_margin_min": 18.3,
-     "full_cost_usd": 50115.0,
+     "full_cost_usd": 49561.0,
      "gate": "B20",
      "gate_changed": true,
      "gate_wait_min": 0,
-     "ground_delay_min": 105,
+     "ground_delay_min": 51,
      "holding_fuel_kg": 0,
      "holding_min": 0,
-     "knock_on_min": 65,
-     "pax_missed": 191,
+     "knock_on_min": 119,
+     "pax_missed": 175,
      "plan": {
-      "arrival_slot": "21:09",
+      "arrival_slot": "20:15",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 105,
+      "ground_delay_min": 51,
       "holding_min": 0
      },
      "system_delay_min": 170,
@@ -1009,43 +1167,15 @@
     },
     "ground_alone": {
      "co2_kg": 0,
-     "cost_usd": 12846.0,
+     "cost_usd": 15394.0,
      "crew_overtime_min": 0,
-     "focal_delay_min": 86,
-     "forced_divert": false,
-     "fuel_margin_min": 18.3,
-     "full_cost_usd": 47846.0,
-     "gate": "B20",
-     "gate_changed": true,
-     "gate_wait_min": 0,
-     "ground_delay_min": 86,
-     "holding_fuel_kg": 0,
-     "holding_min": 0,
-     "knock_on_min": 84,
-     "pax_missed": 175,
-     "plan": {
-      "arrival_slot": "20:50",
-      "divert": false,
-      "extra_fuel_min": 0,
-      "gate": "B20",
-      "ground_delay_min": 86,
-      "holding_min": 0
-     },
-     "system_delay_min": 170,
-     "valid": true,
-     "violations": []
-    },
-    "pilot_alone": {
-     "co2_kg": 0,
-     "cost_usd": 23527.5,
-     "crew_overtime_min": 38,
      "focal_delay_min": 36,
      "forced_divert": false,
      "fuel_margin_min": 18.3,
-     "full_cost_usd": 58527.5,
-     "gate": "A12",
-     "gate_changed": false,
-     "gate_wait_min": 108,
+     "full_cost_usd": 50394.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
      "ground_delay_min": 36,
      "holding_fuel_kg": 0,
      "holding_min": 0,
@@ -1055,15 +1185,41 @@
       "arrival_slot": "20:00",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 36,
       "holding_min": 0
      },
      "system_delay_min": 171,
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
+    },
+    "pilot_alone": {
+     "co2_kg": 0,
+     "cost_usd": 15394.0,
+     "crew_overtime_min": 0,
+     "focal_delay_min": 36,
+     "forced_divert": false,
+     "fuel_margin_min": 18.3,
+     "full_cost_usd": 50394.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
+     "ground_delay_min": 36,
+     "holding_fuel_kg": 0,
+     "holding_min": 0,
+     "knock_on_min": 135,
+     "pax_missed": 175,
+     "plan": {
+      "arrival_slot": "20:00",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 36,
+      "holding_min": 0
+     },
+     "system_delay_min": 171,
+     "valid": true,
+     "violations": []
     }
    },
    "magnitude_min": 126,
@@ -1122,7 +1278,7 @@
         "arrival_slot": "20:46",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 82,
         "holding_min": 0
        },
@@ -1133,7 +1289,7 @@
         "arrival_slot": "20:21",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 57,
         "holding_min": 0
        },
@@ -1144,7 +1300,7 @@
         "arrival_slot": "20:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 51,
         "holding_min": 0
        },
@@ -1155,7 +1311,7 @@
         "arrival_slot": "20:15",
         "divert": false,
         "extra_fuel_min": 6,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 51
        },
@@ -1166,7 +1322,7 @@
         "arrival_slot": "20:21",
         "divert": false,
         "extra_fuel_min": 12,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 57
        },
@@ -1177,7 +1333,7 @@
         "arrival_slot": "20:46",
         "divert": false,
         "extra_fuel_min": 37,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 82
        },
@@ -1207,7 +1363,7 @@
         "arrival_slot": "20:00",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 36,
         "holding_min": 0
        },
@@ -1218,7 +1374,7 @@
         "arrival_slot": "20:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 46,
         "holding_min": 0
        },
@@ -1229,7 +1385,7 @@
         "arrival_slot": "20:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 51,
         "holding_min": 0
        },
@@ -1240,7 +1396,7 @@
         "arrival_slot": "20:21",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 57,
         "holding_min": 0
        },
@@ -1251,7 +1407,7 @@
         "arrival_slot": "20:29",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 65,
         "holding_min": 0
        },
@@ -1262,7 +1418,7 @@
         "arrival_slot": "20:35",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 71,
         "holding_min": 0
        },
@@ -1273,7 +1429,7 @@
         "arrival_slot": "20:39",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 75,
         "holding_min": 0
        },
@@ -1284,7 +1440,7 @@
         "arrival_slot": "20:45",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 81,
         "holding_min": 0
        },
@@ -1295,7 +1451,7 @@
         "arrival_slot": "20:46",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 82,
         "holding_min": 0
        },
@@ -1322,111 +1478,111 @@
      "plans": [
       {
        "plan": {
-        "arrival_slot": "20:50",
+        "arrival_slot": "20:00",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B20",
-        "ground_delay_min": 86,
+        "ground_delay_min": 36,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:50",
+        "arrival_slot": "20:00",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "C12",
-        "ground_delay_min": 86,
+        "ground_delay_min": 36,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:50",
+        "arrival_slot": "20:00",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "C21",
-        "ground_delay_min": 86,
+        "ground_delay_min": 36,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:50",
+        "arrival_slot": "20:29",
         "divert": false,
-        "extra_fuel_min": 41,
+        "extra_fuel_min": 20,
         "gate": "B20",
         "ground_delay_min": 0,
-        "holding_min": 86
+        "holding_min": 65
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:50",
+        "arrival_slot": "20:29",
         "divert": false,
-        "extra_fuel_min": 41,
+        "extra_fuel_min": 20,
         "gate": "C12",
         "ground_delay_min": 0,
-        "holding_min": 86
+        "holding_min": 65
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:50",
+        "arrival_slot": "20:29",
         "divert": false,
-        "extra_fuel_min": 41,
+        "extra_fuel_min": 20,
         "gate": "C21",
         "ground_delay_min": 0,
-        "holding_min": 86
+        "holding_min": 65
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:56",
+        "arrival_slot": "20:35",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B20",
-        "ground_delay_min": 92,
+        "ground_delay_min": 71,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:56",
+        "arrival_slot": "20:35",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "C12",
-        "ground_delay_min": 92,
+        "ground_delay_min": 71,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:56",
+        "arrival_slot": "20:35",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "C21",
-        "ground_delay_min": 92,
+        "ground_delay_min": 71,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "20:56",
+        "arrival_slot": "20:35",
         "divert": false,
-        "extra_fuel_min": 47,
+        "extra_fuel_min": 26,
         "gate": "B20",
         "ground_delay_min": 0,
-        "holding_min": 92
+        "holding_min": 71
        },
        "score": 1.0
       }
@@ -1485,8 +1641,7 @@
      "plan_id": "C3",
      "proposed_by": [
       "atc",
-      "pilot",
-      "ground"
+      "pilot"
      ],
      "round": 1,
      "step": "check",
@@ -1499,7 +1654,7 @@
       "arrival_slot": "20:46",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 82,
       "holding_min": 0
      },
@@ -1510,10 +1665,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1521,7 +1674,7 @@
       "arrival_slot": "20:21",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 57,
       "holding_min": 0
      },
@@ -1532,10 +1685,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1543,7 +1694,7 @@
       "arrival_slot": "20:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 51,
       "holding_min": 0
      },
@@ -1554,10 +1705,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1565,7 +1714,7 @@
       "arrival_slot": "20:15",
       "divert": false,
       "extra_fuel_min": 6,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 51
      },
@@ -1577,8 +1726,7 @@
      "step": "check",
      "valid": false,
      "violations": [
-      "C-FUEL-1",
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
@@ -1587,7 +1735,7 @@
       "arrival_slot": "20:21",
       "divert": false,
       "extra_fuel_min": 12,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 57
      },
@@ -1599,8 +1747,7 @@
      "step": "check",
      "valid": false,
      "violations": [
-      "C-FUEL-1",
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
@@ -1609,7 +1756,7 @@
       "arrival_slot": "20:46",
       "divert": false,
       "extra_fuel_min": 37,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 82
      },
@@ -1621,8 +1768,7 @@
      "step": "check",
      "valid": false,
      "violations": [
-      "C-FUEL-1",
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
@@ -1637,8 +1783,7 @@
      },
      "plan_id": "C10",
      "proposed_by": [
-      "atc",
-      "ground"
+      "atc"
      ],
      "round": 1,
      "step": "check",
@@ -1653,20 +1798,19 @@
       "arrival_slot": "20:00",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 36,
       "holding_min": 0
      },
      "plan_id": "C11",
      "proposed_by": [
-      "pilot"
+      "pilot",
+      "ground"
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1674,7 +1818,7 @@
       "arrival_slot": "20:10",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 46,
       "holding_min": 0
      },
@@ -1684,10 +1828,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1695,7 +1837,7 @@
       "arrival_slot": "20:29",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 65,
       "holding_min": 0
      },
@@ -1705,10 +1847,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1716,20 +1856,19 @@
       "arrival_slot": "20:35",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 71,
       "holding_min": 0
      },
      "plan_id": "C14",
      "proposed_by": [
-      "pilot"
+      "pilot",
+      "ground"
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1737,7 +1876,7 @@
       "arrival_slot": "20:39",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 75,
       "holding_min": 0
      },
@@ -1747,10 +1886,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1758,7 +1895,7 @@
       "arrival_slot": "20:45",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 81,
       "holding_min": 0
      },
@@ -1768,19 +1905,17 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "20:50",
+      "arrival_slot": "20:00",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "C12",
-      "ground_delay_min": 86,
+      "ground_delay_min": 36,
       "holding_min": 0
      },
      "plan_id": "C17",
@@ -1795,11 +1930,11 @@
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "20:50",
+      "arrival_slot": "20:00",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "C21",
-      "ground_delay_min": 86,
+      "ground_delay_min": 36,
       "holding_min": 0
      },
      "plan_id": "C18",
@@ -1814,12 +1949,12 @@
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "20:50",
+      "arrival_slot": "20:29",
       "divert": false,
-      "extra_fuel_min": 41,
-      "gate": "C12",
+      "extra_fuel_min": 20,
+      "gate": "B20",
       "ground_delay_min": 0,
-      "holding_min": 86
+      "holding_min": 65
      },
      "plan_id": "C19",
      "proposed_by": [
@@ -1835,12 +1970,12 @@
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "20:50",
+      "arrival_slot": "20:29",
       "divert": false,
-      "extra_fuel_min": 41,
-      "gate": "C21",
+      "extra_fuel_min": 20,
+      "gate": "C12",
       "ground_delay_min": 0,
-      "holding_min": 86
+      "holding_min": 65
      },
      "plan_id": "C20",
      "proposed_by": [
@@ -1856,12 +1991,12 @@
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "20:56",
+      "arrival_slot": "20:29",
       "divert": false,
-      "extra_fuel_min": 0,
-      "gate": "B20",
-      "ground_delay_min": 92,
-      "holding_min": 0
+      "extra_fuel_min": 20,
+      "gate": "C21",
+      "ground_delay_min": 0,
+      "holding_min": 65
      },
      "plan_id": "C21",
      "proposed_by": [
@@ -1869,17 +2004,19 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": true,
-     "violations": []
+     "valid": false,
+     "violations": [
+      "C-FUEL-1"
+     ]
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "20:56",
+      "arrival_slot": "20:35",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "C12",
-      "ground_delay_min": 92,
+      "ground_delay_min": 71,
       "holding_min": 0
      },
      "plan_id": "C22",
@@ -1894,11 +2031,11 @@
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "20:56",
+      "arrival_slot": "20:35",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "C21",
-      "ground_delay_min": 92,
+      "ground_delay_min": 71,
       "holding_min": 0
      },
      "plan_id": "C23",
@@ -1913,12 +2050,12 @@
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "20:56",
+      "arrival_slot": "20:35",
       "divert": false,
-      "extra_fuel_min": 47,
+      "extra_fuel_min": 26,
       "gate": "B20",
       "ground_delay_min": 0,
-      "holding_min": 92
+      "holding_min": 71
      },
      "plan_id": "C24",
      "proposed_by": [
@@ -1937,7 +2074,7 @@
      "round": 1,
      "step": "filter",
      "unique": 24,
-     "valid": 8
+     "valid": 16
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
@@ -1945,8 +2082,11 @@
       "C1",
       "C2",
       "C3",
-      "C17",
-      "C18"
+      "C6",
+      "C11",
+      "C12",
+      "C14",
+      "C17"
      ],
      "plans": {
       "C1": {
@@ -1966,31 +2106,69 @@
         "atc": 1.0
        }
       },
-      "C17": {
-       "cost_usd": 12846.0,
+      "C11": {
+       "cost_usd": 15394.0,
        "plan": {
-        "arrival_slot": "20:50",
+        "arrival_slot": "20:00",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "C12",
-        "ground_delay_min": 86,
+        "gate": "B20",
+        "ground_delay_min": 36,
         "holding_min": 0
        },
        "proposed_by": [
+        "pilot",
         "ground"
        ],
        "r1_scores": {
-        "ground": 1.0
+        "ground": 1.0,
+        "pilot": 1.0
        }
       },
-      "C18": {
-       "cost_usd": 12846.0,
+      "C12": {
+       "cost_usd": 14904.0,
        "plan": {
-        "arrival_slot": "20:50",
+        "arrival_slot": "20:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "C21",
-        "ground_delay_min": 86,
+        "gate": "B20",
+        "ground_delay_min": 46,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "pilot"
+       ],
+       "r1_scores": {
+        "pilot": 0.889
+       }
+      },
+      "C14": {
+       "cost_usd": 13679.0,
+       "plan": {
+        "arrival_slot": "20:35",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 71,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "pilot",
+        "ground"
+       ],
+       "r1_scores": {
+        "ground": 1.0,
+        "pilot": 0.444
+       }
+      },
+      "C17": {
+       "cost_usd": 15394.0,
+       "plan": {
+        "arrival_slot": "20:00",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C12",
+        "ground_delay_min": 36,
         "holding_min": 0
        },
        "proposed_by": [
@@ -2029,13 +2207,30 @@
        },
        "proposed_by": [
         "atc",
-        "pilot",
-        "ground"
+        "pilot"
        ],
        "r1_scores": {
         "atc": 0.778,
-        "ground": 1.0,
         "pilot": 0.05
+       }
+      },
+      "C6": {
+       "cost_usd": 14561.0,
+       "plan": {
+        "arrival_slot": "20:15",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 51,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot"
+       ],
+       "r1_scores": {
+        "atc": 0.444,
+        "pilot": 0.778
        }
       }
      },
@@ -2048,10 +2243,13 @@
      "round": 2,
      "scores": {
       "C1": 1.0,
+      "C11": 0.05,
+      "C12": 0.167,
+      "C14": 0.333,
       "C17": 0.05,
-      "C18": 0.05,
-      "C2": 0.5,
-      "C3": 0.05
+      "C2": 0.833,
+      "C3": 0.667,
+      "C6": 0.5
      },
      "step": "scores"
     },
@@ -2061,10 +2259,13 @@
      "round": 2,
      "scores": {
       "C1": 0.05,
+      "C11": 1.0,
+      "C12": 0.833,
+      "C14": 0.5,
       "C17": 1.0,
-      "C18": 1.0,
-      "C2": 0.5,
-      "C3": 1.0
+      "C2": 0.167,
+      "C3": 0.333,
+      "C6": 0.667
      },
      "step": "scores"
     },
@@ -2074,39 +2275,82 @@
      "round": 2,
      "scores": {
       "C1": 0.05,
+      "C11": 1.0,
+      "C12": 1.0,
+      "C14": 1.0,
       "C17": 1.0,
-      "C18": 1.0,
       "C2": 1.0,
-      "C3": 1.0
+      "C3": 1.0,
+      "C6": 1.0
      },
      "step": "scores"
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
      "plan": {
-      "arrival_slot": "21:09",
+      "arrival_slot": "20:15",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 105,
+      "ground_delay_min": 51,
       "holding_min": 0
      },
-     "plan_id": "C2",
+     "plan_id": "C6",
      "ranking": [
       {
-       "cost_usd": 11915.0,
-       "plan_id": "C2",
-       "product": 0.23163,
+       "cost_usd": 14561.0,
+       "plan_id": "C6",
+       "product": 0.252845,
        "scores": {
         "atc": 0.5,
         "ground": 1.0,
-        "pilot": 0.5
+        "pilot": 0.667
        }
       },
       {
        "cost_usd": 12846.0,
        "plan_id": "C3",
-       "product": 0.042969,
+       "product": 0.190876,
+       "scores": {
+        "atc": 0.667,
+        "ground": 1.0,
+        "pilot": 0.333
+       }
+      },
+      {
+       "cost_usd": 13679.0,
+       "plan_id": "C14",
+       "product": 0.134372,
+       "scores": {
+        "atc": 0.333,
+        "ground": 1.0,
+        "pilot": 0.5
+       }
+      },
+      {
+       "cost_usd": 11915.0,
+       "plan_id": "C2",
+       "product": 0.128889,
+       "scores": {
+        "atc": 0.833,
+        "ground": 1.0,
+        "pilot": 0.167
+       }
+      },
+      {
+       "cost_usd": 14904.0,
+       "plan_id": "C12",
+       "product": 0.103041,
+       "scores": {
+        "atc": 0.167,
+        "ground": 1.0,
+        "pilot": 0.833
+       }
+      },
+      {
+       "cost_usd": 15394.0,
+       "plan_id": "C11",
+       "product": 0.035857,
        "scores": {
         "atc": 0.05,
         "ground": 1.0,
@@ -2114,19 +2358,9 @@
        }
       },
       {
-       "cost_usd": 12846.0,
+       "cost_usd": 15394.0,
        "plan_id": "C17",
-       "product": 0.042969,
-       "scores": {
-        "atc": 0.05,
-        "ground": 1.0,
-        "pilot": 1.0
-       }
-      },
-      {
-       "cost_usd": 12846.0,
-       "plan_id": "C18",
-       "product": 0.042969,
+       "product": 0.035857,
        "scores": {
         "atc": 0.05,
         "ground": 1.0,
@@ -2149,7 +2383,7 @@
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
-     "plan_id": "C2",
+     "plan_id": "C6",
      "round": 3,
      "step": "votes",
      "votes": {
@@ -2166,7 +2400,7 @@
     },
     {
      "negotiation_id": "DFW-20150424-MQ3086",
-     "plan_id": "C2",
+     "plan_id": "C6",
      "round": 3,
      "step": "final_check",
      "valid": true,
@@ -2176,14 +2410,14 @@
      "negotiation_id": "DFW-20150424-MQ3086",
      "outcome": "consensus",
      "plan": {
-      "arrival_slot": "21:09",
+      "arrival_slot": "20:15",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 105,
+      "ground_delay_min": 51,
       "holding_min": 0
      },
-     "plan_id": "C2",
+     "plan_id": "C6",
      "round": 3,
      "step": "outcome"
     }
@@ -5905,12 +6139,8 @@
     "candidates": 22,
     "pick_unsafe": false,
     "pick_violations": [],
-    "unsafe_agent_favourites": [
-     "atc",
-     "pilot",
-     "ground"
-    ],
-    "unsafe_candidates": 10
+    "unsafe_agent_favourites": [],
+    "unsafe_candidates": 4
    },
    "ablation_extra_fuel": {
     "fuel_fail_as_shipped": 15,
@@ -5923,7 +6153,7 @@
     "gate_only_cost": 449.0
    },
    "b1_candidates": 152,
-   "b1_valid": 68,
+   "b1_valid": 80,
    "connecting_pax_pilot": 0,
    "dest": "DFW",
    "event": "weather",
@@ -5993,131 +6223,71 @@
     },
     "B1": {
      "co2_kg": 0,
-     "cost_usd": 890.0,
+     "cost_usd": 449.0,
      "crew_overtime_min": 0,
-     "focal_delay_min": 10,
+     "focal_delay_min": 1,
      "forced_divert": false,
      "fuel_margin_min": 18.3,
-     "full_cost_usd": 890.0,
+     "full_cost_usd": 449.0,
      "gate": "B20",
      "gate_changed": true,
      "gate_wait_min": 0,
-     "ground_delay_min": 10,
+     "ground_delay_min": 1,
      "holding_fuel_kg": 0,
      "holding_min": 0,
      "knock_on_min": 0,
      "pax_missed": 0,
      "plan": {
-      "arrival_slot": "12:49",
+      "arrival_slot": "12:40",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 10,
+      "ground_delay_min": 1,
       "holding_min": 0
      },
-     "system_delay_min": 10,
+     "system_delay_min": 1,
      "valid": true,
      "violations": []
     },
     "NEG": {
      "co2_kg": 0,
-     "cost_usd": 890.0,
+     "cost_usd": 449.0,
      "crew_overtime_min": 0,
-     "focal_delay_min": 10,
+     "focal_delay_min": 1,
      "forced_divert": false,
      "fuel_margin_min": 18.3,
-     "full_cost_usd": 890.0,
+     "full_cost_usd": 449.0,
      "gate": "B20",
      "gate_changed": true,
      "gate_wait_min": 0,
-     "ground_delay_min": 10,
+     "ground_delay_min": 1,
      "holding_fuel_kg": 0,
      "holding_min": 0,
      "knock_on_min": 0,
      "pax_missed": 0,
      "plan": {
-      "arrival_slot": "12:49",
+      "arrival_slot": "12:40",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 10,
+      "ground_delay_min": 1,
       "holding_min": 0
      },
-     "system_delay_min": 10,
+     "system_delay_min": 1,
      "valid": true,
      "violations": []
     },
     "atc_alone": {
      "co2_kg": 0,
-     "cost_usd": 5684.5,
-     "crew_overtime_min": 38,
+     "cost_usd": 449.0,
+     "crew_overtime_min": 0,
      "focal_delay_min": 1,
      "forced_divert": false,
      "fuel_margin_min": 18.3,
-     "full_cost_usd": 5684.5,
-     "gate": "A12",
-     "gate_changed": false,
-     "gate_wait_min": 66,
-     "ground_delay_min": 1,
-     "holding_fuel_kg": 0,
-     "holding_min": 0,
-     "knock_on_min": 0,
-     "pax_missed": 0,
-     "plan": {
-      "arrival_slot": "12:40",
-      "divert": false,
-      "extra_fuel_min": 0,
-      "gate": "A12",
-      "ground_delay_min": 1,
-      "holding_min": 0
-     },
-     "system_delay_min": 1,
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
-    },
-    "ground_alone": {
-     "co2_kg": 2528,
-     "cost_usd": 2360.0,
-     "crew_overtime_min": 0,
-     "focal_delay_min": 20,
-     "forced_divert": false,
-     "fuel_margin_min": -1.7,
-     "full_cost_usd": 2360.0,
+     "full_cost_usd": 449.0,
      "gate": "B20",
      "gate_changed": true,
      "gate_wait_min": 0,
-     "ground_delay_min": 0,
-     "holding_fuel_kg": 800,
-     "holding_min": 20,
-     "knock_on_min": 0,
-     "pax_missed": 0,
-     "plan": {
-      "arrival_slot": "12:59",
-      "divert": false,
-      "extra_fuel_min": 0,
-      "gate": "B20",
-      "ground_delay_min": 0,
-      "holding_min": 20
-     },
-     "system_delay_min": 20,
-     "valid": false,
-     "violations": [
-      "C-FUEL-1"
-     ]
-    },
-    "pilot_alone": {
-     "co2_kg": 0,
-     "cost_usd": 5684.5,
-     "crew_overtime_min": 38,
-     "focal_delay_min": 1,
-     "forced_divert": false,
-     "fuel_margin_min": 18.3,
-     "full_cost_usd": 5684.5,
-     "gate": "A12",
-     "gate_changed": false,
-     "gate_wait_min": 66,
      "ground_delay_min": 1,
      "holding_fuel_kg": 0,
      "holding_min": 0,
@@ -6127,15 +6297,69 @@
       "arrival_slot": "12:40",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 1,
       "holding_min": 0
      },
      "system_delay_min": 1,
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
+    },
+    "ground_alone": {
+     "co2_kg": 0,
+     "cost_usd": 449.0,
+     "crew_overtime_min": 0,
+     "focal_delay_min": 1,
+     "forced_divert": false,
+     "fuel_margin_min": 18.3,
+     "full_cost_usd": 449.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
+     "ground_delay_min": 1,
+     "holding_fuel_kg": 0,
+     "holding_min": 0,
+     "knock_on_min": 0,
+     "pax_missed": 0,
+     "plan": {
+      "arrival_slot": "12:40",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "system_delay_min": 1,
+     "valid": true,
+     "violations": []
+    },
+    "pilot_alone": {
+     "co2_kg": 0,
+     "cost_usd": 449.0,
+     "crew_overtime_min": 0,
+     "focal_delay_min": 1,
+     "forced_divert": false,
+     "fuel_margin_min": 18.3,
+     "full_cost_usd": 449.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
+     "ground_delay_min": 1,
+     "holding_fuel_kg": 0,
+     "holding_min": 0,
+     "knock_on_min": 0,
+     "pax_missed": 0,
+     "plan": {
+      "arrival_slot": "12:40",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "system_delay_min": 1,
+     "valid": true,
+     "violations": []
     }
    },
    "magnitude_min": 49,
@@ -6161,7 +6385,7 @@
         "arrival_slot": "12:40",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 1,
         "holding_min": 0
        },
@@ -6172,7 +6396,7 @@
         "arrival_slot": "12:40",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 1
        },
@@ -6183,7 +6407,7 @@
         "arrival_slot": "12:44",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 5,
         "holding_min": 0
        },
@@ -6194,7 +6418,7 @@
         "arrival_slot": "12:44",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 5
        },
@@ -6279,7 +6503,7 @@
         "arrival_slot": "12:40",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 1,
         "holding_min": 0
        },
@@ -6290,7 +6514,7 @@
         "arrival_slot": "12:44",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 5,
         "holding_min": 0
        },
@@ -6394,6 +6618,39 @@
      "plans": [
       {
        "plan": {
+        "arrival_slot": "12:40",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "12:40",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C12",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "12:40",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C21",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
         "arrival_slot": "12:59",
         "divert": false,
         "extra_fuel_min": 0,
@@ -6466,39 +6723,6 @@
         "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 25
-       },
-       "score": 1.0
-      },
-      {
-       "plan": {
-        "arrival_slot": "13:04",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "C12",
-        "ground_delay_min": 0,
-        "holding_min": 25
-       },
-       "score": 1.0
-      },
-      {
-       "plan": {
-        "arrival_slot": "13:04",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "C21",
-        "ground_delay_min": 0,
-        "holding_min": 25
-       },
-       "score": 1.0
-      },
-      {
-       "plan": {
-        "arrival_slot": "12:49",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "B20",
-        "ground_delay_min": 10,
-        "holding_min": 0
        },
        "score": 1.0
       }
@@ -6512,21 +6736,20 @@
       "arrival_slot": "12:40",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 1,
       "holding_min": 0
      },
      "plan_id": "C1",
      "proposed_by": [
       "atc",
-      "pilot"
+      "pilot",
+      "ground"
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
@@ -6534,7 +6757,7 @@
       "arrival_slot": "12:40",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 1
      },
@@ -6544,10 +6767,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
@@ -6555,7 +6776,7 @@
       "arrival_slot": "12:44",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 5,
       "holding_min": 0
      },
@@ -6566,10 +6787,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
@@ -6577,7 +6796,7 @@
       "arrival_slot": "12:44",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 5
      },
@@ -6587,10 +6806,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
@@ -6605,8 +6822,7 @@
      "plan_id": "C5",
      "proposed_by": [
       "atc",
-      "pilot",
-      "ground"
+      "pilot"
      ],
      "round": 1,
      "step": "check",
@@ -6812,6 +7028,44 @@
     {
      "negotiation_id": "DFW-20150220-AA1131",
      "plan": {
+      "arrival_slot": "12:40",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "C12",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "plan_id": "C16",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150220-AA1131",
+     "plan": {
+      "arrival_slot": "12:40",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "C21",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "plan_id": "C17",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150220-AA1131",
+     "plan": {
       "arrival_slot": "12:59",
       "divert": false,
       "extra_fuel_min": 0,
@@ -6819,7 +7073,7 @@
       "ground_delay_min": 0,
       "holding_min": 20
      },
-     "plan_id": "C16",
+     "plan_id": "C18",
      "proposed_by": [
       "ground"
      ],
@@ -6840,7 +7094,7 @@
       "ground_delay_min": 0,
       "holding_min": 20
      },
-     "plan_id": "C17",
+     "plan_id": "C19",
      "proposed_by": [
       "ground"
      ],
@@ -6861,7 +7115,7 @@
       "ground_delay_min": 25,
       "holding_min": 0
      },
-     "plan_id": "C18",
+     "plan_id": "C20",
      "proposed_by": [
       "ground"
      ],
@@ -6880,7 +7134,7 @@
       "ground_delay_min": 25,
       "holding_min": 0
      },
-     "plan_id": "C19",
+     "plan_id": "C21",
      "proposed_by": [
       "ground"
      ],
@@ -6896,48 +7150,6 @@
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 0,
-      "holding_min": 25
-     },
-     "plan_id": "C20",
-     "proposed_by": [
-      "ground"
-     ],
-     "round": 1,
-     "step": "check",
-     "valid": false,
-     "violations": [
-      "C-FUEL-1"
-     ]
-    },
-    {
-     "negotiation_id": "DFW-20150220-AA1131",
-     "plan": {
-      "arrival_slot": "13:04",
-      "divert": false,
-      "extra_fuel_min": 0,
-      "gate": "C12",
-      "ground_delay_min": 0,
-      "holding_min": 25
-     },
-     "plan_id": "C21",
-     "proposed_by": [
-      "ground"
-     ],
-     "round": 1,
-     "step": "check",
-     "valid": false,
-     "violations": [
-      "C-FUEL-1"
-     ]
-    },
-    {
-     "negotiation_id": "DFW-20150220-AA1131",
-     "plan": {
-      "arrival_slot": "13:04",
-      "divert": false,
-      "extra_fuel_min": 0,
-      "gate": "C21",
       "ground_delay_min": 0,
       "holding_min": 25
      },
@@ -6958,19 +7170,40 @@
      "round": 1,
      "step": "filter",
      "unique": 22,
-     "valid": 12
+     "valid": 18
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
      "plan_ids": [
+      "C1",
+      "C2",
+      "C3",
       "C5",
-      "C6",
-      "C7",
-      "C9",
       "C11",
-      "C18"
+      "C16"
      ],
      "plans": {
+      "C1": {
+       "cost_usd": 449.0,
+       "plan": {
+        "arrival_slot": "12:40",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot",
+        "ground"
+       ],
+       "r1_scores": {
+        "atc": 1.0,
+        "ground": 1.0,
+        "pilot": 1.0
+       }
+      },
       "C11": {
        "cost_usd": 1625.0,
        "plan": {
@@ -6990,14 +7223,14 @@
         "pilot": 0.444
        }
       },
-      "C18": {
-       "cost_usd": 1625.0,
+      "C16": {
+       "cost_usd": 449.0,
        "plan": {
-        "arrival_slot": "13:04",
+        "arrival_slot": "12:40",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "C12",
-        "ground_delay_min": 25,
+        "ground_delay_min": 1,
         "holding_min": 0
        },
        "proposed_by": [
@@ -7005,6 +7238,42 @@
        ],
        "r1_scores": {
         "ground": 1.0
+       }
+      },
+      "C2": {
+       "cost_usd": 498.0,
+       "plan": {
+        "arrival_slot": "12:40",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 0,
+        "holding_min": 1
+       },
+       "proposed_by": [
+        "atc"
+       ],
+       "r1_scores": {
+        "atc": 0.889
+       }
+      },
+      "C3": {
+       "cost_usd": 645.0,
+       "plan": {
+        "arrival_slot": "12:44",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 5,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot"
+       ],
+       "r1_scores": {
+        "atc": 0.778,
+        "pilot": 0.889
        }
       },
       "C5": {
@@ -7019,68 +7288,11 @@
        },
        "proposed_by": [
         "atc",
-        "pilot",
-        "ground"
+        "pilot"
        ],
        "r1_scores": {
         "atc": 0.556,
-        "ground": 1.0,
         "pilot": 0.778
-       }
-      },
-      "C6": {
-       "cost_usd": 1380.0,
-       "plan": {
-        "arrival_slot": "12:49",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "B20",
-        "ground_delay_min": 0,
-        "holding_min": 10
-       },
-       "proposed_by": [
-        "atc"
-       ],
-       "r1_scores": {
-        "atc": 0.444
-       }
-      },
-      "C7": {
-       "cost_usd": 1184.0,
-       "plan": {
-        "arrival_slot": "12:55",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "B20",
-        "ground_delay_min": 16,
-        "holding_min": 0
-       },
-       "proposed_by": [
-        "atc",
-        "pilot"
-       ],
-       "r1_scores": {
-        "atc": 0.333,
-        "pilot": 0.667
-       }
-      },
-      "C9": {
-       "cost_usd": 1380.0,
-       "plan": {
-        "arrival_slot": "12:59",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "B20",
-        "ground_delay_min": 20,
-        "holding_min": 0
-       },
-       "proposed_by": [
-        "atc",
-        "pilot"
-       ],
-       "r1_scores": {
-        "atc": 0.111,
-        "pilot": 0.556
        }
       }
      },
@@ -7092,12 +7304,12 @@
      "negotiation_id": "DFW-20150220-AA1131",
      "round": 2,
      "scores": {
+      "C1": 1.0,
       "C11": 0.05,
-      "C18": 0.05,
-      "C5": 1.0,
-      "C6": 0.75,
-      "C7": 0.5,
-      "C9": 0.25
+      "C16": 1.0,
+      "C2": 0.75,
+      "C3": 0.5,
+      "C5": 0.25
      },
      "step": "scores"
     },
@@ -7106,12 +7318,12 @@
      "negotiation_id": "DFW-20150220-AA1131",
      "round": 2,
      "scores": {
+      "C1": 1.0,
       "C11": 0.25,
-      "C18": 0.25,
-      "C5": 1.0,
-      "C6": 0.05,
-      "C7": 0.75,
-      "C9": 0.5
+      "C16": 1.0,
+      "C2": 0.05,
+      "C3": 0.75,
+      "C5": 0.5
      },
      "step": "scores"
     },
@@ -7120,30 +7332,30 @@
      "negotiation_id": "DFW-20150220-AA1131",
      "round": 2,
      "scores": {
+      "C1": 1.0,
       "C11": 1.0,
-      "C18": 1.0,
-      "C5": 1.0,
-      "C6": 1.0,
-      "C7": 1.0,
-      "C9": 1.0
+      "C16": 1.0,
+      "C2": 1.0,
+      "C3": 1.0,
+      "C5": 1.0
      },
      "step": "scores"
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
      "plan": {
-      "arrival_slot": "12:49",
+      "arrival_slot": "12:40",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 10,
+      "ground_delay_min": 1,
       "holding_min": 0
      },
-     "plan_id": "C5",
+     "plan_id": "C1",
      "ranking": [
       {
-       "cost_usd": 890.0,
-       "plan_id": "C5",
+       "cost_usd": 449.0,
+       "plan_id": "C1",
        "product": 1.0,
        "scores": {
         "atc": 1.0,
@@ -7152,9 +7364,19 @@
        }
       },
       {
-       "cost_usd": 1184.0,
-       "plan_id": "C7",
-       "product": 0.281883,
+       "cost_usd": 449.0,
+       "plan_id": "C16",
+       "product": 1.0,
+       "scores": {
+        "atc": 1.0,
+        "ground": 1.0,
+        "pilot": 1.0
+       }
+      },
+      {
+       "cost_usd": 645.0,
+       "plan_id": "C3",
+       "product": 0.261047,
        "scores": {
         "atc": 0.5,
         "ground": 1.0,
@@ -7162,9 +7384,9 @@
        }
       },
       {
-       "cost_usd": 1380.0,
-       "plan_id": "C9",
-       "product": 0.080616,
+       "cost_usd": 890.0,
+       "plan_id": "C5",
+       "product": 0.063062,
        "scores": {
         "atc": 0.25,
         "ground": 1.0,
@@ -7172,9 +7394,9 @@
        }
       },
       {
-       "cost_usd": 1380.0,
-       "plan_id": "C6",
-       "product": 0.024185,
+       "cost_usd": 498.0,
+       "plan_id": "C2",
+       "product": 0.03381,
        "scores": {
         "atc": 0.75,
         "ground": 1.0,
@@ -7184,17 +7406,7 @@
       {
        "cost_usd": 1625.0,
        "plan_id": "C11",
-       "product": 0.006846,
-       "scores": {
-        "atc": 0.05,
-        "ground": 1.0,
-        "pilot": 0.25
-       }
-      },
-      {
-       "cost_usd": 1625.0,
-       "plan_id": "C18",
-       "product": 0.006846,
+       "product": 0.003454,
        "scores": {
         "atc": 0.05,
         "ground": 1.0,
@@ -7207,12 +7419,12 @@
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
-     "plan_id": "C5",
+     "plan_id": "C1",
      "round": 3,
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": true
       },
       "ground": {
        "accept": true
@@ -7224,7 +7436,7 @@
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
-     "plan_id": "C5",
+     "plan_id": "C1",
      "round": 3,
      "step": "final_check",
      "valid": true,
@@ -7232,22 +7444,22 @@
     },
     {
      "negotiation_id": "DFW-20150220-AA1131",
-     "outcome": "no_consensus",
+     "outcome": "consensus",
      "plan": {
-      "arrival_slot": "12:49",
+      "arrival_slot": "12:40",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 10,
+      "ground_delay_min": 1,
       "holding_min": 0
      },
-     "plan_id": "C5",
+     "plan_id": "C1",
      "round": 3,
      "step": "outcome"
     }
    ],
    "mode": "dry",
-   "outcome": "no_consensus",
+   "outcome": "consensus",
    "stratum": "large/weather"
   },
   {
@@ -8577,14 +8789,11 @@
   },
   {
    "ablation_checker_off": {
-    "candidates": 22,
+    "candidates": 21,
     "pick_unsafe": false,
     "pick_violations": [],
-    "unsafe_agent_favourites": [
-     "atc",
-     "pilot"
-    ],
-    "unsafe_candidates": 15
+    "unsafe_agent_favourites": [],
+    "unsafe_candidates": 4
    },
    "ablation_extra_fuel": {
     "fuel_fail_as_shipped": 15,
@@ -8597,7 +8806,7 @@
     "gate_only_cost": 400.0
    },
    "b1_candidates": 148,
-   "b1_valid": 43,
+   "b1_valid": 73,
    "connecting_pax_pilot": 0,
    "dest": "ORD",
    "event": "weather",
@@ -8667,71 +8876,71 @@
     },
     "B1": {
      "co2_kg": 0,
-     "cost_usd": 2115.0,
+     "cost_usd": 400.0,
      "crew_overtime_min": 0,
-     "focal_delay_min": 35,
+     "focal_delay_min": 0,
      "forced_divert": false,
      "fuel_margin_min": 20.6,
-     "full_cost_usd": 2115.0,
+     "full_cost_usd": 400.0,
      "gate": "B20",
      "gate_changed": true,
      "gate_wait_min": 0,
-     "ground_delay_min": 35,
+     "ground_delay_min": 0,
      "holding_fuel_kg": 0,
      "holding_min": 0,
      "knock_on_min": 0,
      "pax_missed": 0,
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 35,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
-     "system_delay_min": 35,
+     "system_delay_min": 0,
      "valid": true,
      "violations": []
     },
     "NEG": {
      "co2_kg": 0,
-     "cost_usd": 2115.0,
+     "cost_usd": 400.0,
      "crew_overtime_min": 0,
-     "focal_delay_min": 35,
+     "focal_delay_min": 0,
      "forced_divert": false,
      "fuel_margin_min": 20.6,
-     "full_cost_usd": 2115.0,
+     "full_cost_usd": 400.0,
      "gate": "B20",
      "gate_changed": true,
      "gate_wait_min": 0,
-     "ground_delay_min": 35,
+     "ground_delay_min": 0,
      "holding_fuel_kg": 0,
      "holding_min": 0,
      "knock_on_min": 0,
      "pax_missed": 0,
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 35,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
-     "system_delay_min": 35,
+     "system_delay_min": 0,
      "valid": true,
      "violations": []
     },
     "atc_alone": {
      "co2_kg": 0,
-     "cost_usd": 7291.5,
-     "crew_overtime_min": 38,
+     "cost_usd": 400.0,
+     "crew_overtime_min": 0,
      "focal_delay_min": 0,
      "forced_divert": false,
      "fuel_margin_min": 20.6,
-     "full_cost_usd": 7291.5,
-     "gate": "A12",
-     "gate_changed": false,
-     "gate_wait_min": 90,
+     "full_cost_usd": 400.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
      "ground_delay_min": 0,
      "holding_fuel_kg": 0,
      "holding_min": 0,
@@ -8741,55 +8950,53 @@
       "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 0
      },
      "system_delay_min": 0,
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     "ground_alone": {
      "co2_kg": 0,
-     "cost_usd": 2115.0,
+     "cost_usd": 400.0,
      "crew_overtime_min": 0,
-     "focal_delay_min": 35,
+     "focal_delay_min": 0,
      "forced_divert": false,
      "fuel_margin_min": 20.6,
-     "full_cost_usd": 2115.0,
+     "full_cost_usd": 400.0,
      "gate": "B20",
      "gate_changed": true,
      "gate_wait_min": 0,
-     "ground_delay_min": 35,
+     "ground_delay_min": 0,
      "holding_fuel_kg": 0,
      "holding_min": 0,
      "knock_on_min": 0,
      "pax_missed": 0,
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 35,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
-     "system_delay_min": 35,
+     "system_delay_min": 0,
      "valid": true,
      "violations": []
     },
     "pilot_alone": {
      "co2_kg": 0,
-     "cost_usd": 7291.5,
-     "crew_overtime_min": 38,
+     "cost_usd": 400.0,
+     "crew_overtime_min": 0,
      "focal_delay_min": 0,
      "forced_divert": false,
      "fuel_margin_min": 20.6,
-     "full_cost_usd": 7291.5,
-     "gate": "A12",
-     "gate_changed": false,
-     "gate_wait_min": 90,
+     "full_cost_usd": 400.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
      "ground_delay_min": 0,
      "holding_fuel_kg": 0,
      "holding_min": 0,
@@ -8799,15 +9006,13 @@
       "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 0
      },
      "system_delay_min": 0,
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     }
    },
    "magnitude_min": 72,
@@ -8833,7 +9038,7 @@
         "arrival_slot": "08:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 0
        },
@@ -8844,7 +9049,7 @@
         "arrival_slot": "08:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 5,
         "holding_min": 0
        },
@@ -8855,7 +9060,7 @@
         "arrival_slot": "08:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 5
        },
@@ -8866,7 +9071,7 @@
         "arrival_slot": "08:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -8877,7 +9082,7 @@
         "arrival_slot": "08:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 10
        },
@@ -8888,7 +9093,7 @@
         "arrival_slot": "08:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -8899,7 +9104,7 @@
         "arrival_slot": "08:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 15
        },
@@ -8910,7 +9115,7 @@
         "arrival_slot": "08:26",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 21,
         "holding_min": 0
        },
@@ -8921,7 +9126,7 @@
         "arrival_slot": "08:26",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 21
        },
@@ -8932,7 +9137,7 @@
         "arrival_slot": "08:31",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 26,
         "holding_min": 0
        },
@@ -8951,7 +9156,7 @@
         "arrival_slot": "08:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 0
        },
@@ -8962,7 +9167,7 @@
         "arrival_slot": "08:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 5,
         "holding_min": 0
        },
@@ -8973,7 +9178,7 @@
         "arrival_slot": "08:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -8984,7 +9189,7 @@
         "arrival_slot": "08:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -8995,7 +9200,7 @@
         "arrival_slot": "08:26",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 21,
         "holding_min": 0
        },
@@ -9006,7 +9211,7 @@
         "arrival_slot": "08:31",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 26,
         "holding_min": 0
        },
@@ -9017,7 +9222,7 @@
         "arrival_slot": "08:35",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 30,
         "holding_min": 0
        },
@@ -9066,111 +9271,111 @@
      "plans": [
       {
        "plan": {
-        "arrival_slot": "08:40",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "B20",
-        "ground_delay_min": 35,
-        "holding_min": 0
-       },
-       "score": 1.0
-      },
-      {
-       "plan": {
-        "arrival_slot": "08:40",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "C12",
-        "ground_delay_min": 35,
-        "holding_min": 0
-       },
-       "score": 1.0
-      },
-      {
-       "plan": {
-        "arrival_slot": "08:40",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "C21",
-        "ground_delay_min": 35,
-        "holding_min": 0
-       },
-       "score": 1.0
-      },
-      {
-       "plan": {
-        "arrival_slot": "08:40",
+        "arrival_slot": "08:05",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B20",
         "ground_delay_min": 0,
-        "holding_min": 35
+        "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "08:40",
+        "arrival_slot": "08:05",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "C12",
         "ground_delay_min": 0,
-        "holding_min": 35
-       },
-       "score": 1.0
-      },
-      {
-       "plan": {
-        "arrival_slot": "08:40",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "C21",
-        "ground_delay_min": 0,
-        "holding_min": 35
-       },
-       "score": 1.0
-      },
-      {
-       "plan": {
-        "arrival_slot": "08:45",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "B20",
-        "ground_delay_min": 40,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "08:45",
+        "arrival_slot": "08:05",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C21",
+        "ground_delay_min": 0,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "08:31",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 26,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "08:31",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "C12",
-        "ground_delay_min": 40,
+        "ground_delay_min": 26,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "08:45",
+        "arrival_slot": "08:31",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "C21",
-        "ground_delay_min": 40,
+        "ground_delay_min": 26,
         "holding_min": 0
        },
        "score": 1.0
       },
       {
        "plan": {
-        "arrival_slot": "08:45",
+        "arrival_slot": "08:31",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B20",
         "ground_delay_min": 0,
-        "holding_min": 40
+        "holding_min": 26
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "08:31",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C12",
+        "ground_delay_min": 0,
+        "holding_min": 26
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "08:31",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C21",
+        "ground_delay_min": 0,
+        "holding_min": 26
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "08:35",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 30,
+        "holding_min": 0
        },
        "score": 1.0
       }
@@ -9184,21 +9389,20 @@
       "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C1",
      "proposed_by": [
       "atc",
-      "pilot"
+      "pilot",
+      "ground"
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9206,7 +9410,7 @@
       "arrival_slot": "08:10",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 5,
       "holding_min": 0
      },
@@ -9217,10 +9421,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9228,7 +9430,7 @@
       "arrival_slot": "08:10",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 5
      },
@@ -9238,10 +9440,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9249,7 +9449,7 @@
       "arrival_slot": "08:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 10,
       "holding_min": 0
      },
@@ -9260,10 +9460,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9271,7 +9469,7 @@
       "arrival_slot": "08:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 10
      },
@@ -9281,10 +9479,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9292,7 +9488,7 @@
       "arrival_slot": "08:20",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 15,
       "holding_min": 0
      },
@@ -9303,10 +9499,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9314,7 +9508,7 @@
       "arrival_slot": "08:20",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 15
      },
@@ -9324,10 +9518,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9335,7 +9527,7 @@
       "arrival_slot": "08:26",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 21,
       "holding_min": 0
      },
@@ -9346,10 +9538,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9357,7 +9547,7 @@
       "arrival_slot": "08:26",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 21
      },
@@ -9369,8 +9559,7 @@
      "step": "check",
      "valid": false,
      "violations": [
-      "C-FUEL-1",
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
@@ -9379,21 +9568,20 @@
       "arrival_slot": "08:31",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 26,
       "holding_min": 0
      },
      "plan_id": "C10",
      "proposed_by": [
       "atc",
-      "pilot"
+      "pilot",
+      "ground"
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9401,20 +9589,19 @@
       "arrival_slot": "08:35",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 30,
       "holding_min": 0
      },
      "plan_id": "C11",
      "proposed_by": [
-      "pilot"
+      "pilot",
+      "ground"
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
@@ -9428,8 +9615,7 @@
      },
      "plan_id": "C12",
      "proposed_by": [
-      "pilot",
-      "ground"
+      "pilot"
      ],
      "round": 1,
      "step": "check",
@@ -9448,8 +9634,7 @@
      },
      "plan_id": "C13",
      "proposed_by": [
-      "pilot",
-      "ground"
+      "pilot"
      ],
      "round": 1,
      "step": "check",
@@ -9478,11 +9663,11 @@
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "C12",
-      "ground_delay_min": 35,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C15",
@@ -9497,11 +9682,11 @@
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "C21",
-      "ground_delay_min": 35,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C16",
@@ -9516,12 +9701,12 @@
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:31",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "B20",
-      "ground_delay_min": 0,
-      "holding_min": 35
+      "gate": "C12",
+      "ground_delay_min": 26,
+      "holding_min": 0
      },
      "plan_id": "C17",
      "proposed_by": [
@@ -9529,20 +9714,18 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-FUEL-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:31",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "C12",
-      "ground_delay_min": 0,
-      "holding_min": 35
+      "gate": "C21",
+      "ground_delay_min": 26,
+      "holding_min": 0
      },
      "plan_id": "C18",
      "proposed_by": [
@@ -9550,20 +9733,18 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-FUEL-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:31",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "C21",
+      "gate": "B20",
       "ground_delay_min": 0,
-      "holding_min": 35
+      "holding_min": 26
      },
      "plan_id": "C19",
      "proposed_by": [
@@ -9579,12 +9760,12 @@
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan": {
-      "arrival_slot": "08:45",
+      "arrival_slot": "08:31",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "C12",
-      "ground_delay_min": 40,
-      "holding_min": 0
+      "ground_delay_min": 0,
+      "holding_min": 26
      },
      "plan_id": "C20",
      "proposed_by": [
@@ -9592,39 +9773,22 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": true,
-     "violations": []
+     "valid": false,
+     "violations": [
+      "C-FUEL-1"
+     ]
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan": {
-      "arrival_slot": "08:45",
+      "arrival_slot": "08:31",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "C21",
-      "ground_delay_min": 40,
-      "holding_min": 0
+      "ground_delay_min": 0,
+      "holding_min": 26
      },
      "plan_id": "C21",
-     "proposed_by": [
-      "ground"
-     ],
-     "round": 1,
-     "step": "check",
-     "valid": true,
-     "violations": []
-    },
-    {
-     "negotiation_id": "ORD-20150803-OO6213",
-     "plan": {
-      "arrival_slot": "08:45",
-      "divert": false,
-      "extra_fuel_min": 0,
-      "gate": "B20",
-      "ground_delay_min": 0,
-      "holding_min": 40
-     },
-     "plan_id": "C22",
      "proposed_by": [
       "ground"
      ],
@@ -9640,26 +9804,70 @@
      "received": 30,
      "round": 1,
      "step": "filter",
-     "unique": 22,
-     "valid": 7
+     "unique": 21,
+     "valid": 17
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan_ids": [
-      "C12",
-      "C13",
-      "C14",
-      "C15"
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C10",
+      "C11"
      ],
      "plans": {
-      "C12": {
-       "cost_usd": 2115.0,
+      "C1": {
+       "cost_usd": 400.0,
        "plan": {
-        "arrival_slot": "08:40",
+        "arrival_slot": "08:05",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B20",
-        "ground_delay_min": 35,
+        "ground_delay_min": 0,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot",
+        "ground"
+       ],
+       "r1_scores": {
+        "atc": 1.0,
+        "ground": 1.0,
+        "pilot": 1.0
+       }
+      },
+      "C10": {
+       "cost_usd": 1674.0,
+       "plan": {
+        "arrival_slot": "08:31",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 26,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot",
+        "ground"
+       ],
+       "r1_scores": {
+        "atc": 0.05,
+        "ground": 1.0,
+        "pilot": 0.444
+       }
+      },
+      "C11": {
+       "cost_usd": 1870.0,
+       "plan": {
+        "arrival_slot": "08:35",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 30,
         "holding_min": 0
        },
        "proposed_by": [
@@ -9668,60 +9876,62 @@
        ],
        "r1_scores": {
         "ground": 1.0,
-        "pilot": 0.222
+        "pilot": 0.333
        }
       },
-      "C13": {
-       "cost_usd": 2360.0,
+      "C2": {
+       "cost_usd": 645.0,
        "plan": {
-        "arrival_slot": "08:45",
+        "arrival_slot": "08:10",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B20",
-        "ground_delay_min": 40,
+        "ground_delay_min": 5,
         "holding_min": 0
        },
        "proposed_by": [
-        "pilot",
-        "ground"
-       ],
-       "r1_scores": {
-        "ground": 1.0,
-        "pilot": 0.111
-       }
-      },
-      "C14": {
-       "cost_usd": 2605.0,
-       "plan": {
-        "arrival_slot": "08:50",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "B20",
-        "ground_delay_min": 45,
-        "holding_min": 0
-       },
-       "proposed_by": [
+        "atc",
         "pilot"
        ],
        "r1_scores": {
-        "pilot": 0.05
+        "atc": 0.889,
+        "pilot": 0.889
        }
       },
-      "C15": {
-       "cost_usd": 2115.0,
+      "C3": {
+       "cost_usd": 890.0,
        "plan": {
-        "arrival_slot": "08:40",
+        "arrival_slot": "08:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "C12",
-        "ground_delay_min": 35,
+        "gate": "B20",
+        "ground_delay_min": 0,
+        "holding_min": 5
+       },
+       "proposed_by": [
+        "atc"
+       ],
+       "r1_scores": {
+        "atc": 0.778
+       }
+      },
+      "C4": {
+       "cost_usd": 890.0,
+       "plan": {
+        "arrival_slot": "08:15",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 10,
         "holding_min": 0
        },
        "proposed_by": [
-        "ground"
+        "atc",
+        "pilot"
        ],
        "r1_scores": {
-        "ground": 1.0
+        "atc": 0.667,
+        "pilot": 0.778
        }
       }
      },
@@ -9733,10 +9943,12 @@
      "negotiation_id": "ORD-20150803-OO6213",
      "round": 2,
      "scores": {
-      "C12": 1.0,
-      "C13": 0.5,
-      "C14": 0.05,
-      "C15": 1.0
+      "C1": 1.0,
+      "C10": 0.2,
+      "C11": 0.05,
+      "C2": 0.8,
+      "C3": 0.6,
+      "C4": 0.4
      },
      "step": "scores"
     },
@@ -9745,10 +9957,12 @@
      "negotiation_id": "ORD-20150803-OO6213",
      "round": 2,
      "scores": {
-      "C12": 1.0,
-      "C13": 0.5,
-      "C14": 0.05,
-      "C15": 1.0
+      "C1": 1.0,
+      "C10": 0.4,
+      "C11": 0.2,
+      "C2": 0.8,
+      "C3": 0.05,
+      "C4": 0.6
      },
      "step": "scores"
     },
@@ -9757,28 +9971,30 @@
      "negotiation_id": "ORD-20150803-OO6213",
      "round": 2,
      "scores": {
-      "C12": 1.0,
-      "C13": 1.0,
-      "C14": 1.0,
-      "C15": 1.0
+      "C1": 1.0,
+      "C10": 1.0,
+      "C11": 1.0,
+      "C2": 1.0,
+      "C3": 1.0,
+      "C4": 1.0
      },
      "step": "scores"
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 35,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
-     "plan_id": "C12",
+     "plan_id": "C1",
      "ranking": [
       {
-       "cost_usd": 2115.0,
-       "plan_id": "C12",
+       "cost_usd": 400.0,
+       "plan_id": "C1",
        "product": 1.0,
        "scores": {
         "atc": 1.0,
@@ -9787,33 +10003,53 @@
        }
       },
       {
-       "cost_usd": 2115.0,
-       "plan_id": "C15",
-       "product": 1.0,
+       "cost_usd": 645.0,
+       "plan_id": "C2",
+       "product": 0.396899,
        "scores": {
-        "atc": 1.0,
+        "atc": 0.8,
         "ground": 1.0,
-        "pilot": 1.0
+        "pilot": 0.8
        }
       },
       {
-       "cost_usd": 2360.0,
-       "plan_id": "C13",
-       "product": 0.224047,
+       "cost_usd": 890.0,
+       "plan_id": "C4",
+       "product": 0.107865,
        "scores": {
-        "atc": 0.5,
+        "atc": 0.4,
         "ground": 1.0,
-        "pilot": 0.5
+        "pilot": 0.6
        }
       },
       {
-       "cost_usd": 2605.0,
-       "plan_id": "C14",
-       "product": 0.00203,
+       "cost_usd": 1674.0,
+       "plan_id": "C10",
+       "product": 0.019116,
+       "scores": {
+        "atc": 0.2,
+        "ground": 1.0,
+        "pilot": 0.4
+       }
+      },
+      {
+       "cost_usd": 890.0,
+       "plan_id": "C3",
+       "product": 0.013483,
+       "scores": {
+        "atc": 0.6,
+        "ground": 1.0,
+        "pilot": 0.05
+       }
+      },
+      {
+       "cost_usd": 1870.0,
+       "plan_id": "C11",
+       "product": 0.002139,
        "scores": {
         "atc": 0.05,
         "ground": 1.0,
-        "pilot": 0.05
+        "pilot": 0.2
        }
       }
      ],
@@ -9822,12 +10058,12 @@
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
-     "plan_id": "C12",
+     "plan_id": "C1",
      "round": 3,
      "step": "votes",
      "votes": {
       "atc": {
-       "accept": false
+       "accept": true
       },
       "ground": {
        "accept": true
@@ -9839,7 +10075,7 @@
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
-     "plan_id": "C12",
+     "plan_id": "C1",
      "round": 3,
      "step": "final_check",
      "valid": true,
@@ -9847,36 +10083,31 @@
     },
     {
      "negotiation_id": "ORD-20150803-OO6213",
-     "outcome": "no_consensus",
+     "outcome": "consensus",
      "plan": {
-      "arrival_slot": "08:40",
+      "arrival_slot": "08:05",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B20",
-      "ground_delay_min": 35,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
-     "plan_id": "C12",
+     "plan_id": "C1",
      "round": 3,
      "step": "outcome"
     }
    ],
    "mode": "dry",
-   "outcome": "no_consensus",
+   "outcome": "consensus",
    "stratum": "large/weather"
   },
   {
    "ablation_checker_off": {
-    "candidates": 13,
-    "pick_unsafe": true,
-    "pick_violations": [
-     "C-GATE-1"
-    ],
-    "unsafe_agent_favourites": [
-     "atc",
-     "pilot"
-    ],
-    "unsafe_candidates": 13
+    "candidates": 21,
+    "pick_unsafe": false,
+    "pick_violations": [],
+    "unsafe_agent_favourites": [],
+    "unsafe_candidates": 4
    },
    "ablation_extra_fuel": {
     "fuel_fail_as_shipped": 15,
@@ -9886,10 +10117,10 @@
    },
    "attr": {
     "b0_cost": 15068.5,
-    "gate_only_cost": 15068.5
+    "gate_only_cost": 449.0
    },
    "b1_candidates": 152,
-   "b1_valid": 0,
+   "b1_valid": 69,
    "connecting_pax_pilot": 127,
    "dest": "DFW",
    "event": "weather",
@@ -9958,34 +10189,72 @@
      ]
     },
     "B1": {
-     "cost_usd": 100000.0,
-     "full_cost_usd": 100000.0,
-     "plan": null,
-     "valid": false,
-     "violations": [
-      "no plan"
-     ]
+     "co2_kg": 0,
+     "cost_usd": 449.0,
+     "crew_overtime_min": 0,
+     "focal_delay_min": 1,
+     "forced_divert": false,
+     "fuel_margin_min": 18.3,
+     "full_cost_usd": 2849.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
+     "ground_delay_min": 1,
+     "holding_fuel_kg": 0,
+     "holding_min": 0,
+     "knock_on_min": 0,
+     "pax_missed": 12,
+     "plan": {
+      "arrival_slot": "09:11",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "system_delay_min": 1,
+     "valid": true,
+     "violations": []
     },
     "NEG": {
-     "cost_usd": 100000.0,
-     "full_cost_usd": 100000.0,
-     "plan": null,
-     "valid": false,
-     "violations": [
-      "no plan"
-     ]
+     "co2_kg": 0,
+     "cost_usd": 449.0,
+     "crew_overtime_min": 0,
+     "focal_delay_min": 1,
+     "forced_divert": false,
+     "fuel_margin_min": 18.3,
+     "full_cost_usd": 2849.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
+     "ground_delay_min": 1,
+     "holding_fuel_kg": 0,
+     "holding_min": 0,
+     "knock_on_min": 0,
+     "pax_missed": 12,
+     "plan": {
+      "arrival_slot": "09:11",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "system_delay_min": 1,
+     "valid": true,
+     "violations": []
     },
     "atc_alone": {
      "co2_kg": 0,
-     "cost_usd": 15068.5,
-     "crew_overtime_min": 38,
+     "cost_usd": 449.0,
+     "crew_overtime_min": 0,
      "focal_delay_min": 1,
      "forced_divert": false,
      "fuel_margin_min": 18.3,
-     "full_cost_usd": 17468.5,
-     "gate": "A12",
-     "gate_changed": false,
-     "gate_wait_min": 202,
+     "full_cost_usd": 2849.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
      "ground_delay_min": 1,
      "holding_fuel_kg": 0,
      "holding_min": 0,
@@ -9995,36 +10264,53 @@
       "arrival_slot": "09:11",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 1,
       "holding_min": 0
      },
      "system_delay_min": 1,
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     "ground_alone": {
-     "cost_usd": 100000.0,
-     "full_cost_usd": 100000.0,
-     "plan": null,
-     "valid": false,
-     "violations": [
-      "no plan"
-     ]
+     "co2_kg": 0,
+     "cost_usd": 449.0,
+     "crew_overtime_min": 0,
+     "focal_delay_min": 1,
+     "forced_divert": false,
+     "fuel_margin_min": 18.3,
+     "full_cost_usd": 2849.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
+     "ground_delay_min": 1,
+     "holding_fuel_kg": 0,
+     "holding_min": 0,
+     "knock_on_min": 0,
+     "pax_missed": 12,
+     "plan": {
+      "arrival_slot": "09:11",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "system_delay_min": 1,
+     "valid": true,
+     "violations": []
     },
     "pilot_alone": {
      "co2_kg": 0,
-     "cost_usd": 15068.5,
-     "crew_overtime_min": 38,
+     "cost_usd": 449.0,
+     "crew_overtime_min": 0,
      "focal_delay_min": 1,
      "forced_divert": false,
      "fuel_margin_min": 18.3,
-     "full_cost_usd": 17468.5,
-     "gate": "A12",
-     "gate_changed": false,
-     "gate_wait_min": 202,
+     "full_cost_usd": 2849.0,
+     "gate": "B20",
+     "gate_changed": true,
+     "gate_wait_min": 0,
      "ground_delay_min": 1,
      "holding_fuel_kg": 0,
      "holding_min": 0,
@@ -10034,15 +10320,13 @@
       "arrival_slot": "09:11",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 1,
       "holding_min": 0
      },
      "system_delay_min": 1,
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     }
    },
    "magnitude_min": 185,
@@ -10068,7 +10352,7 @@
         "arrival_slot": "09:11",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 1,
         "holding_min": 0
        },
@@ -10079,7 +10363,7 @@
         "arrival_slot": "09:11",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 1
        },
@@ -10090,7 +10374,7 @@
         "arrival_slot": "09:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 5,
         "holding_min": 0
        },
@@ -10101,7 +10385,7 @@
         "arrival_slot": "09:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 5
        },
@@ -10112,7 +10396,7 @@
         "arrival_slot": "09:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -10123,7 +10407,7 @@
         "arrival_slot": "09:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 10
        },
@@ -10134,7 +10418,7 @@
         "arrival_slot": "09:26",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 16,
         "holding_min": 0
        },
@@ -10145,7 +10429,7 @@
         "arrival_slot": "09:26",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 16
        },
@@ -10156,7 +10440,7 @@
         "arrival_slot": "09:30",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 20,
         "holding_min": 0
        },
@@ -10167,7 +10451,7 @@
         "arrival_slot": "09:30",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 20
        },
@@ -10186,7 +10470,7 @@
         "arrival_slot": "09:11",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 1,
         "holding_min": 0
        },
@@ -10197,7 +10481,7 @@
         "arrival_slot": "09:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 5,
         "holding_min": 0
        },
@@ -10208,7 +10492,7 @@
         "arrival_slot": "09:11",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 1
        },
@@ -10219,7 +10503,7 @@
         "arrival_slot": "09:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 5
        },
@@ -10230,7 +10514,7 @@
         "arrival_slot": "09:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -10241,7 +10525,7 @@
         "arrival_slot": "09:20",
         "divert": false,
         "extra_fuel_min": 2,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 10
        },
@@ -10252,7 +10536,7 @@
         "arrival_slot": "09:26",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 16,
         "holding_min": 0
        },
@@ -10263,7 +10547,7 @@
         "arrival_slot": "09:30",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 20,
         "holding_min": 0
        },
@@ -10274,7 +10558,7 @@
         "arrival_slot": "09:26",
         "divert": false,
         "extra_fuel_min": 8,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 16
        },
@@ -10285,7 +10569,7 @@
         "arrival_slot": "09:30",
         "divert": false,
         "extra_fuel_min": 12,
-        "gate": "A12",
+        "gate": "B20",
         "ground_delay_min": 0,
         "holding_min": 20
        },
@@ -10298,7 +10582,118 @@
     {
      "agent": "ground",
      "negotiation_id": "DFW-20150303-MQ3275",
-     "plans": [],
+     "plans": [
+      {
+       "plan": {
+        "arrival_slot": "09:11",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:11",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C12",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:11",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C21",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:30",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 0,
+        "holding_min": 20
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:30",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C12",
+        "ground_delay_min": 0,
+        "holding_min": 20
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:30",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C21",
+        "ground_delay_min": 0,
+        "holding_min": 20
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:35",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 25,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:35",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C12",
+        "ground_delay_min": 25,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:35",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C21",
+        "ground_delay_min": 25,
+        "holding_min": 0
+       },
+       "score": 1.0
+      },
+      {
+       "plan": {
+        "arrival_slot": "09:35",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 0,
+        "holding_min": 25
+       },
+       "score": 1.0
+      }
+     ],
      "round": 1,
      "step": "proposals"
     },
@@ -10308,21 +10703,20 @@
       "arrival_slot": "09:11",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 1,
       "holding_min": 0
      },
      "plan_id": "C1",
      "proposed_by": [
       "atc",
-      "pilot"
+      "pilot",
+      "ground"
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10330,7 +10724,7 @@
       "arrival_slot": "09:11",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 1
      },
@@ -10341,10 +10735,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10352,7 +10744,7 @@
       "arrival_slot": "09:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 5,
       "holding_min": 0
      },
@@ -10363,10 +10755,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10374,7 +10764,7 @@
       "arrival_slot": "09:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 5
      },
@@ -10385,10 +10775,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10396,7 +10784,7 @@
       "arrival_slot": "09:20",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 10,
       "holding_min": 0
      },
@@ -10407,10 +10795,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10418,7 +10804,7 @@
       "arrival_slot": "09:20",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 10
      },
@@ -10428,10 +10814,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10439,7 +10823,7 @@
       "arrival_slot": "09:26",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 16,
       "holding_min": 0
      },
@@ -10450,10 +10834,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10461,7 +10843,7 @@
       "arrival_slot": "09:26",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 16
      },
@@ -10471,10 +10853,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10482,7 +10862,7 @@
       "arrival_slot": "09:30",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 20,
       "holding_min": 0
      },
@@ -10493,10 +10873,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10504,20 +10882,20 @@
       "arrival_slot": "09:30",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 20
      },
      "plan_id": "C10",
      "proposed_by": [
-      "atc"
+      "atc",
+      "ground"
      ],
      "round": 1,
      "step": "check",
      "valid": false,
      "violations": [
-      "C-FUEL-1",
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
@@ -10526,7 +10904,7 @@
       "arrival_slot": "09:20",
       "divert": false,
       "extra_fuel_min": 2,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 10
      },
@@ -10536,10 +10914,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10547,7 +10923,7 @@
       "arrival_slot": "09:26",
       "divert": false,
       "extra_fuel_min": 8,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 16
      },
@@ -10557,10 +10933,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
@@ -10568,7 +10942,7 @@
       "arrival_slot": "09:30",
       "divert": false,
       "extra_fuel_min": 12,
-      "gate": "A12",
+      "gate": "B20",
       "ground_delay_min": 0,
       "holding_min": 20
      },
@@ -10578,30 +10952,430 @@
      ],
      "round": 1,
      "step": "check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan": {
+      "arrival_slot": "09:11",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "C12",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "plan_id": "C14",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan": {
+      "arrival_slot": "09:11",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "C21",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "plan_id": "C15",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan": {
+      "arrival_slot": "09:30",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "C12",
+      "ground_delay_min": 0,
+      "holding_min": 20
+     },
+     "plan_id": "C16",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
      "valid": false,
      "violations": [
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
-     "received": 20,
+     "plan": {
+      "arrival_slot": "09:30",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "C21",
+      "ground_delay_min": 0,
+      "holding_min": 20
+     },
+     "plan_id": "C17",
+     "proposed_by": [
+      "ground"
+     ],
      "round": 1,
-     "step": "filter",
-     "unique": 13,
-     "valid": 0
+     "step": "check",
+     "valid": false,
+     "violations": [
+      "C-FUEL-1"
+     ]
     },
     {
      "negotiation_id": "DFW-20150303-MQ3275",
-     "outcome": "no_valid_plan",
-     "plan": null,
-     "plan_id": null,
+     "plan": {
+      "arrival_slot": "09:35",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 25,
+      "holding_min": 0
+     },
+     "plan_id": "C18",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan": {
+      "arrival_slot": "09:35",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "C12",
+      "ground_delay_min": 25,
+      "holding_min": 0
+     },
+     "plan_id": "C19",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan": {
+      "arrival_slot": "09:35",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "C21",
+      "ground_delay_min": 25,
+      "holding_min": 0
+     },
+     "plan_id": "C20",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan": {
+      "arrival_slot": "09:35",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 0,
+      "holding_min": 25
+     },
+     "plan_id": "C21",
+     "proposed_by": [
+      "ground"
+     ],
+     "round": 1,
+     "step": "check",
+     "valid": false,
+     "violations": [
+      "C-FUEL-1"
+     ]
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "received": 30,
+     "round": 1,
+     "step": "filter",
+     "unique": 21,
+     "valid": 17
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan_ids": [
+      "C1",
+      "C2",
+      "C3",
+      "C14",
+      "C15"
+     ],
+     "plans": {
+      "C1": {
+       "cost_usd": 449.0,
+       "plan": {
+        "arrival_slot": "09:11",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot",
+        "ground"
+       ],
+       "r1_scores": {
+        "atc": 1.0,
+        "ground": 1.0,
+        "pilot": 1.0
+       }
+      },
+      "C14": {
+       "cost_usd": 449.0,
+       "plan": {
+        "arrival_slot": "09:11",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C12",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "ground"
+       ],
+       "r1_scores": {
+        "ground": 1.0
+       }
+      },
+      "C15": {
+       "cost_usd": 449.0,
+       "plan": {
+        "arrival_slot": "09:11",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "C21",
+        "ground_delay_min": 1,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "ground"
+       ],
+       "r1_scores": {
+        "ground": 1.0
+       }
+      },
+      "C2": {
+       "cost_usd": 498.0,
+       "plan": {
+        "arrival_slot": "09:11",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 0,
+        "holding_min": 1
+       },
+       "proposed_by": [
+        "atc",
+        "pilot"
+       ],
+       "r1_scores": {
+        "atc": 0.889,
+        "pilot": 0.778
+       }
+      },
+      "C3": {
+       "cost_usd": 645.0,
+       "plan": {
+        "arrival_slot": "09:15",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B20",
+        "ground_delay_min": 5,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot"
+       ],
+       "r1_scores": {
+        "atc": 0.778,
+        "pilot": 0.889
+       }
+      }
+     },
+     "round": 1,
+     "step": "shortlist"
+    },
+    {
+     "agent": "atc",
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "round": 2,
+     "scores": {
+      "C1": 1.0,
+      "C14": 1.0,
+      "C15": 1.0,
+      "C2": 0.5,
+      "C3": 0.05
+     },
+     "step": "scores"
+    },
+    {
+     "agent": "pilot",
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "round": 2,
+     "scores": {
+      "C1": 1.0,
+      "C14": 1.0,
+      "C15": 1.0,
+      "C2": 0.05,
+      "C3": 0.5
+     },
+     "step": "scores"
+    },
+    {
+     "agent": "ground",
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "round": 2,
+     "scores": {
+      "C1": 1.0,
+      "C14": 1.0,
+      "C15": 1.0,
+      "C2": 1.0,
+      "C3": 1.0
+     },
+     "step": "scores"
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan": {
+      "arrival_slot": "09:11",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "plan_id": "C1",
+     "ranking": [
+      {
+       "cost_usd": 449.0,
+       "plan_id": "C1",
+       "product": 1.0,
+       "scores": {
+        "atc": 1.0,
+        "ground": 1.0,
+        "pilot": 1.0
+       }
+      },
+      {
+       "cost_usd": 449.0,
+       "plan_id": "C14",
+       "product": 1.0,
+       "scores": {
+        "atc": 1.0,
+        "ground": 1.0,
+        "pilot": 1.0
+       }
+      },
+      {
+       "cost_usd": 449.0,
+       "plan_id": "C15",
+       "product": 1.0,
+       "scores": {
+        "atc": 1.0,
+        "ground": 1.0,
+        "pilot": 1.0
+       }
+      },
+      {
+       "cost_usd": 498.0,
+       "plan_id": "C2",
+       "product": 0.02254,
+       "scores": {
+        "atc": 0.5,
+        "ground": 1.0,
+        "pilot": 0.05
+       }
+      },
+      {
+       "cost_usd": 645.0,
+       "plan_id": "C3",
+       "product": 0.017403,
+       "scores": {
+        "atc": 0.05,
+        "ground": 1.0,
+        "pilot": 0.5
+       }
+      }
+     ],
+     "round": 2,
+     "step": "pick"
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan_id": "C1",
+     "round": 3,
+     "step": "votes",
+     "votes": {
+      "atc": {
+       "accept": true
+      },
+      "ground": {
+       "accept": true
+      },
+      "pilot": {
+       "accept": true
+      }
+     }
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "plan_id": "C1",
+     "round": 3,
+     "step": "final_check",
+     "valid": true,
+     "violations": []
+    },
+    {
+     "negotiation_id": "DFW-20150303-MQ3275",
+     "outcome": "consensus",
+     "plan": {
+      "arrival_slot": "09:11",
+      "divert": false,
+      "extra_fuel_min": 0,
+      "gate": "B20",
+      "ground_delay_min": 1,
+      "holding_min": 0
+     },
+     "plan_id": "C1",
      "round": 3,
      "step": "outcome"
     }
    ],
    "mode": "dry",
-   "outcome": "no_valid_plan",
+   "outcome": "consensus",
    "stratum": "large/weather"
   },
   {
@@ -22013,7 +22787,7 @@
     "pick_unsafe": false,
     "pick_violations": [],
     "unsafe_agent_favourites": [],
-    "unsafe_candidates": 13
+    "unsafe_candidates": 4
    },
    "ablation_extra_fuel": {
     "fuel_fail_as_shipped": 15,
@@ -22026,7 +22800,7 @@
     "gate_only_cost": 0.0
    },
    "b1_candidates": 148,
-   "b1_valid": 45,
+   "b1_valid": 75,
    "connecting_pax_pilot": 99,
    "dest": "DAL",
    "event": "weather",
@@ -22287,7 +23061,7 @@
         "arrival_slot": "09:52",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 12,
         "holding_min": 0
        },
@@ -22298,7 +23072,7 @@
         "arrival_slot": "09:52",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 12
        },
@@ -22309,7 +23083,7 @@
         "arrival_slot": "09:55",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -22320,7 +23094,7 @@
         "arrival_slot": "09:55",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 15
        },
@@ -22331,7 +23105,7 @@
         "arrival_slot": "10:02",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 22,
         "holding_min": 0
        },
@@ -22342,7 +23116,7 @@
         "arrival_slot": "10:02",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 22
        },
@@ -22353,7 +23127,7 @@
         "arrival_slot": "10:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 25,
         "holding_min": 0
        },
@@ -22405,7 +23179,7 @@
         "arrival_slot": "09:52",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 12,
         "holding_min": 0
        },
@@ -22416,7 +23190,7 @@
         "arrival_slot": "09:55",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -22427,7 +23201,7 @@
         "arrival_slot": "10:02",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 22,
         "holding_min": 0
        },
@@ -22438,7 +23212,7 @@
         "arrival_slot": "10:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 25,
         "holding_min": 0
        },
@@ -22449,7 +23223,7 @@
         "arrival_slot": "10:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 30,
         "holding_min": 0
        },
@@ -22460,7 +23234,7 @@
         "arrival_slot": "09:52",
         "divert": false,
         "extra_fuel_min": 3,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 12
        },
@@ -22471,7 +23245,7 @@
         "arrival_slot": "09:55",
         "divert": false,
         "extra_fuel_min": 6,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 15
        },
@@ -22668,7 +23442,7 @@
       "arrival_slot": "09:52",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 12,
       "holding_min": 0
      },
@@ -22679,10 +23453,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -22690,7 +23462,7 @@
       "arrival_slot": "09:52",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 12
      },
@@ -22700,10 +23472,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -22711,7 +23481,7 @@
       "arrival_slot": "09:55",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 15,
       "holding_min": 0
      },
@@ -22722,10 +23492,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -22733,7 +23501,7 @@
       "arrival_slot": "09:55",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 15
      },
@@ -22743,10 +23511,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -22754,7 +23520,7 @@
       "arrival_slot": "10:02",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 22,
       "holding_min": 0
      },
@@ -22765,10 +23531,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -22776,7 +23540,7 @@
       "arrival_slot": "10:02",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 22
      },
@@ -22788,8 +23552,7 @@
      "step": "check",
      "valid": false,
      "violations": [
-      "C-FUEL-1",
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
@@ -22798,7 +23561,7 @@
       "arrival_slot": "10:05",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 25,
       "holding_min": 0
      },
@@ -22809,10 +23572,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -22820,7 +23581,7 @@
       "arrival_slot": "10:10",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 30,
       "holding_min": 0
      },
@@ -22830,10 +23591,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -22841,7 +23600,7 @@
       "arrival_slot": "09:52",
       "divert": false,
       "extra_fuel_min": 3,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 12
      },
@@ -22851,10 +23610,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -22862,7 +23619,7 @@
       "arrival_slot": "09:55",
       "divert": false,
       "extra_fuel_min": 6,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 15
      },
@@ -22872,10 +23629,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -23022,7 +23777,7 @@
      "round": 1,
      "step": "filter",
      "unique": 20,
-     "valid": 7
+     "valid": 16
     },
     {
      "negotiation_id": "DAL-20151102-WN714",
@@ -24473,7 +25228,7 @@
     "pick_unsafe": false,
     "pick_violations": [],
     "unsafe_agent_favourites": [],
-    "unsafe_candidates": 13
+    "unsafe_candidates": 4
    },
    "ablation_extra_fuel": {
     "fuel_fail_as_shipped": 15,
@@ -24486,7 +25241,7 @@
     "gate_only_cost": 294.0
    },
    "b1_candidates": 152,
-   "b1_valid": 38,
+   "b1_valid": 77,
    "connecting_pax_pilot": 0,
    "dest": "SEA",
    "event": "weather",
@@ -24758,7 +25513,7 @@
         "arrival_slot": "22:09",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -24769,7 +25524,7 @@
         "arrival_slot": "22:09",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 10
        },
@@ -24780,7 +25535,7 @@
         "arrival_slot": "22:14",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -24791,7 +25546,7 @@
         "arrival_slot": "22:14",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 15
        },
@@ -24802,7 +25557,7 @@
         "arrival_slot": "22:19",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 20,
         "holding_min": 0
        },
@@ -24813,7 +25568,7 @@
         "arrival_slot": "22:19",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 20
        },
@@ -24854,7 +25609,7 @@
         "arrival_slot": "22:09",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -24865,7 +25620,7 @@
         "arrival_slot": "22:14",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -24876,7 +25631,7 @@
         "arrival_slot": "22:19",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 20,
         "holding_min": 0
        },
@@ -24887,7 +25642,7 @@
         "arrival_slot": "22:24",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 25,
         "holding_min": 0
        },
@@ -24898,7 +25653,7 @@
         "arrival_slot": "22:29",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 30,
         "holding_min": 0
        },
@@ -24909,7 +25664,7 @@
         "arrival_slot": "22:34",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 35,
         "holding_min": 0
        },
@@ -24920,7 +25675,7 @@
         "arrival_slot": "22:39",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 40,
         "holding_min": 0
        },
@@ -25147,7 +25902,7 @@
       "arrival_slot": "22:09",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 10,
       "holding_min": 0
      },
@@ -25158,10 +25913,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25169,7 +25922,7 @@
       "arrival_slot": "22:09",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 10
      },
@@ -25179,10 +25932,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25190,7 +25941,7 @@
       "arrival_slot": "22:14",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 15,
       "holding_min": 0
      },
@@ -25201,10 +25952,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25212,7 +25961,7 @@
       "arrival_slot": "22:14",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 15
      },
@@ -25222,10 +25971,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25233,7 +25980,7 @@
       "arrival_slot": "22:19",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 20,
       "holding_min": 0
      },
@@ -25244,10 +25991,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25255,7 +26000,7 @@
       "arrival_slot": "22:19",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 20
      },
@@ -25267,8 +26012,7 @@
      "step": "check",
      "valid": false,
      "violations": [
-      "C-FUEL-1",
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
@@ -25277,7 +26021,7 @@
       "arrival_slot": "22:24",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 25,
       "holding_min": 0
      },
@@ -25287,10 +26031,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25298,7 +26040,7 @@
       "arrival_slot": "22:29",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 30,
       "holding_min": 0
      },
@@ -25308,10 +26050,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25319,7 +26059,7 @@
       "arrival_slot": "22:34",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 35,
       "holding_min": 0
      },
@@ -25329,10 +26069,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25340,7 +26078,7 @@
       "arrival_slot": "22:39",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 40,
       "holding_min": 0
      },
@@ -25350,10 +26088,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25500,7 +26236,7 @@
      "round": 1,
      "step": "filter",
      "unique": 21,
-     "valid": 8
+     "valid": 17
     },
     {
      "negotiation_id": "SEA-20150303-AA235",
@@ -25508,7 +26244,7 @@
       "C1",
       "C2",
       "C3",
-      "C15"
+      "C5"
      ],
      "plans": {
       "C1": {
@@ -25530,23 +26266,6 @@
         "atc": 1.0,
         "ground": 1.0,
         "pilot": 1.0
-       }
-      },
-      "C15": {
-       "cost_usd": 9205.0,
-       "plan": {
-        "arrival_slot": "22:44",
-        "divert": false,
-        "extra_fuel_min": 0,
-        "gate": "B10",
-        "ground_delay_min": 45,
-        "holding_min": 0
-       },
-       "proposed_by": [
-        "pilot"
-       ],
-       "r1_scores": {
-        "pilot": 0.05
        }
       },
       "C2": {
@@ -25588,6 +26307,25 @@
         "ground": 1.0,
         "pilot": 0.889
        }
+      },
+      "C5": {
+       "cost_usd": 7490.0,
+       "plan": {
+        "arrival_slot": "22:09",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B10",
+        "ground_delay_min": 10,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot"
+       ],
+       "r1_scores": {
+        "atc": 0.556,
+        "pilot": 0.778
+       }
       }
      },
      "round": 1,
@@ -25599,9 +26337,9 @@
      "round": 2,
      "scores": {
       "C1": 1.0,
-      "C15": 0.05,
       "C2": 0.667,
-      "C3": 0.333
+      "C3": 0.333,
+      "C5": 0.05
      },
      "step": "scores"
     },
@@ -25611,9 +26349,9 @@
      "round": 2,
      "scores": {
       "C1": 1.0,
-      "C15": 0.333,
       "C2": 0.05,
-      "C3": 0.667
+      "C3": 0.667,
+      "C5": 0.333
      },
      "step": "scores"
     },
@@ -25623,9 +26361,9 @@
      "round": 2,
      "scores": {
       "C1": 1.0,
-      "C15": 0.05,
       "C2": 1.0,
-      "C3": 1.0
+      "C3": 1.0,
+      "C5": 0.05
      },
      "step": "scores"
     },
@@ -25672,8 +26410,8 @@
        }
       },
       {
-       "cost_usd": 9205.0,
-       "plan_id": "C15",
+       "cost_usd": 7490.0,
+       "plan_id": "C5",
        "product": 4.2e-05,
        "scores": {
         "atc": 0.05,
@@ -25732,11 +26470,11 @@
   },
   {
    "ablation_checker_off": {
-    "candidates": 21,
+    "candidates": 20,
     "pick_unsafe": false,
     "pick_violations": [],
     "unsafe_agent_favourites": [],
-    "unsafe_candidates": 14
+    "unsafe_candidates": 2
    },
    "ablation_extra_fuel": {
     "fuel_fail_as_shipped": 15,
@@ -25749,7 +26487,7 @@
     "gate_only_cost": 0.0
    },
    "b1_candidates": 148,
-   "b1_valid": 21,
+   "b1_valid": 69,
    "connecting_pax_pilot": 10,
    "dest": "FLL",
    "event": "weather",
@@ -26010,7 +26748,7 @@
         "arrival_slot": "19:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -26021,7 +26759,7 @@
         "arrival_slot": "19:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 10
        },
@@ -26032,7 +26770,7 @@
         "arrival_slot": "19:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -26043,7 +26781,7 @@
         "arrival_slot": "19:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 15
        },
@@ -26054,7 +26792,7 @@
         "arrival_slot": "19:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 20,
         "holding_min": 0
        },
@@ -26065,7 +26803,7 @@
         "arrival_slot": "19:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 20
        },
@@ -26076,7 +26814,7 @@
         "arrival_slot": "19:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 25,
         "holding_min": 0
        },
@@ -26117,7 +26855,7 @@
         "arrival_slot": "19:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -26128,7 +26866,7 @@
         "arrival_slot": "19:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -26139,7 +26877,7 @@
         "arrival_slot": "19:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 20,
         "holding_min": 0
        },
@@ -26150,7 +26888,7 @@
         "arrival_slot": "19:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 25,
         "holding_min": 0
        },
@@ -26161,7 +26899,7 @@
         "arrival_slot": "19:25",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 30,
         "holding_min": 0
        },
@@ -26172,7 +26910,7 @@
         "arrival_slot": "19:30",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 35,
         "holding_min": 0
        },
@@ -26183,7 +26921,7 @@
         "arrival_slot": "19:35",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 40,
         "holding_min": 0
        },
@@ -26194,7 +26932,7 @@
         "arrival_slot": "19:40",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 45,
         "holding_min": 0
        },
@@ -26243,78 +26981,78 @@
       },
       {
        "plan": {
-        "arrival_slot": "20:00",
+        "arrival_slot": "18:55",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B10",
-        "ground_delay_min": 65,
+        "ground_delay_min": 0,
         "holding_min": 0
        },
        "score": 0.0
       },
       {
        "plan": {
-        "arrival_slot": "20:00",
+        "arrival_slot": "18:55",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B21",
-        "ground_delay_min": 65,
+        "ground_delay_min": 0,
         "holding_min": 0
        },
        "score": 0.0
       },
       {
        "plan": {
-        "arrival_slot": "20:00",
+        "arrival_slot": "18:55",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B26",
-        "ground_delay_min": 65,
+        "ground_delay_min": 0,
         "holding_min": 0
        },
        "score": 0.0
       },
       {
        "plan": {
-        "arrival_slot": "20:00",
+        "arrival_slot": "19:20",
         "divert": false,
-        "extra_fuel_min": 20,
+        "extra_fuel_min": 0,
         "gate": "B10",
-        "ground_delay_min": 0,
-        "holding_min": 65
+        "ground_delay_min": 25,
+        "holding_min": 0
        },
        "score": 0.0
       },
       {
        "plan": {
-        "arrival_slot": "20:00",
+        "arrival_slot": "19:20",
         "divert": false,
-        "extra_fuel_min": 20,
+        "extra_fuel_min": 0,
         "gate": "B21",
-        "ground_delay_min": 0,
-        "holding_min": 65
+        "ground_delay_min": 25,
+        "holding_min": 0
        },
        "score": 0.0
       },
       {
        "plan": {
-        "arrival_slot": "20:00",
+        "arrival_slot": "19:20",
         "divert": false,
-        "extra_fuel_min": 20,
+        "extra_fuel_min": 0,
         "gate": "B26",
-        "ground_delay_min": 0,
-        "holding_min": 65
+        "ground_delay_min": 25,
+        "holding_min": 0
        },
        "score": 0.0
       },
       {
        "plan": {
-        "arrival_slot": "20:05",
+        "arrival_slot": "19:20",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B10",
-        "ground_delay_min": 70,
-        "holding_min": 0
+        "ground_delay_min": 0,
+        "holding_min": 25
        },
        "score": 0.0
       }
@@ -26390,7 +27128,7 @@
       "arrival_slot": "19:05",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 10,
       "holding_min": 0
      },
@@ -26401,10 +27139,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26412,7 +27148,7 @@
       "arrival_slot": "19:05",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 10
      },
@@ -26422,10 +27158,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26433,7 +27167,7 @@
       "arrival_slot": "19:10",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 15,
       "holding_min": 0
      },
@@ -26444,10 +27178,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26455,7 +27187,7 @@
       "arrival_slot": "19:10",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 15
      },
@@ -26465,10 +27197,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26476,7 +27206,7 @@
       "arrival_slot": "19:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 20,
       "holding_min": 0
      },
@@ -26487,10 +27217,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26498,7 +27226,7 @@
       "arrival_slot": "19:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 20
      },
@@ -26510,8 +27238,7 @@
      "step": "check",
      "valid": false,
      "violations": [
-      "C-FUEL-1",
-      "C-GATE-1"
+      "C-FUEL-1"
      ]
     },
     {
@@ -26520,21 +27247,20 @@
       "arrival_slot": "19:20",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 25,
       "holding_min": 0
      },
      "plan_id": "C10",
      "proposed_by": [
       "atc",
-      "pilot"
+      "pilot",
+      "ground"
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26542,7 +27268,7 @@
       "arrival_slot": "19:25",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 30,
       "holding_min": 0
      },
@@ -26552,10 +27278,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26563,7 +27287,7 @@
       "arrival_slot": "19:30",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 35,
       "holding_min": 0
      },
@@ -26573,10 +27297,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26584,7 +27306,7 @@
       "arrival_slot": "19:35",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 40,
       "holding_min": 0
      },
@@ -26594,10 +27316,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
@@ -26605,7 +27325,7 @@
       "arrival_slot": "19:40",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 45,
       "holding_min": 0
      },
@@ -26615,19 +27335,17 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
      "plan": {
-      "arrival_slot": "20:00",
+      "arrival_slot": "18:55",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B10",
-      "ground_delay_min": 65,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C15",
@@ -26642,11 +27360,11 @@
     {
      "negotiation_id": "FLL-20150818-B61315",
      "plan": {
-      "arrival_slot": "20:00",
+      "arrival_slot": "18:55",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B21",
-      "ground_delay_min": 65,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C16",
@@ -26661,11 +27379,11 @@
     {
      "negotiation_id": "FLL-20150818-B61315",
      "plan": {
-      "arrival_slot": "20:00",
+      "arrival_slot": "18:55",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B26",
-      "ground_delay_min": 65,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C17",
@@ -26680,12 +27398,12 @@
     {
      "negotiation_id": "FLL-20150818-B61315",
      "plan": {
-      "arrival_slot": "20:00",
+      "arrival_slot": "19:20",
       "divert": false,
-      "extra_fuel_min": 20,
-      "gate": "B10",
-      "ground_delay_min": 0,
-      "holding_min": 65
+      "extra_fuel_min": 0,
+      "gate": "B21",
+      "ground_delay_min": 25,
+      "holding_min": 0
      },
      "plan_id": "C18",
      "proposed_by": [
@@ -26693,20 +27411,18 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-FUEL-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
      "plan": {
-      "arrival_slot": "20:00",
+      "arrival_slot": "19:20",
       "divert": false,
-      "extra_fuel_min": 20,
-      "gate": "B21",
-      "ground_delay_min": 0,
-      "holding_min": 65
+      "extra_fuel_min": 0,
+      "gate": "B26",
+      "ground_delay_min": 25,
+      "holding_min": 0
      },
      "plan_id": "C19",
      "proposed_by": [
@@ -26714,20 +27430,18 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-FUEL-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
      "plan": {
-      "arrival_slot": "20:00",
+      "arrival_slot": "19:20",
       "divert": false,
-      "extra_fuel_min": 20,
-      "gate": "B26",
+      "extra_fuel_min": 0,
+      "gate": "B10",
       "ground_delay_min": 0,
-      "holding_min": 65
+      "holding_min": 25
      },
      "plan_id": "C20",
      "proposed_by": [
@@ -26742,37 +27456,19 @@
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
-     "plan": {
-      "arrival_slot": "20:05",
-      "divert": false,
-      "extra_fuel_min": 0,
-      "gate": "B10",
-      "ground_delay_min": 70,
-      "holding_min": 0
-     },
-     "plan_id": "C21",
-     "proposed_by": [
-      "ground"
-     ],
-     "round": 1,
-     "step": "check",
-     "valid": true,
-     "violations": []
-    },
-    {
-     "negotiation_id": "FLL-20150818-B61315",
      "received": 30,
      "round": 1,
      "step": "filter",
-     "unique": 21,
-     "valid": 7
+     "unique": 20,
+     "valid": 18
     },
     {
      "negotiation_id": "FLL-20150818-B61315",
      "plan_ids": [
       "C1",
       "C2",
-      "C3"
+      "C3",
+      "C4"
      ],
      "plans": {
       "C1": {
@@ -26835,6 +27531,25 @@
         "atc": 0.778,
         "ground": 1.0
        }
+      },
+      "C4": {
+       "cost_usd": 7490.0,
+       "plan": {
+        "arrival_slot": "19:05",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B10",
+        "ground_delay_min": 10,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot"
+       ],
+       "r1_scores": {
+        "atc": 0.667,
+        "pilot": 0.778
+       }
       }
      },
      "round": 1,
@@ -26846,8 +27561,9 @@
      "round": 2,
      "scores": {
       "C1": 1.0,
-      "C2": 0.5,
-      "C3": 0.05
+      "C2": 0.667,
+      "C3": 0.333,
+      "C4": 0.05
      },
      "step": "scores"
     },
@@ -26857,8 +27573,9 @@
      "round": 2,
      "scores": {
       "C1": 1.0,
-      "C2": 0.5,
-      "C3": 0.05
+      "C2": 0.667,
+      "C3": 0.05,
+      "C4": 0.333
      },
      "step": "scores"
     },
@@ -26869,7 +27586,8 @@
      "scores": {
       "C1": 1.0,
       "C2": 1.0,
-      "C3": 1.0
+      "C3": 1.0,
+      "C4": 0.05
      },
      "step": "scores"
     },
@@ -26898,21 +27616,31 @@
       {
        "cost_usd": 245.0,
        "plan_id": "C2",
-       "product": 0.0125,
+       "product": 0.022244,
        "scores": {
-        "atc": 0.5,
+        "atc": 0.667,
         "ground": 1.0,
-        "pilot": 0.5
+        "pilot": 0.667
        }
       },
       {
        "cost_usd": 490.0,
        "plan_id": "C3",
-       "product": 0.000125,
+       "product": 0.000833,
        "scores": {
-        "atc": 0.05,
+        "atc": 0.333,
         "ground": 1.0,
         "pilot": 0.05
+       }
+      },
+      {
+       "cost_usd": 7490.0,
+       "plan_id": "C4",
+       "product": 4.2e-05,
+       "scores": {
+        "atc": 0.05,
+        "ground": 0.05,
+        "pilot": 0.333
        }
       }
      ],
@@ -30720,7 +31448,7 @@
     "pick_unsafe": false,
     "pick_violations": [],
     "unsafe_agent_favourites": [],
-    "unsafe_candidates": 16
+    "unsafe_candidates": 3
    },
    "ablation_extra_fuel": {
     "fuel_fail_as_shipped": 14,
@@ -30733,7 +31461,7 @@
     "gate_only_cost": 0.0
    },
    "b1_candidates": 148,
-   "b1_valid": 31,
+   "b1_valid": 73,
    "connecting_pax_pilot": 22,
    "dest": "LGA",
    "event": "weather",
@@ -30972,7 +31700,7 @@
         "arrival_slot": "09:02",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 7,
         "holding_min": 0
        },
@@ -30983,7 +31711,7 @@
         "arrival_slot": "09:02",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 7
        },
@@ -30994,7 +31722,7 @@
         "arrival_slot": "09:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -31005,7 +31733,7 @@
         "arrival_slot": "09:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 10
        },
@@ -31016,7 +31744,7 @@
         "arrival_slot": "09:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -31027,7 +31755,7 @@
         "arrival_slot": "09:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 15
        },
@@ -31038,7 +31766,7 @@
         "arrival_slot": "09:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 20,
         "holding_min": 0
        },
@@ -31049,7 +31777,7 @@
         "arrival_slot": "09:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 0,
         "holding_min": 20
        },
@@ -31060,7 +31788,7 @@
         "arrival_slot": "09:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 25,
         "holding_min": 0
        },
@@ -31090,7 +31818,7 @@
         "arrival_slot": "09:02",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 7,
         "holding_min": 0
        },
@@ -31101,7 +31829,7 @@
         "arrival_slot": "09:05",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 10,
         "holding_min": 0
        },
@@ -31112,7 +31840,7 @@
         "arrival_slot": "09:10",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 15,
         "holding_min": 0
        },
@@ -31123,7 +31851,7 @@
         "arrival_slot": "09:15",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 20,
         "holding_min": 0
        },
@@ -31134,7 +31862,7 @@
         "arrival_slot": "09:20",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 25,
         "holding_min": 0
        },
@@ -31145,7 +31873,7 @@
         "arrival_slot": "09:25",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 30,
         "holding_min": 0
        },
@@ -31156,7 +31884,7 @@
         "arrival_slot": "09:30",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 35,
         "holding_min": 0
        },
@@ -31167,7 +31895,7 @@
         "arrival_slot": "09:35",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 40,
         "holding_min": 0
        },
@@ -31178,7 +31906,7 @@
         "arrival_slot": "09:40",
         "divert": false,
         "extra_fuel_min": 0,
-        "gate": "A12",
+        "gate": "B10",
         "ground_delay_min": 45,
         "holding_min": 0
        },
@@ -31271,33 +31999,33 @@
       },
       {
        "plan": {
-        "arrival_slot": "09:45",
+        "arrival_slot": "08:55",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B10",
-        "ground_delay_min": 50,
+        "ground_delay_min": 0,
         "holding_min": 0
        },
        "score": 0.0
       },
       {
        "plan": {
-        "arrival_slot": "09:45",
+        "arrival_slot": "08:55",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B21",
-        "ground_delay_min": 50,
+        "ground_delay_min": 0,
         "holding_min": 0
        },
        "score": 0.0
       },
       {
        "plan": {
-        "arrival_slot": "09:45",
+        "arrival_slot": "08:55",
         "divert": false,
         "extra_fuel_min": 0,
         "gate": "B26",
-        "ground_delay_min": 50,
+        "ground_delay_min": 0,
         "holding_min": 0
        },
        "score": 0.0
@@ -31333,7 +32061,7 @@
       "arrival_slot": "09:02",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 7,
       "holding_min": 0
      },
@@ -31344,10 +32072,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31355,7 +32081,7 @@
       "arrival_slot": "09:02",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 7
      },
@@ -31365,10 +32091,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31376,7 +32100,7 @@
       "arrival_slot": "09:05",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 10,
       "holding_min": 0
      },
@@ -31387,10 +32111,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31398,7 +32120,7 @@
       "arrival_slot": "09:05",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 10
      },
@@ -31408,10 +32130,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31419,7 +32139,7 @@
       "arrival_slot": "09:10",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 15,
       "holding_min": 0
      },
@@ -31430,10 +32150,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31441,7 +32159,7 @@
       "arrival_slot": "09:10",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 15
      },
@@ -31451,10 +32169,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31462,7 +32178,7 @@
       "arrival_slot": "09:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 20,
       "holding_min": 0
      },
@@ -31473,10 +32189,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31484,7 +32198,7 @@
       "arrival_slot": "09:15",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 0,
       "holding_min": 20
      },
@@ -31494,10 +32208,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31505,7 +32217,7 @@
       "arrival_slot": "09:20",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 25,
       "holding_min": 0
      },
@@ -31516,10 +32228,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31527,7 +32237,7 @@
       "arrival_slot": "09:25",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 30,
       "holding_min": 0
      },
@@ -31537,10 +32247,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31548,7 +32256,7 @@
       "arrival_slot": "09:30",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 35,
       "holding_min": 0
      },
@@ -31558,10 +32266,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31569,7 +32275,7 @@
       "arrival_slot": "09:35",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 40,
       "holding_min": 0
      },
@@ -31579,10 +32285,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31590,7 +32294,7 @@
       "arrival_slot": "09:40",
       "divert": false,
       "extra_fuel_min": 0,
-      "gate": "A12",
+      "gate": "B10",
       "ground_delay_min": 45,
       "holding_min": 0
      },
@@ -31600,10 +32304,8 @@
      ],
      "round": 1,
      "step": "check",
-     "valid": false,
-     "violations": [
-      "C-GATE-1"
-     ]
+     "valid": true,
+     "violations": []
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
@@ -31728,11 +32430,11 @@
     {
      "negotiation_id": "LGA-20150327-WN2583",
      "plan": {
-      "arrival_slot": "09:45",
+      "arrival_slot": "08:55",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B10",
-      "ground_delay_min": 50,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C21",
@@ -31747,11 +32449,11 @@
     {
      "negotiation_id": "LGA-20150327-WN2583",
      "plan": {
-      "arrival_slot": "09:45",
+      "arrival_slot": "08:55",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B21",
-      "ground_delay_min": 50,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C22",
@@ -31766,11 +32468,11 @@
     {
      "negotiation_id": "LGA-20150327-WN2583",
      "plan": {
-      "arrival_slot": "09:45",
+      "arrival_slot": "08:55",
       "divert": false,
       "extra_fuel_min": 0,
       "gate": "B26",
-      "ground_delay_min": 50,
+      "ground_delay_min": 0,
       "holding_min": 0
      },
      "plan_id": "C23",
@@ -31788,12 +32490,15 @@
      "round": 1,
      "step": "filter",
      "unique": 23,
-     "valid": 7
+     "valid": 20
     },
     {
      "negotiation_id": "LGA-20150327-WN2583",
      "plan_ids": [
       "C1",
+      "C2",
+      "C3",
+      "C4",
       "C15",
       "C17"
      ],
@@ -31852,6 +32557,61 @@
        "r1_scores": {
         "ground": 0.5
        }
+      },
+      "C2": {
+       "cost_usd": 7343.0,
+       "plan": {
+        "arrival_slot": "09:02",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B10",
+        "ground_delay_min": 7,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot"
+       ],
+       "r1_scores": {
+        "atc": 0.889,
+        "pilot": 0.889
+       }
+      },
+      "C3": {
+       "cost_usd": 7686.0,
+       "plan": {
+        "arrival_slot": "09:02",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B10",
+        "ground_delay_min": 0,
+        "holding_min": 7
+       },
+       "proposed_by": [
+        "atc"
+       ],
+       "r1_scores": {
+        "atc": 0.778
+       }
+      },
+      "C4": {
+       "cost_usd": 7490.0,
+       "plan": {
+        "arrival_slot": "09:05",
+        "divert": false,
+        "extra_fuel_min": 0,
+        "gate": "B10",
+        "ground_delay_min": 10,
+        "holding_min": 0
+       },
+       "proposed_by": [
+        "atc",
+        "pilot"
+       ],
+       "r1_scores": {
+        "atc": 0.667,
+        "pilot": 0.778
+       }
       }
      },
      "round": 1,
@@ -31864,7 +32624,10 @@
      "scores": {
       "C1": 1.0,
       "C15": 0.05,
-      "C17": 0.5
+      "C17": 0.2,
+      "C2": 0.8,
+      "C3": 0.6,
+      "C4": 0.4
      },
      "step": "scores"
     },
@@ -31874,8 +32637,11 @@
      "round": 2,
      "scores": {
       "C1": 1.0,
-      "C15": 0.05,
-      "C17": 0.5
+      "C15": 0.2,
+      "C17": 0.4,
+      "C2": 0.8,
+      "C3": 0.05,
+      "C4": 0.6
      },
      "step": "scores"
     },
@@ -31885,8 +32651,11 @@
      "round": 2,
      "scores": {
       "C1": 1.0,
-      "C15": 0.5,
-      "C17": 0.05
+      "C15": 0.667,
+      "C17": 0.333,
+      "C2": 0.05,
+      "C3": 0.05,
+      "C4": 0.05
      },
      "step": "scores"
     },
@@ -31913,22 +32682,52 @@
        }
       },
       {
+       "cost_usd": 7343.0,
+       "plan_id": "C2",
+       "product": 0.0016,
+       "scores": {
+        "atc": 0.8,
+        "ground": 0.05,
+        "pilot": 0.8
+       }
+      },
+      {
        "cost_usd": 7097.5,
        "plan_id": "C17",
-       "product": 0.000625,
+       "product": 0.001332,
        "scores": {
-        "atc": 0.5,
+        "atc": 0.2,
+        "ground": 0.333,
+        "pilot": 0.4
+       }
+      },
+      {
+       "cost_usd": 7490.0,
+       "plan_id": "C4",
+       "product": 0.0006,
+       "scores": {
+        "atc": 0.4,
         "ground": 0.05,
-        "pilot": 0.5
+        "pilot": 0.6
        }
       },
       {
        "cost_usd": 6997.5,
        "plan_id": "C15",
-       "product": 6.3e-05,
+       "product": 0.000334,
        "scores": {
         "atc": 0.05,
-        "ground": 0.5,
+        "ground": 0.667,
+        "pilot": 0.2
+       }
+      },
+      {
+       "cost_usd": 7686.0,
+       "plan_id": "C3",
+       "product": 7.5e-05,
+       "scores": {
+        "atc": 0.6,
+        "ground": 0.05,
         "pilot": 0.05
        }
       }

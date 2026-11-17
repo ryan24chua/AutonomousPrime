@@ -19,6 +19,7 @@ def make_state(**over) -> GroundState:
         event_magnitude_min=60,
         scheduled_arrival_min=1140,
         disrupted_arrival_min=1200,
+        event_end_min=1200,
         scheduled_gate="A1",
         now_min=1100,
         next_departure_min=1300,

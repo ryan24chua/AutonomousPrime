@@ -81,3 +81,15 @@ def test_build_world_runs_once_per_negotiate(monkeypatch):
         from pathlib import Path
 
         Path(result.log_path).unlink(missing_ok=True)
+
+
+@pytest.mark.parametrize(
+    "key",
+    [DEMO, FlightKey(2015, 4, 24, "AA", "96", "STL")],  # weather, late aircraft (console demo rows)
+    ids=["weather", "late_aircraft"],
+)
+def test_every_view_shares_one_disrupted_arrival(key):
+    w = build_world_for(key, seed=7)
+    assert w.ground.disrupted_arrival_min == w.atc.focal_earliest_arr_min
+    assert w.ground.now_min == w.ground.disrupted_arrival_min - 60
+    assert w.ground.event_end_min == w.ground.scheduled_arrival_min + w.ground.event_magnitude_min

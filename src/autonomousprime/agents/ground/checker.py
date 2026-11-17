@@ -142,10 +142,11 @@ def check_ground(
         )
     )
 
-    # Knock-on to the next leg. The part present even in the best case (arrive at the disrupted
-    # time, minimum turnaround) is the event's fault and identical across plans, so cost ignores it.
+    # Knock-on to the next leg. The part present even if the flight arrives when the event clears
+    # (scheduled arrival + reported delay, the given disruption) with minimum turnaround is the event's
+    # fault and identical across plans, so cost ignores it.
     knock_on = max(0, occ_end - state.next_departure_min)
-    best_case_end = state.disrupted_arrival_min + state.limits.min_turnaround_min
+    best_case_end = state.event_end_min + state.limits.min_turnaround_min
     unavoidable = max(0, best_case_end - state.next_departure_min)
 
     reference_ready = (

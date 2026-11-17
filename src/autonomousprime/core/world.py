@@ -115,7 +115,8 @@ class GroundState:
     event_type: str  # "weather" | "late_aircraft"
     event_magnitude_min: int
     scheduled_arrival_min: int
-    disrupted_arrival_min: int
+    disrupted_arrival_min: int  # earliest arrival, the same for every view (earliest_arrival_min)
+    event_end_min: int  # scheduled arrival + reported delay: the given disruption (register S5)
     scheduled_gate: str
     now_min: int  # when the disruption was announced to Ground
     next_departure_min: int  # focal aircraft's next scheduled departure
@@ -200,6 +201,13 @@ def event_of(row: dict) -> dict | None:
     return None
 
 
+def earliest_arrival_min(sched_min: int, event: dict) -> int:
+    """The earliest the focal can arrive, known at decision time (one rule for every view).
+    A late inbound aircraft pushes the scheduled arrival by its reported delay; weather does not move the
+    aircraft, it cuts the airport's capacity, and ATC's arrival menu decides how late the slot is."""
+    return sched_min + (event["magnitude_min"] if event["type"] == "late_aircraft" else 0)
+
+
 def strip_hindsight(row: dict) -> dict:
     return {k: v for k, v in row.items() if k not in atc_config.HINDSIGHT_COLUMNS}
 
@@ -231,7 +239,7 @@ def _atc_view(day_rows: list[dict], focal_row: dict, seed: int, weather_cut: flo
     dest = focal_row["DESTINATION_AIRPORT"]
     event = event_of(focal_row)
     sched = hhmm_to_min(focal_row["SCHEDULED_ARRIVAL"])
-    earliest = sched + (event["magnitude_min"] if event["type"] == "late_aircraft" else 0)
+    earliest = earliest_arrival_min(sched, event)
     hours = range(sched // 60 - atc_config.HORIZON_HOURS, sched // 60 + atc_config.HORIZON_HOURS + 2)
 
     background: list[Arrival] = []
@@ -462,7 +470,10 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
     shift_min = round(rules.ground_crew_shift_h * 60)
     notice_min = round(rules.gate_change_notice_min)
     sched_arr = hhmm_to_min(focal["SCHEDULED_ARRIVAL"])
-    disrupted_arr = sched_arr + magnitude
+    disrupted_arr = earliest_arrival_min(sched_arr, {"type": event_type, "magnitude_min": magnitude})
+    # The synthetic gate occupancy and crew shift are anchored on when the event clears: the scheduled
+    # arrival plus the reported delay minutes (the airport is backed up until then).
+    event_end = sched_arr + magnitude
     rng = random.Random(seed)
 
     nxt = [
@@ -486,10 +497,10 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
     for g in gates:
         if g == scheduled_gate or g in spares:
             continue
-        busy[g].append(BusyWindow(sched_arr - rng.randint(0, 60), disrupted_arr + rng.randint(30, 180), "background"))
+        busy[g].append(BusyWindow(sched_arr - rng.randint(0, 60), event_end + rng.randint(30, 180), "background"))
     # The next flight planned for the focal's gate is itself held, so the gate frees late.
     busy[scheduled_gate].append(
-        BusyWindow(sched_arr + 40, disrupted_arr + rng.randint(15, 28), "background (next flight at scheduled gate)")
+        BusyWindow(sched_arr + 40, event_end + rng.randint(15, 28), "background (next flight at scheduled gate)")
     )
 
     return GroundState(
@@ -502,10 +513,11 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
         event_magnitude_min=magnitude,
         scheduled_arrival_min=sched_arr,
         disrupted_arrival_min=disrupted_arr,
+        event_end_min=event_end,
         scheduled_gate=scheduled_gate,
         now_min=disrupted_arr - 60,
         next_departure_min=next_dep,
-        crew_shift_start_min=disrupted_arr + rng.randint(10, 30) - shift_min,
+        crew_shift_start_min=event_end + rng.randint(10, 30) - shift_min,
         connecting_pax=rng.randint(18, 40),
         connection_slack_min=rng.randint(8, 20),
         crew_shift_min=shift_min,
@@ -513,8 +525,11 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
         gate_busy=busy,
         provenance={
             "flight, tail, scheduled times, event type/magnitude": "real (DOT 2015)",
+            "disrupted arrival": "derived (earliest arrival: scheduled + late-aircraft delay; weather: scheduled)",
+            "announce time": "synthetic (60 min before the disrupted arrival)",
             "next departure": next_src,
             "gate count, min turnaround, spare gates, crew shift, gate-change notice": LIMITS_SOURCE,
-            "gate occupancy, scheduled gate, crew shift start, connections, announce time": f"synthetic (seed {seed})",
+            "gate occupancy, scheduled gate, crew shift start, connections": f"synthetic (seed {seed}), "
+            "anchored on scheduled arrival + reported delay",
         },
     )
