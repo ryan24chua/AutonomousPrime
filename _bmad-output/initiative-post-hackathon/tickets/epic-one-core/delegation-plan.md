@@ -2,6 +2,18 @@
 
 **Status:** approved 2026-11-11.
 
+## Progress (2026-11-17, session paused)
+
+- **Done on `refactor/one-core`:** stories 12, 13, 1, 2, 3 (A, then B1–B7), 4, 5. Each has a `story-*-plan.md` with its deferred items.
+- **Story 7:** code merged; the live demo-row check is pending (needs a key or the user running `pytest -m live`). The response cache is now on by default for live runs: a decision for the user.
+- **Next:**
+  1. Story 7 live check.
+  2. Story 6 (one cost module).
+  3. Stories 8, 9 (republish RESULTS.md; its numbers must match story 3's B1/B5/B7 commit messages), 10, 11.
+- **Headline moved in story 3:**
+  - Per-flight seeding (B5) removed a shared spare gate.
+  - Sample consensus fell from 24/32 to 19/32, and the mean negotiated cost rose from $822 to $1,759.
+
 ## Context
 
 Epic 2 (`_bmad-output/initiative-post-hackathon/tickets/epic-one-core/`) collapses the hackathon's three parallel implementations into one core:
