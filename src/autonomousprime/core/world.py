@@ -9,7 +9,7 @@ The checker, the cost and the fallback are code, not parties: they read the whol
 
 Every synthetic or derived value carries a label (`real`, `derived`, `workbook`, `synthetic`); `WorldState.provenance`
 collects them. The three views were built by three separate lanes and still disagree on some derived values
-("2400", the seeding); each is unified in its own commit.
+(the seeding); it is unified in its own commit.
 """
 
 from __future__ import annotations

@@ -1,6 +1,7 @@
 """Time helpers for the core: minutes after local midnight, DOT-style HHMM, display "HH:MM".
 
-Every world builder converts times through this module.
+Every world builder converts times through this module. One rule for DOT's "2400": it is 1440 minutes,
+the end of the scheduled day (displayed "24:00"), never 00:00 of the same day.
 """
 
 
@@ -24,10 +25,9 @@ def min_to_hhmm(m: int) -> str:
 
 
 def dot_to_hhmm(s: str) -> str:
-    """DOT 'HHMM' -> 'HH:MM' for the Pilot's view. '2400' becomes '00:00' of the same date
-    (the Pilot's rule today; the ATC and Ground views read '2400' as 1440)."""
-    s = s.zfill(4)
-    return f"{int(s[:2]) % 24:02d}:{s[2:]}"
+    """DOT 'HHMM' -> 'HH:MM' for the Pilot's view; '2400' -> '24:00' (1440, see the module rule)."""
+    m = hhmm_to_min(s)
+    return f"{m // 60:02d}:{m % 60:02d}"
 
 
 def to_min(t: str) -> int:
