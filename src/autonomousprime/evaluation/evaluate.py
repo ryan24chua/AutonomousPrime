@@ -52,7 +52,7 @@ from autonomousprime.fallback import config as fb_config
 from autonomousprime.fallback.scenario import solve_scenario
 from autonomousprime.agents.ground.checker import check_ground
 
-from autonomousprime.core.world import event_of
+from autonomousprime.core.world import date_of, event_of
 from autonomousprime.infra import data
 
 FLIGHTS = paths.FLIGHTS
@@ -77,10 +77,12 @@ LABELS = {
 
 
 # ---------------------------------------------------------------- data + sampling
-def load_rows() -> dict[tuple[str, str], list[dict]]:
+def load_rows() -> dict[tuple[str, str, str], list[dict]]:
+    """Every row by full date (YEAR, MONTH, DAY as csv strings), file order."""
     by_day = defaultdict(list)
-    for (_, month, day), rows in data.days().items():
-        by_day[(str(month), str(day))].extend(rows)
+    for rows in data.days().values():
+        for r in rows:
+            by_day[date_of(r)].append(r)
     return by_day
 
 
@@ -101,6 +103,7 @@ def sample(by_day) -> list[tuple[str, dict]]:
             pool = sorted(
                 strata[(hub, ev)],
                 key=lambda r: (
+                    int(r["YEAR"]),
                     int(r["MONTH"]),
                     int(r["DAY"]),
                     r["AIRLINE"],
@@ -116,7 +119,7 @@ def demo_row(by_day) -> dict:
     y, m, d = DEMO[0].split("-")
     return next(
         r
-        for r in by_day[(str(int(m)), str(int(d)))]
+        for r in by_day[(str(int(y)), str(int(m)), str(int(d)))]
         if r["DESTINATION_AIRPORT"] == DEMO[1] and f"{r['AIRLINE']}{r['FLIGHT_NUMBER']}" == DEMO[2]
     )
 
@@ -465,7 +468,7 @@ async def run(live_n: int) -> None:
     picks = [("demo", demo_row(by_day))] + sample(by_day)
     recs = []
     for stratum, row in picks:
-        day = by_day[(row["MONTH"], row["DAY"])]
+        day = by_day[date_of(row)]
         try:
             recs.append(await evaluate_one(stratum, row, day))
         except Exception as e:  # a failure is a result: record it, keep going
@@ -507,7 +510,7 @@ async def run(live_n: int) -> None:
         chosen = [picks[0]] + [(st, rw) for (st, rw), r in zip(picks, recs) if r.get("id") in no_cons][: live_n - 1]
         for stratum, row in chosen:
             try:
-                live.append(await evaluate_one(stratum, row, by_day[(row["MONTH"], row["DAY"])], live_client=client))
+                live.append(await evaluate_one(stratum, row, by_day[date_of(row)], live_client=client))
             except Exception as e:
                 live.append({"id": row["FLIGHT_NUMBER"], "stratum": stratum, "error": f"{type(e).__name__}: {e}"})
             print("live", live[-1].get("id"), live[-1].get("outcome", live[-1].get("error")), flush=True)

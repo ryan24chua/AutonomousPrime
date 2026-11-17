@@ -81,12 +81,13 @@ def _patched(out_dir: Path):
 
 
 def _evaluation(by_day: dict, out_dir: Path) -> list[dict]:
+    from autonomousprime.core.world import date_of
     from autonomousprime.evaluation import evaluate as ev
 
     picks = [("demo", ev.demo_row(by_day))] + ev.sample(by_day)
     rows = []
     for stratum, row in picks:
-        rec = asyncio.run(ev.evaluate_one(stratum, row, by_day[(row["MONTH"], row["DAY"])]))
+        rec = asyncio.run(ev.evaluate_one(stratum, row, by_day[date_of(row)]))
         log = out_dir / "logs" / f"{rec['id']}-{rec['mode']}.jsonl"
         rec["mediator_log"] = [json.loads(line) for line in log.read_text().splitlines() if line.strip()]
         rows.append(project(rec))

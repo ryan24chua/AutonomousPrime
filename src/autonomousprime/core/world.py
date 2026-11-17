@@ -9,7 +9,7 @@ The checker, the cost and the fallback are code, not parties: they read the whol
 
 Every synthetic or derived value carries a label (`real`, `derived`, `workbook`, `synthetic`); `WorldState.provenance`
 collects them. The three views were built by three separate lanes and still disagree on some derived values
-(the year filter, "2400", the seeding); each is unified in its own commit.
+("2400", the seeding); each is unified in its own commit.
 """
 
 from __future__ import annotations
@@ -178,7 +178,8 @@ def build_world(
     day_rows: list[dict], focal_row: dict, seed: int = 7, weather_cut: float = atc_config.WEATHER_CUT
 ) -> WorldState:
     """The world for one disrupted arrival. `day_rows` are every loader row of the focal's date (file order) and
-    `focal_row` is one of them (the same object)."""
+    `focal_row` is one of them (the same object). Raises ValueError if a row is from another date."""
+    _check_one_date(day_rows, focal_row)
     return WorldState(
         seed=seed,
         focal=strip_hindsight(focal_row),
@@ -189,6 +190,19 @@ def build_world(
 
 
 # ---------------------------------------------------------------- shared row helpers
+def date_of(row: dict) -> tuple[str, str, str]:
+    """The full date of a row (YEAR, MONTH, DAY), as the exact csv strings."""
+    return row["YEAR"], row["MONTH"], row["DAY"]
+
+
+def _check_one_date(day_rows: list[dict], focal_row: dict) -> None:
+    """The one year filter: a world is built from the rows of the focal's full date only."""
+    date = date_of(focal_row)
+    other = next((r for r in day_rows if date_of(r) != date), None)
+    if other is not None:
+        raise ValueError(f"world for {'-'.join(date)} got a row dated {'-'.join(date_of(other))}")
+
+
 def _num(v: str) -> float:
     return float(v) if v not in ("", None) else 0.0
 

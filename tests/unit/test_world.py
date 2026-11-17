@@ -108,3 +108,13 @@ def test_every_view_uses_one_event_classifier(demo_world):
         event["type"],
         event["magnitude_min"],
     )
+
+
+def test_world_refuses_rows_from_another_date():
+    from autonomousprime.core.world import build_world
+    from autonomousprime.infra import data
+
+    rows = data.day(2015, 4, 24)
+    focal = next(r for r in rows if (r["AIRLINE"], r["FLIGHT_NUMBER"], r["ORIGIN_AIRPORT"]) == ("AA", "1480", "MCI"))
+    with pytest.raises(ValueError, match="another|dated"):
+        build_world(rows + data.day(2015, 4, 25)[:1], focal, seed=7)
