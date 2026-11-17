@@ -149,3 +149,10 @@ def test_non_hub_negotiates_end_to_end():
     result = service.negotiate(NON_HUB, seed=7, live=False)
     Path(result.log_path).unlink(missing_ok=True)
     assert result.outcome in ("consensus", "halt_least_cost", "recommend_cancel")
+
+
+def test_scheduled_gate_comes_from_the_world():
+    keys = [DEMO, FlightKey(2015, 4, 24, "AA", "36", "SAN"), SMALL_HUB, NON_HUB]
+    gates = [build_world_for(k, seed=7).ground.scheduled_gate for k in keys]
+    assert len(set(gates)) > 1, "the scheduled gate must be drawn per flight, not fixed"
+    assert build_world_for(DEMO, seed=7).ground.scheduled_gate == gates[0]

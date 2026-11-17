@@ -524,7 +524,8 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
         next_dep, next_src = sched_arr + 75, "synthetic (no linked next leg in the filtered data)"
 
     gates = _gate_ids(limits.gates)
-    scheduled_gate = f"A{min(12, len(gates))}"
+    # The flight's planned gate: a seeded draw per flight, in its own stream so it moves no other draw.
+    scheduled_gate = flight_rng(seed, focal_row, "ground-scheduled-gate").choice(gates)
     candidates = _spare_candidates(gates, scheduled_gate)
     spares = rng.sample(candidates, min(limits.spare_gates_at_any_time, len(candidates)))
     busy: dict[str, list[BusyWindow]] = {g: [] for g in gates}

@@ -14,7 +14,6 @@ TRIGGERS = ("no_consensus_r3", "no_valid_r1", "agent_error", "malformed_twice", 
 MIN_FUEL_FLAG_MIN = 10  # fuel margin below this -> MINIMUM_FUEL flag (soft)
 
 # --- Synthetic world ---
-SCHEDULED_GATE = "A12"  # same synthetic choice as ground_agent.inputs
 CONNECTING_PAX_RANGE = (18, 40)  # seeded uniform
 CONNECTION_SLACK_RANGE = (8, 20)  # minutes, seeded uniform
 CREW_END_SLACK_RANGE = (10, 40)  # shift ends this long after the minimum-turnaround finish, seeded
