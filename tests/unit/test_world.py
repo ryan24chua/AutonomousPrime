@@ -1,0 +1,83 @@
+"""core.world: one frozen WorldState per negotiation, each role reading only its own view."""
+
+import dataclasses
+
+import pytest
+
+from autonomousprime import service
+from autonomousprime.core import world as core_world
+from autonomousprime.core.world import GroundState, PilotInputs, World, WorldState
+from autonomousprime.mediator import adapters
+from autonomousprime.service import FlightKey, build_world_for
+
+DEMO = FlightKey(2015, 4, 24, "AA", "1480", "MCI")  # DFW weather row used by the console
+
+# What only one role may see. A view must not carry another role's private inputs.
+PRIVATE = {
+    "atc": {"background", "weather_hours", "weather_cut", "focal_earliest_arr_min"},
+    "pilot": {"alternate", "connections", "crew_report", "mct_min", "aircraft_class"},
+    "ground": {
+        "gate_busy",
+        "scheduled_gate",
+        "crew_shift_start_min",
+        "connecting_pax",
+        "connection_slack_min",
+        "now_min",
+    },
+}
+VIEW_TYPES = {"atc": World, "pilot": PilotInputs, "ground": GroundState}
+
+
+@pytest.fixture(scope="module")
+def demo_world() -> WorldState:
+    return build_world_for(DEMO, seed=7)
+
+
+@pytest.mark.parametrize("role", list(VIEW_TYPES))
+def test_view_excludes_other_roles_private_fields(role):
+    names = {f.name for f in dataclasses.fields(VIEW_TYPES[role])}
+    assert PRIVATE[role] <= names, f"{role} view lost its own fields"
+    for other, private in PRIVATE.items():
+        if other != role:
+            assert not names & private, f"{role} view carries {other}'s private fields {names & private}"
+
+
+def test_views_and_provenance(demo_world):
+    for role, cls in VIEW_TYPES.items():
+        assert isinstance(demo_world.view(role), cls)
+    with pytest.raises(KeyError):
+        demo_world.view("mediator")
+    assert demo_world.negotiation_id == "DFW-20150424-AA1480"
+    prov = demo_world.provenance
+    for role in VIEW_TYPES:
+        assert any(k.startswith(f"{role}: ") for k in prov), f"no provenance for {role}"
+    assert all(v for v in prov.values())
+
+
+def test_world_state_is_frozen(demo_world):
+    with pytest.raises(dataclasses.FrozenInstanceError):
+        demo_world.seed = 8
+
+
+def test_focal_carries_no_hindsight(demo_world):
+    from autonomousprime.infra.data import OUTCOME_COLUMNS
+
+    assert not set(OUTCOME_COLUMNS) & set(demo_world.focal)
+
+
+def test_build_world_runs_once_per_negotiate(monkeypatch):
+    calls = []
+    real = core_world.build_world
+
+    def counting(*a, **k):
+        calls.append(1)
+        return real(*a, **k)
+
+    monkeypatch.setattr(adapters, "build_world", counting)
+    result = service.negotiate(DEMO, seed=7, live=False)
+    try:
+        assert len(calls) == 1
+    finally:
+        from pathlib import Path
+
+        Path(result.log_path).unlink(missing_ok=True)

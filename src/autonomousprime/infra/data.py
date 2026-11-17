@@ -19,6 +19,7 @@ import pickle
 import shutil
 import sys
 import tempfile
+from functools import lru_cache
 from pathlib import Path
 
 from autonomousprime import paths
@@ -166,3 +167,10 @@ def outcomes(
     if r is None:
         raise LookupError(f"no flight {airline}{flight_number} from {origin} on {year}-{month}-{day}")
     return {k: r[k] for k in OUTCOME_COLUMNS if k in r}
+
+
+@lru_cache(maxsize=1)
+def airports() -> dict[str, dict]:
+    """airports.csv by IATA code (real coordinates; no outcome data)."""
+    with open(paths.AIRPORTS, newline="") as f:
+        return {r["IATA_CODE"]: r for r in csv.DictReader(f)}

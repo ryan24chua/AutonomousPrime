@@ -14,9 +14,9 @@ from autonomousprime.agents.ground.assumptions import (
     MAX_GATE_WAIT_MIN,
     OVERTIME_MULTIPLIER,
 )
-from autonomousprime.agents.ground.inputs import WorldState
+from autonomousprime.core.world import GroundState
 from autonomousprime.agents.ground.options import cheapest_valid, enumerate_options, ranked_alternatives
-from autonomousprime.agents.ground.timeutil import min_to_hhmm
+from autonomousprime.core.timeutil import min_to_hhmm
 
 # The brief: "Ground: optimise gate utilisation, avoid ground-crew overtime, minimise turnaround delays."
 STATED_OBJECTIVES = {
@@ -80,7 +80,7 @@ def _interest_defs() -> list[dict]:
 # Args: state - world state.
 # Returns: JSON-serialisable dict: interests, constraints, alternatives (options, ranked, BATNA),
 #   priorities (ranked by stake), notes, acdm.
-def build_icap(state: WorldState) -> dict:
+def build_icap(state: GroundState) -> dict:
     options = enumerate_options(state, state.disrupted_arrival_min)
     valid = [o for o in options if o.selectable]
     item = lambda o, k: o.cost["items"][k]  # noqa: E731

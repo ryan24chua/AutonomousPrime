@@ -23,9 +23,10 @@ from autonomousprime.agents.ground.assumptions import LIMITS_SOURCE, MAX_GATE_WA
 from autonomousprime.agents.ground.checker import GroundCheck, check_ground
 from autonomousprime.agents.ground.cost import cost_ground
 from autonomousprime.agents.ground.icap import build_icap
-from autonomousprime.agents.ground.inputs import WorldState, walk_min
+from autonomousprime.agents.ground.inputs import walk_min
+from autonomousprime.core.world import GroundState
 from autonomousprime.agents.ground.options import free_gate_ids
-from autonomousprime.agents.ground.timeutil import min_to_hhmm
+from autonomousprime.core.timeutil import min_to_hhmm
 
 DEFAULT_MODEL = "claude-sonnet-5-5"
 MAX_TOKENS = 4000
@@ -84,7 +85,7 @@ def assert_no_hindsight(obj) -> None:
 # Args: state - world state.
 # Returns: JSON-serialisable dict.
 # Raises: ValueError if a hindsight field slipped in.
-def build_ground_facts(state: WorldState) -> dict:
+def build_ground_facts(state: GroundState) -> dict:
     icap = build_icap(state)
     free_gates = [
         {"gate": g, "terminal": g[0], "walk_min_from_scheduled_gate": walk_min(state.scheduled_gate, g)}
@@ -141,7 +142,7 @@ def build_ground_facts(state: WorldState) -> dict:
 # The plan Ground assumes before anyone has negotiated: arrive at the disrupted time, scheduled gate.
 # Args: state - world state.
 # Returns: baseline Plan.
-def baseline_plan(state: WorldState) -> Plan:
+def baseline_plan(state: GroundState) -> Plan:
     return Plan(
         arrival_slot=min_to_hhmm(state.disrupted_arrival_min),
         ground_delay_min=0,
@@ -165,7 +166,7 @@ class GroundAgent:
     # Round 1: parallel analysis. Ground proposes its preferred gate.
     # Args: state - world state.
     # Returns: AgentMessage with action "propose" (or "reject" if the model never gave valid output).
-    async def propose(self, state: WorldState) -> AgentMessage:
+    async def propose(self, state: GroundState) -> AgentMessage:
         user = (
             "Round 1. Propose your preferred gate for the focal flight, "
             "using only the facts block. Action must be `propose`. Fill requested_next_action."
@@ -178,7 +179,7 @@ class GroundAgent:
     # Returns: AgentMessage with action accept/counter/reject.
     async def respond(
         self,
-        state: WorldState,
+        state: GroundState,
         round_no: int,
         table_plan_id: str,
         table_plan: Plan,

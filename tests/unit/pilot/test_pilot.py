@@ -14,7 +14,7 @@ from autonomousprime.agents.pilot.agent import (
     pilot_facts,
 )
 from autonomousprime.infra import data
-from autonomousprime.agents.pilot.inputs import Alternate, Connection, PilotInputs, build_pilot_inputs
+from autonomousprime.core.world import Alternate, Connection, PilotInputs, build_world
 from autonomousprime.agents.schema import AgentMessage, Plan
 
 RULES = fuel_crew_rules()
@@ -223,10 +223,9 @@ def test_agents_run_concurrently_not_sequentially():
 
 
 def test_real_row_dfw_demo_day():
-    row = next(
-        r for r in data.day(2015, 4, 24) if r["DESTINATION_AIRPORT"] == "DFW" and float(r["WEATHER_DELAY"] or 0) > 15
-    )
-    inp = build_pilot_inputs(row, seed=7)
+    rows = data.day(2015, 4, 24)
+    row = next(r for r in rows if r["DESTINATION_AIRPORT"] == "DFW" and float(r["WEATHER_DELAY"] or 0) > 15)
+    inp = build_world(rows, row, seed=7).pilot
     assert inp.event_type == "weather" and inp.alternate.iata != "DFW" and inp.alternate.distance_nm > 100
     facts = pilot_facts(inp, {"P1": plan(inp.sched_arr, gd=0)})
     for leaked in ("ARRIVAL_DELAY", "DEPARTURE_TIME", "ARRIVAL_TIME", "AIR_TIME"):

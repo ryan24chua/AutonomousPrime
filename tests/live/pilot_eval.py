@@ -20,7 +20,7 @@ from pathlib import Path
 
 from autonomousprime.agents.pilot.agent import PilotAgent
 from autonomousprime.infra import data
-from autonomousprime.agents.pilot.inputs import Alternate, Connection, PilotInputs, build_pilot_inputs
+from autonomousprime.core.world import Alternate, Connection, PilotInputs, build_world
 from autonomousprime.agents.schema import Plan
 
 OUT = Path(__file__).resolve().parents[2] / "results" / "pilot_live_eval.json"
@@ -33,13 +33,13 @@ def plan(slot, gd=0, hold=0, extra=0, divert=False):
     )
 
 
-def real_row():
-    return next(
-        r for r in data.day(2015, 4, 24) if r["DESTINATION_AIRPORT"] == "DFW" and float(r["WEATHER_DELAY"] or 0) > 15
-    )
+def real_inputs():
+    rows = data.day(2015, 4, 24)
+    row = next(r for r in rows if r["DESTINATION_AIRPORT"] == "DFW" and float(r["WEATHER_DELAY"] or 0) > 15)
+    return build_world(rows, row, seed=7).pilot
 
 
-REAL = build_pilot_inputs(real_row(), seed=7)  # AA36 SAN->DFW, weather
+REAL = real_inputs()  # AA36 SAN->DFW, weather
 SYN = PilotInputs(
     flight="AA100",
     tail="N1AA",

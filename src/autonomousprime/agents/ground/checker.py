@@ -3,7 +3,7 @@
 Rules: C-GATE-1 gate free (waiting allowed up to MAX_GATE_WAIT_MIN), C-GATE-2 gate-change
 notice, C-TURN-1 minimum turnaround (hard), C-CREW-1 crew overtime (soft: cost + flag).
 `check_ground` is the entry point for the shared checker.py. Limits come from the workbook
-(via WorldState); the wait cap is a labelled assumption (ground_agent/assumptions.py).
+(via GroundState); the wait cap is a labelled assumption (ground_agent/assumptions.py).
 """
 
 from dataclasses import dataclass, field
@@ -12,8 +12,9 @@ from typing import Optional
 from autonomousprime.agents.schema import Plan
 from autonomousprime.agents.ground.acdm import acdm_flags
 from autonomousprime.agents.ground.assumptions import MAX_GATE_WAIT_MIN
-from autonomousprime.agents.ground.inputs import WorldState, walk_min
-from autonomousprime.agents.ground.timeutil import hhmm_to_min
+from autonomousprime.agents.ground.inputs import walk_min
+from autonomousprime.core.world import GroundState
+from autonomousprime.core.timeutil import hhmm_to_min
 
 
 @dataclass
@@ -76,7 +77,7 @@ def _earliest_free_start(windows, arrival: int, turnaround: int) -> int:
 # Returns: GroundCheck (valid=False if any hard rule is violated; A-CDM flags are report-only).
 def check_ground(
     plan: Plan,
-    state: WorldState,
+    state: GroundState,
     turnaround_min: Optional[int] = None,
     previous_ready_min: Optional[int] = None,
 ) -> GroundCheck:

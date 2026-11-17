@@ -7,7 +7,8 @@ max(3600 / hourly arrival cap, wake gap for the pair / arrival runways). The age
 from dataclasses import asdict, dataclass
 
 from . import config
-from .world_stub import Arrival, World, hhmm_to_min, min_to_hhmm
+from autonomousprime.core.timeutil import hhmm_to_min, min_to_hhmm
+from autonomousprime.core.world import Arrival, World
 
 
 @dataclass

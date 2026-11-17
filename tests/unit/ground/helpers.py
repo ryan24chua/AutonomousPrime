@@ -1,12 +1,12 @@
 from autonomousprime.agents.constraints import airport_limits, fuel_crew_rules
 from autonomousprime.agents.schema import Plan
-from autonomousprime.agents.ground.inputs import BusyWindow, WorldState
-from autonomousprime.agents.ground.timeutil import min_to_hhmm
+from autonomousprime.core.timeutil import min_to_hhmm
+from autonomousprime.core.world import BusyWindow, GroundState
 
 
 # A small hand-built DFW state: arrival 20:00 (1200), gate A1 free, B2 busy to 20:20, no overtime.
 # Limits, crew shift and gate-change notice come from the workbook, like the real builder.
-def make_state(**over) -> WorldState:
+def make_state(**over) -> GroundState:
     rules = fuel_crew_rules()
     shift = round(rules.ground_crew_shift_h * 60)
     kw = dict(
@@ -30,7 +30,7 @@ def make_state(**over) -> WorldState:
         gate_busy={"A1": [], "A2": [], "B2": [BusyWindow(1150, 1220, "bg")], "C3": []},
     )
     kw.update(over)
-    return WorldState(**kw)
+    return GroundState(**kw)
 
 
 # Builds a plan arriving at `slot` minutes from midnight at `gate`.

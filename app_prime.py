@@ -104,14 +104,11 @@ def key_constraints(airline, flight_number, origin, month=MONTH, day=DAY):
     try:
         from autonomousprime.agents.constraints import fuel_crew_rules
         from autonomousprime.agents.pilot.agent import fuel_budget
-        from autonomousprime.agents.pilot.inputs import build_pilot_inputs
-        from autonomousprime.agents.ground.inputs import build_world
+        from autonomousprime.service import FlightKey, build_world_for
 
-        w = build_world(airline, flight_number, month, day, origin, SEED)
-        raw = load_row(airline, flight_number, origin, month, day)
-        fuel = fuel_budget(
-            build_pilot_inputs({**raw, "MONTH": str(month), "DAY": str(day), "YEAR": "2015"}, SEED), fuel_crew_rules()
-        )
+        world = build_world_for(FlightKey(2015, int(month), int(day), airline, flight_number, origin), SEED)
+        w = world.ground
+        fuel = fuel_budget(world.pilot, fuel_crew_rules())
         free = [g for g, ws in w.gate_busy.items() if not ws]
         return [
             ("Holdable fuel before divert", f"{fuel.holdable_before_divert_min:g} min (derived)"),

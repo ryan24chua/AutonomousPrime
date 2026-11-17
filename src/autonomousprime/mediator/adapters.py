@@ -3,7 +3,8 @@
 Nothing here edits another lane's code; it calls their public functions:
   ATC    agents/atc/    (World, build_menu, check_slot, ATCAgent)
   Pilot  agents/pilot/  (PilotInputs, assess_plan, pilot_alternatives, PilotAgent)
-  Ground agents/ground/ (WorldState, check_ground, cost_ground, free_gate_ids, GroundAgent)
+  Ground agents/ground/ (check_ground, cost_ground, free_gate_ids, GroundAgent)
+The world they read is built once by core/world.py.
 
 Rounds 1-2 (plans + 0-1 scores) are computed from each lane's own code-side assessment, so every
 number is code. Round 3 votes call the lanes' real agents (Claude) when live=True, else their dry-run
@@ -18,16 +19,14 @@ from dataclasses import dataclass
 from autonomousprime import paths
 from autonomousprime.agents.constraints import fuel_crew_rules
 from autonomousprime.agents.pilot.agent import PilotAgent, _rank_key, assess_plan, pilot_alternatives
-from autonomousprime.agents.pilot.inputs import PilotInputs, build_pilot_inputs
 from autonomousprime.agents.schema import Plan
 from autonomousprime.agents.atc.agent import ATCAgent
 from autonomousprime.agents.atc.menu import Option as ATCOption, build_menu, check_slot
-from autonomousprime.agents.atc.world_stub import World, build_world as build_atc_world
 from autonomousprime.agents.ground.agent import GroundAgent
 from autonomousprime.agents.ground.checker import check_ground
 from autonomousprime.agents.ground.cost import cost_ground
-from autonomousprime.agents.ground.inputs import WorldState, build_world as build_ground_world
 from autonomousprime.agents.ground.options import free_gate_ids
+from autonomousprime.core.world import GroundState, PilotInputs, World, WorldState, build_world
 
 from .core import PLANS_PER_AGENT, CheckResult, ScoredPlan, Vote, plan_key
 
@@ -36,31 +35,23 @@ REPO = paths.REPO
 
 @dataclass
 class Scenario:
-    """One disruption (one DOT row), built once per lane from the same row."""
+    """One disruption (one DOT row): the world, built once, plus ATC's arrival menu over it."""
 
     focal_row: dict
     atc_world: World
     atc_menu: list[ATCOption]
     pilot_inputs: PilotInputs
-    ground_state: WorldState
+    ground_state: GroundState
+    world: WorldState
 
     @property
     def negotiation_id(self) -> str:
-        f = self.focal_row
-        return f"{f['DESTINATION_AIRPORT']}-{self.atc_world.date.replace('-', '')}-{f['AIRLINE']}{f['FLIGHT_NUMBER']}"
+        return self.world.negotiation_id
 
 
 def build_scenario(day_rows: list[dict], focal_row: dict, seed: int = 7) -> Scenario:
-    world = build_atc_world(day_rows, focal_row, seed=seed)
-    ground = build_ground_world(
-        focal_row["AIRLINE"],
-        focal_row["FLIGHT_NUMBER"],
-        int(focal_row["MONTH"]),
-        int(focal_row["DAY"]),
-        focal_row["ORIGIN_AIRPORT"],
-        seed=seed,
-    )
-    return Scenario(focal_row, world, build_menu(world), build_pilot_inputs(focal_row, seed=seed), ground)
+    w = build_world(day_rows, focal_row, seed=seed)
+    return Scenario(focal_row, w.atc, build_menu(w.atc), w.pilot, w.ground, w)
 
 
 # ---------------------------------------------------------------- shared code: checker and cost

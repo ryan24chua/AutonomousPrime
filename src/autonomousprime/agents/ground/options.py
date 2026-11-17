@@ -8,8 +8,8 @@ from dataclasses import dataclass
 from autonomousprime.agents.schema import Plan
 from autonomousprime.agents.ground.checker import GroundCheck, check_ground
 from autonomousprime.agents.ground.cost import cost_ground
-from autonomousprime.agents.ground.inputs import WorldState
-from autonomousprime.agents.ground.timeutil import min_to_hhmm
+from autonomousprime.core.world import GroundState
+from autonomousprime.core.timeutil import min_to_hhmm
 
 
 @dataclass
@@ -31,7 +31,7 @@ class Option:
 # disrupted arrival (excludes the scheduled gate). Natural gate order (A2 before A10).
 # Args: state - world state.
 # Returns: list of gate ids.
-def free_gate_ids(state: WorldState) -> list[str]:
+def free_gate_ids(state: GroundState) -> list[str]:
     horizon_end = state.disrupted_arrival_min + 240
     free = [
         g
@@ -44,7 +44,7 @@ def free_gate_ids(state: WorldState) -> list[str]:
 # Enumerates the Ground options at a given arrival time: scheduled gate first, then each free gate.
 # Args: state - world state; arrival_min - arrival time in minutes from midnight.
 # Returns: list of Option with ids G1, G2, ...
-def enumerate_options(state: WorldState, arrival_min: int) -> list[Option]:
+def enumerate_options(state: GroundState, arrival_min: int) -> list[Option]:
     options = []
     for i, gate in enumerate([state.scheduled_gate] + free_gate_ids(state), start=1):
         plan = Plan(

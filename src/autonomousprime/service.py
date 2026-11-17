@@ -15,7 +15,8 @@ from dataclasses import dataclass
 from dotenv import load_dotenv
 
 from autonomousprime import paths
-from autonomousprime.agents.atc.world_stub import load_day, pick_focal
+from autonomousprime.core.world import WorldState, build_world, pick_focal
+from autonomousprime.infra.data import day as load_day
 from autonomousprime.mediator.adapters import LaneAgent, build_scenario, check_plan, plan_cost
 from autonomousprime.mediator.core import AGENTS, Log, run_negotiation
 from autonomousprime.mediator.report import render
@@ -97,6 +98,12 @@ def _find_row(key: FlightKey) -> tuple[list[dict], dict]:
         if (r["AIRLINE"], r["FLIGHT_NUMBER"], r["ORIGIN_AIRPORT"]) == (key.airline, key.flight_number, key.origin):
             return rows, r
     raise LookupError(f"row not found: {key}")
+
+
+def build_world_for(flight: FlightKey, seed: int = 7) -> WorldState:
+    """The world for one flight, outside a negotiation (the console's limits panel, demos, tests)."""
+    rows, focal = _find_row(flight)
+    return build_world(rows, focal, seed=seed)
 
 
 def _entry(rnd: int, agent: str, action: str, plan: dict | None, plan_id: str | None, reason: str, s, flags=()):

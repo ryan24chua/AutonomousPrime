@@ -12,7 +12,7 @@ from .facts import build_atc_facts
 from .menu import Option, build_menu, cheapest_valid, earliest_valid
 from .prompt import SYSTEM, user_message
 from .schema import validate
-from .world_stub import World
+from autonomousprime.core.world import World
 
 ENVELOPE_KEYS = frozenset(
     {"schema_version", "negotiation_id", "message_id", "state_revision", "ruleset_id", "status", "validator_errors"}

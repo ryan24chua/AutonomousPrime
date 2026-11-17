@@ -16,8 +16,8 @@ from autonomousprime.agents.ground.assumptions import ASSUMPTIONS
 from autonomousprime.agents.ground.checker import check_ground
 from autonomousprime.agents.ground.cost import cost_ground
 from autonomousprime.agents.ground.icap import build_icap
-from autonomousprime.agents.ground.inputs import build_world
-from autonomousprime.agents.ground.timeutil import min_to_hhmm
+from autonomousprime.service import FlightKey, build_world_for
+from autonomousprime.core.timeutil import min_to_hhmm
 
 
 # Prints a plan's Ground check and cost, all computed by code.
@@ -36,7 +36,7 @@ def show(title, plan, state):
 async def main():
     load_dotenv(REPO / ".env.local")
     load_dotenv(REPO / ".env")
-    state = build_world()
+    state = build_world_for(FlightKey(2015, 4, 24, "AA", "1480", "MCI"), seed=7).ground
     print(
         f"{state.focal_flight} {state.tail} {state.event_type} +{state.event_magnitude_min} min at {state.airport}; "
         f"scheduled {min_to_hhmm(state.scheduled_arrival_min)}, disrupted {min_to_hhmm(state.disrupted_arrival_min)}"

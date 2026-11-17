@@ -1,4 +1,4 @@
-from autonomousprime.agents.ground.inputs import BusyWindow
+from autonomousprime.core.world import BusyWindow
 from autonomousprime.agents.ground.options import cheapest_valid, enumerate_options, free_gate_ids, ranked_alternatives
 from tests.unit.ground.helpers import make_state
 

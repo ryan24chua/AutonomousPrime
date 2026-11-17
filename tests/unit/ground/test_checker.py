@@ -1,7 +1,8 @@
 from autonomousprime.agents.constraints import airport_limits
 from autonomousprime.agents.ground.checker import check_ground
 from autonomousprime.agents.ground.cost import cost_ground
-from autonomousprime.agents.ground.inputs import BusyWindow, build_world
+from autonomousprime.core.world import BusyWindow
+from autonomousprime.service import FlightKey, build_world_for
 from tests.unit.ground.helpers import make_state, plan
 
 
@@ -64,7 +65,7 @@ def test_other_terminal_gate_change_risks_connections():
 
 
 def test_demo_world_builds_from_real_row():
-    s = build_world()
+    s = build_world_for(FlightKey(2015, 4, 24, "AA", "1480", "MCI"), seed=7).ground
     assert (s.focal_flight, s.airport, s.event_type, s.event_magnitude_min) == ("AA1480", "DFW", "weather", 165)
     assert sum(1 for w in s.gate_busy.values() if not w) == 3  # spare gates from the workbook
     assert (s.crew_shift_min, s.gate_change_notice_min) == (480, 20)  # read from the workbook

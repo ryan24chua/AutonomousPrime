@@ -32,6 +32,7 @@ These came from the hackathon brief and are the design today, not rules. Changin
 
 ## Where things are
 
+- World: `core/world.py` builds one frozen `WorldState` per negotiation; each role reads only its own view (`world.view(role)`). Times go through `core/timeutil.py`.
 - Roles: `src/autonomousprime/agents/{atc,pilot,ground}/`, with each prompt beside its agent. The shared message schema and workbook limits are in `agents/schema.py` and `agents/constraints.py`.
 - Negotiation:
   - `mediator/core.py`: rounds, Nash pick, log.

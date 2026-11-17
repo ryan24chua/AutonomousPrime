@@ -5,7 +5,8 @@ from collections import Counter
 
 from . import config
 from .menu import Option, as_dicts
-from .world_stub import World, min_to_hhmm
+from autonomousprime.core.timeutil import min_to_hhmm
+from autonomousprime.core.world import World
 
 FOCAL_FIELDS = (
     "YEAR",

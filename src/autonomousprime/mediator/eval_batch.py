@@ -14,7 +14,8 @@ import random
 import time
 
 from autonomousprime import paths
-from autonomousprime.agents.atc.world_stub import event_of, load_day
+from autonomousprime.core.world import event_of
+from autonomousprime.infra.data import day as load_day
 
 from .adapters import LaneAgent, build_scenario, check_plan, plan_cost
 from .core import AGENTS, Log, run_negotiation

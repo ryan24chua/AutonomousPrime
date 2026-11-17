@@ -6,7 +6,7 @@ from autonomousprime.agents.ground.assumptions import ACDM_SOURCE
 from autonomousprime.agents.ground.checker import check_ground
 from autonomousprime.agents.ground.cost import cost_ground
 from autonomousprime.agents.ground.icap import build_icap
-from autonomousprime.agents.ground.inputs import BusyWindow
+from autonomousprime.core.world import BusyWindow
 from tests.unit.ground.helpers import make_state, plan
 
 

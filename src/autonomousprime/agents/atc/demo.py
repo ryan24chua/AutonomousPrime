@@ -12,7 +12,8 @@ import json
 from . import config
 from .agent import ATCAgent
 from .menu import Option, cheapest_valid, check_slot
-from .world_stub import build_world, load_day, pick_focal
+from autonomousprime.core.world import build_world, pick_focal
+from autonomousprime.infra import data
 
 
 def table_plan(plan_id: str, proposed_by: str, opt: Option, menu: list[Option]) -> dict:
@@ -44,10 +45,10 @@ def main() -> None:
     a = p.parse_args()
 
     y, m, d = map(int, a.date.split("-"))
-    rows = load_day(y, m, d)
+    rows = data.day(y, m, d)
     focal = pick_focal(rows, a.dest, a.flight)
     cut = config.WEATHER_CUT_SENSITIVITY if a.sensitivity else config.WEATHER_CUT
-    world = build_world(rows, focal, weather_cut=cut)
+    world = build_world(rows, focal, seed=0, weather_cut=cut).atc
     agent = ATCAgent(world, dry_run=a.dry_run)
 
     print(f"Negotiation {agent.negotiation_id}")

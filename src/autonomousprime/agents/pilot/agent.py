@@ -23,7 +23,8 @@ from pathlib import Path
 import anthropic
 
 from autonomousprime.agents.constraints import ASSUMPTIONS, FuelCrewRules, fuel_crew_rules
-from autonomousprime.agents.pilot.inputs import PilotInputs, to_min
+from autonomousprime.core.timeutil import to_min
+from autonomousprime.core.world import PilotInputs
 from autonomousprime.agents.schema import AgentMessage, Alternative, FailedConstraint, ICAPBrief, Plan, validate_ranges
 
 MODEL = "claude-sonnet-5-5"  # docs/hackathon/mvp-spec.md section 14: agents on Sonnet tier

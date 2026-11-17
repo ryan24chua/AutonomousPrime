@@ -52,7 +52,7 @@ from autonomousprime.fallback import config as fb_config
 from autonomousprime.fallback.scenario import solve_scenario
 from autonomousprime.agents.ground.checker import check_ground
 
-from autonomousprime.agents.atc.world_stub import event_of
+from autonomousprime.core.world import event_of
 from autonomousprime.infra import data
 
 FLIGHTS = paths.FLIGHTS
