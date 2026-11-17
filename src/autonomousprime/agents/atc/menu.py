@@ -133,7 +133,9 @@ def build_menu(world: World) -> list[Option]:
 
 
 def check_slot(plan: dict, menu: list[Option]) -> dict:
-    """Stub of the checker (contract v0.2 shape): the plan must match a code-computed option exactly."""
+    """ATC's slot check (contract v0.2 shape): the plan must match a code-computed option exactly.
+
+    core/rules/atc.py registers it as C-CAP-1. Fuel is the Pilot's rule (core/rules/pilot.py), not ATC's."""
     key = (plan.get("arrival_slot"), plan.get("ground_delay_min"), plan.get("holding_min"))
     opt = next((o for o in menu if key == (o.arrival_slot, o.ground_delay_min, o.holding_min)), None)
     violations = [] if opt is None else list(opt.violations)
@@ -149,20 +151,7 @@ def check_slot(plan: dict, menu: list[Option]) -> dict:
             "unit": "arrivals_per_hour",
         }
     ]
-    if plan.get("holding_min") is not None:
-        hold, limit = plan["holding_min"], config.HOLDABLE_MIN + (plan.get("extra_fuel_min") or 0)
-        checks.append(
-            {
-                "rule_id": "C-FUEL-1",
-                "result": "PASS" if hold <= limit else "FAIL",
-                "actual": hold,
-                "limit": limit,
-                "unit": "holding_min",
-            }
-        )
-        if hold > limit:
-            violations.append(f"C-FUEL-1: holding {hold} min exceeds limit {limit} min")
-    valid = cap_ok and all(c["result"] == "PASS" for c in checks)
+    valid = cap_ok
     return {"status": "VALID" if valid else "INVALID", "valid": valid, "checks": checks, "violations": violations}
 
 

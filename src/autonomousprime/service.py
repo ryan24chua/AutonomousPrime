@@ -17,7 +17,8 @@ from dotenv import load_dotenv
 from autonomousprime import paths
 from autonomousprime.core.world import WorldState, build_world, pick_focal
 from autonomousprime.infra.data import day as load_day
-from autonomousprime.mediator.adapters import LaneAgent, build_scenario, check_plan, plan_cost
+from autonomousprime.core import rules
+from autonomousprime.mediator.adapters import LaneAgent, build_scenario, plan_cost
 from autonomousprime.mediator.core import AGENTS, Log, run_negotiation
 from autonomousprime.mediator.report import render
 
@@ -107,7 +108,7 @@ def build_world_for(flight: FlightKey, seed: int = 7) -> WorldState:
 
 
 def _entry(rnd: int, agent: str, action: str, plan: dict | None, plan_id: str | None, reason: str, s, flags=()):
-    chk = check_plan(s, plan) if plan else None
+    chk = rules.check(s, plan) if plan else None
     return {
         "round": rnd,
         "agent": agent,
@@ -155,7 +156,7 @@ def negotiate(flight: FlightKey, seed: int = 7, live: bool = False) -> RunResult
         "data": "DOT 2015 flights.csv row + organiser workbook limits",
         "synthetic_inputs": "gate occupancy, filler arrivals, connecting pax, crew report (labelled in each lane)",
     }
-    out = asyncio.run(run_negotiation(agents, lambda pl: check_plan(s, pl), lambda pl: plan_cost(s, pl), log, context))
+    out = asyncio.run(run_negotiation(agents, lambda pl: rules.check(s, pl), lambda pl: plan_cost(s, pl), log, context))
     fb = None
     if out.outcome != "consensus":
         from autonomousprime.fallback.scenario import solve_scenario

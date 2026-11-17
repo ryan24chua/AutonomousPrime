@@ -33,13 +33,13 @@ import time
 from collections import Counter, defaultdict
 
 from autonomousprime import paths
+from autonomousprime.core import rules
 from autonomousprime.mediator.adapters import (
     PROPOSERS,
     LaneAgent,
     Scenario,
     _atc_option,
     build_scenario,
-    check_plan,
     plan_cost,
     score_plans,
 )
@@ -136,7 +136,7 @@ def metrics(s: Scenario, plan: dict | None, forced_divert: bool = False) -> dict
             "cost_usd": fb_config.CANCEL_COST,
             "full_cost_usd": fb_config.CANCEL_COST,
         }
-    chk = check_plan(s, plan)
+    chk = rules.check(s, plan)
     a = assess_plan("m", Plan(**plan), s.pilot_inputs, fuel_crew_rules())
     g = check_ground(Plan(**plan), s.ground_state).metrics
     opt = _atc_option(s, plan)
@@ -221,7 +221,7 @@ async def evaluate_one(stratum: str, row: dict, day_rows: list[dict], live_clien
     agents = {n: LaneAgent(n, s, live=live_client is not None, client=live_client) for n in AGENTS}
     out = await run_negotiation(
         agents,
-        lambda p: check_plan(s, p),
+        lambda p: rules.check(s, p),
         lambda p: plan_cost(s, p),
         Log(log_path, sid),
         {"eval": True, "stratum": stratum},
@@ -256,17 +256,17 @@ async def evaluate_one(stratum: str, row: dict, day_rows: list[dict], live_clien
     short = shortlist(cands)
     for c in short:
         c.cost_usd = round(plan_cost(s, c.plan), 2)
-        c.check = check_plan(s, c.plan)
+        c.check = rules.check(s, c.plan)
     for a in AGENTS:
         sc = score_plans(a, s, {c.plan_id: c.plan for c in short})
         for c in short:
             c.r2_scores[a] = max(0.05, sc[c.plan_id].score)
     pick = nash_pick(short) if short else None
     rec["ablation_checker_off"] = {
-        "unsafe_candidates": sum(1 for c in cands if not check_plan(s, c.plan).valid),
+        "unsafe_candidates": sum(1 for c in cands if not rules.check(s, c.plan).valid),
         "candidates": len(cands),
         "unsafe_agent_favourites": [
-            a for a in AGENTS if proposals[a] and not check_plan(s, proposals[a][0].plan).valid
+            a for a in AGENTS if proposals[a] and not rules.check(s, proposals[a][0].plan).valid
         ],
         "pick_unsafe": bool(pick and not pick.check.valid),
         "pick_violations": pick.check.violations if pick else [],
@@ -278,8 +278,8 @@ async def evaluate_one(stratum: str, row: dict, day_rows: list[dict], live_clien
     as_shipped = sum(
         1
         for o in holds
-        if check_plan(s, {**o.plan(gs)}).violations
-        and any(v.startswith("C-FUEL-1") for v in check_plan(s, o.plan(gs)).violations)
+        if rules.check(s, {**o.plan(gs)}).violations
+        and any(v.startswith("C-FUEL-1") for v in rules.check(s, o.plan(gs)).violations)
     )
     fixed = 0
     for o in holds:

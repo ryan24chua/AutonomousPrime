@@ -122,7 +122,7 @@ def write_results(summary: dict, recs: list[dict]) -> Path:
         "| Structured messages (brief) | Met | `mediator/core.py` ScoredPlan / Vote; message contract in `core/contracts.py` |"
     )
     w(
-        f"| Explicit constraint checking in code (brief, rubric 25%) | Met | `check_plan`: C-CAP-1, C-FUEL-1, C-CREW-2, "
+        f"| Explicit constraint checking in code (brief, rubric 25%) | Met | `core.rules.check`: C-CAP-1, C-FUEL-1, C-CREW-2, "
         f"C-GATE-1/2, C-TURN-1; {A['unsafe_candidates_caught']} unsafe plans caught |"
     )
     w(
@@ -162,7 +162,7 @@ def write_results(summary: dict, recs: list[dict]) -> Path:
     # ------------------------------------------------------------ cost by method
     w("## 2. Cost improvement: every method on the same scenarios\n")
     w(
-        "All methods use the same scenario, the same checker (`mediator.adapters.check_plan`) and the same cost model "
+        "All methods use the same scenario, the same checker (`core.rules.check`) and the same cost model "
         "(`plan_cost`: ATC delay/holding/knock-on + Ground gate/crew/connection). *Connection-aware* adds "
         "$200 for each passenger the Pilot lane counts as missing a connection because of the arrival time, which "
         "`plan_cost` leaves out (§5).\n"

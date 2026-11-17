@@ -1,5 +1,5 @@
 """Fallback on the mediator's own scenario: same ATC slot menu, same gates, same checker and cost as the
-negotiation, so the fallback plan always passes the mediator's final safety check (check_plan).
+negotiation, so the fallback plan always passes the mediator's final safety check (core.rules.check).
 evaluation/evaluate.py reads the cost weights from fallback/config.py.
 """
 
@@ -8,17 +8,18 @@ from autonomousprime.agents.ground.options import free_gate_ids
 TIE_BREAK = ["cost_usd", "total_system_delay_min", "holding_min", "divert", "arrival_slot", "gate"]
 
 
-# Least-cost plan that passes mediator.adapters.check_plan, or a cancellation recommendation.
+# Least-cost plan that passes core.rules.check, or a cancellation recommendation.
 # Args: s - mediator Scenario; trigger - why the fallback runs (config.TRIGGERS).
 # Returns: a dict with the fallback plan, its cost and the rejected-rule counts, or a cancellation recommendation.
 def solve_scenario(s, trigger: str) -> dict:
-    from autonomousprime.mediator.adapters import check_plan, plan_cost  # lazy: mediator imports fallback
+    from autonomousprime.core import rules
+    from autonomousprime.mediator.adapters import plan_cost  # lazy: mediator imports fallback
 
     gates = [s.ground_state.scheduled_gate] + free_gate_ids(s.ground_state)
     cands = [(o, o.plan(g)) for o in s.atc_menu for g in gates]
     scored, rejected = [], {}
     for n, (o, plan) in enumerate(cands, 1):
-        chk = check_plan(s, plan)
+        chk = rules.check(s, plan)
         if not chk.valid:
             for v in chk.violations:
                 rid = v.split(":")[0]

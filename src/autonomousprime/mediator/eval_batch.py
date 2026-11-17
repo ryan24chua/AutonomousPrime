@@ -17,7 +17,9 @@ from autonomousprime import paths
 from autonomousprime.core.world import event_of
 from autonomousprime.infra.data import day as load_day
 
-from .adapters import LaneAgent, build_scenario, check_plan, plan_cost
+from autonomousprime.core import rules
+
+from .adapters import LaneAgent, build_scenario, plan_cost
 from .core import AGENTS, Log, run_negotiation
 
 RESULTS = paths.RESULTS
@@ -43,7 +45,7 @@ def run_one(rows, focal, seed, live, client) -> dict:
     agents = {n: LaneAgent(n, s, live=live, client=client) for n in AGENTS}
     log = Log(paths.REPO / "logs" / "eval" / f"{s.negotiation_id}.jsonl", s.negotiation_id)
     log.path.unlink(missing_ok=True)
-    out = asyncio.run(run_negotiation(agents, lambda pl: check_plan(s, pl), lambda pl: plan_cost(s, pl), log))
+    out = asyncio.run(run_negotiation(agents, lambda pl: rules.check(s, pl), lambda pl: plan_cost(s, pl), log))
     fb = solve_scenario(s, "baseline")
     rec = {
         "flight": s.negotiation_id,
@@ -54,7 +56,7 @@ def run_one(rows, focal, seed, live, client) -> dict:
     }
     if out.plan:
         rec["agents_plan_cost"] = round(plan_cost(s, out.plan), 2)
-        rec["chosen_plan_valid"] = check_plan(s, out.plan).valid
+        rec["chosen_plan_valid"] = rules.check(s, out.plan).valid
         rec["plan"] = out.plan
     return rec
 

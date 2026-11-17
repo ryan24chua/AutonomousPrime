@@ -19,7 +19,8 @@ from dataclasses import dataclass
 from autonomousprime import paths
 from autonomousprime.agents.constraints import fuel_crew_rules
 from autonomousprime.agents.pilot.agent import PilotAgent, _rank_key, assess_plan, pilot_alternatives
-from autonomousprime.core.contracts import CheckResult, Plan, ScoredPlan, Vote
+from autonomousprime.core import rules
+from autonomousprime.core.contracts import Plan, ScoredPlan, Vote
 from autonomousprime.agents.atc.agent import ATCAgent
 from autonomousprime.agents.atc.menu import Option as ATCOption, build_menu, check_slot
 from autonomousprime.agents.ground.agent import GroundAgent
@@ -58,25 +59,6 @@ def build_scenario(day_rows: list[dict], focal_row: dict, seed: int = 7) -> Scen
 def _atc_option(s: Scenario, plan: dict) -> ATCOption | None:
     key = (plan["arrival_slot"], plan["ground_delay_min"], plan["holding_min"])
     return next((o for o in s.atc_menu if (o.arrival_slot, o.ground_delay_min, o.holding_min) == key), None)
-
-
-def check_plan(s: Scenario, plan: dict) -> CheckResult:
-    """Every lane's hard constraints, in code. A plan survives only if all pass."""
-    violations: list[str] = []
-    slot = check_slot({**plan, "gate": None}, s.atc_menu)  # C-CAP-1 (+ ATC's fuel stub)
-    violations += [v for v in slot["violations"] if not v.startswith("C-FUEL-1")]  # Pilot owns fuel below
-    p = Plan(**plan)
-    a = assess_plan("chk", p, s.pilot_inputs, fuel_crew_rules())
-    if not a.fuel_ok:
-        violations.append(f"C-FUEL-1: fuel margin {a.fuel_margin_min} min < 0")
-    if not a.duty_ok:
-        violations.append(f"C-CREW-2: flight crew duty margin {a.duty_margin_min} min < 0")
-    if plan.get("gate") is None:
-        violations.append("C-GATE-1: no gate in plan")
-    else:
-        g = check_ground(p, s.ground_state)
-        violations += [f"{v.rule_id}: {v.message}" for v in g.violations]
-    return CheckResult(not violations, violations)
 
 
 def plan_cost(s: Scenario, plan: dict) -> float:
@@ -234,7 +216,7 @@ class LaneAgent:
             msg = await asyncio.to_thread(self.agent.respond, 3, table, table["check"], [])
             return Vote(msg.get("action") == "accept", msg.get("reason", ""), tuple(msg.get("flags") or ()))
         if self.name == "pilot":
-            msg = await self.agent.respond(self.s.pilot_inputs, plan_id, p, check_plan(self.s, plan).__dict__, [], 3)
+            msg = await self.agent.respond(self.s.pilot_inputs, plan_id, p, rules.check(self.s, plan).__dict__, [], 3)
             return Vote(msg.action == "accept", msg.reason, tuple(msg.flags))
         chk = check_ground(p, self.s.ground_state)
         if self.agent is None:  # dry run: Ground accepts any plan passing its hard rules
