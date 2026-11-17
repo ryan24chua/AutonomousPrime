@@ -461,9 +461,24 @@ def terminal_of(gate: str) -> str:
     return gate[0]
 
 
+GATES_PER_TERMINAL = 30  # SYNTHETIC layout
+
+
 def _gate_ids(n: int) -> list[str]:
-    """Gate ids for an airport: 30 gates per terminal A.. (SYNTHETIC layout)."""
-    return [f"{'ABCDEFGH'[i // 30]}{i % 30 + 1}" for i in range(n)]
+    """Gate ids for an airport with `n` gates: 30 per terminal, A.. (SYNTHETIC layout). Works for any size:
+    an airport with 30 gates or fewer has one terminal."""
+    return [f"{_terminal_letter(i // GATES_PER_TERMINAL)}{i % GATES_PER_TERMINAL + 1}" for i in range(n)]
+
+
+def _terminal_letter(i: int) -> str:
+    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i]
+
+
+def _spare_candidates(gates: list[str], scheduled_gate: str) -> list[str]:
+    """Where the free (spare) gates are drawn from: another terminal than the scheduled gate's when the airport
+    has more than one, else any other gate of its one terminal."""
+    other_terminal = [g for g in gates if terminal_of(g) != terminal_of(scheduled_gate)]
+    return other_terminal or [g for g in gates if g != scheduled_gate]
 
 
 def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundState:
@@ -509,10 +524,9 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
         next_dep, next_src = sched_arr + 75, "synthetic (no linked next leg in the filtered data)"
 
     gates = _gate_ids(limits.gates)
-    scheduled_gate = "A12"
-    spares = rng.sample(
-        [g for g in gates if terminal_of(g) != terminal_of(scheduled_gate)], limits.spare_gates_at_any_time
-    )
+    scheduled_gate = f"A{min(12, len(gates))}"
+    candidates = _spare_candidates(gates, scheduled_gate)
+    spares = rng.sample(candidates, min(limits.spare_gates_at_any_time, len(candidates)))
     busy: dict[str, list[BusyWindow]] = {g: [] for g in gates}
     for g in gates:
         if g == scheduled_gate or g in spares:

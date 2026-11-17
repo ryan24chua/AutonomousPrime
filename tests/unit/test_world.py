@@ -127,3 +127,25 @@ def test_synthetic_draws_are_keyed_per_flight():
     spares = lambda w: [g for g, busy in w.ground.gate_busy.items() if not busy]  # noqa: E731
     assert spares(a) != spares(b), "two flights must not share the same synthetic gate world"
     assert spares(build_world_for(DEMO, seed=7)) == spares(a), "same flight and seed must repeat exactly"
+
+
+SMALL_HUB = FlightKey(2015, 4, 24, "AA", "71", "DFW")  # -> SJC, 30 gates (one terminal)
+NON_HUB = FlightKey(2015, 4, 24, "AA", "125", "DFW")  # -> PNS, 8 gates
+
+
+@pytest.mark.parametrize("key", [SMALL_HUB, NON_HUB], ids=["small_hub", "non_hub"])
+def test_gate_world_works_at_any_airport_size(key):
+    g = build_world_for(key, seed=7).ground
+    assert g.limits.size_class in ("Small hub", "Non-hub")
+    assert len(g.gate_busy) == g.limits.gates
+    assert g.scheduled_gate in g.gate_busy
+    spares = [gate for gate, busy in g.gate_busy.items() if not busy]
+    assert spares and g.scheduled_gate not in spares
+
+
+def test_non_hub_negotiates_end_to_end():
+    from pathlib import Path
+
+    result = service.negotiate(NON_HUB, seed=7, live=False)
+    Path(result.log_path).unlink(missing_ok=True)
+    assert result.outcome in ("consensus", "halt_least_cost", "recommend_cancel")
