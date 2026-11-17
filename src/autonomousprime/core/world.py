@@ -9,7 +9,7 @@ The checker, the cost and the fallback are code, not parties: they read the whol
 
 Every synthetic or derived value carries a label (`real`, `derived`, `workbook`, `synthetic`); `WorldState.provenance`
 collects them. The three views were built by three separate lanes and still disagree on some derived values
-(the disrupted arrival, the event type, the year filter, "2400", the seeding); each is unified in its own commit.
+(the year filter, "2400", the seeding); each is unified in its own commit.
 """
 
 from __future__ import annotations
@@ -194,6 +194,9 @@ def _num(v: str) -> float:
 
 
 def event_of(row: dict) -> dict | None:
+    """The disruption on a row, the one classifier for every view: weather if WEATHER_DELAY > 15 min,
+    else late aircraft if LATE_AIRCRAFT_DELAY > 20 min, else none. The size is the recorded cause minutes,
+    known at decision time (register S5)."""
     if _num(row["WEATHER_DELAY"]) > 15:
         return {"type": "weather", "magnitude_min": int(_num(row["WEATHER_DELAY"]))}
     if _num(row["LATE_AIRCRAFT_DELAY"]) > 20:
@@ -388,8 +391,7 @@ def derive_connections(row: dict, by_origin_day, seed: int) -> tuple[Connection,
 def _pilot_view(day_rows: list[dict], focal_row: dict, seed: int, airborne: bool = False) -> PilotInputs:
     by_origin_day = _schedule_index(day_rows)
     row = {k: focal_row[k] for k in PILOT_COLUMNS}
-    w, late = float(row["WEATHER_DELAY"] or 0), float(row["LATE_AIRCRAFT_DELAY"] or 0)
-    event = "weather" if (w > 15 and w >= late) else "late_aircraft"
+    event = event_of(row)
     dist = int(float(row["DISTANCE"]))
     limits = airport_limits().get(row["DESTINATION_AIRPORT"])
     mct = ASSUMPTIONS["mct_min"].get(limits.size_class if limits else "", ASSUMPTIONS["mct_min"]["default"])
@@ -404,8 +406,8 @@ def _pilot_view(day_rows: list[dict], focal_row: dict, seed: int, airborne: bool
         sched_time_min=int(float(row["SCHEDULED_TIME"])),
         distance_mi=dist,
         aircraft_class="widebody" if dist >= ASSUMPTIONS["widebody_if_distance_mi_at_least"] else "narrowbody",
-        event_type=event,
-        event_magnitude_min=int(w if event == "weather" else late),
+        event_type=event["type"],
+        event_magnitude_min=event["magnitude_min"],
         airborne=airborne,
         alternate=nearest_alternate(row["DESTINATION_AIRPORT"]),
         crew_report=crew_report_time(row, by_origin_day),
@@ -456,13 +458,10 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
     )
     if focal is None:
         raise LookupError("focal flight not found in flights.csv")
-    weather, late = int(focal["WEATHER_DELAY"] or 0), int(focal["LATE_AIRCRAFT_DELAY"] or 0)
-    if weather > 15:
-        event_type, magnitude = "weather", weather
-    elif late > 20:
-        event_type, magnitude = "late_aircraft", late
-    else:
+    event = event_of(focal)
+    if event is None:
         raise LookupError("row is not a weather/late-aircraft disruption")
+    event_type, magnitude = event["type"], event["magnitude_min"]
 
     airport = focal["DESTINATION_AIRPORT"]
     limits = airport_limits()[airport]
@@ -470,7 +469,7 @@ def _ground_view(day_rows: list[dict], focal_row: dict, seed: int) -> GroundStat
     shift_min = round(rules.ground_crew_shift_h * 60)
     notice_min = round(rules.gate_change_notice_min)
     sched_arr = hhmm_to_min(focal["SCHEDULED_ARRIVAL"])
-    disrupted_arr = earliest_arrival_min(sched_arr, {"type": event_type, "magnitude_min": magnitude})
+    disrupted_arr = earliest_arrival_min(sched_arr, event)
     # The synthetic gate occupancy and crew shift are anchored on when the event clears: the scheduled
     # arrival plus the reported delay minutes (the airport is backed up until then).
     event_end = sched_arr + magnitude

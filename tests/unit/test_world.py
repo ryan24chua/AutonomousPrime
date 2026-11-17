@@ -93,3 +93,18 @@ def test_every_view_shares_one_disrupted_arrival(key):
     assert w.ground.disrupted_arrival_min == w.atc.focal_earliest_arr_min
     assert w.ground.now_min == w.ground.disrupted_arrival_min - 60
     assert w.ground.event_end_min == w.ground.scheduled_arrival_min + w.ground.event_magnitude_min
+
+
+def test_every_view_uses_one_event_classifier(demo_world):
+    from autonomousprime.core.world import event_of
+
+    event = event_of(demo_world.focal)
+    assert demo_world.atc.event == event
+    assert (demo_world.pilot.event_type, demo_world.pilot.event_magnitude_min) == (
+        event["type"],
+        event["magnitude_min"],
+    )
+    assert (demo_world.ground.event_type, demo_world.ground.event_magnitude_min) == (
+        event["type"],
+        event["magnitude_min"],
+    )
