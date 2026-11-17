@@ -159,7 +159,22 @@ def test_refusal_and_api_error_become_reject():
     s = make_state()
     assert run(GroundAgent(FakeClient([resp(None, stop="refusal")])).propose(s)).action == "reject"
     err = anthropic.APIConnectionError(request=httpx2.Request("POST", "https://api.anthropic.com"))
-    assert run(GroundAgent(FakeClient([err])).propose(s)).action == "reject"
+    assert run(GroundAgent(FakeClient([err, err])).propose(s)).action == "reject"
+
+
+def test_max_tokens_and_missing_output_reject_at_once_without_a_re_ask():
+    s = make_state()
+    for r in (resp(decision(), stop="max_tokens"), resp(None)):
+        client = FakeClient([r, resp(decision())])
+        m = run(GroundAgent(client).propose(s))
+        assert m.action == "reject" and "no usable output" in m.reason and len(client.calls) == 1
+
+
+def test_api_error_retries_once_in_the_gateway_then_rejects_with_api_error():
+    err = anthropic.APIConnectionError(request=httpx2.Request("POST", "https://api.anthropic.com"))
+    client = FakeClient([err, err])
+    m = run(GroundAgent(client).propose(make_state()))
+    assert m.action == "reject" and "API error" in m.reason and len(client.calls) == 2
 
 
 def test_system_prompt_has_ground_facts_only_and_cache_breakpoint():

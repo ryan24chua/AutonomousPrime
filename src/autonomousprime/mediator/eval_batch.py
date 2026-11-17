@@ -70,11 +70,9 @@ def main() -> None:
 
     client = None
     if not a.dry_run:
-        import anthropic
-        from dotenv import load_dotenv
+        from autonomousprime.infra.llm import make_gateway
 
-        load_dotenv(paths.REPO / ".env.local")
-        client = anthropic.AsyncAnthropic()
+        client = make_gateway()
     rows = load_day(2015, 4, 24)
     picked = sample_rows(rows, "DFW", a.n_each, a.seed)
     recs, t0 = [], time.time()

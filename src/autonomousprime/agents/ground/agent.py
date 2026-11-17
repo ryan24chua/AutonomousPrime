@@ -11,15 +11,13 @@ This module adds only Ground's role.
 """
 
 import json
-import time
 from pathlib import Path
 from typing import Literal, Optional
 
-import anthropic
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel
 
+from autonomousprime.agents.base import Checked, RoleAgent
 from autonomousprime.core.contracts import (
-    LIMITS,
     AgentMessage,
     Alternative,
     FailedConstraint,
@@ -35,10 +33,8 @@ from autonomousprime.agents.ground.inputs import walk_min
 from autonomousprime.core.world import GroundState
 from autonomousprime.agents.ground.options import free_gate_ids
 from autonomousprime.core.timeutil import min_to_hhmm
+from autonomousprime.infra.llm import LLMResult
 
-DEFAULT_MODEL = "claude-sonnet-5-5"
-MAX_TOKENS = 4000
-EFFORT = "medium"
 PROMPT_PATH = Path(__file__).parent / "prompts" / "ground.md"
 # Outcome columns agents must never see (docs/hackathon/mvp-spec.md section 6, "No hindsight").
 FORBIDDEN_FIELDS = {
@@ -161,15 +157,20 @@ def baseline_plan(state: GroundState) -> Plan:
     )
 
 
-class GroundAgent:
-    # Args: client - AsyncAnthropic (or a compatible fake); model - model id; log_path - optional JSONL file
-    #   that receives one line per LLM call.
-    def __init__(self, client, model: str = DEFAULT_MODEL, log_path: Optional[Path] = None):
-        self.client = client
-        self.model = model
-        self.log_path = Path(log_path) if log_path else None
-        self.call_log: list[dict] = []
-        self._role_prompt = PROMPT_PATH.read_text()
+def _ask_again(text: str) -> dict:
+    return {"role": "user", "content": text}
+
+
+# Ground's failure policy: a schema-invalid reply is re-asked; a refusal, truncation, empty reply or API error
+# gives up at once (the agent then rejects).
+def _on_failure(res: LLMResult) -> list[dict] | None:
+    return [_ask_again(f"Your reply was invalid: {res.error}. Reply again.")] if res.kind == "invalid" else None
+
+
+class GroundAgent(RoleAgent):
+    # Args: client - an LLMGateway, or a raw async client (tests); None builds the live gateway.
+    def __init__(self, client=None):
+        super().__init__("ground", PROMPT_PATH, client)
 
     # Round 1: parallel analysis. Ground proposes its preferred gate.
     # Args: state - world state.
@@ -218,49 +219,35 @@ class GroundAgent:
     # Returns: AgentMessage.
     async def _run(self, state, round_no, user, mode, base_plan, table_id, table_check) -> AgentMessage:
         facts = build_ground_facts(state)
-        system = [
-            {"type": "text", "text": self._role_prompt},
-            {
-                "type": "text",
-                "text": "FACTS:\n" + json.dumps(facts, sort_keys=True),
-                "cache_control": {"type": "ephemeral"},
-            },
-        ]
         messages = [{"role": "user", "content": user}]
-        for attempt in range(1, LIMITS.max_attempts + 1):
-            t0 = time.time()
+
+        def check(d: GroundDecision) -> Checked:
             try:
-                resp = await self.client.messages.parse(
-                    model=self.model,
-                    max_tokens=MAX_TOKENS,
-                    system=system,
-                    messages=messages,
-                    output_format=GroundDecision,
-                    output_config={"effort": EFFORT},
-                )
-            except ValidationError as e:
-                self._log(round_no, attempt, None, t0, error=f"schema: {e.errors()[0]['msg']}")
-                messages.append(
-                    {"role": "user", "content": f"Your reply was invalid: {e.errors()[0]['msg']}. Reply again."}
-                )
-                continue
-            except (anthropic.APIStatusError, anthropic.APIConnectionError) as e:
-                self._log(round_no, attempt, None, t0, error=f"api: {type(e).__name__}")
-                return self._reject(facts, round_no, "API error")
-            self._log(round_no, attempt, resp, t0)
-            if resp.stop_reason in ("refusal", "max_tokens") or resp.parsed_output is None:
-                return self._reject(facts, round_no, f"no usable output ({resp.stop_reason})")
-            try:
-                self._validate(resp.parsed_output, mode, [i["id"] for i in facts["icap"]["interests"]])
+                self._validate(d, mode, [i["id"] for i in facts["icap"]["interests"]])
             except ValueError as e:
-                messages.append({"role": "user", "content": f"Your reply was invalid: {e}. Reply again."})
-                continue
-            msg = self._to_message(resp.parsed_output, state, round_no, base_plan, table_id, table_check, facts)
+                return Checked(errors=[str(e)], followup=[_ask_again(f"Your reply was invalid: {e}. Reply again.")])
+            msg = self._to_message(d, state, round_no, base_plan, table_id, table_check, facts)
             problems = validate_ranges(msg)
             if problems:
-                messages.append({"role": "user", "content": f"Fix these problems and reply again: {problems}"})
-                continue
-            return msg
+                return Checked(
+                    errors=problems, followup=[_ask_again(f"Fix these problems and reply again: {problems}")]
+                )
+            return Checked(msg)
+
+        turn = await self.run_turn(
+            messages,
+            GroundDecision,
+            check,
+            system_extra=["FACTS:\n" + json.dumps(facts, sort_keys=True)],
+            on_failure=_on_failure,
+        )
+        if turn.ok:
+            return turn.value
+        kind = turn.last.kind
+        if kind in ("transient_error", "api_error"):
+            return self._reject(facts, round_no, "API error")
+        if kind in ("refusal", "max_tokens", "no_output"):
+            return self._reject(facts, round_no, f"no usable output ({turn.last.stop_reason})")
         return self._reject(facts, round_no, "invalid output twice")
 
     # Validates a decision against the protocol (code-side, not trusted to the model).
@@ -368,33 +355,3 @@ class GroundAgent:
             flags=[],
             icap=self._icap(facts, "Middleman: use the table plan or the fallback", None),
         )
-
-    # Appends one LLM-call record to memory and, if configured, to the JSONL log.
-    # Args: resp - API response or None; error - failure text if no response.
-    def _log(self, round_no: int, attempt: int, resp, t0: float, error: Optional[str] = None) -> None:
-        entry = {
-            "ts": time.time(),
-            "agent": "ground",
-            "round": round_no,
-            "attempt": attempt,
-            "model": self.model,
-            "latency_s": round(time.time() - t0, 2),
-            "error": error,
-        }
-        if resp is not None:
-            u = resp.usage
-            entry.update(
-                request_id=getattr(resp, "_request_id", None),
-                stop_reason=resp.stop_reason,
-                usage={
-                    "input": u.input_tokens,
-                    "output": u.output_tokens,
-                    "cache_creation": getattr(u, "cache_creation_input_tokens", None),
-                    "cache_read": getattr(u, "cache_read_input_tokens", None),
-                },
-            )
-        self.call_log.append(entry)
-        if self.log_path:
-            self.log_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(self.log_path, "a") as f:
-                f.write(json.dumps(entry) + "\n")

@@ -7,6 +7,7 @@ python -m autonomousprime.agents.atc.demo --sensitivity        # 17% weather cut
 """
 
 import argparse
+import asyncio
 import json
 
 from . import config
@@ -58,7 +59,7 @@ def main() -> None:
         f"| weather cut {cut:.0%} | menu {len(agent.menu)} options"
     )
 
-    r1 = agent.propose()
+    r1 = asyncio.run(agent.propose())
     print("\nROUND 1", json.dumps(r1, indent=1))
 
     # Stand-in for the middle man (rule 4): P1 = ATC's valid round-1 plan (the only real agent here);
@@ -75,7 +76,7 @@ def main() -> None:
         "flags": [a.flag] if a.flag else [],
         "reason": "stand-in Pilot message (demo only)",
     }
-    r2 = agent.respond(2, p1, p1["check"], [pilot])
+    r2 = asyncio.run(agent.respond(2, p1, p1["check"], [pilot]))
     print(
         f"\nROUND 2 (table {p1['plan_id']} {p1['plan']['arrival_slot']} by {p1['proposed_by']}/{p1['source_id']}, "
         f"Pilot flags {pilot['flags']})",
@@ -86,7 +87,7 @@ def main() -> None:
     table = p1
     if r2["action"] == "counter" and r2["status"] == "OK":
         table = table_plan("P2", "atc", next(o for o in agent.menu if o.option_id == r2["plan_id"]), agent.menu)
-    r3 = agent.respond(3, table, table["check"], [pilot | {"round": 3}])
+    r3 = asyncio.run(agent.respond(3, table, table["check"], [pilot | {"round": 3}]))
     print(f"\nROUND 3 (table {table['plan_id']} {table['plan']['arrival_slot']})", json.dumps(r3, indent=1))
 
     print(f"\nSUMMARY {agent.negotiation_id}")

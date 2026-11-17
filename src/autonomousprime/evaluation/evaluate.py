@@ -500,11 +500,9 @@ async def run(live_n: int) -> None:
     }
 
     if live_n:
-        import anthropic
-        from dotenv import load_dotenv
+        from autonomousprime.infra.llm import make_gateway
 
-        load_dotenv(paths.REPO / ".env.local")
-        client = anthropic.AsyncAnthropic()
+        client = make_gateway()
         live = []
         no_cons = {r["id"] for r in recs if r.get("outcome") == "no_consensus"}
         chosen = [picks[0]] + [(st, rw) for (st, rw), r in zip(picks, recs) if r.get("id") in no_cons][: live_n - 1]

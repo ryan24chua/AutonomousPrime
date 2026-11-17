@@ -7,10 +7,7 @@ Usage: .venv/bin/python -m autonomousprime.agents.ground.demo
 import asyncio
 import json
 
-import anthropic
-from dotenv import load_dotenv
 
-from autonomousprime.agents.constraints import REPO
 from autonomousprime.agents.ground.agent import GroundAgent, baseline_plan
 from autonomousprime.agents.ground.assumptions import ASSUMPTIONS
 from autonomousprime.agents.ground.checker import check_ground
@@ -18,6 +15,7 @@ from autonomousprime.agents.ground.cost import cost_ground
 from autonomousprime.agents.ground.icap import build_icap
 from autonomousprime.service import FlightKey, build_world_for
 from autonomousprime.core.timeutil import min_to_hhmm
+from autonomousprime.infra.llm import make_gateway
 
 
 # Prints a plan's Ground check and cost, all computed by code.
@@ -34,8 +32,6 @@ def show(title, plan, state):
 
 # Runs round 1 (propose) and round 2 (respond to a stub table plan) for the Ground agent.
 async def main():
-    load_dotenv(REPO / ".env.local")
-    load_dotenv(REPO / ".env")
     state = build_world_for(FlightKey(2015, 4, 24, "AA", "1480", "MCI"), seed=7).ground
     print(
         f"{state.focal_flight} {state.tail} {state.event_type} +{state.event_magnitude_min} min at {state.airport}; "
@@ -52,7 +48,8 @@ async def main():
     print("ICAP options:", json.dumps(icap["alternatives"]["options"]))
     print("BATNA:", json.dumps(icap["alternatives"]["batna"]))
 
-    agent = GroundAgent(anthropic.AsyncAnthropic(), log_path=REPO / "logs" / "ground_calls.jsonl")
+    gateway = make_gateway()  # calls are logged to logs/llm_calls.jsonl
+    agent = GroundAgent(gateway)
     msg = await agent.propose(state)
     print("\nROUND 1 message:\n", msg.model_dump_json(by_alias=True, indent=2))
     if msg.plan:
@@ -62,7 +59,7 @@ async def main():
     check = show("stub table plan P1 (scheduled gate)", table, state)
     reply = await agent.respond(state, 2, "P1", table, check, [{"round": 1, "message": msg.model_dump(by_alias=True)}])
     print("\nROUND 2 message:\n", reply.model_dump_json(by_alias=True, indent=2))
-    print("\nLLM calls:", json.dumps(agent.call_log, indent=2))
+    print("\nLLM calls:", json.dumps(gateway.calls, indent=2))
 
 
 if __name__ == "__main__":

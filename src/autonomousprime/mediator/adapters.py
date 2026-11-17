@@ -13,7 +13,6 @@ policies (ATC, Pilot) / Ground's hard check. Scores are normalised within the se
 
 from __future__ import annotations
 
-import asyncio
 from dataclasses import dataclass
 
 from autonomousprime import paths
@@ -191,7 +190,7 @@ class LaneAgent:
     def __init__(self, name: str, s: Scenario, live: bool = False, client=None):
         self.name, self.s, self.live = name, s, live
         if name == "atc":
-            self.agent = ATCAgent(s.atc_world, dry_run=not live, negotiation_id=s.negotiation_id)
+            self.agent = ATCAgent(s.atc_world, dry_run=not live, negotiation_id=s.negotiation_id, client=client)
         elif name == "pilot":
             self.agent = PilotAgent(client=client, dry_run=not live)
         else:
@@ -213,7 +212,7 @@ class LaneAgent:
                 "check": check_slot({**plan, "gate": None}, self.s.atc_menu),
                 "total_system_delay_min": opt.total_system_delay_min if opt else None,
             }
-            msg = await asyncio.to_thread(self.agent.respond, 3, table, table["check"], [])
+            msg = await self.agent.respond(3, table, table["check"], [])
             return Vote(msg.get("action") == "accept", msg.get("reason", ""), tuple(msg.get("flags") or ()))
         if self.name == "pilot":
             msg = await self.agent.respond(self.s.pilot_inputs, plan_id, p, rules.check(self.s, plan).__dict__, [], 3)

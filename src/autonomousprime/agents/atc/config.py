@@ -54,10 +54,6 @@ SCHEMA_VERSION = "0.2-hybrid"
 RULESET_ID = "challenge2-workbook-2026-10-31"
 FLAGS = ("MINIMUM_FUEL", "EMERGENCY_FUEL")  # closed enum, agent contract v0.2
 CAP10_TOLERANCE_MIN = 5  # counter only if own option beats the table by >= this much total system delay
-
-# --- Model ---
-MODEL = "claude-sonnet-5-5"
-MAX_TOKENS = 700
 HINDSIGHT_COLUMNS = frozenset(
     {
         "DEPARTURE_TIME",

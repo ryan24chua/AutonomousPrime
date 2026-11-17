@@ -5,6 +5,7 @@ import inspect
 import pytest
 
 from autonomousprime import cli, service
+from autonomousprime.infra import llm
 from autonomousprime.service import FlightKey, LiveUnavailable
 from demo_rows import DEMO_ROWS, row_date
 
@@ -13,7 +14,7 @@ from demo_rows import DEMO_ROWS, row_date
 def no_key(monkeypatch):
     """No API key, and no .env.local can supply one; building a scenario is a test failure."""
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    monkeypatch.setattr(service, "load_dotenv", lambda *a, **k: None)
+    monkeypatch.setattr(llm, "load_dotenv", lambda *a, **k: None)
 
     def fail(*a, **k):
         raise AssertionError("build_scenario must not run when live mode is unavailable")

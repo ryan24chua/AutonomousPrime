@@ -20,13 +20,12 @@ import math
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-import anthropic
-
+from autonomousprime.agents.base import Checked, RoleAgent
 from autonomousprime.agents.constraints import ASSUMPTIONS, FuelCrewRules, fuel_crew_rules
 from autonomousprime.core.timeutil import to_min
+from autonomousprime.infra.llm import LLMResult
 from autonomousprime.core.world import PilotInputs
 from autonomousprime.core.contracts import (
-    LIMITS,
     AgentMessage,
     Alternative,
     FailedConstraint,
@@ -35,9 +34,9 @@ from autonomousprime.core.contracts import (
     validate_ranges,
 )
 
-MODEL = "claude-sonnet-5-5"  # docs/hackathon/mvp-spec.md section 14: agents on Sonnet tier
-EFFORT = "medium"
-PROMPT = (Path(__file__).parent / "prompts" / "pilot.md").read_text()
+PROMPT_PATH = (
+    Path(__file__).parent / "prompts" / "pilot.md"
+)  # read on every call; model and tokens: infra.llm.ROLE_SETTINGS
 
 INTERESTS = {
     "weather": "Arrive safely without holding near the weather, keep fuel above the must-divert point, "
@@ -284,21 +283,17 @@ def pilot_facts(inp: PilotInputs, plans: dict[str, Plan], rules: FuelCrewRules |
 
 
 # ---------------------------------------------------------------- agent (Claude)
-class PilotAgent:
+class PilotAgent(RoleAgent):
     """Async: the middleman runs the three agents concurrently each round, e.g.
-    `await asyncio.gather(atc.respond(...), pilot.respond(...), ground.respond(...))`."""
+    `await asyncio.gather(atc.respond(...), pilot.respond(...), ground.respond(...))`.
+    `client`: an LLMGateway, a raw async client (tests), or None for the live gateway; unused in a dry run."""
 
-    def __init__(
-        self,
-        client: anthropic.AsyncAnthropic | None = None,
-        model: str = MODEL,
-        effort: str = EFFORT,
-        dry_run: bool = False,
-    ):
+    def __init__(self, client=None, dry_run: bool = False):
         self.dry_run = dry_run
-        self.client = None if dry_run else (client or anthropic.AsyncAnthropic())
-        self.model, self.effort = model, effort
-        self.calls: list[dict] = []  # per-call log for the consensus log / evaluation
+        if dry_run:
+            self.role, self._prompt, self.gateway = "pilot", PROMPT_PATH, None
+        else:
+            super().__init__("pilot", PROMPT_PATH, client)
 
     async def propose(self, inp: PilotInputs, candidates: dict[str, Plan], round_: int = 1) -> AgentMessage:
         facts = pilot_facts(inp, candidates)
@@ -331,52 +326,22 @@ class PilotAgent:
         messages = [
             {"role": "user", "content": f"FACTS (computed by code):\n{json.dumps(facts, indent=1)}\n\nTASK: {task}"}
         ]
-        for attempt in range(
-            1, LIMITS.max_attempts + 1
-        ):  # re-ask once, then treat as reject (docs/hackathon/mvp-spec.md section 5)
-            try:
-                resp = await self.client.messages.parse(
-                    model=self.model,
-                    max_tokens=4000,
-                    system=[{"type": "text", "text": PROMPT, "cache_control": {"type": "ephemeral"}}],
-                    messages=messages,
-                    output_format=AgentMessage,
-                    output_config={"effort": self.effort},
-                )
-            except anthropic.APIConnectionError as e:
-                self.calls.append({"attempt": attempt, "error": f"connection: {e}"})
-                continue
-            except anthropic.RateLimitError as e:
-                self.calls.append({"attempt": attempt, "error": f"rate_limited: {e.message}"})
-                continue
-            except anthropic.APIStatusError as e:
-                self.calls.append({"attempt": attempt, "error": f"api_{e.status_code}: {e.message}"})
-                break
-            self.calls.append(
-                {
-                    "attempt": attempt,
-                    "request_id": resp._request_id,
-                    "stop_reason": resp.stop_reason,
-                    "usage": resp.usage.model_dump(),
-                }
-            )
-            if resp.stop_reason in ("refusal", "max_tokens") or resp.parsed_output is None:
-                messages.append(
-                    {
-                        "role": "user",
-                        "content": f"Your last reply could not be used "
-                        f"(stop_reason={resp.stop_reason}). Reply again with one valid message.",
-                    }
-                )
-                continue
-            msg = resp.parsed_output
+
+        def check(msg: AgentMessage) -> Checked:
             problems = validate_ranges(msg)
             if not problems:
-                return msg
-            messages += [
-                {"role": "assistant", "content": msg.model_dump_json(by_alias=True)},
-                {"role": "user", "content": f"Fix these problems and reply again: {problems}"},
-            ]
+                return Checked(msg)
+            return Checked(
+                errors=problems,
+                followup=[
+                    {"role": "assistant", "content": msg.model_dump_json(by_alias=True)},
+                    {"role": "user", "content": f"Fix these problems and reply again: {problems}"},
+                ],
+            )
+
+        turn = await self.run_turn(messages, AgentMessage, check, on_failure=self._on_failure)
+        if turn.ok:
+            return turn.value
         return AgentMessage(
             **{"from": "pilot"},
             round=round_,
@@ -385,6 +350,11 @@ class PilotAgent:
             offer="none",
             reason="Pilot agent output invalid twice; treated as reject.",
         )
+
+    def _on_failure(self, res: LLMResult) -> list[dict] | None:
+        if res.kind == "transient_error":
+            return []  # connection / rate limit / 5xx after the gateway's retry: use the next attempt unchanged
+        return self.on_failure(res)  # refusal, truncation, empty or invalid reply: ask again; other API error: stop
 
     def _policy(self, inp: PilotInputs, facts: dict, round_: int) -> AgentMessage:
         """Deterministic stand-in for Claude (dry-run / tests): same priority order and ICAP brief as the prompt."""

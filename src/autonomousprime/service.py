@@ -8,13 +8,11 @@ A run is live only when the caller passes live=True; an API key in the environme
 
 import asyncio
 import json
-import os
 import time
 from dataclasses import dataclass
 
-from dotenv import load_dotenv
-
 from autonomousprime import paths
+from autonomousprime.infra.llm import LiveUnavailable, make_gateway  # noqa: F401  (LiveUnavailable: console import)
 from autonomousprime.core.world import WorldState, build_world, pick_focal
 from autonomousprime.infra.data import day as load_day
 from autonomousprime.core import rules
@@ -45,10 +43,6 @@ class FlightKey:
             spec["flight_number"],
             spec["origin"],
         )
-
-
-class LiveUnavailable(RuntimeError):
-    """Live mode was asked for but no API key is configured."""
 
 
 @dataclass
@@ -130,17 +124,9 @@ def _entry(rnd: int, agent: str, action: str, plan: dict | None, plan_id: str | 
 
 def negotiate(flight: FlightKey, seed: int = 7, live: bool = False) -> RunResult:
     """Run one negotiation. live=True -> real Claude votes (needs ANTHROPIC_API_KEY in .env.local); else a dry run."""
-    if live:
-        load_dotenv(paths.REPO / ".env.local")
-        if not os.environ.get("ANTHROPIC_API_KEY"):
-            raise LiveUnavailable("Live mode needs ANTHROPIC_API_KEY in .env.local")
+    client = make_gateway() if live else None  # raises LiveUnavailable without a key
     rows, focal = _find_row(flight)
     s = build_scenario(rows, focal, seed=seed)
-    client = None
-    if live:
-        import anthropic
-
-        client = anthropic.AsyncAnthropic()
     agents = {n: LaneAgent(n, s, live=live, client=client) for n in AGENTS}
     run_id = time.strftime("%Y%m%d-%H%M%S")
     log = Log(paths.REPO / "logs" / f"mediator-{s.negotiation_id}-{run_id}.jsonl", s.negotiation_id)
