@@ -18,32 +18,13 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Callable, Protocol
 
+from autonomousprime.core.contracts import CheckResult, ScoredPlan, Vote
+
 AGENTS = ("atc", "pilot", "ground")
 PLANS_PER_AGENT = 10
 SHORTLIST_PER_AGENT = 3
 SCORE_FLOOR = 0.05  # a 0 would zero the product and act as a veto; vetoes belong to the checker
 PLAN_FIELDS = ("arrival_slot", "ground_delay_min", "holding_min", "extra_fuel_min", "gate", "divert")
-
-
-@dataclass(frozen=True)
-class ScoredPlan:
-    """One plan as an agent sends it: the full plan, the agent's 0-1 score, and why."""
-
-    plan: dict
-    score: float
-    reason: str
-
-
-@dataclass(frozen=True)
-class Vote:
-    accept: bool
-    reason: str
-
-
-@dataclass(frozen=True)
-class CheckResult:
-    valid: bool
-    violations: list[str]  # each starts with a rule id, e.g. "C-FUEL-1: ..."
 
 
 class Agent(Protocol):

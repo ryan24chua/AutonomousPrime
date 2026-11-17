@@ -1,16 +1,45 @@
-"""Shared agent message schema (docs/hackathon/mvp-spec.md section 7). Every agent's output must validate against AgentMessage.
+"""The message contract: one definition of the agent message, the mediator's result types and the limits.
 
-Owned jointly by the agent lanes and the middleman lane: change it only with the team.
-Ranges (minutes >= 0, HH:MM format, word limits) are enforced in Python by `validate_ranges`,
-because structured outputs do not support min/max constraints in the schema.
+Agent message (docs/hackathon/mvp-spec.md section 7, docs/architecture.md section 5): every agent's output
+must validate against AgentMessage. Ranges (minutes >= 0, HH:MM format, word limits) are enforced in Python
+by `validate_ranges`, because structured outputs do not support min/max constraints in the schema.
+Mediator results (ScoredPlan, Vote, CheckResult) are frozen dataclasses. Message limits live in
+`MessageLimits`, validated at construction; the module-level `LIMITS` is the one instance in use.
 """
 
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
+
+
+@dataclass(frozen=True)
+class MessageLimits:
+    """Word limits and retry count for an agent message (design-register N7). Positive ints; tolerance >= 0."""
+
+    need_words: int = 20
+    offer_words: int = 20
+    reason_words: int = 30
+    word_tolerance: int = 5  # extra words `validate_ranges` allows; the UI trims. ATC's validator allows none.
+    max_attempts: int = 2  # calls per turn for a malformed reply: ask, then re-ask once
+
+    def __post_init__(self) -> None:
+        for name in ("need_words", "offer_words", "reason_words", "max_attempts"):
+            v = getattr(self, name)
+            if isinstance(v, bool) or not isinstance(v, int) or v <= 0:
+                raise ValueError(f"{name} must be a positive int, got {v!r}")
+        t = self.word_tolerance
+        if isinstance(t, bool) or not isinstance(t, int) or t < 0:
+            raise ValueError(f"word_tolerance must be an int >= 0, got {t!r}")
+
+    def word_limits(self) -> dict[str, int]:
+        return {"need": self.need_words, "offer": self.offer_words, "reason": self.reason_words}
+
+
+LIMITS = MessageLimits()
 
 AgentName = Literal["atc", "pilot", "ground"]
 Action = Literal["propose", "accept", "counter", "reject"]
@@ -86,7 +115,28 @@ def validate_ranges(msg: AgentMessage) -> list[str]:
         for name in ("ground_delay_min", "holding_min", "extra_fuel_min"):
             if getattr(p, name) < 0:
                 problems.append(f"{name} must be >= 0")
-    for name, limit in (("need", 20), ("offer", 20), ("reason", 30)):
-        if len(getattr(msg, name).split()) > limit + 5:  # small tolerance; trimmed by the UI
+    for name, limit in LIMITS.word_limits().items():
+        if len(getattr(msg, name).split()) > limit + LIMITS.word_tolerance:  # small tolerance; trimmed by the UI
             problems.append(f"{name} longer than {limit} words")
     return problems
+
+
+@dataclass(frozen=True)
+class ScoredPlan:
+    """One plan as an agent sends it: the full plan, the agent's 0-1 score, and why."""
+
+    plan: dict
+    score: float
+    reason: str
+
+
+@dataclass(frozen=True)
+class Vote:
+    accept: bool
+    reason: str
+
+
+@dataclass(frozen=True)
+class CheckResult:
+    valid: bool
+    violations: list[str]  # each starts with a rule id, e.g. "C-FUEL-1: ..."

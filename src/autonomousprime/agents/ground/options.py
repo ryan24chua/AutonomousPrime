@@ -5,7 +5,7 @@ minimum turnaround (a longer turnaround only adds cost, so it is not enumerated)
 
 from dataclasses import dataclass
 
-from autonomousprime.agents.schema import Plan
+from autonomousprime.core.contracts import Plan
 from autonomousprime.agents.ground.checker import GroundCheck, check_ground
 from autonomousprime.agents.ground.cost import cost_ground
 from autonomousprime.core.world import GroundState

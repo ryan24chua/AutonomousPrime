@@ -1,5 +1,5 @@
 from autonomousprime.agents.constraints import airport_limits, fuel_crew_rules
-from autonomousprime.agents.schema import Plan
+from autonomousprime.core.contracts import Plan
 from autonomousprime.core.timeutil import min_to_hhmm
 from autonomousprime.core.world import BusyWindow, GroundState
 

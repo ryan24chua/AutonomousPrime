@@ -16,6 +16,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 from autonomousprime import paths
+from autonomousprime.core.timeutil import hhmm_to_min, min_to_hhmm, to_min
 from autonomousprime.infra import data
 from autonomousprime.service import LiveUnavailable
 from demo_rows import DAY, DEMO_ROWS, MONTH, SEED, row_date
@@ -83,7 +84,7 @@ def render_stages(slot, active):
 # Formats an HHMM string or minutes-from-midnight int as HH:MM.
 def hhmm(v):
     if isinstance(v, (int, float)):
-        return f"{int(v) // 60 % 24:02d}:{int(v) % 60:02d}"
+        return min_to_hhmm(int(v))
     s = str(v).zfill(4)
     return f"{s[:2]}:{s[2:]}"
 
@@ -264,9 +265,8 @@ def render_summary(res, row):
     m1, m2, m3 = st.columns(3)
     slot = p.get("arrival_slot")
     if slot and not p.get("divert"):
-        sched = int(str(row["SCHEDULED_ARRIVAL"]).zfill(4)[:2]) * 60 + int(str(row["SCHEDULED_ARRIVAL"]).zfill(4)[2:])
-        h, mm = map(int, slot.split(":"))
-        m1.metric("Lands", slot, f"{h * 60 + mm - sched} min late", delta_color="inverse")
+        sched = hhmm_to_min(row["SCHEDULED_ARRIVAL"])
+        m1.metric("Lands", slot, f"{to_min(slot) - sched} min late", delta_color="inverse")
     m2.metric("Gate", p.get("gate") or "—")
     if isinstance(c.get("cost"), (int, float)):
         m3.metric("Estimated cost", f"${c['cost']:,.0f}")

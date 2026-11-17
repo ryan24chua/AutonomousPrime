@@ -47,7 +47,7 @@ from autonomousprime.mediator.core import AGENTS, Log, merge_duplicates, nash_pi
 
 from autonomousprime.agents.constraints import airport_limits, fuel_crew_rules
 from autonomousprime.agents.pilot.agent import assess_plan, fuel_budget
-from autonomousprime.agents.schema import Plan
+from autonomousprime.core.contracts import Plan
 from autonomousprime.fallback import config as fb_config
 from autonomousprime.fallback.scenario import solve_scenario
 from autonomousprime.agents.ground.checker import check_ground

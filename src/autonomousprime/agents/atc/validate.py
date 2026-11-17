@@ -1,12 +1,14 @@
-"""Validate an ATC message against agent contract v0.2, docs/hackathon/mvp-spec.md §7 and the ATC spec (CAP-4, 6, 7, 8, 10, 11)."""
+"""Validate an ATC message against its option menu: agent contract v0.2, docs/hackathon/mvp-spec.md §7 and the
+ATC spec (CAP-4, 6, 7, 8, 10, 11). Word limits come from `core.contracts.LIMITS`; ATC allows no tolerance."""
 
 import re
+
+from autonomousprime.core.contracts import LIMITS
 
 from . import config
 from .menu import Option
 
 NUM = re.compile(r"\d{1,2}:\d{2}|\d+(?:\.\d+)?")
-LIMITS = {"need": 20, "offer": 20, "reason": 30}
 MARGIN_WORDS = ("margin", "thin", "spare", "capacity", "cap")
 ACTIONS = {1: {"propose"}, 2: {"accept", "counter", "reject"}, 3: {"accept", "reject"}}
 PLAN_KEYS = ("arrival_slot", "ground_delay_min", "holding_min", "extra_fuel_min")
@@ -101,11 +103,11 @@ def validate(
                     f"otherwise accept"
                 )
 
-    for field, limit in LIMITS.items():
+    for field, limit in LIMITS.word_limits().items():
         words = len(str(msg.get(field, "")).split())
         if words > limit:
             errs.append(f'"{field}" has {words} words; max {limit}')
-    invented = numbers_in(" ".join(str(msg.get(f, "")) for f in LIMITS)) - numbers_in(allowed_text)
+    invented = numbers_in(" ".join(str(msg.get(f, "")) for f in LIMITS.word_limits())) - numbers_in(allowed_text)
     if invented:
         errs.append(f"CAP-6: numbers not in your facts or menu: {sorted(invented)}")
 

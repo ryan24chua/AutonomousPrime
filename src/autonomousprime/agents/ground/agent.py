@@ -1,7 +1,7 @@
 """Ground Ops agent: separate system prompt, one call per round, only Ground's facts.
 
 The model decides only the gate (GroundDecision) plus short text. Code assembles the shared
-AgentMessage (agents/schema.py): the full Plan, the safety flags, and the ICAP brief (interest,
+AgentMessage (core/contracts.py): the full Plan, the safety flags, and the ICAP brief (interest,
 concessions, deadline, failed constraint). An accept of a plan that is not on the table, or that
 fails the Ground check, is overridden to `reject` in code (same pattern as the Pilot agent).
 Invalid output is re-asked once, then becomes `reject`.
@@ -18,7 +18,15 @@ from typing import Literal, Optional
 import anthropic
 from pydantic import BaseModel, ValidationError
 
-from autonomousprime.agents.schema import AgentMessage, Alternative, FailedConstraint, ICAPBrief, Plan, validate_ranges
+from autonomousprime.core.contracts import (
+    LIMITS,
+    AgentMessage,
+    Alternative,
+    FailedConstraint,
+    ICAPBrief,
+    Plan,
+    validate_ranges,
+)
 from autonomousprime.agents.ground.assumptions import LIMITS_SOURCE, MAX_GATE_WAIT_MIN, OVERTIME_MULTIPLIER
 from autonomousprime.agents.ground.checker import GroundCheck, check_ground
 from autonomousprime.agents.ground.cost import cost_ground
@@ -219,7 +227,7 @@ class GroundAgent:
             },
         ]
         messages = [{"role": "user", "content": user}]
-        for attempt in (1, 2):
+        for attempt in range(1, LIMITS.max_attempts + 1):
             t0 = time.time()
             try:
                 resp = await self.client.messages.parse(

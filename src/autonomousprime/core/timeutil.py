@@ -18,6 +18,13 @@ def hhmm_to_min(s: str) -> int:
     return h * 60 + m
 
 
+def slot_to_min(slot: str, ref_min: int) -> int:
+    """Arrival slot 'HH:MM' -> minutes after midnight, rolling to the next day (+1440) when the slot is more
+    than 12 h before `ref_min` (the scheduled arrival, in minutes). Result may exceed 1440."""
+    m = hhmm_to_min(slot)
+    return m + 1440 if m < ref_min - 720 else m
+
+
 def min_to_hhmm(m: int) -> str:
     """Minutes after midnight -> 'HH:MM', wrapping past midnight."""
     m %= 1440

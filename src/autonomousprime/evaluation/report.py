@@ -119,7 +119,7 @@ def write_results(summary: dict, recs: list[dict]) -> Path:
         "LaneAgent per lane; live mode = 3 separate Claude calls in round 3 |"
     )
     w(
-        "| Structured messages (brief) | Met | `mediator/core.py` ScoredPlan / Vote; lane schemas in `agents/schema.py` |"
+        "| Structured messages (brief) | Met | `mediator/core.py` ScoredPlan / Vote; message contract in `core/contracts.py` |"
     )
     w(
         f"| Explicit constraint checking in code (brief, rubric 25%) | Met | `check_plan`: C-CAP-1, C-FUEL-1, C-CREW-2, "

@@ -9,12 +9,12 @@ notice, C-TURN-1 minimum turnaround (hard), C-CREW-1 crew overtime (soft: cost +
 from dataclasses import dataclass, field
 from typing import Optional
 
-from autonomousprime.agents.schema import Plan
+from autonomousprime.core.contracts import Plan
 from autonomousprime.agents.ground.acdm import acdm_flags
 from autonomousprime.agents.ground.assumptions import MAX_GATE_WAIT_MIN
 from autonomousprime.agents.ground.inputs import walk_min
 from autonomousprime.core.world import GroundState
-from autonomousprime.core.timeutil import hhmm_to_min
+from autonomousprime.core.timeutil import slot_to_min
 
 
 @dataclass
@@ -50,14 +50,6 @@ class GroundCheck:
         }
 
 
-# Parses an arrival slot, rolling past midnight when it is far before the reference time.
-# Args: slot - "HH:MM"; ref_min - scheduled arrival in minutes.
-# Returns: minutes from midnight, possibly > 1440.
-def _slot_to_min(slot: str, ref_min: int) -> int:
-    m = hhmm_to_min(slot)
-    return m + 1440 if m < ref_min - 720 else m
-
-
 # Earliest start >= arrival at which a gate stays free for `turnaround` minutes.
 # Args: windows - the gate's busy windows; arrival - landing time; turnaround - occupancy minutes.
 # Returns: start minute of the occupancy.
@@ -81,7 +73,7 @@ def check_ground(
     turnaround_min: Optional[int] = None,
     previous_ready_min: Optional[int] = None,
 ) -> GroundCheck:
-    arrival = _slot_to_min(plan.arrival_slot, state.scheduled_arrival_min)
+    arrival = slot_to_min(plan.arrival_slot, state.scheduled_arrival_min)
     turnaround = turnaround_min if turnaround_min is not None else state.limits.min_turnaround_min
     violations: list[Violation] = []
     checks: list[Check] = []

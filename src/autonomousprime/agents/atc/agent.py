@@ -6,13 +6,14 @@ import os
 import time
 
 from autonomousprime import paths
+from autonomousprime.core.contracts import LIMITS
+from autonomousprime.core.world import World
 
 from . import config
 from .facts import build_atc_facts
 from .menu import Option, build_menu, cheapest_valid, earliest_valid
 from .prompt import SYSTEM, user_message
-from .schema import validate
-from autonomousprime.core.world import World
+from .validate import validate
 
 ENVELOPE_KEYS = frozenset(
     {"schema_version", "negotiation_id", "message_id", "state_revision", "ruleset_id", "status", "validator_errors"}
@@ -92,7 +93,7 @@ class ATCAgent:
         allowed_text = user
         messages = [{"role": "user", "content": user}]
         errors: list[str] = []
-        for attempt in (1, 2):
+        for attempt in range(1, LIMITS.max_attempts + 1):
             text = self._stand_in(round_no, table) if self.dry_run else self._call(messages)
             body = parse_json(text)
             if body is not None:

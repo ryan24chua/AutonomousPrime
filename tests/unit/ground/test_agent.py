@@ -6,7 +6,7 @@ import httpx2
 import pytest
 from pydantic import ValidationError
 
-from autonomousprime.agents.schema import validate_ranges
+from autonomousprime.core.contracts import validate_ranges
 from autonomousprime.agents.ground.agent import (
     GroundAgent,
     GroundDecision,

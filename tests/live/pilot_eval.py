@@ -21,7 +21,7 @@ from pathlib import Path
 from autonomousprime.agents.pilot.agent import PilotAgent
 from autonomousprime.infra import data
 from autonomousprime.core.world import Alternate, Connection, PilotInputs, build_world
-from autonomousprime.agents.schema import Plan
+from autonomousprime.core.contracts import Plan
 
 OUT = Path(__file__).resolve().parents[2] / "results" / "pilot_live_eval.json"
 CONCURRENCY = asyncio.Semaphore(5)

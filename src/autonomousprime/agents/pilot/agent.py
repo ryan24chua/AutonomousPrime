@@ -25,7 +25,15 @@ import anthropic
 from autonomousprime.agents.constraints import ASSUMPTIONS, FuelCrewRules, fuel_crew_rules
 from autonomousprime.core.timeutil import to_min
 from autonomousprime.core.world import PilotInputs
-from autonomousprime.agents.schema import AgentMessage, Alternative, FailedConstraint, ICAPBrief, Plan, validate_ranges
+from autonomousprime.core.contracts import (
+    LIMITS,
+    AgentMessage,
+    Alternative,
+    FailedConstraint,
+    ICAPBrief,
+    Plan,
+    validate_ranges,
+)
 
 MODEL = "claude-sonnet-5-5"  # docs/hackathon/mvp-spec.md section 14: agents on Sonnet tier
 EFFORT = "medium"
@@ -323,7 +331,9 @@ class PilotAgent:
         messages = [
             {"role": "user", "content": f"FACTS (computed by code):\n{json.dumps(facts, indent=1)}\n\nTASK: {task}"}
         ]
-        for attempt in (1, 2):  # re-ask once, then treat as reject (docs/hackathon/mvp-spec.md section 5)
+        for attempt in range(
+            1, LIMITS.max_attempts + 1
+        ):  # re-ask once, then treat as reject (docs/hackathon/mvp-spec.md section 5)
             try:
                 resp = await self.client.messages.parse(
                     model=self.model,

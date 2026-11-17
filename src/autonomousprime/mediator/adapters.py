@@ -19,7 +19,7 @@ from dataclasses import dataclass
 from autonomousprime import paths
 from autonomousprime.agents.constraints import fuel_crew_rules
 from autonomousprime.agents.pilot.agent import PilotAgent, _rank_key, assess_plan, pilot_alternatives
-from autonomousprime.agents.schema import Plan
+from autonomousprime.core.contracts import CheckResult, Plan, ScoredPlan, Vote
 from autonomousprime.agents.atc.agent import ATCAgent
 from autonomousprime.agents.atc.menu import Option as ATCOption, build_menu, check_slot
 from autonomousprime.agents.ground.agent import GroundAgent
@@ -28,7 +28,7 @@ from autonomousprime.agents.ground.cost import cost_ground
 from autonomousprime.agents.ground.options import free_gate_ids
 from autonomousprime.core.world import GroundState, PilotInputs, World, WorldState, build_world
 
-from .core import PLANS_PER_AGENT, CheckResult, ScoredPlan, Vote, plan_key
+from .core import PLANS_PER_AGENT, plan_key
 
 REPO = paths.REPO
 

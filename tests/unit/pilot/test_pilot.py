@@ -15,7 +15,7 @@ from autonomousprime.agents.pilot.agent import (
 )
 from autonomousprime.infra import data
 from autonomousprime.core.world import Alternate, Connection, PilotInputs, build_world
-from autonomousprime.agents.schema import AgentMessage, Plan
+from autonomousprime.core.contracts import AgentMessage, Plan
 
 RULES = fuel_crew_rules()
 
